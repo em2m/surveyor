@@ -1,0 +1,13 @@
+{
+  "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
+  "lib": {
+    "entryFile": "src/index.ts",
+    "externals": {
+      "moment": "moment",
+      "moment-timezone": "moment-timezone",
+      "@angular/material": "ng.material",
+      "material-design-lite": "material-design-lite",
+      "leaflet": "leaflet"
+    }
+  }
+}

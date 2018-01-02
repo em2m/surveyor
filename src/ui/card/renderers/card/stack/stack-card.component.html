@@ -1,0 +1,10 @@
+
+<div class="mdl-grid" [hidden]="hidden">
+  <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-desktop card-stack-title card-divider-mobile">
+    {{card.title}}
+  </div>
+  <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-desktop card-stack-content" [ngClass]="{'card-divider-desktop': !last}">
+    <h3 *ngIf="failed">Unable to load Widget</h3>
+    <div #cardTarget></div>
+  </div>
+</div>

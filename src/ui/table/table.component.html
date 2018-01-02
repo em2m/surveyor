@@ -1,0 +1,25 @@
+<table *ngIf="rows" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width: 100%">
+  <thead>
+  <th *ngIf="!selectionDisabled">
+    <mdl-checkbox [(ngModel)]="toggle" (click)="toggleAll()" [mdl-ripple]="true"></mdl-checkbox>
+  </th>
+  <th  *ngFor="let col of cols"  [title]="col.title || ''"  [ngStyle]="col.headerStyle || {}" class="mdl-data-table__cell--non-numeric">
+    {{ col.title || col.name }}
+  </th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let row of rows">
+    <td *ngIf="!selectionDisabled">
+      <mdl-checkbox [mdl-ripple]="true" [(ngModel)]="row.selected" (ngModelChange)="selectionChange(row, row.selected)">
+      </mdl-checkbox>
+    </td>
+    <td *ngFor="let col of cols" (click)="handleClick(row)" [ngStyle]="col.style || {}" class="mdl-data-table__cell--non-numeric">
+      {{ row.values[col.key] }}
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div *ngIf="rows.length == 0" class="text-xs-center" style="padding-top: 20px;">
+  No Results Found
+</div>

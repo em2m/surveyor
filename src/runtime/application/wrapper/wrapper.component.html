@@ -1,0 +1,16 @@
+<mdl-layout mdl-layout-fixed-header>
+  <mdl-layout-header>
+    <surveyor-dropdown>
+      <surveyor-sidenav></surveyor-sidenav>
+    </surveyor-dropdown>
+    <surveyor-application-header></surveyor-application-header>
+  </mdl-layout-header>
+
+  <mdl-layout-content style="background-color: #eee;" class="flex-vertical">
+    <router-outlet></router-outlet>
+  </mdl-layout-content>
+  <mdl-layout-spacer></mdl-layout-spacer>
+  <footer class="mdl-mini-footer">
+    <surveyor-application-footer></surveyor-application-footer>
+  </footer>
+</mdl-layout>

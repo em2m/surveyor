@@ -1,0 +1,42 @@
+<div class="mdl-layout">
+  <span class="hidden-tablet-down">
+    <span *ngIf="primaryActions && primaryActions.length > 0">
+      <span *ngFor="let action of primaryActions">
+        <button (click)="action.run()" [disabled]="!action.enabled"
+                mdl-button mdl-ripple mdl-button-type="raised" [class.mdl-button--raised]="raised" [class.mdl-button--colored]="colored">
+          <!--<i class="fa {{action.iconClass}}"></i>--> {{action.text}}
+        </button>
+      </span>
+    </span>
+
+    <span *ngIf="secondaryActions && secondaryActions.length > 0">
+      <button #actionButton="mdlButton" (click)="actionMenu.toggle($event, actionButton)" style="padding-right: 8px;"
+              mdl-button mdl-ripple mdl-button-type="raised" [class.mdl-button--raised]="raised" [class.mdl-button--colored]="colored">
+        Actions <mdl-icon>arrow_drop_down</mdl-icon>
+      </button>
+      <mdl-menu #actionMenu="mdlMenu" mdl-menu-position="bottom-right">
+        <mdl-menu-item mdl-ripple *ngFor="let action of secondaryActions" [ngClass]="{disabled: !action.enabled}" (click)="action.enabled ? action.run() : ''">
+          {{action.text}}
+        </mdl-menu-item>
+      </mdl-menu>
+    </span>
+  </span>
+
+  <span class="hidden-desktop-up">
+    <span *ngIf="primaryActions?.length || secondaryActions?.length">
+      <button #actionButton="mdlButton" (click)="actionMenu.toggle($event, actionButton)" style="padding-right: 8px;"
+              mdl-button mdl-ripple mdl-button-type="raised" [class.mdl-button--raised]="raised" [class.mdl-button--colored]="colored">
+        Actions <mdl-icon>arrow_drop_down</mdl-icon>
+      </button>
+      <mdl-menu #actionMenu="mdlMenu" mdl-menu-position="bottom-right">
+        <mdl-menu-item mdl-ripple *ngFor="let action of primaryActions; let last = last;"
+                       [attr.mdl-menu-item-full-bleed-divider]="last" [disabled]="!action.enabled" (click)="action.enabled ? action.run() : ''">
+          {{action.text}}
+        </mdl-menu-item>
+        <mdl-menu-item mdl-ripple *ngFor="let action of secondaryActions" [disabled]="!action.enabled" (click)="action.enabled ? action.run() : ''">
+          {{action.text}}
+        </mdl-menu-item>
+      </mdl-menu>
+    </span>
+  </span>
+</div>

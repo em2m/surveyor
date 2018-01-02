@@ -1,0 +1,11 @@
+<div style="padding-top: 2rem; text-align: center;">
+  <i class="fa fa-exclamation-triangle" style="font-size: 12rem;"></i>
+  <h3>Oops! We can't seem to find the page you're looking for.</h3>
+
+  <h4 style="padding-top: 2rem;">Here are some helpful links instead:</h4>
+  <ul style="list-style-type: none; display: inline;">
+    <li *ngFor="let link of links" style="display: inline; padding: 0 1rem;">
+      <button [routerLink]="link.href" class="mdl-button mdl-js-button mdl-button--primary mdl-button--raised mdl-js-ripple-effect">{{ link.label }}</button>
+    </li>
+  </ul>
+</div>

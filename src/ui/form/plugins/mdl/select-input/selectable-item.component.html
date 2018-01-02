@@ -1,0 +1,3 @@
+<div #selectableItem class="item-wrapper" (click)="emitSelection()" [ngClass]="{'highlighted': isHighlighted()}">
+  <span class="item mdl-list__item">{{displayItem()}}</span>
+</div>

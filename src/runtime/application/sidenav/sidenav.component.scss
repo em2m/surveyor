@@ -1,0 +1,73 @@
+
+.sidenav {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  padding: 0;
+  list-style: none;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+
+  /*
+  @include media-breakpoint-up(xs) {
+    width: 275px;
+  }
+  @include media-breakpoint-down(xs) {
+    width: 70vw;
+  }
+  */
+}
+
+.sidenav-left {
+  left: 0;
+  -webkit-transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+  transform: translateX(-100%);
+  -webkit-transition: 300ms ease;
+  transition: 300ms ease;
+}
+.sidenav-left.sidenav-visible {
+  -webkit-transform: translateX(0%);
+  -ms-transform: translateX(0%);
+  transform: translateX(0%);
+  -webkit-transition: 300ms ease;
+  transition: 300ms ease;
+}
+
+.sidenav-right {
+  right: 0;
+  -webkit-transform: translateX(100%);
+  -ms-transform: translateX(100%);
+  transform: translateX(100%);
+  -webkit-transition: 300ms ease;
+  transition: 300ms ease;
+}
+.sidenav-right.sidenav-visible {
+  -webkit-transform: translateX(0%);
+  -ms-transform: translateX(0%);
+  transform: translateX(0%);
+  -webkit-transition: 300ms ease;
+  transition: 300ms ease;
+}
+
+.sidenav-overlay {
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 990;
+}
+
+.sidenav header {
+  padding: 16px;
+  border-bottom: 1px solid rgba(207, 216, 220, 0.56);
+}
+
+.sidenav-bottom {
+}

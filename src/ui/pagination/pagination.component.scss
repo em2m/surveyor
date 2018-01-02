@@ -1,0 +1,19 @@
+.pagination {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+
+  li {
+    padding: 1px;
+  }
+}
+
+.pagination-page .mdl-button {
+  font-size: 1rem;
+}
+
+.mdl-button {
+  min-width: inherit;
+  border-radius: 3rem;
+}

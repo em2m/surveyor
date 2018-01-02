@@ -1,0 +1,9 @@
+<div class="surveyor-dropdown-toggle" (click)="toggleDropdown()">
+  <i class="material-icons">menu</i>
+</div>
+
+<div *ngIf="showDropdown" class="surveyor-dropdown" #dropdown>
+  <ng-content></ng-content>
+</div>
+
+<div *ngIf="showDropdown" class="surveyor-dropdown-bg" (click)="toggleDropdown()"></div>

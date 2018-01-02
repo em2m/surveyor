@@ -1,0 +1,20 @@
+<div class="selected-container">
+  <div class="selected larger-font max-width-250" *ngIf="selectedTz">{{selectedTz?.name}}</div>
+  <div class="selected larger-font" *ngIf="!selectedTz">No Timezone Selected</div>
+  <div class="local-btn" (click)="selectLocal()">Use Local</div>
+</div>
+<div class="mdl-textfield mdl-js-textfield">
+  <input class="mdl-textfield__input searcher" (keyup)="search()"
+         [(ngModel)]="searchText" placeholder="Search for a timezone...">
+  <div class="clear-icon" *ngIf="clearVisible">
+    <i class="fa fa-times-circle" (click)="clearSearch()"></i>
+  </div>
+</div>
+<div class="nav-color-input">
+  <div class="timezone" *ngFor="let timezone of tzSearchResults; let i = index" (click)="select(i)">
+    <div class="not-selected-spacer" *ngIf="!(selectedTz?.name === timezone.name)"></div>
+    <span><i class="fa fa-check-circle" *ngIf="selectedTz?.name === timezone.name"></i></span>
+    <span [ngClass]="{'selected': selectedTz?.name === timezone.name}">(UTC{{timezone.offset}}) {{timezone.displayName}}</span>
+  </div>
+</div>
+

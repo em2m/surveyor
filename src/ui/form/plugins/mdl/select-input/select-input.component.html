@@ -1,0 +1,18 @@
+<div style="position: relative" [ngClass]="{'is-invalid': isInvalid()}">
+  <div [class]="'mdl-cell mdl-cell--12-col mdl-cell--' + controlDefinition.width + '-col-desktop'">
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <input #inputBox class="mdl-textfield__input" type="text" id="{{controlDefinition.key}}"
+             [formControl]="formControl"
+             (blur)="handleBlur()" (focus)="showDropdown()" (keydown)="navigateDropdown($event)" readonly/>
+      <label class="mdl-textfield__label" for="{{controlDefinition.key}}">{{controlDefinition.label}}</label>
+    </div>
+    <div class="search-box mdl-shadow--6dp" #myPopover
+         [style.width.px]="300" [style.max-height.px]="200" *ngIf="dropdownIsVisible">
+      <mdl-selectable-item *ngFor="let item of filteredItems()" [item]="item" [highlightedItem]="highlightedItem"
+                       (onSelect)="itemSelect(item)"></mdl-selectable-item>
+    </div>
+  </div>
+  <div *ngFor="let errorKey of getErrors()" class="error-message">
+    {{getErrorMessage(errorKey)}}
+  </div>
+</div>

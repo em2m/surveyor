@@ -1,0 +1,42 @@
+<ul *ngIf="pages.length > 0 && totalItems > 0" class="pagination" role="navigation" aria-label="Pagination">
+  <li class="pagination-first">
+    <button *ngIf="showFirst" class="mdl-button mdl-js-button mdl-js-ripple-effect" [disabled]="!firstPage"
+            (click)="selectPage(firstPage)">
+      <ng-container *ngIf="!showIcons">First</ng-container>
+      <ng-container *ngIf="showIcons">
+        <i class="fa fa-chevron-left"></i>
+      </ng-container>
+    </button>
+  </li>
+  <li class="pagination-previous">
+    <button class="mdl-button mdl-js-button mdl-js-ripple-effect" [disabled]="!prevPage"
+            (click)="selectPage(prevPage)">
+      <ng-container *ngIf="!showIcons">Prev</ng-container>
+      <ng-container *ngIf="showIcons">
+        <i class="fa fa-chevron-left"></i>
+      </ng-container>
+    </button>
+  </li>
+  <li class="pagination-page" *ngFor="let page of pages" [class.pagination-current]="page == currentPage">
+    <button class="mdl-button mdl-js-button mdl-js-ripple-effect" [ngClass]="{'mdl-button--raised mdl-button--colored': page == currentPage}"
+            (click)="selectPage(page)">{{ page }}</button>
+  </li>
+  <li class="pagination-next">
+    <button class="mdl-button mdl-js-button mdl-js-ripple-effect" [disabled]="!nextPage"
+            (click)="selectPage(nextPage)">
+      <ng-container *ngIf="!showIcons">Next</ng-container>
+      <ng-container *ngIf="showIcons">
+        <i class="fa fa-chevron-right"></i>
+      </ng-container>
+    </button>
+  </li>
+  <li class="pagination-last">
+    <button *ngIf="showLast" class="mdl-button mdl-js-button mdl-js-ripple-effect" [disabled]="!lastPage"
+            (click)="selectPage(lastPage)">
+      <ng-container *ngIf="!showIcons">Last</ng-container>
+      <ng-container *ngIf="showIcons">
+        <i class="fa fa-chevron-left"></i>
+      </ng-container>
+    </button>
+  </li>
+</ul>

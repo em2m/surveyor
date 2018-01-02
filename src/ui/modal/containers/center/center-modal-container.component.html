@@ -1,0 +1,15 @@
+<div class="modal-overlay animated fadeIn" [class.fadeOut]="isDismissed" (keyup.esc)="cancel()">
+  <div class="mdl-dialog show-modal animated zoomIn" [class.zoomOut]="isDismissed" [style.width]="width+'px'">
+    <h4 class="mdl-dialog__title">{{ title }}</h4>
+    <div class="mdl-dialog__content">
+      <div #modalTarget></div>
+    </div>
+    <div class="mdl-dialog__actions">
+      <button *ngIf="!hideSubmit" type="button" class="mdl-button mdl-button--colored" [disabled]="!canSubmit()" (click)="submit()">{{ submitLabel }}</button>
+      <button *ngIf="!hideCancel" type="button" class="mdl-button mdl-button--colored close" (click)="cancel()">{{ cancelLabel }}</button>
+      <div class="mdl-layout-spacer"></div>
+      <button *ngIf="!hideDelete" type="button" class="mdl-button mdl-color-text--red" (click)="delete()">{{ deleteLabel }}</button>
+
+    </div>
+  </div>
+</div>

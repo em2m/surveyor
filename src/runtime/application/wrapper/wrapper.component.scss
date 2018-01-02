@@ -1,0 +1,22 @@
+.layout {
+  display:flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.layout-content {
+  flex-flow: column;
+  flex: 1;
+  overflow: scroll;
+}
+
+.header {
+}
+
+.body {
+  /* Would be nice to make this dynamic in case footer height changes */
+  min-height: calc(100% - 40px);
+}
+
+.footer {
+}

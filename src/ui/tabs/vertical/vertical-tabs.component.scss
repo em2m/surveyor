@@ -1,0 +1,40 @@
+.nav {
+  margin-top: 1px;
+  margin-bottom: 15px;
+}
+
+.list-group {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.list-group-item {
+  color: rgba(85, 89, 92, 0.9);
+  background-color: transparent;
+  padding: 0.75rem 1.5rem;
+  margin-left: 2rem;
+  border: 0;
+  box-shadow: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  outline: none;
+}
+
+.active-nav {
+  color: #1a6398;
+  background-color: transparent;
+  position: relative;
+}
+
+.active-nav::before {
+  background-color: #ff4081;
+  content: "";
+  display: block;
+  width: 3px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 0;
+}

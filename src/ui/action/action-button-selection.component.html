@@ -1,0 +1,12 @@
+<span style="display: flex; align-items: center;">
+  <span style="flex: 1; text-transform: uppercase;">
+    <i class="fa fa-close fa-lg" style="padding: 0 1rem; cursor: pointer;" (click)="clearSelection.next()"></i>
+    <span><ng-container *ngIf="itemSelection.all">All</ng-container> {{ itemSelection.count() | number }} items selected</span>
+    <button *ngIf="itemSelection.allOnPage && !itemSelection.all" (click)="handleSelectAll()"
+            class="mdl-button mdl-js-button mdl-js-ripple-effect" style="margin-left: 2rem;">
+      Select all {{ itemSelection.totalItems | number }} items
+    </button>
+  </span>
+  <surveyor-action-button-group [actionTarget]="actionTarget" [selection]="whenSelection"
+      [raised]="false" [colored]="true"></surveyor-action-button-group>
+</span>

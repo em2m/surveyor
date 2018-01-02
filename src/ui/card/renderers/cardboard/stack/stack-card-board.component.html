@@ -1,0 +1,10 @@
+<span class="stack-header" (click)="collapse()" *ngIf="cards && cards.length > 0">
+  <span class="stack-header-title">{{ title }}</span>
+  <span class="mdl-layout-spacer"></span>
+  <i class="material-icons" [ngClass]="{'rotate-45': collapsed}">close</i>
+</span>
+<div class="card-board content-grid mdl-grid mdl-grid--no-spacing collapse"
+      [ngClass]="{'collapse-open ': !collapsed, 'collapse-closed': collapsed}">
+  <surveyor-card *ngFor="let card of cards; let $last = last;" (cardCreated)="created($event)" [cardId]="card.id"
+                 [last]="$last" type="stack" class="mdl-cell mdl-cell--12-col"></surveyor-card>
+</div>

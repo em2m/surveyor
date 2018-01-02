@@ -1,0 +1,107 @@
+.mdl-textfield {
+  position: relative;
+  .clear-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding-top: 23px;
+    animation-name: fade-in;
+    animation-duration: 0.5s;
+  }
+}
+
+.larger-font {
+  font-size: 16px;
+}
+
+.max-width-250 {
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+::-moz-placeholder {
+  color: rgba(0, 0, 0, 0.2) !important;
+}
+
+::-webkit-input-placeholder {
+  color: rgba(0, 0, 0, 0.2)
+}
+
+.timezone:hover {
+  cursor: pointer;
+  color: #283593;
+}
+
+.selected {
+  color: #283593;
+}
+
+.not-selected-spacer {
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+}
+
+.fa-check-circle {
+  color: #5CB85C;
+  animation-name: in-from-left;
+  animation-duration: 0.5s;
+}
+
+@keyframes in-from-left {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+   from {
+     opacity: 0;
+   }
+   to {
+     opacity: 1;
+   }
+ }
+
+@keyframes shrink {
+  from {
+    transform: scale(1, 1)
+  }
+  to {
+    transform: scale(0.9, 0.9)
+  }
+}
+
+
+.selected-container {
+  width: 100%;
+  position: relative;
+
+  .local-btn {
+    position: absolute;
+    right: 0;
+    top: -2px;
+    background-color: #283593;
+    color: #FFF;
+    border-radius: 3px;
+    padding: 0 5px 0 5px;
+  }
+
+  .local-btn:hover {
+    cursor: pointer;
+    background-color: lighten(#283593, 20%);
+  }
+
+  .local-btn:active {
+    background-color: lighten(#283593, 30%);
+    animation-name: shrink;
+    animation-duration: 0.2s;
+  }
+}

@@ -1,0 +1,271 @@
+@import "./variables.scss";
+@import "./rotate.scss";
+@import "~material-design-lite/dist/material.css";
+@import "~material-design-icons/iconfont/material-icons.css";
+@import '~font-awesome/css/font-awesome.css';
+@import '~@angular-mdl/popover/popover.scss';
+@import '~@angular-mdl/select/select.scss';
+@import '~animate.css';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~leaflet/dist/leaflet.css";
+@import '~leaflet.markercluster/dist/MarkerCluster.css';
+@import '~leaflet.markercluster/dist/MarkerCluster.Default.css';
+
+body {
+  margin: 0;
+  color: #555555;
+}
+
+.flex-vertical {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 !important;
+  overflow: auto;
+}
+
+.flex-horizontal {
+  display: flex !important;
+  flex-direction: row !important;
+  flex:1 !important;
+  overflow: auto;
+}
+
+.flex-fill {
+  flex: 1 !important;
+}
+
+.flex-scroll {
+  overflow: auto !important;
+}
+
+.flex-spacer {
+  flex: 1 1 auto;
+}
+
+.flex-horizontal > ng-component, .flex-vertical > ng-component, ng-component > ng-component {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 !important;
+  overflow: auto;
+}
+
+
+.mdl-button {
+  color: #787878;
+}
+
+.mdl-menu__item {
+  color: #787878
+}
+
+.mdl-card {
+  overflow: visible;
+  position: initial;
+}
+
+.mdl-card__supporting-text {
+  overflow: visible;
+  font-size: 16px !important;
+}
+
+.mdl-textfield .error {
+  color: rgb(213,0,0);
+  position: absolute;
+  font-size: 12px;
+  margin-top: 3px;
+  display: block;
+}
+
+.container-fixed {
+  padding-right: 0;
+  padding-left: 0;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.card-divider-desktop {
+  @media (min-width: 840px) {
+    border-bottom: 1px solid lightgrey;
+    width: 100%;
+  }
+}
+
+.card-divider-mobile {
+  @media (max-width: 839px) {
+    border-bottom: 1px solid lightgrey;
+    width: 100%;
+  }
+}
+
+.stack-divider-top {
+  border-top: 1px solid lightgrey;
+}
+
+/* Phone */
+@media (max-width: 479px) {
+  .hidden-desktop-down {
+    display: none !important;
+  }
+  .hidden-tablet-down {
+    display: none !important;
+  }
+  .hidden-phone-up {
+    display: none !important;
+  }
+  .hidden-phone-down {
+    display: none !important;
+  }
+  .container-fixed {
+    width: 100%;
+  }
+}
+
+/* Tablet */
+@media (min-width: 480px) and (max-width: 839px) {
+  .hidden-desktop-down {
+    display: none !important;
+  }
+  .hidden-tablet-up {
+    display: none !important;
+  }
+  .hidden-tablet-down {
+    display: none !important;
+  }
+  .hidden-phone-up {
+    display: none !important;
+  }
+  .container-fixed {
+    width: 480px - 36px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 840px) {
+  .hidden-desktop-up {
+    display: none !important;
+  }
+  .hidden-desktop-down {
+    display: none !important;
+  }
+  .hidden-tablet-up {
+    display: none !important;
+  }
+  .hidden-phone-up {
+    display: none !important;
+  }
+}
+
+@media (min-width: 840px) and (max-width: 1069px) {
+  .container-fixed {
+    width: 840px - 36px;
+  }
+}
+
+@media (min-width: 1070px) {
+  .container-fixed {
+    width: 980px;
+  }
+}
+
+.em2m-badge {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  margin-right: 0.5rem;
+  border: 1px solid #888;
+  color: #888;
+  border-radius: 0.25rem;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+
+.toggle {
+  display: none;
+
+  // add default box-sizing for this scope
+  &,
+  &:after,
+  &:before,
+  & *,
+  & *:after,
+  & *:before,
+  & + .tgl-btn {
+    box-sizing: border-box;
+    &::selection {
+      background: none;
+    }
+  }
+
+  + .toggle-btn {
+    outline: 0;
+    display: block;
+    width: 4em;
+    height: 2em;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    &:after,
+    &:before {
+      position: relative;
+      display: block;
+      content: "";
+      width: 50%;
+      height: 100%;
+    }
+
+    &:after {
+      left: 0;
+    }
+
+    &:before {
+      display: none;
+    }
+  }
+
+  &:checked + .toggle-btn:after {
+    left: 50%;
+  }
+}
+
+// themes
+.toggle-light {
+  + .toggle-btn {
+    background: #CCC;
+    border-radius: 2em;
+    padding: 2px;
+    transition: all .4s ease;
+    &:after {
+      border-radius: 50%;
+      background: #fff;
+      transition: all .2s ease;
+    }
+  }
+
+  &:checked + .toggle-btn {
+    background: rgb(63,81,181);
+  }
+}
+
+.form-entry {
+  display: block;
+}
+
+.form-button {
+  margin-top: 1.5rem;
+}
+
+.stack-info-label {
+  font-size: 18px;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.stack-info-value {
+  font-size: 18px;
+  padding-bottom: 1.25rem;
+  font-weight: 200;
+}

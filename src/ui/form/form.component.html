@@ -1,0 +1,6 @@
+<form>
+    <surveyor-form-input *ngFor="let controlDef of controlDefinitions" [controlDefinition]="controlDef"
+                         [controlInstance]="getFormControl(controlDef)" [asyncValues]="asyncValues"
+                         [asyncOptions]="asyncOptions">
+    </surveyor-form-input>
+</form>
