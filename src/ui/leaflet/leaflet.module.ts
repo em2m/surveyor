@@ -5,6 +5,7 @@ import {LeafletService} from "./leaflet.service";
 import {SurveyorLeafletComponent} from "./leaflet.component";
 import {MapboxProvider} from "./providers/mapbox/mapbox.provider";
 import {MapquestProvider} from "./providers/mapquest/mapquest.provider";
+import {OpenStreetMapProvider} from "./providers/openstreetmap/openstreetmap.provider";
 
 export * from './leaflet.component';
 export * from './leaflet.model';
@@ -35,6 +36,7 @@ export class SurveyorLeafletModule {
         LeafletService,
         MapboxProvider,
         MapquestProvider,
+        OpenStreetMapProvider,
         {provide: "PLUGIN", useValue: LeafletPlugin, multi: true}
       ]
     };
