@@ -16,7 +16,6 @@ import {CardService} from "./card.service";
 export class CardBoardPage implements OnInit {
 
   cardboardId: string;
-  filterContext: FilterContext;
   hidden = false;
 
   constructor(private route: ActivatedRoute,

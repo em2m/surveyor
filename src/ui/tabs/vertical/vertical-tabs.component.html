@@ -2,16 +2,16 @@
     <div [class]="'mdl-cell mdl-cell--' + tabsGridWidth + '-col'">
       <div style="padding-top: 1rem;" class="hidden-tablet-down">
         <ul class="list-group">
-          <li *ngFor="let tab of tabs" class="list-group-item" [routerLink]="[tab.path]" routerLinkActive="active active-nav"
-              [routerLinkActiveOptions]="{exact:tab.exact}" [ngClass]="{'is-active': isActive(tab)}">
+          <li *ngFor="let tab of tabs" class="list-group-item" [routerLink]="[tab.path]"
+              routerLinkActive="active active-nav" [routerLinkActiveOptions]="{exact:tab.exact}">
             {{ tab.title }}
           </li>
         </ul>
       </div>
       <div style="padding-top: 1rem;" class="hidden-desktop-up">
         <ul class="list-group">
-          <li *ngFor="let tab of tabs" class="list-group-item" [routerLink]="[tab.path]" routerLinkActive="active active-nav"
-              [routerLinkActiveOptions]="{exact:tab.exact}" [ngClass]="{'is-active': isActive(tab)}">
+          <li *ngFor="let tab of tabs" class="list-group-item" [routerLink]="[tab.path]"
+              routerLinkActive="active active-nav" [routerLinkActiveOptions]="{exact:tab.exact}">
             {{ tab.title }}
           </li>
         </ul>
