@@ -1,7 +1,4 @@
-import {
-  Component, ComponentFactoryResolver, ElementRef, OnDestroy, OnInit, Type, ViewChild, ViewContainerRef
-} from "@angular/core";
-import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
+import {Component, ComponentFactoryResolver, ElementRef, OnDestroy, OnInit, Type, ViewChild, ViewContainerRef} from "@angular/core";
 import {ApplicationHeaderService} from "./header.service";
 import {Extension} from "../../../core/extension/extension.model";
 import {MenuContribution} from "../../../ui/menu/menu.contribution";
@@ -9,6 +6,7 @@ import {StateService} from "../../../core/state/state.service";
 import "rxjs/add/operator/filter";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/mergeMap";
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'surveyor-application-header',
@@ -20,16 +18,13 @@ export class ApplicationHeaderComponent implements OnInit, OnDestroy {
   @ViewChild('navbar') navbar: ElementRef;
   @ViewChild('headerLeft', {read: ViewContainerRef}) headerLeft: any;
   @ViewChild('headerRight', {read: ViewContainerRef}) headerRight: any;
-  showDropDown = false;
   brandColor: string;
-  brandSub: any;
+  brandSub: Subscription;
   contributionRefs: Array<any> = [];
 
-  constructor(private router: Router,
-              private activatedRoute: ActivatedRoute,
-              private stateService: StateService,
+  constructor(private stateService: StateService,
               private headerService: ApplicationHeaderService,
-              private resolver: ComponentFactoryResolver) { }
+              private resolver: ComponentFactoryResolver) {}
 
   ngOnInit() {
     this.brandSub = this.stateService.watch("brand:loaded").subscribe(brand => {
@@ -39,25 +34,6 @@ export class ApplicationHeaderComponent implements OnInit, OnDestroy {
     });
 
     this.generateHeaders();
-    this.router.events
-      .filter(event => event instanceof NavigationEnd)
-      .map(() => this.activatedRoute)
-      .map(route => {
-        this.generateHeaders();
-
-        while (route.firstChild) {
-          route = route.firstChild;
-        }
-        if (route.data['value']['showOrgDropdown']) {
-          return route;
-        } else {
-          return route.parent;
-        }
-      })
-      .flatMap(route => route.data)
-      .subscribe(data => {
-        this.showDropDown = data['showOrgDropdown'];
-      });
   }
 
   generateHeaders() {
