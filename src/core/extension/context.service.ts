@@ -15,7 +15,7 @@ export class ContextService {
   set(context: FilterContext) {
     context.route = this.router.routerState.snapshot.url;
     context.config = this.config.get();
-    this.subject.next(context);
+    //this.subject.next(context);
   }
 
   get(): FilterContext {
