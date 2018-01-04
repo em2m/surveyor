@@ -13,6 +13,7 @@ export * from './leaflet.service';
 export * from './leaflet.plugin';
 export * from './providers/mapbox/mapbox.provider';
 export * from './providers/mapquest/mapquest.provider';
+export * from './providers/openstreetmap/openstreetmap.provider';
 
 @NgModule({
   imports: [

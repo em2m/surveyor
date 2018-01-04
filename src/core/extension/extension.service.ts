@@ -10,7 +10,8 @@ export class ExtensionService {
   public DEFAULT_PRIORITY = 99;
 
   private pluginRegistry: { [name: string]: Plugin } = {};
-  private extensionRegistry: { [type: string]: Array<Extension> } = {};
+  private extensionsByType: { [type: string]: Array<Extension> } = {};
+  private extensionsByTarget: { [type: string]: Array<Extension> } = {};
 
   constructor(@Inject("PLUGIN") plugins: Plugin[],
               private router: Router,
@@ -31,7 +32,7 @@ export class ExtensionService {
               let extensions = plugin.extensions[extensionType];
               extensions.forEach((ext: Extension) => {
                 // console.log("Registering Extension: ", extensionType, ext);
-                this.registerExtension(extensionType, ext);
+                this.registerExtension(extensionType, ext.target, ext);
               });
             }
           }
@@ -40,20 +41,28 @@ export class ExtensionService {
     });
   }
 
-  private registerExtension(type: string, extension: any) {
-    let extensionsForType = this.extensionRegistry[type];
+  private registerExtension(type: string, target: string, extension: any) {
+    let extensionsForType = this.extensionsByType[type];
     if (!extensionsForType) {
       extensionsForType = [];
-      this.extensionRegistry[type] = extensionsForType;
+      this.extensionsByType[type] = extensionsForType;
     }
+
+    let extensionsForTarget = this.extensionsByTarget[target];
+    if (!extensionsForTarget) {
+      extensionsForTarget = [];
+      this.extensionsByTarget[target] = extensionsForTarget;
+    }
+
     if (extension instanceof Type) {
       extension = { value: extension };
     }
     extensionsForType.push(extension);
+    extensionsForTarget.push(extension);
   }
 
   getExtensionById(type: string, id: string): Extension {
-    for (let extension of this.extensionRegistry[type] || []) {
+    for (let extension of this.extensionsByType[type] || []) {
       let config = extension.config || {};
       if (config.id === id) {
         return extension;
@@ -63,7 +72,7 @@ export class ExtensionService {
   }
 
   getExtensionsForType(type: string): Array<Extension> {
-    let extensions = this.extensionRegistry[type] || [];
+    let extensions = this.extensionsByType[type] || [];
     return extensions
       .map(extension => {
         if (extension.priority === undefined) {
@@ -83,7 +92,30 @@ export class ExtensionService {
   }
 
   getExtensionsForTypeAndTarget(type: string, target: string): Array<Extension> {
-    let extensions = this.extensionRegistry[type] || [];
+    let extensions = this.extensionsByType[type] || [];
+    return extensions
+      .map(extension => {
+        if (extension.priority === undefined) {
+          extension.priority = this.DEFAULT_PRIORITY;
+        }
+        return extension;
+      })
+      .filter((ext: Extension) => {
+        return ext.target === target;
+      })
+      .filter((extension: Extension) => {
+        let filterContext = this.contextService.get();
+        return FilterUtils.isPermitted(filterContext, extension.filters);
+      })
+      .sort((ext1: Extension, ext2: Extension) => {
+        if (ext1.priority === ext2.priority) { return 0; }
+        if (ext1.priority < ext2.priority) { return -1; }
+        return 1;
+      });
+  }
+
+  getExtensionsForTarget(target: string): Array<Extension> {
+    let extensions = this.extensionsByTarget[target] || [];
     return extensions
       .map(extension => {
         if (extension.priority === undefined) {

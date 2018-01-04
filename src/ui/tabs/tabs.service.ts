@@ -53,12 +53,18 @@ export class TabsService {
   }
 
   isTabActive(activatedRoute: ActivatedRoute, tab: any): boolean {
+    /*
     let tabPath = tab.path.substring(1);
     if (tabPath.length === 1) {
       // Handle special case where route is simply "/"
       tabPath = "";
     }
 
-    return this.router.routerState.snapshot.url.endsWith(activatedRoute.parent.snapshot.url + tabPath);
+    console.log("Active Route", this.router.routerState.snapshot.url);
+    console.log("Ends With", activatedRoute.parent.snapshot.url.join('/') + tabPath);
+
+    return this.router.routerState.snapshot.url.endsWith(activatedRoute.parent.snapshot.url.join('/') + tabPath);
+    */
+    return false;
   }
 }

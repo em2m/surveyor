@@ -26,8 +26,4 @@ export class VerticalTabsComponent implements OnInit, OnChanges {
   ngOnChanges() {
     this.tabs = this.tabsService.findTabs(this.route, this.routes, this.queryParams);
   }
-
-  isActive(tab: any): boolean {
-    return this.tabsService.isTabActive(this.route, tab);
-  }
 }
