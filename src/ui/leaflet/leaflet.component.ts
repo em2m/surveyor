@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, Input, Output} from "@angular/core";
+import {AfterViewInit, Component, ElementRef, Renderer2, Input, Output, EventEmitter} from "@angular/core";
 import * as L from 'leaflet';
 import {Control, Map, MapOptions} from "leaflet";
 import {FeatureProvider, LayerDefinition, LayerProvider} from "./leaflet.model";
@@ -18,7 +18,9 @@ export class SurveyorLeafletComponent implements AfterViewInit {
   @Output() mapReady = new EventEmitter();
   private map: Map;
 
-  constructor(private leafletService: LeafletService) {}
+  constructor(private leafletService: LeafletService,
+              private elementRef: ElementRef,
+              private renderer: Renderer2) {}
 
   ngAfterViewInit() {
     // Initialize the primary map object
@@ -75,6 +77,9 @@ export class SurveyorLeafletComponent implements AfterViewInit {
     setTimeout(() => {
       this.map.invalidateSize({});
     });
+
+    let leafletContainerDiv = this.elementRef.nativeElement.querySelector(".leaflet-container");
+    this.renderer.removeClass(leafletContainerDiv, 'leaflet-touch');
 
     this.mapReady.emit(this.map);
   }
