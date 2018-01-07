@@ -75,11 +75,11 @@ export class SurveyorLeafletComponent implements AfterViewInit {
     L.control.layers(baseLayers, overlays, {}).addTo(this.map);
 
     setTimeout(() => {
+      let leafletContainerDiv = this.elementRef.nativeElement.querySelector(".leaflet-container");
+      this.renderer.removeClass(leafletContainerDiv, 'leaflet-touch');
       this.map.invalidateSize({});
     });
 
-    let leafletContainerDiv = this.elementRef.nativeElement.querySelector(".leaflet-container");
-    this.renderer.removeClass(leafletContainerDiv, 'leaflet-touch');
 
     this.mapReady.emit(this.map);
   }
