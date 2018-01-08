@@ -15,6 +15,7 @@ export * from './leaflet.plugin';
 export * from './providers/mapbox/mapbox.provider';
 export * from './providers/mapquest/mapquest.provider';
 export * from './providers/openstreetmap/openstreetmap.provider';
+export * from './providers/zoomcontrol/zoom-control.provider';
 
 @NgModule({
   imports: [
