@@ -1,4 +1,4 @@
-import {Map, Layer} from "leaflet";
+import {Map, Layer, Control} from "leaflet";
 
 export interface LayerDefinition {
   label: string;
@@ -14,4 +14,9 @@ export interface LayerProvider {
 export interface FeatureProvider {
   config: any;
   provide(map: Map);
+}
+
+export interface ControlProvider {
+  config: any;
+  provide(map: Map): Control;
 }

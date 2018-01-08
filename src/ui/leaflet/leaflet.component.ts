@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, Renderer2, Input, Output, EventEmitter} from "@angular/core";
 import * as L from 'leaflet';
-import {Control, Map, MapOptions} from "leaflet";
-import {FeatureProvider, LayerDefinition, LayerProvider} from "./leaflet.model";
+import {Control, Map, map, MapOptions} from "leaflet";
+import {ControlProvider, FeatureProvider, LayerDefinition, LayerProvider} from "./leaflet.model";
 import {LeafletService} from "./leaflet.service";
 import LayersObject = Control.LayersObject;
 
@@ -27,7 +27,8 @@ export class SurveyorLeafletComponent implements AfterViewInit {
     if (!this.options) {
       this.options = <MapOptions>{
         center: [37.8, -96],
-        zoom: 4
+        zoom: 4,
+        zoomControl: false
       };
     }
 
@@ -70,7 +71,17 @@ export class SurveyorLeafletComponent implements AfterViewInit {
     this.leafletService.findFeatures(this.mapId)
       .forEach((provider: FeatureProvider) => {
         provider.provide(this.map);
-      });
+    });
+
+    this.leafletService.findControls(this.mapId)
+      .forEach((provider: ControlProvider) => {
+        let control = provider.provide(this.map);
+
+        if (control)
+          control.addTo(this.map)
+        else
+          console.error("Could not provide control for " + provider.config)
+    })
 
     L.control.layers(baseLayers, overlays, {}).addTo(this.map);
 
