@@ -18,30 +18,27 @@ export class SidenavService {
   }
 
   registerContributions() {
-    this.contextService.onChange()
-      .subscribe(filterContext => {
-        // Register all components defined as plugin extensions sorted in priority order
-        this.extensionService.getExtensionsForType(this.SIDENAV_EXTENSION_TYPE)
-          .forEach((extension: Extension) => {
-            let items = extension.config.items;
+    // Register all components defined as plugin extensions sorted in priority order
+    this.extensionService.getExtensionsForType(this.SIDENAV_EXTENSION_TYPE)
+      .forEach((extension: Extension) => {
+        let items = extension.config.items;
 
-            if (items && items.length > 0) {
-              extension.config.items = items.filter(item => {
-                let filters = item.filters || [];
-                let allowed = true;
+        if (items && items.length > 0) {
+          extension.config.items = items.filter(item => {
+            let filters = item.filters || [];
+            let allowed = true;
 
-                filters.forEach(f => {
-                  allowed = allowed && f.filter(filterContext);
-                });
-                return allowed;
-              });
-            }
-
-            this.extensions.push(extension);
+            filters.forEach(f => {
+              allowed = allowed && f.filter(this.contextService.getContext());
+            });
+            return allowed;
           });
+        }
 
-        this.extensionsSubject.next(this.extensions);
+        this.extensions.push(extension);
       });
+
+      this.extensionsSubject.next(this.extensions);
   }
 
   show() {

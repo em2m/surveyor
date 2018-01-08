@@ -17,12 +17,8 @@ export class LoaderService {
     this.router = this.injector.get(Router);
     this.routes = this.router.config;
 
-    console.log("Routes (Before)", this.routes);
-
     // Iterate over all of the routes to process subroutes
     this.routes.forEach((route) => this.parseRoute(route));
-
-    console.log("Routes (After)", this.routes);
 
     // Reset the routes including the complete application routes
     this.router.resetConfig(this.routes);
