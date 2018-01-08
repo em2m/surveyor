@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, Renderer2, Input, Output, EventEmitter} from "@angular/core";
 import * as L from 'leaflet';
-import {Control, Map, map, MapOptions} from "leaflet";
+import {Control, Map, MapOptions} from "leaflet";
 import {ControlProvider, FeatureProvider, LayerDefinition, LayerProvider} from "./leaflet.model";
 import {LeafletService} from "./leaflet.service";
 import LayersObject = Control.LayersObject;
