@@ -22,7 +22,6 @@ export class ContextService {
 
   onContextChange(): Observable<FilterContext> {
     return this.contextSubject.asObservable().map((context) => {
-      console.log("OnContextChange()", context);
       return context;
     });
   }
