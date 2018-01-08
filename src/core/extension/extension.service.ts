@@ -81,7 +81,7 @@ export class ExtensionService {
         return extension;
       })
       .filter((extension: Extension) => {
-        let filterContext = this.contextService.get();
+        let filterContext = this.contextService.getContext();
         return FilterUtils.isPermitted(filterContext, extension.filters);
       })
       .sort((ext1: Extension, ext2: Extension) => {
@@ -104,7 +104,7 @@ export class ExtensionService {
         return ext.target === target;
       })
       .filter((extension: Extension) => {
-        let filterContext = this.contextService.get();
+        let filterContext = this.contextService.getContext();
         return FilterUtils.isPermitted(filterContext, extension.filters);
       })
       .sort((ext1: Extension, ext2: Extension) => {
@@ -127,7 +127,7 @@ export class ExtensionService {
         return ext.target === target;
       })
       .filter((extension: Extension) => {
-        let filterContext = this.contextService.get();
+        let filterContext = this.contextService.getContext();
         return FilterUtils.isPermitted(filterContext, extension.filters);
       })
       .sort((ext1: Extension, ext2: Extension) => {

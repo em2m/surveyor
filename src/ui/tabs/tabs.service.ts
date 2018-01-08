@@ -36,7 +36,7 @@ export class TabsService {
             }
 
             // Only add the tab if it passes all filter checks
-            if (FilterUtils.isPermitted(this.contextService.get(), route.data["filters"] as Array<Filter>)) {
+            if (FilterUtils.isPermitted(this.contextService.getContext(), route.data["filters"] as Array<Filter>)) {
               tabs.push({
                 title: route.data["title"] || route.path,
                 path: `./${route.path}`,
