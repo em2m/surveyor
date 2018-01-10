@@ -1,6 +1,4 @@
-
-import {Agg, AndQuery, NotQuery, Query, Sort} from "./query.model";
-import {Field} from "./scaleset.model";
+import {Agg, AndQuery, Field, NotQuery, Query, Sort} from "./query.model";
 import {PickerOptions} from "../../ui/picker/picker.model";
 import {Subject} from "rxjs/Subject";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";

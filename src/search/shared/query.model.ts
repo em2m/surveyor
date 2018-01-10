@@ -130,6 +130,16 @@ export interface Agg {
   aggs?: { [ key: string ]: Agg; };
 }
 
+export class Field {
+  name?: string;
+  label?: string;
+  expr?: string;
+  settings?: { [ key: string ]: any; } = {};
+
+  constructor() {
+  }
+}
+
 export class AggSort {
   constructor(public type?: string, public direction?: string) {}
 

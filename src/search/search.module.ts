@@ -14,7 +14,6 @@ import {ToggleRecursiveComponent} from "./components/toggle-recursive/toggle-rec
 
 export * from './shared/query.model';
 export * from './shared/searcher.model';
-export * from './shared/scaleset.model';
 export * from './components/search/sort/sort.component';
 export * from './components/search/sort/sort.model';
 export * from './components/search/search-input/searcher-input.component'
