@@ -1,0 +1,4 @@
+<input #queryInput (keyup.enter)="addQuery(queryInput.value)"/>
+<ul>
+  <li *ngFor="let query of queries; let i = index" (click)="removeQuery(i)">{{ query }}</li>
+</ul>

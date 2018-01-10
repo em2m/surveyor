@@ -1,22 +1,22 @@
-export class RestQuery {
+export class ScalesetRestQuery {
   aggs: any[] = [];
   bbox: any; // TODO: ADD SUPPORT FOR JTS ENVELOPE
-  constraints: Array<Constraint> = [];
+  constraints: Array<ScalesetConstraint> = [];
   fields: Array<Field> = [];
   geoField: string;
   limit = 10;
   offset = 0;
   q: string;
-  sorts: Array<Sort> = [];
+  sorts: Array<ScalesetSort> = [];
 
   constructor() {
   }
 }
 
-export class Query {
-  aggs: { [ key: string ]: Aggregation; } = {};
+export class ScalesetQuery {
+  aggs: { [ key: string ]: ScalesetAggregation; } = {};
   bbox: any; // TODO: ADD SUPPORT FOR JTS ENVELOPE
-  filters: { [ key: string ]: Filter; } = {};
+  filters: { [ key: string ]: ScalesetFilter; } = {};
   fields: Array<Field> = [];
   fieldSet: string;
   geoField: string;
@@ -24,7 +24,7 @@ export class Query {
   offset = 0;
   headers: { [ key: string ]: any; } = {};
   q: string;
-  sorts: Array<Sort> = [];
+  sorts: Array<ScalesetSort> = [];
 
   constructor() {
   }
@@ -40,12 +40,12 @@ export class Field {
   }
 }
 
-export class Constraint {
+export class ScalesetConstraint {
   field: string;
   values: Array<string>;
 }
 
-export class Filter {
+export class ScalesetFilter {
   name: string;
   type: string;
   clause = 'MUST';     // MUST, MUST_NOT, SHOULD
@@ -54,7 +54,7 @@ export class Filter {
   }
 }
 
-export class TermFilter extends Filter {
+export class ScalesetTermFilter extends ScalesetFilter {
   query: string;
   field: string;
   type = "term";
@@ -64,7 +64,7 @@ export class TermFilter extends Filter {
   }
 }
 
-export class QueryFilter extends Filter {
+export class ScalesetQueryFilter extends ScalesetFilter {
   query: string;
   operator = 'AND';
   type = "query";
@@ -74,7 +74,7 @@ export class QueryFilter extends Filter {
   }
 }
 
-export class RangeFilter extends Filter {
+export class ScalesetRangeFilter extends ScalesetFilter {
   type = "range";
   field: string;
   gte: string;
@@ -88,20 +88,20 @@ export class RangeFilter extends Filter {
   }
 }
 
-export class Aggregation {
+export class ScalesetAggregation {
   name: string;
   type: string;
   field: string;
-  order: Sort;
+  order: ScalesetSort;
   limit: number;
   time_zone: string;
-  aggs: { [ key: string ]: Aggregation; } = {};
+  aggs: { [ key: string ]: ScalesetAggregation; } = {};
 
   constructor() {
   }
 }
 
-export class Sort {
+export class ScalesetSort {
   field: string;
   direction: string;          // Ascending, Descending
   type = 'Lexical';   // Count, Lexical, None
@@ -112,10 +112,10 @@ export class Sort {
   }
 }
 
-export class Results {
-  aggs: { [ key: string ]: AggregationResults; } = {};
+export class ScalesetResults {
+  aggs: { [ key: string ]: ScalesetAggregationResults; } = {};
   items: Array<any> = [];
-  query: Query;
+  query: ScalesetQuery;
   totalItems = 0;
   bbox: any; // TODO: ADD SUPPORT FOR JTS ENVELOPE
   headers: { [ key: string ]: any; } = {};
@@ -125,27 +125,27 @@ export class Results {
   }
 }
 
-export class AggregationResults {
-  buckets: Array<Bucket> = [];
-  stats: Stats;
+export class ScalesetAggregationResults {
+  buckets: Array<ScalesetBucket> = [];
+  stats: ScalesetStats;
   name: string;
 
   constructor() {
   }
 }
 
-export class Bucket {
+export class ScalesetBucket {
   count: number;
   label: string;
   key: any;
-  stats: Stats;
-  aggs: { [ key: string ]: AggregationResults; } = {};
+  stats: ScalesetStats;
+  aggs: { [ key: string ]: ScalesetAggregationResults; } = {};
 
   constructor() {
   }
 }
 
-export class Stats {
+export class ScalesetStats {
   count: number;
   sum: number;
   min: number;

@@ -5,6 +5,7 @@ import {PickerOptions} from "../../ui/picker/picker.model";
 import {Subject} from "rxjs/Subject";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Observable} from "rxjs/Observable";
+import {SortModel} from "../components/search/sort/sort.model";
 
 export interface SearchRequestFields {
   name?: string;
@@ -14,7 +15,7 @@ export interface SearchRequestFields {
 }
 
 export interface SearchRequestSorts {
-  field: string;
+  field?: string;
   direction: string;
 }
 
@@ -39,7 +40,7 @@ export interface SearchRequest {
   countTotal?: boolean;
 }
 
-export interface Selection {
+export interface SearchSelection {
   key: string;
   label: string;
   query: Query;
@@ -62,10 +63,13 @@ export interface SearcherSettings {
   recursive: boolean;
   pickerOptions?: PickerOptions;
   filter?: Query;
+  sortModel?: SortModel;
 }
 
 export class Searcher {
   public aggs: Array<Agg>;
+  public sortModel: SortModel;
+  public aggsMapper: {[key: string]: any};
   public fields: Array<Field> = [];
   public constraints: Array<SearchConstraint> = [];
   public sorts: Array<Sort> = [];
@@ -96,12 +100,15 @@ export class Searcher {
     this.pageSize = settings.pageSize || 50;
     this.currentPage = 1;
     this.pickerOptions = settings.pickerOptions;
+    this.sortModel = settings.sortModel;
 
     this._searchRequest = searchRequest;
   }
 
   get searchRequest(): SearchRequest {
     // Build the fields array
+
+    let MAX_AGG_SIZE = 2000;
     this._searchRequest.fields = [];
     this.fields.forEach(field => {
       const request: any = {
@@ -129,9 +136,13 @@ export class Searcher {
     }
     this._searchRequest.query = new AndQuery(queries);
 
-    this._searchRequest.aggs = this.aggs;
+    this._searchRequest.aggs = JSON.parse(JSON.stringify(this.aggs));
     this._searchRequest.sorts = this.sorts;
     this._searchRequest.limit = this.pageSize;
+
+    this._searchRequest.aggs.forEach(agg => { if (agg.size) {
+      agg.size = MAX_AGG_SIZE;
+    } });
 
     return this._searchRequest;
   }

@@ -125,7 +125,7 @@ export interface Agg {
   field?: string;
   sort?: AggSort;
   label?: string;
-  limit?: number;
+  size?: number;
   time_zone?: string;
   aggs?: { [ key: string ]: Agg; };
 }

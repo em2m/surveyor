@@ -1,0 +1,23 @@
+<div class="selected-container">
+  <div class="selected larger-font max-width-250" *ngIf="selectedItem">{{selectedItem.key}}</div>
+  <div class="selected larger-font" *ngIf="!selectedItem">No Aggregate Selected</div>
+</div>
+<div class="mdl-textfield mdl-js-textfield">
+  <input class="mdl-textfield__input searcher" (keyup)="search()"
+         [(ngModel)]="searchText" placeholder="Search for {{key}}...">
+  <div class="clear-icon" *ngIf="clearVisible">
+    <i class="fa fa-times-circle" (click)="clearSearch()"></i>
+  </div>
+</div>
+<div class="nav-color-input">
+  <div class="timezone" *ngFor="let bucketItem of bucketSearchResults; let i = index" (click)="select(bucketItem)">
+    <span [ngClass]="{'selected': selectedItem?.key === bucketItem.key}" style="cursor: pointer; display:flex; align-items:flex-start;">
+      <span class="not-selected-spacer" *ngIf="!(selectedItem?.key === bucketItem.key)"></span>
+      <span><i class="fa fa-check-circle" *ngIf="selectedItem?.key === bucketItem.key"></i></span>
+      <span class="facet_label">{{bucketItem.label || bucketItem.key}}</span>
+      <span class="mdl-layout-spacer"></span>
+      <span class="facet_count"> {{bucketItem.count}} </span>
+    </span>
+  </div>
+</div>
+
