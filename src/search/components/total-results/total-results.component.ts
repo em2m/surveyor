@@ -7,5 +7,5 @@ import {Searcher} from "../../shared/searcher.model";
   templateUrl: './total-results.component.html'
 })
 export class TotalResultComponent {
-  constructor(private searcher: Searcher) {}
+  constructor(public searcher: Searcher) {}
 }
