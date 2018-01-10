@@ -8,9 +8,6 @@ import {StandardFacetComponent} from "./components/standard-facet/standard-facet
 import {SearchPlugin} from "./search.plugin";
 import {PickerService} from "../ui/picker/picker.service";
 import {QueryPickerComponent} from "./pickers/query-picker/query-picker.component";
-import {SearchDropdownComponent} from "./components/search/search-dropdown/search-dropdown.component";
-import {SearchFormComponent} from "./components/search/search-form/search-form.component";
-import {SearchFormFilterComponent} from "./components/search/search-form/search-form-filter.component";
 import {SearcherInputComponent} from "./components/search/search-input/searcher-input.component";
 import {TermPickerComponent} from "./pickers/term-picker/term-picker.component";
 import {ToggleRecursiveComponent} from "./components/toggle-recursive/toggle-recursive.component";
@@ -20,14 +17,6 @@ export * from './shared/searcher.model';
 export * from './shared/scaleset.model';
 export * from './components/search/sort/sort.component';
 export * from './components/search/sort/sort.model';
-export * from './components/search/search-dropdown/search-dropdown.component';
-export * from './components/search/search-form/search-form.component';
-export * from './components/search/search-form/search-form-filter.component';
-export * from './components/search/search-form/filter-base';
-export * from './components/search/search-form/filter-checkboxes';
-export * from './components/search/search-form/filter-control.service';
-export * from './components/search/search-form/filter-dropdown';
-export * from './components/search/search-form/filter-textbox';
 export * from './components/search/search-input/searcher-input.component'
 export * from './components/total-results/total-results.component';
 export * from './components/standard-facet/standard-facet.component';
@@ -43,9 +32,6 @@ const components: any[] = [
   ToggleRecursiveComponent,
   TermPickerComponent,
   QueryPickerComponent,
-  SearchDropdownComponent,
-  SearchFormComponent,
-  SearchFormFilterComponent,
   SearcherInputComponent
 ];
 
