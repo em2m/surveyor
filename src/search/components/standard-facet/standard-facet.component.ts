@@ -24,7 +24,7 @@ export class StandardFacetComponent {
         buckets: this.searcher.searchResult.aggs[agg.key].buckets
       }
     }).subscribe((item: any) => {
-      if (item.agg)
+      if (item && item.agg)
         this.addConstraint(item.agg, item.bucket);
     });
   }
