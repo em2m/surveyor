@@ -14,7 +14,7 @@ export class StandardFacetComponent {
 
   requestAggs: { [key: string]: any} = {};
 
-  constructor(private searcher: Searcher, private pickerService: PickerService) {}
+  constructor(public searcher: Searcher, private pickerService: PickerService) {}
 
   showMoreAggs(agg) {
     this.pickerService.pick("term-picker", <PickerOptions> {

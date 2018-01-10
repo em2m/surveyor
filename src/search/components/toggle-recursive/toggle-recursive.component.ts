@@ -6,7 +6,7 @@ import {Component} from "@angular/core";
   templateUrl: './toggle-recursive.component.html'
 })
 export class ToggleRecursiveComponent {
-  constructor(private searcher: Searcher) {}
+  constructor(public searcher: Searcher) {}
 
   toggleRecursive() {
     this.searcher.recursive = !this.searcher.recursive;
