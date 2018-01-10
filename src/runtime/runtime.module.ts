@@ -12,6 +12,7 @@ import {SurveyorUiModule} from "../ui/ui.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {LoaderService} from "./loader/loader.service";
 import {SurveyorLoaderModule} from "./loader/loader.module";
+import {SurveyorSearchModule} from "../search/search.module";
 
 export * from './runtime.component';
 export * from './application/application.module';
@@ -36,7 +37,8 @@ export function routeLoader(loader: LoaderService) {
     SurveyorCoreModule.forRoot(),
     SurveyorApplicationModule,
     SurveyorMaterialModule.forRoot(),
-    SurveyorUiModule
+    SurveyorUiModule,
+    SurveyorSearchModule.forRoot()
   ],
   exports: [
     BrowserModule,
@@ -49,6 +51,7 @@ export function routeLoader(loader: LoaderService) {
     SurveyorLoaderModule,
     SurveyorRuntimeComponent,
     SurveyorUiModule,
+    SurveyorSearchModule
   ],
   declarations: [
     SurveyorRuntimeComponent

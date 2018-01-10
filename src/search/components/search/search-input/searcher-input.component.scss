@@ -1,0 +1,69 @@
+
+@mixin rounded($radius: 0.5em) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+
+.mdl-grid {
+  padding: 0;
+}
+
+.mdl-chip {
+  cursor: pointer;
+  //padding-left: 0;
+}
+
+.search-wrapper {
+  background-color: #eee;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  min-height: inherit;
+  padding: 0.5rem 1rem;
+  @include rounded(0.25rem);
+}
+
+.search-icon {
+  padding-right: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.search-constraints {
+  background-color: transparent;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.search-constraint {
+  padding-right: 0.5rem;
+}
+
+.search-input-wrapper {
+  min-width: 200px;
+  flex: 1;
+  width: 100%;
+}
+
+.search-input {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  line-height: 34px;
+  font-size: 1rem;
+  width: 100%;
+}

@@ -125,9 +125,19 @@ export interface Agg {
   field?: string;
   sort?: AggSort;
   label?: string;
-  limit?: number;
+  size?: number;
   time_zone?: string;
   aggs?: { [ key: string ]: Agg; };
+}
+
+export class Field {
+  name?: string;
+  label?: string;
+  expr?: string;
+  settings?: { [ key: string ]: any; } = {};
+
+  constructor() {
+  }
 }
 
 export class AggSort {

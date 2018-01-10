@@ -1,0 +1,19 @@
+<div class="mdl-grid mdl-grid--no-spacing" style="padding: 0 1rem;">
+  <div class="mdl-cell mdl-cell--12-col mdl-card search-wrapper">
+    <ul class="search-constraints">
+      <li class="search-icon"><i class="material-icons">search</i></li>
+      <li *ngFor="let constraint of constraints" class="search-constraint">
+        <span class="mdl-chip mdl-chip--deletable" (click)="clickConstraint(constraint)">
+          <span *ngIf="!constraint.not" class="mdl-chip__text">{{ constraint.text }}</span>
+          <span *ngIf="constraint.not" class="mdl-chip__text mdl-color-text--red">NOT {{ constraint.text }}</span>
+          <button type="button" class="mdl-chip__action" (click)="removeConstraint(constraint)" >
+            <i class="material-icons">cancel</i>
+          </button>
+        </span>
+      </li>
+      <li class="search-input-wrapper">
+        <input autofocus [(ngModel)]="searchInput" class="search-input" [placeholder]="placeholder" (keyup.enter)="onSubmit(searchInput)"/>
+      </li>
+    </ul>
+  </div>
+</div>
