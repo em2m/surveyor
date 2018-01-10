@@ -18,7 +18,7 @@ export class StandardFacetComponent {
 
   showMoreAggs(agg) {
     this.pickerService.pick("term-picker", <PickerOptions> {
-      title: "Select an Value",
+      title: "Select a value",
       params: {
         agg: agg,
         buckets: this.searcher.searchResult.aggs[agg.key].buckets
