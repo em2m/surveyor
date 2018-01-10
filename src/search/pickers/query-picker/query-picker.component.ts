@@ -3,7 +3,7 @@ import {Picker} from "../../../ui/picker/picker.component";
 import {MatchQuery, OrQuery, TermQuery} from "../../shared/query.model";
 
 @Component({
-  selector: "em2m-searcher-query-picker",
+  selector: "surveyor-searcher-query-picker",
   templateUrl: "./query-picker.component.html",
   styleUrls: [ "./query-picker.component.scss" ]
 })
