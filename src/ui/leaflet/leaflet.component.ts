@@ -27,10 +27,10 @@ export class SurveyorLeafletComponent implements AfterViewInit {
     if (!this.options) {
       this.options = <MapOptions>{
         center: [37.8, -96],
-        zoom: 4,
-        zoomControl: false
+        zoom: 4
       };
     }
+    this.options.zoomControl = false;
 
     this.map =  L.map(this.mapId, this.options);
 
