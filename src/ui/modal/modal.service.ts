@@ -90,7 +90,7 @@ export class ModalService {
   status(message: string): ModalResult {
     let options = <ModalOptions> {
       hideSubmit: true,
-      cancelLabel: "Cancel",
+      hideCancel: true,
       params: { message: message },
       type: "center"
     };

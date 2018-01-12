@@ -23,6 +23,8 @@ export class SurveyorLeafletComponent implements AfterViewInit {
               private renderer: Renderer2) {}
 
   ngAfterViewInit() {
+    window['L'].Browser.touch = false;  // Hack to reduce the size of the vertices
+
     // Initialize the primary map object
     if (!this.options) {
       this.options = <MapOptions>{
@@ -32,7 +34,7 @@ export class SurveyorLeafletComponent implements AfterViewInit {
     }
     this.options.zoomControl = false;
 
-    this.map =  L.map(this.mapId, this.options);
+    this.map = L.map(this.mapId, this.options);
 
     let baseLayers = <LayersObject>{};
     let first = true;
@@ -77,11 +79,12 @@ export class SurveyorLeafletComponent implements AfterViewInit {
       .forEach((provider: ControlProvider) => {
         let control = provider.provide(this.map);
 
-        if (control)
-          control.addTo(this.map)
-        else
-          console.error("Could not provide control for " + provider.config)
-    })
+        if (control) {
+          control.addTo(this.map);
+        } else {
+          console.error("Could not provide control for " + provider.config);
+        }
+    });
 
     L.control.layers(baseLayers, overlays, {}).addTo(this.map);
 
