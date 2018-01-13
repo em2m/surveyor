@@ -74,6 +74,7 @@ export class Searcher {
   public recursive = true;
   public fullTextFields: Array<string>;
   public filter?: Query;
+  public options: { [key: string]: any } = {};
   public pageStart: number;
   public pageEnd: number;
   public pickerOptions: PickerOptions;
