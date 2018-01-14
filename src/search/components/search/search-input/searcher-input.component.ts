@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {SearchConstraint, Searcher, SearchRequest} from "../../../shared/searcher.model";
 import {PickerService} from "../../../../ui/picker/picker.service";
-import {BoolQuery, LuceneQuery, MatchQuery, OperationType, Query} from "../../../shared/query.model";
+import {BoolQuery, LuceneQuery, MatchQuery, OperationType, Query, RegexQuery} from "../../../shared/query.model";
 
 @Component({
   selector: 'surveyor-searcher-input',
@@ -37,7 +37,7 @@ export class SearcherInputComponent implements OnInit {
       } else {
         const queries = new Array<Query>();
         this.searcher.fullTextFields.forEach(field => {
-          queries.push(new LuceneQuery(`*${searchInput}*`, field));
+          queries.push(new LuceneQuery(`${field}:*${searchInput}*`, field));
         });
         constraint.query = new BoolQuery(OperationType.OR, queries);
       }
