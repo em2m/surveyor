@@ -11,6 +11,7 @@ import {QueryPickerComponent} from "./pickers/query-picker/query-picker.componen
 import {SearcherInputComponent} from "./components/search/search-input/searcher-input.component";
 import {TermPickerComponent} from "./pickers/term-picker/term-picker.component";
 import {ToggleRecursiveComponent} from "./components/toggle-recursive/toggle-recursive.component";
+import {SurveyorRegionModule} from "../ui/region/region.module";
 
 export * from './shared/query.model';
 export * from './shared/searcher.model';
@@ -39,7 +40,8 @@ const components: any[] = [
     CommonModule,
     MdlModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SurveyorRegionModule
   ],
   exports: [
     ...components,

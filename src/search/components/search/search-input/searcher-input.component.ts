@@ -10,6 +10,7 @@ import {BoolQuery, LuceneQuery, MatchQuery, OperationType, Query} from "../../..
 })
 export class SearcherInputComponent implements OnInit {
 
+  @Input() iconRegion = "icon-region";
   @Input() searcher: Searcher;
   @Input() placeholder = "Search ...";
   public searchInput = '';
