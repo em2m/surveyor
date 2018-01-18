@@ -17,8 +17,7 @@
 .search-wrapper {
   background-color: #eee;
   display: flex;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
+  flex-direction: row;
   flex-wrap: wrap;
   min-height: inherit;
   padding: 0.5rem 1rem;
@@ -32,19 +31,11 @@
 
 .search-constraints {
   background-color: transparent;
-  width: 100%;
   padding: 0;
   margin: 0;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
   align-items: center;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
+  flex: 1;
   flex-wrap: wrap;
   list-style: none;
 }

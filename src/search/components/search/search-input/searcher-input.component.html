@@ -15,5 +15,8 @@
         <input autofocus [(ngModel)]="searchInput" class="search-input" [placeholder]="placeholder" (keyup.enter)="onSubmit(searchInput)"/>
       </li>
     </ul>
+    <div>
+      <surveyor-region [regionId]="iconRegion"></surveyor-region>
+    </div>
   </div>
 </div>
