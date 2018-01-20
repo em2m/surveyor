@@ -1,7 +1,7 @@
-import {AfterViewInit, Component, EventEmitter, Input, Output} from "@angular/core";
+import {AfterViewInit, Component, ElementRef, Renderer2, Input, Output, EventEmitter} from "@angular/core";
 import * as L from 'leaflet';
 import {Control, Map, MapOptions} from "leaflet";
-import {FeatureProvider, LayerDefinition, LayerProvider} from "./leaflet.model";
+import {ControlProvider, FeatureProvider, LayerDefinition, LayerProvider} from "./leaflet.model";
 import {LeafletService} from "./leaflet.service";
 import LayersObject = Control.LayersObject;
 
@@ -18,9 +18,13 @@ export class SurveyorLeafletComponent implements AfterViewInit {
   @Output() mapReady = new EventEmitter();
   private map: Map;
 
-  constructor(private leafletService: LeafletService) {}
+  constructor(private leafletService: LeafletService,
+              private elementRef: ElementRef,
+              private renderer: Renderer2) {}
 
   ngAfterViewInit() {
+    window['L'].Browser.touch = false;  // Hack to reduce the size of the vertices
+
     // Initialize the primary map object
     if (!this.options) {
       this.options = <MapOptions>{
@@ -28,8 +32,9 @@ export class SurveyorLeafletComponent implements AfterViewInit {
         zoom: 4
       };
     }
+    this.options.zoomControl = false;
 
-    this.map =  L.map(this.mapId, this.options);
+    this.map = L.map(this.mapId, this.options);
 
     let baseLayers = <LayersObject>{};
     let first = true;
@@ -68,13 +73,27 @@ export class SurveyorLeafletComponent implements AfterViewInit {
     this.leafletService.findFeatures(this.mapId)
       .forEach((provider: FeatureProvider) => {
         provider.provide(this.map);
-      });
+    });
+
+    this.leafletService.findControls(this.mapId)
+      .forEach((provider: ControlProvider) => {
+        let control = provider.provide(this.map);
+
+        if (control) {
+          control.addTo(this.map);
+        } else {
+          console.error("Could not provide control for " + provider.config);
+        }
+    });
 
     L.control.layers(baseLayers, overlays, {}).addTo(this.map);
 
     setTimeout(() => {
+      let leafletContainerDiv = this.elementRef.nativeElement.querySelector(".leaflet-container");
+      this.renderer.removeClass(leafletContainerDiv, 'leaflet-touch');
       this.map.invalidateSize({});
     });
+
 
     this.mapReady.emit(this.map);
   }

@@ -11,9 +11,8 @@ export class MapboxProvider implements LayerProvider {
   constructor(private appConfig: AppConfig) {}
 
   provide(): Array<LayerDefinition> {
-    console.log(this.appConfig.get());
     let mapProvider = this.appConfig.get().map.provider;
-    if (!mapProvider || mapProvider === 'mapbox') {
+    if (mapProvider === 'mapbox') {
       let accessToken = this.appConfig.get().map.mapbox.accessToken;
 
       let streetsLayer = {

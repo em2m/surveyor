@@ -12,6 +12,7 @@ import {SurveyorPickerModule} from "./picker/picker.module";
 import {SurveyorTableModule} from "./table/table.module";
 import {SurveyorTabsModule} from "./tabs/tabs.module";
 import {SurveyorToastModule} from "./toast/toast.module";
+import {SurveyorRegionModule} from "./region/region.module";
 
 export * from './action/action.module';
 export * from './card/card.module';
@@ -23,6 +24,7 @@ export * from './menu/menu.module';
 export * from './modal/modal.module';
 export * from './pagination/pagination.module';
 export * from './picker/picker.module';
+export * from './region/region.module';
 export * from './table/table.module';
 export * from './tabs/tabs.module';
 export * from './toast/toast.module';
@@ -39,6 +41,7 @@ export * from './toast/toast.module';
     SurveyorModalModule.forRoot(),
     SurveyorPaginationModule.forRoot(),
     SurveyorPickerModule.forRoot(),
+    SurveyorRegionModule.forRoot(),
     SurveyorTableModule.forRoot(),
     SurveyorTabsModule.forRoot(),
     SurveyorToastModule.forRoot()
@@ -54,6 +57,7 @@ export * from './toast/toast.module';
     SurveyorModalModule,
     SurveyorPaginationModule,
     SurveyorPickerModule,
+    SurveyorRegionModule,
     SurveyorTableModule,
     SurveyorTabsModule,
     SurveyorToastModule

@@ -1,6 +1,8 @@
 import {Plugin} from "../../core/extension/extension.model";
 import {MapboxProvider} from "./providers/mapbox/mapbox.provider";
 import {MapquestProvider} from "./providers/mapquest/mapquest.provider";
+import {OpenStreetMapProvider} from "./providers/openstreetmap/openstreetmap.provider";
+import {ZoomControlProvider} from "./providers/zoomcontrol/zoom-control.provider";
 
 export let LeafletPlugin: Plugin = <Plugin> {
   name: "Leaflet Plugin",
@@ -15,7 +17,19 @@ export let LeafletPlugin: Plugin = <Plugin> {
         value: MapquestProvider,
         target: "global",
         priority: 2
+      },
+      {
+        value: OpenStreetMapProvider,
+        target: "global",
+        priority: 3
       }
     ],
+    "surveyor:leaflet-control": [
+      {
+        value: ZoomControlProvider,
+        target: "global",
+        priority: -1
+      }
+    ]
   }
 };

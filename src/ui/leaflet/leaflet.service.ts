@@ -1,5 +1,5 @@
 import {Injectable, Injector} from "@angular/core";
-import {FeatureProvider, LayerProvider} from "./leaflet.model";
+import {ControlProvider, FeatureProvider, LayerProvider} from "./leaflet.model";
 import {ExtensionService} from "../../core/extension/extension.service";
 import {FilterContext} from "../../core/extension/extension.model";
 import {Map} from "leaflet";
@@ -12,6 +12,7 @@ export class LeafletService {
   private BASE_LAYER_EXTENSION_TYPE = "surveyor:leaflet-base-layer";
   private OVERLAY_EXTENSION_TYPE = "surveyor:leaflet-overlay";
   private FEATURE_EXTENSION_TYPE = "surveyor:leaflet-feature";
+  private CONTROL_EXTENSION_TYPE = "surveyor:leaflet-control";
 
   private mapSources: { [mapId: string]: BehaviorSubject<Map>; } = {};
 
@@ -57,6 +58,21 @@ export class LeafletService {
       let type = extension.value;
 
       let layer = this.injector.get(type) as FeatureProvider;
+      layer.config = extension.config;
+      return layer;
+    });
+  }
+
+  findControls(target: string): Array<ControlProvider> {
+    let extensions = [
+      ...this.extensionService.getExtensionsForTypeAndTarget(this.CONTROL_EXTENSION_TYPE, "global"),
+      ...this.extensionService.getExtensionsForTypeAndTarget(this.CONTROL_EXTENSION_TYPE, target)
+    ];
+
+    return extensions.filter(extension => extension !== null).map(extension => {
+      let type = extension.value;
+
+      let layer = this.injector.get(type) as ControlProvider;
       layer.config = extension.config;
       return layer;
     });

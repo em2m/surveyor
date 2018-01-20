@@ -16,9 +16,7 @@ export class ApplicationUnknownComponent implements OnInit {
     this.links = this.extensionService.getExtensionsForTypeAndTarget('surveyor:link-contribution', "404")
       .map(extension => {
         if (extension) {
-          let link = extension.value;
-          //link.href = link.href ? link.href.replace("${orgId}", this.authService.getOrganizationId()) : "";
-          return link;
+          return extension.value;
         }
       });
   }

@@ -36,7 +36,7 @@ export class TabsService {
             }
 
             // Only add the tab if it passes all filter checks
-            if (FilterUtils.isPermitted(this.contextService.get(), route.data["filters"] as Array<Filter>)) {
+            if (FilterUtils.isPermitted(this.contextService.getContext(), route.data["filters"] as Array<Filter>)) {
               tabs.push({
                 title: route.data["title"] || route.path,
                 path: `./${route.path}`,
@@ -53,12 +53,18 @@ export class TabsService {
   }
 
   isTabActive(activatedRoute: ActivatedRoute, tab: any): boolean {
+    /*
     let tabPath = tab.path.substring(1);
     if (tabPath.length === 1) {
       // Handle special case where route is simply "/"
       tabPath = "";
     }
 
-    return this.router.routerState.snapshot.url.endsWith(activatedRoute.parent.snapshot.url + tabPath);
+    console.log("Active Route", this.router.routerState.snapshot.url);
+    console.log("Ends With", activatedRoute.parent.snapshot.url.join('/') + tabPath);
+
+    return this.router.routerState.snapshot.url.endsWith(activatedRoute.parent.snapshot.url.join('/') + tabPath);
+    */
+    return false;
   }
 }

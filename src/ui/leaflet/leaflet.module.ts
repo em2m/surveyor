@@ -5,6 +5,8 @@ import {LeafletService} from "./leaflet.service";
 import {SurveyorLeafletComponent} from "./leaflet.component";
 import {MapboxProvider} from "./providers/mapbox/mapbox.provider";
 import {MapquestProvider} from "./providers/mapquest/mapquest.provider";
+import {OpenStreetMapProvider} from "./providers/openstreetmap/openstreetmap.provider";
+import {ZoomControlProvider} from "./providers/zoomcontrol/zoom-control.provider";
 
 export * from './leaflet.component';
 export * from './leaflet.model';
@@ -12,6 +14,8 @@ export * from './leaflet.service';
 export * from './leaflet.plugin';
 export * from './providers/mapbox/mapbox.provider';
 export * from './providers/mapquest/mapquest.provider';
+export * from './providers/openstreetmap/openstreetmap.provider';
+export * from './providers/zoomcontrol/zoom-control.provider';
 
 @NgModule({
   imports: [
@@ -35,6 +39,8 @@ export class SurveyorLeafletModule {
         LeafletService,
         MapboxProvider,
         MapquestProvider,
+        OpenStreetMapProvider,
+        ZoomControlProvider,
         {provide: "PLUGIN", useValue: LeafletPlugin, multi: true}
       ]
     };

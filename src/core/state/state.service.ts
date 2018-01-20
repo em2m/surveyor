@@ -9,8 +9,14 @@ export class StateService {
 
   constructor() {}
 
-  set(key: string, value: any) {
+  set(key: string, value: any, storage: "NONE" | "LOCAL" | "SESSION" = "NONE") {
     this.getSource(key).next(value);
+
+    if (storage === "LOCAL") {
+      localStorage.setItem(key, JSON.stringify(value));
+    } else if (storage === "SESSION") {
+      sessionStorage.setItem(key, JSON.stringify(value));
+    }
   }
 
   get(key: string): any {
@@ -24,7 +30,11 @@ export class StateService {
   private getSource(key: string): BehaviorSubject<any> {
     let source = this.sources[key];
     if (!source) {
-      source = new BehaviorSubject<any>(null);
+      let storedValue = sessionStorage.getItem(key) || localStorage.getItem(key);
+      if (storedValue) {
+        storedValue = JSON.parse(storedValue);
+      }
+      source = new BehaviorSubject<any>(storedValue);
       this.sources[key] = source;
     }
     return source;
