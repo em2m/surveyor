@@ -1,16 +1,28 @@
-<mdl-layout mdl-layout-fixed-header>
-  <mdl-layout-header>
-    <surveyor-dropdown>
-      <surveyor-sidenav></surveyor-sidenav>
-    </surveyor-dropdown>
-    <surveyor-application-header></surveyor-application-header>
-  </mdl-layout-header>
 
-  <mdl-layout-content style="background-color: #eee;" class="flex-vertical">
-    <router-outlet></router-outlet>
-  </mdl-layout-content>
-  <mdl-layout-spacer></mdl-layout-spacer>
-  <footer class="mdl-mini-footer">
+<div class="application-wrapper">
+  <div class="application-content flex-vertical" [class.is-mobile]="isMobile">
+    <!-- Toolbar -->
+    <mat-toolbar color="primary" class="application-toolbar" [style.background-color]="brandColor">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <surveyor-application-header></surveyor-application-header>
+    </mat-toolbar>
+
+    <!-- Sidenav and Content -->
+    <mat-sidenav-container class="sidenav-container flex-vertical">
+      <mat-sidenav #sidenav [mode]="isMobile ? 'over' : 'side'" [fixedInViewport]="isMobile"
+                   [fixedTopGap]="isMobile? 0 : 64" style="max-width: 250px">
+        <surveyor-sidenav></surveyor-sidenav>
+      </mat-sidenav>
+
+      <mat-sidenav-content class="flex-vertical">
+        <div style="background-color: #eee;" class="flex-vertical">
+          <router-outlet></router-outlet>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+
     <surveyor-application-footer></surveyor-application-footer>
-  </footer>
-</mdl-layout>
+  </div>
+</div>
