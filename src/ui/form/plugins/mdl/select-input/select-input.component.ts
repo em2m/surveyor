@@ -36,7 +36,10 @@ export class MdlSelectInputComponent extends SurveyorFormInputComponent implemen
 
   initialize() {
     this.items = JSON.parse(JSON.stringify(this.controlDefinition.options.selections || []));
-    let included = this.items.map(item => item.value || item).indexOf(this.controlDefinition.value) > -1;
+    let included = this.items.map(item => {
+      if (item.value === 0) return 0;
+      else return item.value || item;
+    }).indexOf(this.controlDefinition.value) > -1;
     if (included) {
       this.setValue(this.controlDefinition.value);
     } else {
@@ -169,7 +172,10 @@ export class MdlSelectInputComponent extends SurveyorFormInputComponent implemen
 
   setValue(val: any) {
     if (this.items) {
-      let item = this.items.find(i => (i.value || i) === val);
+      let item = this.items.find(i => {
+        if (i.value === 0) return 0 === val;
+        else return (i.value || i) === val;
+      });
       if (item) {
         this.value = val;
         this.itemSelect(item);
