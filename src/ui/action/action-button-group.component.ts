@@ -23,21 +23,16 @@ export class ActionButtonGroupComponent implements OnInit, OnDestroy {
   constructor(private actionService: ActionService, private contextService: ContextService) {}
 
   ngOnInit() {
-    this.findActions();
-    /*
     this.contextSub = this.contextService.onContextChange()
       .subscribe(context => {
-
+        this.findActions();
       });
-      */
   }
 
   ngOnDestroy() {
-    /*
     if (this.contextSub) {
       this.contextSub.unsubscribe();
     }
-    */
   }
 
   private findActions() {
