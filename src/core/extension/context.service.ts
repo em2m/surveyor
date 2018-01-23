@@ -32,7 +32,7 @@ export class ContextService {
   }
 
   notifyContext() {
-    //this.contextSubject.next(this.getContext());
+    this.contextSubject.next(this.getContext());
   }
 
   addActions(actions: Array<string>) {
@@ -58,11 +58,11 @@ export class ContextService {
 
   setValue(key: string, value: any) {
     let prevValue = this.context.values[key];
-    if (!prevValue || JSON.stringify(prevValue) !== JSON.stringify(value)) {
+    //if (!prevValue || JSON.stringify(prevValue) !== JSON.stringify(value)) {
       this.context.values[key] = value;
       this.notifyValue(key);
       this.notifyContext();
-    }
+    //}
   }
 
   getValue(key: string): any {
