@@ -12,6 +12,8 @@ import {SurveyorMenuModule} from "../../ui/menu/menu.module";
 import {SurveyorDropdownModule} from "../../ui/dropdown/dropdown.module";
 import {ApplicationSidenavComponent} from "./sidenav/sidenav.component";
 import {SidenavService} from "./sidenav/sidenav.service";
+import {MatButtonModule, MatIconModule, MatListModule, MatSidenavModule, MatToolbarModule} from "@angular/material";
+import {LayoutModule} from "@angular/cdk/layout";
 
 export * from './application-routing.module';
 export * from './footer/footer.component';
@@ -37,7 +39,13 @@ let components = [
     ApplicationRoutingModule,
     SurveyorMenuModule,
     SurveyorDropdownModule,
-    MdlModule
+    MdlModule,
+    MatButtonModule,
+    MatIconModule,
+    MatListModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    LayoutModule
   ],
   exports: [
     ...components

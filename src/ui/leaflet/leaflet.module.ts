@@ -7,6 +7,8 @@ import {MapboxProvider} from "./providers/mapbox/mapbox.provider";
 import {MapquestProvider} from "./providers/mapquest/mapquest.provider";
 import {OpenStreetMapProvider} from "./providers/openstreetmap/openstreetmap.provider";
 import {ZoomControlProvider} from "./providers/zoomcontrol/zoom-control.provider";
+import {GoogleMapsProvider} from "./providers/google-maps/google-maps.provider";
+import {GoogleMapsLoaderService} from "./providers/google-maps/google-maps-loader.service";
 
 export * from './leaflet.component';
 export * from './leaflet.model';
@@ -14,6 +16,7 @@ export * from './leaflet.service';
 export * from './leaflet.plugin';
 export * from './providers/mapbox/mapbox.provider';
 export * from './providers/mapquest/mapquest.provider';
+export * from './providers/google-maps/google-maps.provider';
 export * from './providers/openstreetmap/openstreetmap.provider';
 export * from './providers/zoomcontrol/zoom-control.provider';
 
@@ -39,6 +42,8 @@ export class SurveyorLeafletModule {
         LeafletService,
         MapboxProvider,
         MapquestProvider,
+        GoogleMapsProvider,
+        GoogleMapsLoaderService,
         OpenStreetMapProvider,
         ZoomControlProvider,
         {provide: "PLUGIN", useValue: LeafletPlugin, multi: true}

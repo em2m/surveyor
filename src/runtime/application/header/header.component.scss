@@ -1,4 +1,14 @@
 
-.mdl-layout__header-row {
-  padding: 0 0 0 70px;
+:host {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+.header-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: baseline;
+  padding: 0 0.75rem;
 }
