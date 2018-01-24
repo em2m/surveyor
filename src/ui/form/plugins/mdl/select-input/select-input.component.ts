@@ -173,7 +173,7 @@ export class MdlSelectInputComponent extends SurveyorFormInputComponent implemen
   setValue(val: any) {
     if (this.items) {
       let item = this.items.find(i => {
-        if (i === undefined) return i === val;
+        if (i.value === undefined) return i === val;
         else return i.value === val;
       });
       if (item) {
