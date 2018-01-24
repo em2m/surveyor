@@ -10,7 +10,8 @@ export interface LayerDefinition {
 
 export interface LayerProvider {
   config: any;
-  provide(map: Map): Array<LayerDefinition> | Observable<Array<LayerDefinition>>;
+  //provide(map: Map): Array<LayerDefinition> | Observable<Array<LayerDefinition>>;
+  provide(map: Map): LayerDefinition | Array<LayerDefinition>;
 }
 
 export interface FeatureProvider {

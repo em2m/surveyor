@@ -12,7 +12,7 @@
     <!-- Sidenav and Content -->
     <mat-sidenav-container class="sidenav-container flex-vertical">
       <mat-sidenav #sidenav [mode]="isMobile ? 'over' : 'side'" [fixedInViewport]="isMobile"
-                   [fixedTopGap]="isMobile? 0 : 64" style="max-width: 250px">
+                   [fixedTopGap]="isMobile? 0 : 64" style="max-width: 200px" (click)="sidenav.close()">
         <surveyor-sidenav></surveyor-sidenav>
       </mat-sidenav>
 
