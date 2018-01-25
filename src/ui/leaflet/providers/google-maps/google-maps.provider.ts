@@ -15,12 +15,13 @@ export class GoogleMapsProvider implements LayerProvider {
 
   }
 
-  provide(): Array<LayerDefinition> | Observable<Array<LayerDefinition>> {
+  provide(): Array<LayerDefinition> /* | Observable<Array<LayerDefinition>>*/ {
 
     let mapProvider = this.appConfig.get().map.provider;
     if (mapProvider === 'google') {
       //let accessToken = this.appConfig.get().map.google.apiKey;
 
+      /*
       return this.googleMaps.loadApi("AIzaSyAL7AtF6jYTzN4mObd57kZ7XEhb-bbmEpY")
         .map(() => {
           let gridLayer = L.gridLayer as any;
@@ -36,8 +37,10 @@ export class GoogleMapsProvider implements LayerProvider {
           console.log("Google Layers Ready");
           return [streetsLayer, satelliteLayer];
         });
+        */
+      return [];
     } else {
-      return Observable.from([]);
+      return [];
     }
   }
 }

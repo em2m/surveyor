@@ -10,7 +10,7 @@ import {StateService} from "../../../core/state/state.service";
 })
 export class ApplicationWrapperComponent implements OnInit, OnDestroy {
 
-  isMobile = false;
+  isMobile = true;
   brandColor: string;
   private breakpointSub: Subscription;
   private brandSub: Subscription;
@@ -20,7 +20,7 @@ export class ApplicationWrapperComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.breakpointSub = this.breakpointObserver.observe([Breakpoints.Handset, Breakpoints.Tablet]).subscribe(result => {
-      this.isMobile = result.matches;
+      //this.isMobile = result.matches;
     });
 
     this.brandSub = this.stateService.watch("brand:loaded").subscribe(brand => {
