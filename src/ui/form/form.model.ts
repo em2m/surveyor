@@ -47,7 +47,7 @@ export class ControlDefinition {
     this.key = data.key;
     this.label = data.label;
     this.component = data.component;
-    this.value = data.value || null;
+    this.value = data.value;
     this.disabled = data.disabled || false;
     this.options = data.options || {};
     this.validators = data.validators || [];

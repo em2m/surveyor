@@ -4,7 +4,7 @@ import {ActionService} from "./action.service";
 import {ActionButtonGroupComponent} from "./action-button-group.component";
 import {ActionButtonSelectionComponent} from "./action-button-selection.component";
 import {NavigateBackAction} from "./actions/back.action";
-import {MdlModule} from "@angular-mdl/core";
+import {MatButtonModule, MatMenuModule} from "@angular/material";
 
 export * from './action.model';
 export * from './action.service';
@@ -20,7 +20,8 @@ const components = [
 @NgModule({
   imports: [
     CommonModule,
-    MdlModule
+    MatButtonModule,
+    MatMenuModule
   ],
   exports: [
     ...components
