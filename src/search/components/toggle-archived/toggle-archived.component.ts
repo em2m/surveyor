@@ -1,4 +1,4 @@
-import {Searcher} from "../../../";
+import {Searcher} from "../../shared/searcher.model";
 import {Component, Input} from "@angular/core";
 
 @Component({
