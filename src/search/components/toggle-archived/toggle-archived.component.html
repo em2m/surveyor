@@ -1,0 +1,9 @@
+<form style="padding: 1rem 0;">
+  <div class="form-group">
+    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect is-checked" for="toggle-closed-checkbox">
+      <input type="checkbox" id="toggle-closed-checkbox" class="mdl-checkbox__input"
+             (change)="toggleArchived()" [checked]="searcher.options.archived">
+      <span class="mdl-checkbox__label" style="font-size: 14px;">{{label}}</span>
+    </label>
+  </div>
+</form>
