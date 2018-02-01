@@ -7,10 +7,16 @@ import {Component, Input} from "@angular/core";
 })
 export class ToggleArchivedComponent {
   @Input() label;
-  constructor(public searcher: Searcher) {}
+  archived = false;
+
+  constructor(public searcher: Searcher) {
+    this.archived = searcher.options && searcher.options.archived ? searcher.options.archived : false;
+  }
 
   toggleArchived() {
-    this.searcher.options.archived = !this.searcher.options.archived;
+    this.searcher.options = this.searcher.options || {};
+    this.searcher.options.archived = !this.archived;
+    this.archived = !this.archived;
     this.searcher.broadcastRequest();
   }
 }
