@@ -97,4 +97,19 @@ export class ModalService {
 
     return this.open(StatusModal, options);
   }
+
+  message(message: string) {
+    let options = <ModalOptions> {
+      hideSubmit: true,
+      hideCancel: false,
+      cancelLabel: "OK",
+      params: { message: message },
+      type: "center"
+    };
+
+    let modal = this.open(ConfirmationModal, options);
+    modal.submit.subscribe((value: boolean) => {
+      modal.dismiss();
+    });
+  }
 }

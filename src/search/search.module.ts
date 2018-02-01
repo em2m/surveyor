@@ -11,25 +11,28 @@ import {QueryPickerComponent} from "./pickers/query-picker/query-picker.componen
 import {SearcherInputComponent} from "./components/search/search-input/searcher-input.component";
 import {TermPickerComponent} from "./pickers/term-picker/term-picker.component";
 import {ToggleRecursiveComponent} from "./components/toggle-recursive/toggle-recursive.component";
+import {ToggleArchivedComponent} from "./components/toggle-archived/toggle-archived.component";
 import {SurveyorRegionModule} from "../ui/region/region.module";
 
 export * from './shared/query.model';
 export * from './shared/searcher.model';
 export * from './components/search/sort/sort.component';
 export * from './components/search/sort/sort.model';
-export * from './components/search/search-input/searcher-input.component'
+export * from './components/search/search-input/searcher-input.component';
 export * from './components/total-results/total-results.component';
+export * from './components/toggle-archived/toggle-archived.component';
 export * from './components/standard-facet/standard-facet.component';
 export * from './components/toggle-recursive/toggle-recursive.component';
 export * from './pickers/term-picker/term-picker.component';
-export * from './pickers/query-picker/query-picker.component'
-export * from './search.plugin'
+export * from './pickers/query-picker/query-picker.component';
+export * from './search.plugin';
 
 const components: any[] = [
   SortComponent,
   TotalResultComponent,
   StandardFacetComponent,
   ToggleRecursiveComponent,
+  ToggleArchivedComponent,
   TermPickerComponent,
   QueryPickerComponent,
   SearcherInputComponent

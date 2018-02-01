@@ -269,3 +269,18 @@ body {
   padding-bottom: 1.25rem;
   font-weight: 200;
 }
+
+.mat-drawer-backdrop {
+  opacity: 0 !important;
+}
+
+.leaflet-control-icon {
+  width: 26px;
+  height: 26px;
+  background-color: #FFF;
+}
+
+.leaflet-fa-icon {
+  margin: 3px;
+  font-size: 20px;
+}
