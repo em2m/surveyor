@@ -56,6 +56,16 @@ export class ContextService {
     return this.context.actions || [];
   }
 
+  hasAction(action: string): boolean {
+    for (let availableAction of (this.context.actions || [])) {
+      // If the action matches just one of the available actions then the action is permitted
+      if (action.search("^" + availableAction.replace("*", "(.*)") + "$") >= 0) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   setValue(key: string, value: any) {
     let prevValue = this.context.values[key];
     //if (!prevValue || JSON.stringify(prevValue) !== JSON.stringify(value)) {
