@@ -19,6 +19,7 @@ export * from './providers/mapbox/mapbox.provider';
 export * from './providers/mapquest/mapquest.provider';
 export * from './providers/google-maps/google-maps.provider';
 export * from './providers/google-maps/google-street-view-control.provider';
+export * from './providers/google-maps/google-maps-loader.service';
 export * from './providers/openstreetmap/openstreetmap.provider';
 export * from './providers/zoomcontrol/zoom-control.provider';
 
