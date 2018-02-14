@@ -6,3 +6,7 @@
   opacity: .5 !important;
   cursor: not-allowed;
 }
+
+button[mat-button] {
+  margin-bottom: 0.3rem;
+}

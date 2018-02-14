@@ -15,6 +15,7 @@ export * from "./extension/context.service";
 export * from "./extension/filters/action.filter";
 export * from "./extension/filters/and.filter";
 export * from "./extension/filters/config.filter";
+export * from "./extension/filters/context.filter";
 export * from "./extension/filters/filter.util";
 export * from "./extension/filters/not.filter";
 export * from "./extension/filters/or.filter";
