@@ -181,6 +181,28 @@ export class Searcher {
     this._searchRequest.offset = (this.currentPage - 1) * this.pageSize;
   }
 
+  public addConstraint(constraint: SearchConstraint) {
+    let addConstraint = true;
+    this.constraints.forEach(constraintItem => {
+      let constraintItemString = Object.keys(constraintItem.query).map(key => constraintItem.query[key]).sort().toString().trim();
+      if (constraintItem.not) {
+        constraintItemString += constraintItem.not.toString();
+      }
+      let constraintString = Object.keys(constraint.query).map(key => constraint.query[key]).sort().toString().trim();
+      if (constraint.not) {
+        constraintString += constraint.not.toString();
+      }
+      if (constraintItemString == constraintString)
+        addConstraint = false
+    });
+    if (addConstraint)
+      this.constraints.push(constraint)
+  }
+
+  public setConstraints(constraints: Array<SearchConstraint>) {
+    this.constraints = constraints
+  }
+
   public broadcastRequest() {
     this.requestSubject.next(this._searchRequest);
   }

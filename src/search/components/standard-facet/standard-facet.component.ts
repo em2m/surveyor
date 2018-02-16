@@ -72,7 +72,7 @@ export class StandardFacetComponent {
       let gte = bucket.from;
       query = new RangeQuery(agg.field, lt, null, null, gte, null);
     }
-    this.searcher.constraints.push({
+    this.searcher.addConstraint({
       label: `${agg.label || agg.key} : ${bucket.label || bucket.key}`,
       query: query
     });
