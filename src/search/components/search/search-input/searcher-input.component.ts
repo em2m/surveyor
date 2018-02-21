@@ -33,14 +33,17 @@ export class SearcherInputComponent implements OnInit {
         label: searchInput
       };
 
-      if (searchInput.indexOf(":") > 0 || searchInput.indexOf("(") > 0 || searchInput.indexOf("*") > 0) {
+      if (searchInput.indexOf(":") > -1 || searchInput.indexOf("(") > -1 || searchInput.indexOf("*") > -1) {
         constraint.query = new LuceneQuery(searchInput, "_all");
       } else {
         const queries = new Array<Query>();
+        let tokenizedSearchInput = searchInput.split(" ");
         this.searcher.fullTextFields.forEach(field => {
-          queries.push(new LuceneQuery(`${field}:*${searchInput}*`, field));
+          tokenizedSearchInput.forEach(queryString => {
+            queries.push(new LuceneQuery(`${field}:*${queryString}*`, field));
+          })
         });
-        constraint.query = new BoolQuery(OperationType.OR, queries);
+        constraint.query = new BoolQuery(OperationType.AND, queries);
       }
 
       this.searcher.addConstraint(constraint);
