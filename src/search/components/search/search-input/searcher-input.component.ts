@@ -1,7 +1,10 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {SearchConstraint, Searcher, SearchRequest} from "../../../shared/searcher.model";
 import {PickerService} from "../../../../ui/picker/picker.service";
-import {BoolQuery, LuceneQuery, MatchQuery, OperationType, Query, RegexQuery} from "../../../shared/query.model";
+import {
+  AndQuery, BoolQuery, LuceneQuery, MatchQuery, OperationType, Query,
+  RegexQuery
+} from "../../../shared/query.model";
 
 @Component({
   selector: 'surveyor-searcher-input',
@@ -36,14 +39,16 @@ export class SearcherInputComponent implements OnInit {
       if (searchInput.indexOf(":") > -1 || searchInput.indexOf("(") > -1 || searchInput.indexOf("*") > -1) {
         constraint.query = new LuceneQuery(searchInput, "_all");
       } else {
-        const queries = new Array<Query>();
+        const outerQueries = new Array<Query>();
         let tokenizedSearchInput = searchInput.split(" ");
         this.searcher.fullTextFields.forEach(field => {
+          const innerQueries = new Array<Query>();
           tokenizedSearchInput.forEach(queryString => {
-            queries.push(new LuceneQuery(`${field}:*${queryString}*`, field));
+            innerQueries.push(new LuceneQuery(`${field}:*${queryString}*`, field));
           })
+          outerQueries.push(new BoolQuery(OperationType.AND, innerQueries))
         });
-        constraint.query = new BoolQuery(OperationType.AND, queries);
+        constraint.query = new BoolQuery(OperationType.OR, outerQueries);
       }
 
       this.searcher.addConstraint(constraint);
