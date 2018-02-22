@@ -1,4 +1,4 @@
-import {Agg, AndQuery, Field, NotQuery, Query, Sort} from "./query.model";
+import {Agg, AndQuery, BoolQuery, Field, NotQuery, Query, Sort} from "./query.model";
 import {PickerOptions} from "../../ui/picker/picker.model";
 import {Subject} from "rxjs/Subject";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
@@ -192,7 +192,7 @@ export class Searcher {
       if (constraint.not) {
         constraintString += constraint.not.toString();
       }
-      if (constraintItemString == constraintString)
+      if (constraintItemString == constraintString && !(constraint.query instanceof BoolQuery))
         addConstraint = false
     });
     if (addConstraint)
