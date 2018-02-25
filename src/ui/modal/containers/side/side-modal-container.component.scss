@@ -53,6 +53,8 @@
 }
 
 .mdl-dialog__content {
+  display: flex;
+  flex-flow: column;
   flex: 1;
   overflow: auto;
   padding: 1rem;
