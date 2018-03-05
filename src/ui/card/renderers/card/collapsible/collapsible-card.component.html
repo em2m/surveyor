@@ -1,0 +1,9 @@
+<div class="card-header" (click)="collapse()">
+  <span class="card-header-title">{{ card?.title }}</span>
+  <span class="flex-spacer"></span>
+  <i class="material-icons" [ngClass]="{'rotate-45': collapsed}">close</i>
+</div>
+<div>
+  <h3 *ngIf="failed">Unable to load Widget</h3>
+  <div #cardTarget></div>
+</div>
