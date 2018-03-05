@@ -6,6 +6,7 @@
   align-items: center;
   display: flex;
   cursor: pointer;
+  border-top: 1px solid lightgrey;
 
   :hover {
     color: rgb(63,81,181);
@@ -44,7 +45,7 @@
 }
 
 .card-content {
-  padding: 1rem;
+  padding: 0 1rem;
 }
 
 .no-padding {
