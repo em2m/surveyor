@@ -15,7 +15,8 @@ export class MdlCheckboxInputComponent extends SurveyorFormInputComponent implem
   }
 
   setValue(val: any) {
-    if (val) {
+    if (val && val.length > 0) {
+      this.selected = val;
       super.setValue(val);
     } else {
       super.setValue([]);
@@ -33,5 +34,6 @@ export class MdlCheckboxInputComponent extends SurveyorFormInputComponent implem
       this.selected.push(selection.value);
     }
     this.formControl.setValue(this.selected);
+    if (this.formControl.pristine) { this.formControl.markAsDirty(); }
   }
 }
