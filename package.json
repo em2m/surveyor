@@ -1,6 +1,8 @@
 {
   "name": "@em2m/surveyor",
   "version": "1.4.0-SNAPSHOT",
+  "version": "1.3.4 ",
+  "license": "MIT",
   "scripts": {
     "clean": "rimraf dist",
     "packagr": "ng-packagr -p ng-package.json",
