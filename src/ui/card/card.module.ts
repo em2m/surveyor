@@ -10,6 +10,8 @@ import {StandardCardComponent} from "./renderers/card/standard/standard-card.com
 import {StackCardBoardRenderer} from "./renderers/cardboard/stack/stack-card-board.component";
 import {StandardCardBoardRenderer} from "./renderers/cardboard/standard/standard-card-board.component";
 import {CardPlugin} from "./card-plugin";
+import {AccordionCardBoardRenderer} from "./renderers/cardboard/accordion/accordion-card-board.component";
+import {CollapsibleCardComponent} from "./renderers/card/collapsible/collapsible-card.component";
 
 export * from './card-plugin';
 export * from './card.component';
@@ -19,10 +21,12 @@ export * from './card-board.component';
 export * from './card-board.page';
 export * from './renderers/card/base-card.component';
 export * from './renderers/card/card.renderer';
+export * from './renderers/card/collapsible/collapsible-card.component';
 export * from './renderers/card/html/html-card.component';
 export * from './renderers/card/stack/stack-card.component';
 export * from './renderers/card/standard/standard-card.component';
 export * from './renderers/cardboard/card-board.renderer';
+export * from './renderers/cardboard/accordion/accordion-card-board.component';
 export * from './renderers/cardboard/stack/stack-card-board.component';
 export * from './renderers/cardboard/standard/standard-card-board.component';
 
@@ -30,9 +34,11 @@ const components = [
   CardComponent,
   CardBoardComponent,
   CardBoardPage,
+  CollapsibleCardComponent,
   HtmlCardComponent,
   StackCardComponent,
   StandardCardComponent,
+  AccordionCardBoardRenderer,
   StackCardBoardRenderer,
   StandardCardBoardRenderer
 ];
