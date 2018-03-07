@@ -1,7 +1,7 @@
 <div class="margin">
   <div class="form-entry mdl-textfield mdl-js-textfield mdl-textfield--floating-label" (click)="loadPicker()">
     <input class="mdl-textfield__input form-control" id="organization" style="cursor: pointer;"
-           [placeholder]="label || controlDefinition.options.placeholder" readonly>
+           [placeholder]="label || controlDefinition.options.placeholder" readonly [disabled]="controlDefinition?.disabled">
     <label class="mdl-textfield__label" for="organization">{{controlDefinition.label}}</label>
   </div>
 </div>

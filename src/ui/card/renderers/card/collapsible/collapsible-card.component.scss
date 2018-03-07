@@ -1,10 +1,12 @@
 .card-header {
-  padding: 3rem 1rem;
-  font-size: 38px;
+  padding: 1rem;
+  font-size: 24px;
+  line-height: 24px;
   font-weight: 300;
   align-items: center;
   display: flex;
   cursor: pointer;
+  border-top: 1px solid lightgrey;
 
   :hover {
     color: rgb(63,81,181);
@@ -17,21 +19,13 @@
 }
 
 .card-header > .material-icons {
-  font-size: 36px;
+  font-size: 24px;
   font-weight: lighter;
   transition: 500ms;
 
   @media (max-width: 839px) {
     font-size: 28px;
   }
-}
-
-.rotate-45 {
-  -o-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
-  transform: rotate(45deg);
 }
 
 .collapse {
@@ -43,9 +37,17 @@
 }
 
 .collapse-open {
-  max-height: 2000px;
+  max-height: 1000px;
 }
 
 .collapse-closed {
   max-height: 0;
+}
+
+.card-content {
+  padding: 0 1rem;
+}
+
+.no-padding {
+  padding: 0 !important;
 }
