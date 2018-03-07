@@ -24,7 +24,7 @@ export class ExtensionService {
       if (!this.pluginRegistry[plugin.name]) {
         this.pluginRegistry[plugin.name] = plugin;
 
-        console.log('Loading Plugin: ' + plugin.name);
+        //console.log('Loading Plugin: ' + plugin.name);
 
         if (plugin.extensions) {
           for (let extensionType in plugin.extensions) {

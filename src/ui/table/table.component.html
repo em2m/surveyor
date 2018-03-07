@@ -1,4 +1,4 @@
-<table *ngIf="rows" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width: 100%">
+<table *ngIf="rows" class="mdl-data-table mdl-js-data-table" style="width: 100%">
   <thead>
   <th *ngIf="!selectionDisabled">
     <mdl-checkbox [(ngModel)]="toggle" (click)="toggleAll()" [mdl-ripple]="true"></mdl-checkbox>
