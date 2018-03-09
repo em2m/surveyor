@@ -1,5 +1,6 @@
 import {ModuleWithProviders, NgModule} from "@angular/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatInputModule} from '@angular/material/input';
 import {SurveyorFormComponent} from "./form.component";
 import {SurveyorFormInputWrapperComponent} from "./form-input-wrapper.component";
 import {CommonModule} from "@angular/common";
@@ -18,6 +19,9 @@ import {MdlModule} from "@angular-mdl/core";
 import {MdlPickerInputComponent} from "./plugins/mdl/picker-input/picker-input.component";
 import {MdlPasswordInputComponent} from "./plugins/mdl/password-input/password-input.component";
 
+import {MobileSelectInputComponent} from "./plugins/mobile/select-input/select-input.component";
+import {MobileNumberInputComponent} from "./plugins/mobile/number-input/number-input.component";
+
 export * from "./form.component";
 export * from "./form-input-component";
 export * from "./form.model";
@@ -29,6 +33,9 @@ export * from "./file-upload.service";
 export * from "./plugins/mdl/mdl-form-plugin";
 export * from "./plugins/form-services/form-services-plugin";
 
+export * from "./plugins/mobile/select-input/select-input.component";
+export * from "./plugins/mobile/number-input/number-input.component";
+
 const components = [
   SurveyorFormComponent,
   SurveyorFormInputWrapperComponent,
@@ -39,7 +46,9 @@ const components = [
   MdlSelectableItemComponent,
   MdlCheckboxInputComponent,
   MdlPasswordInputComponent,
-  ConfirmedPasswordInputComponent
+  ConfirmedPasswordInputComponent,
+  MobileSelectInputComponent,
+  MobileNumberInputComponent,
 ];
 
 @NgModule({
@@ -48,7 +57,8 @@ const components = [
     FormsModule,
     ReactiveFormsModule,
     MdlPopoverModule,
-    MdlModule
+    MdlModule,
+    MatInputModule
   ],
   exports: [
     CommonModule,
