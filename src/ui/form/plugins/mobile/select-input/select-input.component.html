@@ -1,0 +1,7 @@
+<div [ngStyle]="{'padding': '8px'}">
+  <div class="select-label">{{controlDefinition.label}}</div>
+  <select (change)="itemSelect($event.target.value)">
+    <option *ngFor="let item of items; let i = index" [value]="item.value"
+            [selected]="i === selectedIndex">{{item.label}}</option>
+  </select>
+</div>
