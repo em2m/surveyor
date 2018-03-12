@@ -25,11 +25,12 @@ export class CardSupport<T> implements Card {
 
   hideCard() {
     this.hidden = true;
-    this.hide.emit(this);
+    this.hide.emit(true);
   }
 
   showCard() {
     this.hidden = false;
+    this.hide.emit(false);
   }
 
   init(contextObs: Observable<any>) {
