@@ -1,4 +1,4 @@
-  <div class="mdl-grid mdl-grid--no-spacing">
+  <div class="flex-horizontal mdl-grid mdl-grid--no-spacing">
     <div [class]="'mdl-cell mdl-cell--' + tabsGridWidth + '-col'">
       <div style="padding-top: 1rem;" class="hidden-tablet-down">
         <ul class="list-group">
@@ -17,7 +17,7 @@
         </ul>
       </div>
     </div>
-    <div [class]="'mdl-cell mdl-cell--' + contentGridWidth + '-col'" style="padding-top: 1rem;">
+    <div [class]="'flex-scroll mdl-cell mdl-cell--' + contentGridWidth + '-col'" style="padding-top: 1rem;">
       <router-outlet></router-outlet>
     </div>
   </div>
