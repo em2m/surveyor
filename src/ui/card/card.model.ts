@@ -28,6 +28,10 @@ export class CardSupport<T> implements Card {
     this.hide.emit(this);
   }
 
+  showCard() {
+    this.hidden = false;
+  }
+
   init(contextObs: Observable<any>) {
     if (contextObs) {
       contextObs.subscribe(context => {
