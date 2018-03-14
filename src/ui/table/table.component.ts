@@ -79,4 +79,6 @@ export class TableComponent implements OnInit {
     this.toggle = toggle;
   }
 
+  valueCount
+
 }
