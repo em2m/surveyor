@@ -1,0 +1,10 @@
+<div class="card-header" (click)="collapse()" *ngIf="card?.title">
+  <span class="card-header-title">{{ card?.title }}</span>
+  <span class="flex-spacer"></span>
+  <i class="material-icons" [ngClass]="{'rotate180': collapsed}">keyboard_arrow_up</i>
+</div>
+<div class="collapse card-content"
+     [ngClass]="{'collapse-open ': !collapsed, 'collapse-closed': collapsed, 'no-padding': card?.style === 'noPadding'}">
+  <h3 *ngIf="failed">Unable to load Widget</h3>
+  <div #cardTarget></div>
+</div>

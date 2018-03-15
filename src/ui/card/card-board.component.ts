@@ -55,8 +55,8 @@ export class CardBoardComponent implements OnInit, OnChanges, OnDestroy {
           this.cardsHidden[card.id] = false;
         }
         if (card.hide) {
-          card.hide.subscribe(res => {
-            this.cardsHidden[res.id] = res.hidden;
+          card.hide.subscribe(hidden => {
+            this.cardsHidden[card.id] = hidden;
             this.hidden = true;
             for (let key in this.cardsHidden) {
               if (this.cardsHidden.hasOwnProperty(key)) {

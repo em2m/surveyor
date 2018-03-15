@@ -12,6 +12,7 @@ export interface ModalOptions {
   hideCancel?: boolean;
   hideDelete?: boolean;
   width?: number;
+  noPadding?: boolean;
   elementRef?: ViewContainerRef;
 }
 

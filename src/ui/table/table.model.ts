@@ -37,7 +37,13 @@ export class DefaultTableModel implements TableModel {
   cellValue(row: any, col: Column) {
     let val = row[col.key];
     let format = (<any>col).format;
-    return format ? format(val, row) : val;
+    let result = val;
+    if (format) {
+      try {
+        result = format(val, row);
+      } catch (ex) {}
+    }
+    return result;
   }
 
   isSelected(row: any): boolean {

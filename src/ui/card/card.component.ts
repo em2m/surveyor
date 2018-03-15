@@ -59,8 +59,9 @@ export class CardComponent implements OnInit, OnChanges, OnDestroy {
             this.cardCreated.emit(res);
 
             if (res.hide) {
-              res.hide.subscribe(hideEvent => {
-                this.hide = hideEvent;
+              res.hide.subscribe(hidden => {
+                this.hide = hidden;
+                this.hidden.emit(hidden);
               });
             }
           });

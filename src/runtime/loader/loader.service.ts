@@ -36,9 +36,30 @@ export class LoaderService {
     if (route.data) {
       let routeTarget = route.data['target'];
       if (routeTarget) {
-        this.extensionService.getExtensionsForTypeAndTarget("surveyor:page", routeTarget).forEach((extension: Extension) => {
-          let extRoute = extension.value as Route;
+        this.extensionService.getExtensionsForTypeAndTarget("surveyor:page", routeTarget).forEach((routeExt: Extension) => {
+          let extRoute = routeExt.value as Route;
 
+          // Process all resolver extensions
+          this.extensionService.getExtensionsForTypeAndTarget("surveyor:resolver", routeTarget).forEach((resolverExt: Extension) => {
+            if (!route.resolve) {
+              route.resolve = {};
+            }
+            route.resolve[resolverExt.config["key"]] = resolverExt.value;
+          });
+
+          // Process all guard extensions
+          this.extensionService.getExtensionsForTypeAndTarget("surveyor:guard", routeTarget).forEach((guardExt: Extension) => {
+            if (!route.canActivate) {
+              route.canActivate = [];
+            }
+            if (!route.canActivateChild) {
+              route.canActivateChild = [];
+            }
+            route.canActivate.push(guardExt.value);
+            route.canActivateChild.push(guardExt.value);
+          });
+
+          // Process each child in the tree recursively
           if (route.children.map((childRoute) => childRoute.path).indexOf(extRoute.path) < 0) {
             if (!extRoute.data) {
               extRoute.data = {};

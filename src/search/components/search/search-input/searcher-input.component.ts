@@ -51,7 +51,7 @@ export class SearcherInputComponent implements OnInit {
         constraint.query = new BoolQuery(OperationType.OR, outerQueries);
       }
 
-      this.searcher.constraints.push(constraint);
+      this.searcher.addConstraint(constraint);
       this.searcher.broadcastRequest();
     }
     this.searchInput = '';

@@ -20,6 +20,7 @@ export abstract class ModalContainer implements OnInit {
   width = 350;
   modalRef: any;
   isDismissed = false;
+  noPadding = false;
 
   constructor(private resolver: ComponentFactoryResolver) {}
 
@@ -37,6 +38,7 @@ export abstract class ModalContainer implements OnInit {
       ? this.options.hideDelete : this.hideDelete;
     this.hideCancel = this.options.hideCancel;
     this.width = this.options.width || 350;
+    this.noPadding = this.options.noPadding;
 
     let factory = this.resolver.resolveComponentFactory(this.modal);
     let modalRef = this.modalTarget.createComponent(factory);

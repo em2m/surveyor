@@ -35,7 +35,6 @@ export class AppConfig {
           return Observable.throw(error.json().error || 'App configuration failed to load');
         })
         .subscribe((config: any) => {
-          console.log("App configuration successfully loaded");
           this.config = config;
           resolve(true);
         });

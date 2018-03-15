@@ -7,12 +7,18 @@ const routes: Routes = [
   {
     path: "",
     data: { target: "surveyor:root" },
+    resolve: {},
     children: [
       {
         path: "",
         component: ApplicationWrapperComponent,
         data: { target: "surveyor:apps" },
+        resolve: {},
         children: [
+          {
+            path: "404",
+            component: ApplicationUnknownComponent
+          },
           /*
           {
             path: "**",
