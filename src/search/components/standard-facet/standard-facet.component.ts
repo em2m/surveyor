@@ -67,6 +67,9 @@ export class StandardFacetComponent {
     if (agg.op === "missing") {
       query = new ExistsQuery(agg.key, true);
     }
+    if (agg.op === "filters") {
+      query = agg.filters[key];
+    }
     if (agg.op === "range" || agg.op === "date_range") {
       let lt = bucket.to;
       let gte = bucket.from;
