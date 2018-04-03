@@ -12,6 +12,7 @@ export interface Card {
   actionGroup?: string;
   priority?: number;
   gridWidth?: number;
+  width?: string;
   config?: any;
   hide?: EventEmitter<any>;
   init(context: Observable<any>);

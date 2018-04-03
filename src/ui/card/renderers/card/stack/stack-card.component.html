@@ -1,9 +1,9 @@
 
-<div class="mdl-grid" [hidden]="hidden">
-  <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-desktop card-stack-title card-divider-mobile">
+<div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="8px" [hidden]="hidden" class="card-stack">
+  <div fxFlex="100%" fxFlex.gt-sm="33%" class="card-stack-title card-divider-mobile">
     {{card.title}}
   </div>
-  <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-desktop card-stack-content" [ngClass]="{'card-divider-desktop': !last}">
+  <div fxFlex="100%" fxFlex.gt-sm="66%" class="card-stack-content" [ngClass]="{'card-divider-desktop': !last}">
     <h3 *ngIf="failed">Unable to load Widget</h3>
     <div #cardTarget></div>
   </div>

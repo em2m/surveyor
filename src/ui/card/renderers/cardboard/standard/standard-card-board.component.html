@@ -1,6 +1,6 @@
-<div class="card-board content-grid mdl-grid" style="padding-right: 0; padding-left: 0;">
-  <div *ngFor="let cardRow of cardRows; let $last = last" class="mdl-grid mdl-cell mdl-cell--12-col">
+<div fxLayout="column" class="card-board content-grid" style="padding-right: 0; padding-left: 0;">
+  <div fxFlex="100%" fxLayout="row" *ngFor="let cardRow of cardRows; let $last = last" style="margin: 0.5rem;">
     <surveyor-card *ngFor="let card of cardRow" (cardCreated)="created($event)" [cardId]="card.id" type="standard"
-          [class]="'mdl-cell mdl-cell--12-col mdl-cell--' + card.gridWidth + '-col-desktop'"></surveyor-card>
+                   fxFlex="100%" [fxFlex.gt-sm]="card.width" style="margin: 0.5rem;"></surveyor-card>
   </div>
 </div>
