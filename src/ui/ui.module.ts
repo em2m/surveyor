@@ -13,11 +13,13 @@ import {SurveyorTableModule} from "./table/table.module";
 import {SurveyorTabsModule} from "./tabs/tabs.module";
 import {SurveyorToastModule} from "./toast/toast.module";
 import {SurveyorRegionModule} from "./region/region.module";
+import {SurveyorGeoModule} from "./geo/geo.module";
 
 export * from './action/action.module';
 export * from './card/card.module';
 export * from './dropdown/dropdown.module';
 export * from './form/form.module';
+export * from './geo/geo.module';
 export * from './leaflet/leaflet.module';
 export * from './mask/mask.module';
 export * from './menu/menu.module';
@@ -35,6 +37,7 @@ export * from './toast/toast.module';
     SurveyorCardModule.forRoot(),
     SurveyorDropdownModule.forRoot(),
     SurveyorFormModule.forRoot(),
+    SurveyorGeoModule.forRoot(),
     SurveyorLeafletModule.forRoot(),
     SurveyorMaskModule.forRoot(),
     SurveyorMenuModule.forRoot(),
@@ -51,6 +54,7 @@ export * from './toast/toast.module';
     SurveyorCardModule,
     SurveyorDropdownModule,
     SurveyorFormModule,
+    SurveyorGeoModule,
     SurveyorLeafletModule,
     SurveyorMaskModule,
     SurveyorMenuModule,

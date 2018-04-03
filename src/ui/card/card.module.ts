@@ -12,6 +12,7 @@ import {StandardCardBoardRenderer} from "./renderers/cardboard/standard/standard
 import {CardPlugin} from "./card-plugin";
 import {AccordionCardBoardRenderer} from "./renderers/cardboard/accordion/accordion-card-board.component";
 import {CollapsibleCardComponent} from "./renderers/card/collapsible/collapsible-card.component";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 export * from './card-plugin';
 export * from './card.component';
@@ -45,7 +46,8 @@ const components = [
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    FlexLayoutModule
   ],
   declarations: [
     ...components

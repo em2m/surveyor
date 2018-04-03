@@ -1,3 +1,6 @@
+.card-stack {
+  margin: 0.5rem;
+}
 
 .card-stack-title {
   align-self: flex-start;
@@ -5,6 +8,7 @@
   padding: 0 0 0.5rem 0;
   font-size: 24px;
   font-weight: 300;
+  margin: 0.5rem;
 }
 
 .card-stack-content {
@@ -15,4 +19,5 @@
   @media (max-width: 839px) {
     padding: 0;
   }
+  margin: 0.5rem;
 }
