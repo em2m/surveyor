@@ -1,7 +1,7 @@
 import {Injectable, Injector} from "@angular/core";
-import {ExtensionService} from "../..";
 import {ForwardGeocodeResult, GeoConfig, GeoConfigResolver, GeoProvider} from "./geo.model";
 import {Observable} from "rxjs/Observable";
+import {ExtensionService} from "../../core/extension/extension.service";
 
 @Injectable()
 export class GeoService {
@@ -37,6 +37,17 @@ export class GeoService {
       .flatMap(() => {
         if (this.geoProvider) {
           return this.geoProvider.staticImageUrl(lng, lat, zoom, width, height);
+        } else {
+          return Observable.of(null);
+        }
+      });
+  }
+
+  staticGeojsonImageUrl(geojson: any, width: number, height: number): Observable<string> {
+    return this.resolveProvider()
+      .flatMap(() => {
+        if (this.geoProvider) {
+          //return this.geoProvider.staticImageUrl(lng, lat, zoom, width, height);
         } else {
           return Observable.of(null);
         }
