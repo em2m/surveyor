@@ -41,6 +41,7 @@ export class StandardCardBoardRenderer extends CardBoardRenderer implements OnIn
       while (!rowFilled && cards.length > 0) {
         let card = cards.pop();
         card.gridWidth = card.gridWidth || 12;
+        card.width = (card.gridWidth / 12) * 100 + "%";
         if (rowSize + card.gridWidth <= 12) {
           cardRow.push(card);
           rowSize += card.gridWidth;
