@@ -1,0 +1,13 @@
+<div style="position: relative" [ngClass]="{'is-invalid': isInvalid()}">
+  <div [class]="'mdl-cell mdl-cell--12-col mdl-cell--' + controlDefinition.width + '-col-desktop'">
+    <mat-form-field floatPlaceholder="always">
+      <mat-select [placeholder]="controlDefinition.label" [value]="" (valueChange)="setValue($event)">
+        <mat-option>---</mat-option>
+        <mat-option *ngFor="let item of items" [value]="item.key">{{ item.label }}</mat-option>
+      </mat-select>
+      <mat-error *ngFor="let errorKey of getErrors()">
+        {{getErrorMessage(errorKey)}}
+      </mat-error>
+    </mat-form-field>
+  </div>
+</div>

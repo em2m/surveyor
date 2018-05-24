@@ -1,0 +1,38 @@
+<table *ngIf="rows" class="mdl-data-table mdl-js-data-table" style="width: 100%">
+  <thead>
+  <th *ngIf="!selectionDisabled" style="width: 48px;">
+    <!--<mdl-checkbox [(ngModel)]="toggle" (click)="toggleAll()" [mdl-ripple]="true"></mdl-checkbox>-->
+    <mat-checkbox [(ngModel)]="toggle" (ngModelChange)="toggleAll()" [ngModelOptions]="{standalone: true}"></mat-checkbox>
+  </th>
+  <th  *ngFor="let col of cols"  [title]="col.title || ''"  [ngStyle]="col.headerStyle || {}" class="mdl-data-table__cell--non-numeric">
+    {{ col.title || col.name }}
+  </th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let row of rows" style="height: 24px;">
+    <ng-container *ngIf="row.orig.length > 1">
+      <td *ngIf="!selectionDisabled" style="width: 48px;">
+        <!--
+        <mdl-checkbox [mdl-ripple]="true" [(ngModel)]="row.selected" (ngModelChange)="selectionChange(row, row.selected)">
+        </mdl-checkbox>
+        -->
+        <mat-checkbox [(ngModel)]="row.selected" (ngModelChange)="selectionChange(row, row.selected)"
+                      [ngModelOptions]="{standalone: true}"></mat-checkbox>
+      </td>
+      <td *ngFor="let col of cols" (click)="handleClick(row)" [ngStyle]="col.style || {}" class="mdl-data-table__cell--non-numeric">
+        {{ row.values[col.key] }}
+      </td>
+    </ng-container>
+    <ng-container *ngIf="row.orig.length === 1">
+      <td style="font-size: 16px; text-align: center; background-color: #eee; color: rgba(0,0,0,.7); font-weight: bold; height: 24px;"
+          [attr.colspan]="cols.length">
+        {{ row.orig[0] }}
+      </td>
+    </ng-container>
+  </tr>
+  </tbody>
+</table>
+
+<div *ngIf="rows.length == 0" class="text-xs-center" style="padding-top: 20px;">
+  No Results Found
+</div>

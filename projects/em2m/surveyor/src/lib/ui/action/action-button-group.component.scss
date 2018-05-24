@@ -1,0 +1,16 @@
+.mdl-layout {
+  overflow: inherit;
+}
+
+.disabled {
+  opacity: .5 !important;
+  cursor: not-allowed;
+}
+
+button[mat-button] {
+  margin-bottom: 0.3rem;
+}
+
+.button-wrapper {
+  padding-left: 0.25rem;
+}
