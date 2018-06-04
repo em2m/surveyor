@@ -2,6 +2,8 @@ import {
   Component, Input, ComponentFactoryResolver, EventEmitter, Output, ViewChild, ViewContainerRef, OnInit, OnChanges, OnDestroy
 } from "@angular/core";
 import {CardService} from "./card.service";
+import {ContextService} from "../../core/extension/context.service";
+import {Subscription} from "rxjs/index";
 
 @Component({
   selector: 'surveyor-card-board',
@@ -19,12 +21,20 @@ export class CardBoardComponent implements OnInit, OnChanges, OnDestroy {
   hidden = false;
 
   private cardBoardRef: any;
+  private ctxSub: Subscription;
 
-  constructor(private resolver: ComponentFactoryResolver, private cardService: CardService) {
+  constructor(private resolver: ComponentFactoryResolver,
+              private ctx: ContextService,
+              private cardService: CardService) {
   }
 
   ngOnInit() {
     this.loadCardBoard();
+
+    this.ctxSub = this.ctx.onContextChange()
+      .subscribe(() => {
+        this.loadCardBoard();
+      });
   }
 
   ngOnChanges() {

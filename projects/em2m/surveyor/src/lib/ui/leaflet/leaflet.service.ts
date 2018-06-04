@@ -2,7 +2,7 @@ import {Injectable, Injector} from "@angular/core";
 import {ControlProvider, FeatureProvider, LayerProvider} from "./leaflet.model";
 import {ExtensionService} from "../../core/extension/extension.service";
 import {FilterContext} from "../../core/extension/extension.model";
-import {Map} from "leaflet";
+import {Map, Control} from "leaflet";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Observable} from "rxjs/Observable";
 
@@ -15,6 +15,7 @@ export class LeafletService {
   private CONTROL_EXTENSION_TYPE = "surveyor:leaflet-control";
 
   private mapSources: { [mapId: string]: BehaviorSubject<Map>; } = {};
+  private mapControlLayers: { [mapId: string]: Control.Layers } = {};
 
   constructor(private injector: Injector, private extensionService: ExtensionService) {}
 
@@ -88,6 +89,14 @@ export class LeafletService {
 
   watchMap(mapId: string): Observable<Map> {
     return this.getMapSource(mapId).asObservable();
+  }
+
+  setLayerControl(mapId: string, controlLayer: Control.Layers) {
+    this.mapControlLayers[mapId] = controlLayer;
+  }
+
+  getLayerControl(mapId): Control.Layers {
+    return this.mapControlLayers[mapId];
   }
 
   private getMapSource(mapId: string): BehaviorSubject<Map> {
