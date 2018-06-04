@@ -156,7 +156,10 @@ export class SurveyorLeafletComponent implements AfterViewInit {
         }
       });
 
-    L.control.layers(baseLayers, overlays, {}).addTo(this.map);
+    // Persist the control layer in case controls need to be added manually
+    let controlLayers = L.control.layers(baseLayers, overlays, {});
+    this.leafletService.setLayerControl(this.mapId, controlLayers);
+    controlLayers.addTo(this.map);
 
     setTimeout(() => {
       this.renderer.removeClass(this.elementRef.nativeElement.querySelector(".leaflet-container"), 'leaflet-touch');
