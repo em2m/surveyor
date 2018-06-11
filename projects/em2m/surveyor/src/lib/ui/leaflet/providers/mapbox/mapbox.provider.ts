@@ -17,20 +17,28 @@ export class MapboxProvider implements LayerProvider {
 
       let streetsLayer = {
         label: "Streets",
-        layer: L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}', {
+        layer: L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
           maxZoom: 21,
           id: 'elasticm2m.nejp4l71',
-          accessToken: accessToken
+          accessToken: accessToken,
+          /*
+          tileSize: 512,
+          zoomOffset: -1
+          */
         })
       };
 
       let satelliteLayer = {
         label: "Satellite",
-        layer: L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}', {
+        layer: L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
           maxZoom: 21,
           maxNativeZoom: 19,
           id: 'elasticm2m.nejpcg33',
-          accessToken: accessToken
+          accessToken: accessToken,
+          /*
+          tileSize: 512,
+          zoomOffset: -1
+          */
         })
       };
       return [streetsLayer, satelliteLayer];
