@@ -29,14 +29,10 @@ export class CardBoardComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit() {
-    //this.loadCardBoard();
-
-    /*
     this.ctxSub = this.ctx.onContextChange()
       .subscribe(() => {
         this.loadCardBoard();
       });
-      */
   }
 
   ngOnChanges() {
@@ -44,16 +40,12 @@ export class CardBoardComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log('Destroying Cardboard: ', this.target);
-
-    // this.ctxSub.unsubscribe();
+    this.ctxSub.unsubscribe();
 
     this.destroyCardBoard();
   }
 
   private loadCardBoard() {
-    console.log('Loading cardboard: ', this.target);
-
     this.destroyCardBoard();
 
     let renderer = this.cardService.resolveCardBoardRenderer(this.type);
