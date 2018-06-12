@@ -17,7 +17,7 @@ export class MapquestProvider implements LayerProvider {
 
       let streetsLayer = {
         label: "Streets",
-        layer: L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}', {
+        layer: L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
           maxZoom: 21,
           id: 'mapquest.streets-mb',
           accessToken: accessToken
@@ -26,7 +26,7 @@ export class MapquestProvider implements LayerProvider {
 
       let satelliteLayer = {
         label: "Satellite",
-        layer: L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}', {
+        layer: L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
           maxZoom: 21,
           maxNativeZoom: 19,
           id: 'mapquest.satellitenolabels',

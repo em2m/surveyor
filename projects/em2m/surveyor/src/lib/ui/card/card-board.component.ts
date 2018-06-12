@@ -29,8 +29,6 @@ export class CardBoardComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit() {
-    this.loadCardBoard();
-
     this.ctxSub = this.ctx.onContextChange()
       .subscribe(() => {
         this.loadCardBoard();
@@ -42,6 +40,8 @@ export class CardBoardComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.ctxSub.unsubscribe();
+
     this.destroyCardBoard();
   }
 

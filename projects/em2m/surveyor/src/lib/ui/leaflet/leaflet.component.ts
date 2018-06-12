@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Renderer2, Input, Output, EventEmitter} from "@angular/core";
+import {AfterViewInit, Component, ElementRef, Renderer2, Input, Output, EventEmitter, OnDestroy} from "@angular/core";
 import * as L from 'leaflet';
 import {Control, Map, MapOptions} from "leaflet";
 import {ControlProvider, FeatureProvider, LayerDefinition, LayerProvider} from "./leaflet.model";
@@ -14,7 +14,7 @@ import "rxjs/add/operator/mergeMap";
   selector: 'surveyor-leaflet',
   template: '<div [id]="mapId" style="height: 100%; width: 100%;"></div>'
 })
-export class SurveyorLeafletComponent implements AfterViewInit {
+export class SurveyorLeafletComponent implements AfterViewInit, OnDestroy {
 
   @Input() mapId: string;
   @Input() options?: MapOptions;
@@ -27,6 +27,13 @@ export class SurveyorLeafletComponent implements AfterViewInit {
   constructor(private leafletService: LeafletService,
               private elementRef: ElementRef,
               private renderer: Renderer2) {}
+
+  ngOnDestroy() {
+    if (this.map) {
+      this.map.remove();
+    }
+    this.leafletService.setMap(this.mapId, null);
+  }
 
   ngAfterViewInit() {
 
