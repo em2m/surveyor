@@ -3,7 +3,7 @@
   <div class="mdl-card__title" *ngIf="card?.title">
     <span class="mdl-card__title-text">{{card?.title}}</span>
   </div>
-  <div class="mdl-card__supporting-text">
+  <div [ngClass]="{'mdl-card__supporting-text': card?.style != 'none'}">
     <h3 *ngIf="failed">Unable to load Widget</h3>
     <div #cardTarget></div>
   </div>
