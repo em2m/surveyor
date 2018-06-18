@@ -1,4 +1,4 @@
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 
 export interface Selection {
   empty: boolean;
@@ -29,7 +29,7 @@ export interface Action {
   text: string;
   toolTipText: string;
   primary: boolean;
-  init(selectionObs: Observable<Selection>);
+  onSelectionChange(selection: Selection);
   run();
 }
 
@@ -40,11 +40,8 @@ export class ActionSupport implements Action {
   styleClass: string;
   toolTipText: string;
   primary = false;
-
-  init(selectionObs: Observable<Selection>) {}
-
-  run() {
-  }
+  onSelectionChange(selection: Selection) {}
+  run() {}
 }
 
 export abstract class ListSelectionAction extends ActionSupport implements Action {
@@ -56,13 +53,11 @@ export abstract class ListSelectionAction extends ActionSupport implements Actio
     super();
   }
 
-  init(selectionObs: Observable<Selection>) {
-    if (selectionObs) {
-      selectionObs.subscribe(selection => {
-        this.selection = <ItemSelection>selection;
-        let selectionCount = this.selection.items.length;
-        this.enabled = selectionCount >= this.minSelectionCount && selectionCount <= this.maxSelectionCount;
-      });
+  onSelectionChange(selection: Selection) {
+    if (selection) {
+      this.selection = <ItemSelection>selection;
+      let selectionCount = (selection as ItemSelection).items.length;
+      this.enabled = selectionCount >= this.minSelectionCount && selectionCount <= this.maxSelectionCount;
     }
   }
 }

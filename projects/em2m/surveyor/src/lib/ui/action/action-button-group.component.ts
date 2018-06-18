@@ -12,26 +12,40 @@ import {ContextService} from '../../core/extension/context.service';
 export class ActionButtonGroupComponent implements OnInit, OnDestroy {
 
   @Input() actionTarget: string;
-  @Input() selection: Observable<Selection>;
+  @Input() selection: Observable<Selection> | Selection;
   @Input() raised = true;
   @Input() colored = true;
   @Input() iconOnly = false;
   primaryActions: Array<Action> = [];
   secondaryActions: Array<Action> = [];
   private contextSub: Subscription;
+  private selectionSub: Subscription;
+  private selectionValue: Selection;
 
   constructor(private actionService: ActionService, private contextService: ContextService) {}
 
   ngOnInit() {
-    this.contextSub = this.contextService.onContextChange()
-      .subscribe(context => {
-        this.findActions();
-      });
+    this.contextSub = this.contextService.onContextChange().subscribe(() => this.findActions());
+
+    if (this.selection) {
+      if (this.selection instanceof Selection) {
+        this.updateSelectionValue(this.selection as Selection);
+      } else {
+        this.selectionSub = (this.selection as Observable<Selection>).subscribe(selection => {
+          if (selection) {
+            this.updateSelectionValue(selection);
+          }
+        });
+      }
+    }
   }
 
   ngOnDestroy() {
     if (this.contextSub) {
       this.contextSub.unsubscribe();
+    }
+    if (this.selectionSub) {
+      this.selectionSub.unsubscribe();
     }
   }
 
@@ -44,7 +58,18 @@ export class ActionButtonGroupComponent implements OnInit, OnDestroy {
       } else {
         this.secondaryActions.push(action);
       }
-      action.init(this.selection);
+
+      if (this.selectionValue) {
+        action.onSelectionChange(this.selectionValue);
+      }
     });
+  }
+
+  private updateSelectionValue(selection: Selection)  {
+    this.selectionValue = selection;
+    if (selection) {
+      this.primaryActions.forEach(action => action.onSelectionChange(selection));
+      this.secondaryActions.forEach(action => action.onSelectionChange(selection));
+    }
   }
 }

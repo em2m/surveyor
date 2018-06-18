@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Renderer2, Input, Output, EventEmitter, OnDestroy} from "@angular/core";
+import {AfterViewInit, Component, ElementRef, Renderer2, Input, Output, EventEmitter, OnDestroy, ChangeDetectionStrategy} from "@angular/core";
 import * as L from 'leaflet';
 import {Control, Map, MapOptions} from "leaflet";
 import {ControlProvider, FeatureProvider, LayerDefinition, LayerProvider} from "./leaflet.model";
@@ -12,7 +12,8 @@ import "rxjs/add/operator/mergeMap";
 
 @Component({
   selector: 'surveyor-leaflet',
-  template: '<div [id]="mapId" style="height: 100%; width: 100%;"></div>'
+  template: '<div [id]="mapId" style="height: 100%; width: 100%;"></div>',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SurveyorLeafletComponent implements AfterViewInit, OnDestroy {
 
