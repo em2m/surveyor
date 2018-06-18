@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Renderer2, Input, Output, EventEmitter, OnDestroy, ChangeDetectionStrategy} from "@angular/core";
+import {AfterViewInit, Component, ElementRef, Renderer2, Input, Output, EventEmitter, OnDestroy, ChangeDetectionStrategy, NgZone} from "@angular/core";
 import * as L from 'leaflet';
 import {Control, Map, MapOptions} from "leaflet";
 import {ControlProvider, FeatureProvider, LayerDefinition, LayerProvider} from "./leaflet.model";
@@ -27,7 +27,8 @@ export class SurveyorLeafletComponent implements AfterViewInit, OnDestroy {
 
   constructor(private leafletService: LeafletService,
               private elementRef: ElementRef,
-              private renderer: Renderer2) {}
+              private renderer: Renderer2,
+              private ngZone: NgZone) {}
 
   ngOnDestroy() {
     if (this.map) {
@@ -48,7 +49,9 @@ export class SurveyorLeafletComponent implements AfterViewInit, OnDestroy {
     }
     this.options.zoomControl = false;
 
-    this.map = L.map(this.mapId, this.options);
+    this.ngZone.runOutsideAngular(() => {
+      this.map = L.map(this.mapId, this.options);
+    });
 
     // Hacks to remove the touch capabilities from leaflet which causes large buttons and boxes
     window['L'].Browser.touch = false;
