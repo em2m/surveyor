@@ -19,9 +19,9 @@ export class GoogleMapsProvider implements LayerProvider {
 
     let mapProvider = this.appConfig.get().map.provider;
     if (mapProvider === 'google') {
-      //let accessToken = this.appConfig.get().map.google.apiKey;
+      let accessToken = this.appConfig.get().map.google.apiKey;
 
-      return this.googleMaps.loadApi('AIzaSyAL7AtF6jYTzN4mObd57kZ7XEhb-bbmEpY')
+      return this.googleMaps.loadApi(accessToken)
         .map(() => {
           let gridLayer = L.gridLayer as any;
           let streetsLayer = <LayerDefinition>{
@@ -33,7 +33,6 @@ export class GoogleMapsProvider implements LayerProvider {
             layer: gridLayer.googleMutant({type: 'hybrid'})
           };
 
-          console.log('Google Layers Ready');
           return [streetsLayer, satelliteLayer];
         });
     } else {
