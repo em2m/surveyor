@@ -1,17 +1,17 @@
-import {Map, Layer, Control} from "leaflet";
-import {Observable} from "rxjs/Observable";
+import {Map, Layer, Control} from 'leaflet';
+import {Observable} from 'rxjs/Observable';
 
 export interface LayerDefinition {
   label: string;
   layer: Layer;
-  type?: "overlay" | "baseLayer";
+  type?: 'overlay' | 'baseLayer';
   enabled?: boolean;
 }
 
 export interface LayerProvider {
   config: any;
-  //provide(map: Map): Array<LayerDefinition> | Observable<Array<LayerDefinition>>;
-  provide(map: Map): LayerDefinition | Array<LayerDefinition>;
+  provide(map: Map): Array<LayerDefinition> | Observable<Array<LayerDefinition>>;
+  //provide(map: Map): LayerDefinition | Array<LayerDefinition>;
 }
 
 export interface FeatureProvider {
