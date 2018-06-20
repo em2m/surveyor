@@ -1,7 +1,7 @@
-import * as L from "leaflet";
-import {LayerDefinition, LayerProvider} from "../../leaflet.model";
-import {Injectable} from "@angular/core";
-import {AppConfig} from "../../../../core/config/config.service";
+import * as L from 'leaflet';
+import {LayerDefinition, LayerProvider} from '../../leaflet.model';
+import {Injectable} from '@angular/core';
+import {AppConfig} from '../../../../core/config/config.service';
 
 @Injectable()
 export class MapboxProvider implements LayerProvider {
@@ -16,7 +16,7 @@ export class MapboxProvider implements LayerProvider {
       let accessToken = this.appConfig.get().map.mapbox.accessToken;
 
       let streetsLayer = {
-        label: "Streets",
+        label: 'Streets',
         layer: L.tileLayer('https://api.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
           maxZoom: 21,
           id: 'mapbox.streets',
@@ -29,7 +29,7 @@ export class MapboxProvider implements LayerProvider {
       };
 
       let satelliteLayer = {
-        label: "Satellite",
+        label: 'Satellite',
         layer: L.tileLayer('https://api.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
           maxZoom: 21,
           maxNativeZoom: 19,

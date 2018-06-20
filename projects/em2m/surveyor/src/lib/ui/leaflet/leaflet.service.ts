@@ -1,18 +1,17 @@
-import {Injectable, Injector} from "@angular/core";
-import {ControlProvider, FeatureProvider, LayerProvider} from "./leaflet.model";
-import {ExtensionService} from "../../core/extension/extension.service";
-import {FilterContext} from "../../core/extension/extension.model";
-import {Map, Control} from "leaflet";
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
-import {Observable} from "rxjs/Observable";
+import {Injectable, Injector} from '@angular/core';
+import {ControlProvider, FeatureProvider, LayerProvider} from './leaflet.model';
+import {ExtensionService} from '../../core/extension/extension.service';
+import {Map, Control} from 'leaflet';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class LeafletService {
 
-  private BASE_LAYER_EXTENSION_TYPE = "surveyor:leaflet-base-layer";
-  private OVERLAY_EXTENSION_TYPE = "surveyor:leaflet-overlay";
-  private FEATURE_EXTENSION_TYPE = "surveyor:leaflet-feature";
-  private CONTROL_EXTENSION_TYPE = "surveyor:leaflet-control";
+  private BASE_LAYER_EXTENSION_TYPE = 'surveyor:leaflet-base-layer';
+  private OVERLAY_EXTENSION_TYPE = 'surveyor:leaflet-overlay';
+  private FEATURE_EXTENSION_TYPE = 'surveyor:leaflet-feature';
+  private CONTROL_EXTENSION_TYPE = 'surveyor:leaflet-control';
 
   private mapSources: { [mapId: string]: BehaviorSubject<Map>; } = {};
   private mapControlLayers: { [mapId: string]: Control.Layers } = {};
@@ -21,7 +20,7 @@ export class LeafletService {
 
   findBaseLayers(target: string): Array<LayerProvider> {
     let extensions = [
-      ...this.extensionService.getExtensionsForTypeAndTarget(this.BASE_LAYER_EXTENSION_TYPE, "global"),
+      ...this.extensionService.getExtensionsForTypeAndTarget(this.BASE_LAYER_EXTENSION_TYPE, 'global'),
       ...this.extensionService.getExtensionsForTypeAndTarget(this.BASE_LAYER_EXTENSION_TYPE, target)
     ];
 
@@ -36,7 +35,7 @@ export class LeafletService {
 
   findOverlays(target: string): Array<LayerProvider> {
     let extensions = [
-      ...this.extensionService.getExtensionsForTypeAndTarget(this.OVERLAY_EXTENSION_TYPE, "global"),
+      ...this.extensionService.getExtensionsForTypeAndTarget(this.OVERLAY_EXTENSION_TYPE, 'global'),
       ...this.extensionService.getExtensionsForTypeAndTarget(this.OVERLAY_EXTENSION_TYPE, target)
     ];
 
@@ -51,7 +50,7 @@ export class LeafletService {
 
   findFeatures(target: string): Array<FeatureProvider> {
     let extensions = [
-      ...this.extensionService.getExtensionsForTypeAndTarget(this.FEATURE_EXTENSION_TYPE, "global"),
+      ...this.extensionService.getExtensionsForTypeAndTarget(this.FEATURE_EXTENSION_TYPE, 'global'),
       ...this.extensionService.getExtensionsForTypeAndTarget(this.FEATURE_EXTENSION_TYPE, target)
     ];
 
@@ -66,7 +65,7 @@ export class LeafletService {
 
   findControls(target: string): Array<ControlProvider> {
     let extensions = [
-      ...this.extensionService.getExtensionsForTypeAndTarget(this.CONTROL_EXTENSION_TYPE, "global"),
+      ...this.extensionService.getExtensionsForTypeAndTarget(this.CONTROL_EXTENSION_TYPE, 'global'),
       ...this.extensionService.getExtensionsForTypeAndTarget(this.CONTROL_EXTENSION_TYPE, target)
     ];
 

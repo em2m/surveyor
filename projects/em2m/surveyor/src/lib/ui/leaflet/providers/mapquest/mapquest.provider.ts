@@ -1,7 +1,7 @@
-import * as L from "leaflet";
-import {LayerDefinition, LayerProvider} from "../../leaflet.model";
-import {Injectable} from "@angular/core";
-import {AppConfig} from "../../../../core/config/config.service";
+import * as L from 'leaflet';
+import {LayerDefinition, LayerProvider} from '../../leaflet.model';
+import {Injectable} from '@angular/core';
+import {AppConfig} from '../../../../core/config/config.service';
 
 @Injectable()
 export class MapquestProvider implements LayerProvider {
@@ -16,7 +16,7 @@ export class MapquestProvider implements LayerProvider {
       let accessToken = this.appConfig.get().map.mapquest.accessToken;
 
       let streetsLayer = {
-        label: "Streets",
+        label: 'Streets',
         layer: L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
           maxZoom: 21,
           id: 'mapquest.streets-mb',
@@ -25,7 +25,7 @@ export class MapquestProvider implements LayerProvider {
       };
 
       let satelliteLayer = {
-        label: "Satellite",
+        label: 'Satellite',
         layer: L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
           maxZoom: 21,
           maxNativeZoom: 19,
@@ -35,7 +35,7 @@ export class MapquestProvider implements LayerProvider {
       };
 
       let hybridLayer = {
-        label: "Hybrid",
+        label: 'Hybrid',
         layer: L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}', {
           maxZoom: 21,
           maxNativeZoom: 19,

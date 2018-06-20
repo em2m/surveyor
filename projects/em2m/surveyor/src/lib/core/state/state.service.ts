@@ -22,6 +22,11 @@ export class StateService {
     return this.getSource(key).getValue();
   }
 
+  clear() {
+    localStorage.clear();
+    sessionStorage.clear();
+  }
+
   watch(key: string): Observable<any> {
     return this.getSource(key).asObservable();
   }

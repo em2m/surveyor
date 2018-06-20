@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Observable} from "rxjs/Observable";
-import "rxjs/add/observable/fromPromise";
-import "rxjs/add/observable/of";
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/fromPromise';
+import 'rxjs/add/observable/of';
 
 @Injectable()
 export class GoogleMapsLoaderService {
@@ -30,7 +30,7 @@ export class GoogleMapsLoaderService {
 
       if (script.readyState) {  // IE
         script.onreadystatechange = () => {
-          if (script.readyState === "loaded" || script.readyState === "complete") {
+          if (script.readyState === 'loaded' || script.readyState === 'complete') {
             script.onreadystatechange = null;
             observer.next(true);
           }

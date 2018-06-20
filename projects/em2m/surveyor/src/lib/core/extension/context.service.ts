@@ -24,6 +24,9 @@ export class ContextService {
   }
 
   clearContext() {
+    localStorage.clear();
+    sessionStorage.clear();
+
     this.context = new FilterContext();
     this.notifyContext();
   }
