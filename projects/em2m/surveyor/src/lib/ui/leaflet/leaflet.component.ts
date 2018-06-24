@@ -94,16 +94,18 @@ export class SurveyorLeafletComponent implements AfterViewInit, OnDestroy {
       });
 
     let featuresObs = Observable.from(this.leafletService.findFeatures(this.mapId))
-      .forEach((provider: FeatureProvider) => {
+      .concatMap((provider: FeatureProvider) => {
         provider.provide(this.map);
+        return Observable.of(null);
       });
 
     let controlsObs = Observable.from(this.leafletService.findControls(this.mapId))
-      .forEach((provider: ControlProvider) => {
+      .concatMap((provider: ControlProvider) => {
         let control = provider.provide(this.map);
         if (control) {
           control.addTo(this.map);
         }
+        return Observable.of(null);
       });
 
     let completeObs = Observable.of(null).map(() => {
@@ -119,7 +121,7 @@ export class SurveyorLeafletComponent implements AfterViewInit, OnDestroy {
     });
 
     // Chain up the observables to ensure layers are processed in order
-    Observable.concat(overlayObs, baseLayerObs, featuresObs, controlsObs, completeObs).subscribe();
+    Observable.concat(baseLayerObs, overlayObs, featuresObs, controlsObs, completeObs).subscribe();
 
     /*
     let baseLayers = <LayersObject>{};

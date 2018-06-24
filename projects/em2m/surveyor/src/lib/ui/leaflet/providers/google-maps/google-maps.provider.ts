@@ -11,9 +11,7 @@ export class GoogleMapsProvider implements LayerProvider {
 
   config: any;
 
-  constructor(private appConfig: AppConfig, private googleMaps: GoogleMapsLoaderService) {
-
-  }
+  constructor(private appConfig: AppConfig, private googleMaps: GoogleMapsLoaderService) {}
 
   provide(): Array<LayerDefinition> | Observable<Array<LayerDefinition>> {
 
