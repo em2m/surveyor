@@ -1,20 +1,24 @@
-import {AfterViewInit, Component, ElementRef, Renderer2, Input, Output, EventEmitter} from "@angular/core";
+import {AfterViewInit, Component, ElementRef, Renderer2, Input, Output, EventEmitter, OnDestroy, ChangeDetectionStrategy, NgZone} from '@angular/core';
 import * as L from 'leaflet';
-import {Control, Map, MapOptions} from "leaflet";
-import {ControlProvider, FeatureProvider, LayerDefinition, LayerProvider} from "./leaflet.model";
-import {LeafletService} from "./leaflet.service";
+import {Control, Map, MapOptions} from 'leaflet';
+import {ControlProvider, FeatureProvider, LayerDefinition, LayerProvider} from './leaflet.model';
 import LayersObject = Control.LayersObject;
-import "rxjs/add/observable/from";
-import "rxjs/add/observable/of";
-import "rxjs/add/observable/concat";
-import "rxjs/add/operator/do";
-import "rxjs/add/operator/mergeMap";
+import {Observable} from 'rxjs';
+import {LeafletService} from './leaflet.service';
+import 'rxjs/add/observable/from';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/concat';
+import 'rxjs/add/observable/merge';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/concatMap';
 
 @Component({
   selector: 'surveyor-leaflet',
-  template: '<div [id]="mapId" style="height: 100%; width: 100%;"></div>'
+  template: '<div [id]="mapId" style="height: 100%; width: 100%;"></div>',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SurveyorLeafletComponent implements AfterViewInit {
+export class SurveyorLeafletComponent implements AfterViewInit, OnDestroy {
 
   @Input() mapId: string;
   @Input() options?: MapOptions;
@@ -26,10 +30,17 @@ export class SurveyorLeafletComponent implements AfterViewInit {
 
   constructor(private leafletService: LeafletService,
               private elementRef: ElementRef,
-              private renderer: Renderer2) {}
+              private renderer: Renderer2,
+              private ngZone: NgZone) {}
+
+  ngOnDestroy() {
+    if (this.map) {
+      this.map.remove();
+    }
+    this.leafletService.setMap(this.mapId, null);
+  }
 
   ngAfterViewInit() {
-
     // Initialize the primary map object
     if (!this.options) {
       this.options = <MapOptions>{
@@ -40,16 +51,17 @@ export class SurveyorLeafletComponent implements AfterViewInit {
     }
     this.options.zoomControl = false;
 
-    this.map = L.map(this.mapId, this.options);
+    this.ngZone.runOutsideAngular(() => {
+      this.map = L.map(this.mapId, this.options);
+    });
 
     // Hacks to remove the touch capabilities from leaflet which causes large buttons and boxes
-    window['L'].Browser.touch = false;
-    let leafletContainerDiv = this.elementRef.nativeElement.querySelector(".leaflet-container");
+    window['L'].Browser['touch'] = false;
+    let leafletContainerDiv = this.elementRef.nativeElement.querySelector('.leaflet-container');
     this.renderer.removeClass(leafletContainerDiv, 'leaflet-touch');
 
-    /*
     let baseLayerObs = Observable.from(this.leafletService.findBaseLayers(this.mapId))
-      .flatMap((provider: LayerProvider) => {
+      .concatMap((provider: LayerProvider) => {
         let layerDefsObs = provider.provide(this.map);
         if (!(layerDefsObs instanceof Observable)) {
           layerDefsObs = Observable.of(layerDefsObs);
@@ -66,7 +78,7 @@ export class SurveyorLeafletComponent implements AfterViewInit {
       });
 
     let overlayObs = Observable.from(this.leafletService.findOverlays(this.mapId))
-      .flatMap((provider: LayerProvider) => {
+      .concatMap((provider: LayerProvider) => {
         let layerDefsObs = provider.provide(this.map);
         if (!(layerDefsObs instanceof Observable)) {
           layerDefsObs = Observable.of(layerDefsObs);
@@ -75,7 +87,6 @@ export class SurveyorLeafletComponent implements AfterViewInit {
           layerDefs.forEach((layerDef: LayerDefinition) => {
             this.overlays[layerDef.label] = layerDef.layer;
             if ((provider.config && provider.config.enabled && layerDef.enabled !== false) || layerDef.enabled) {
-            //if (layerDef.enabled !== false) {
               layerDef.layer.addTo(this.map);
             }
           });
@@ -83,29 +94,36 @@ export class SurveyorLeafletComponent implements AfterViewInit {
       });
 
     let featuresObs = Observable.from(this.leafletService.findFeatures(this.mapId))
-      .forEach((provider: FeatureProvider) => {
+      .concatMap((provider: FeatureProvider) => {
         provider.provide(this.map);
+        return Observable.of(null);
       });
 
     let controlsObs = Observable.from(this.leafletService.findControls(this.mapId))
-      .forEach((provider: ControlProvider) => {
+      .concatMap((provider: ControlProvider) => {
         let control = provider.provide(this.map);
         if (control) {
           control.addTo(this.map);
         }
+        return Observable.of(null);
       });
 
-    let completeObs = new Observable((observer => {
-      L.control.layers(this.baseLayers, this.overlays, {}).addTo(this.map);
+    let completeObs = Observable.of(null).map(() => {
+      this.renderer.removeClass(this.elementRef.nativeElement.querySelector('.leaflet-container'), 'leaflet-touch');
+
+      // Persist the control layer in case controls need to be added manually
+      let controlLayers = L.control.layers(this.baseLayers, this.overlays, {});
+      this.leafletService.setLayerControl(this.mapId, controlLayers);
+      controlLayers.addTo(this.map);
+
       this.map.invalidateSize({});
       this.mapReady.emit(this.map);
-      observer.next(true);
-    }));
+    });
 
     // Chain up the observables to ensure layers are processed in order
-    Observable.concat(overlayObs, baseLayerObs, featuresObs, controlsObs, completeObs).subscribe();
-    */
+    Observable.concat(baseLayerObs, overlayObs, featuresObs, controlsObs, completeObs).subscribe();
 
+    /*
     let baseLayers = <LayersObject>{};
     let first = true;
 
@@ -152,7 +170,7 @@ export class SurveyorLeafletComponent implements AfterViewInit {
         if (control) {
           control.addTo(this.map);
         } else {
-          console.error("Could not provide control for " + provider.config);
+          console.error('Could not provide control for ' + provider.config);
         }
       });
 
@@ -162,10 +180,11 @@ export class SurveyorLeafletComponent implements AfterViewInit {
     controlLayers.addTo(this.map);
 
     setTimeout(() => {
-      this.renderer.removeClass(this.elementRef.nativeElement.querySelector(".leaflet-container"), 'leaflet-touch');
+      this.renderer.removeClass(this.elementRef.nativeElement.querySelector('.leaflet-container'), 'leaflet-touch');
       this.map.invalidateSize({});
     });
 
     this.mapReady.emit(this.map);
+    */
   }
 }

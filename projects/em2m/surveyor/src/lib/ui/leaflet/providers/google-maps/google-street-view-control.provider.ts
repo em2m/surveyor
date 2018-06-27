@@ -1,6 +1,6 @@
-import {ControlProvider} from "../../leaflet.model";
-import {Injectable} from "@angular/core";
-import {Control, DomEvent, DomUtil, Map} from "leaflet";
+import {ControlProvider} from '../../leaflet.model';
+import {Injectable} from '@angular/core';
+import {Control, DomEvent, DomUtil, Map} from 'leaflet';
 
 @Injectable()
 export class GoogleStreetViewControlProvider implements ControlProvider {
@@ -19,7 +19,7 @@ export class GoogleStreetViewControl extends Control {
   private map: Map;
 
   constructor() {
-    super({ position: "topleft"});
+    super({ position: 'topleft'});
   }
 
   onAdd?(map: Map): HTMLElement {
@@ -37,6 +37,6 @@ export class GoogleStreetViewControl extends Control {
   _click() {
     let mapCenter = this.map.getCenter();
     let url = `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${mapCenter.lat},${mapCenter.lng}&pitch=0&fov=80`;
-    window.open(url, "_blank");
+    window.open(url, '_blank');
   }
 }

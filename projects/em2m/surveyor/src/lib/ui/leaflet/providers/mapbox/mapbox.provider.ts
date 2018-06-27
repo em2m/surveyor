@@ -1,7 +1,7 @@
-import * as L from "leaflet";
-import {LayerDefinition, LayerProvider} from "../../leaflet.model";
-import {Injectable} from "@angular/core";
-import {AppConfig} from "../../../../core/config/config.service";
+import * as L from 'leaflet';
+import {LayerDefinition, LayerProvider} from '../../leaflet.model';
+import {Injectable} from '@angular/core';
+import {AppConfig} from '../../../../core/config/config.service';
 
 @Injectable()
 export class MapboxProvider implements LayerProvider {
@@ -16,21 +16,29 @@ export class MapboxProvider implements LayerProvider {
       let accessToken = this.appConfig.get().map.mapbox.accessToken;
 
       let streetsLayer = {
-        label: "Streets",
-        layer: L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}', {
+        label: 'Streets',
+        layer: L.tileLayer('https://api.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
           maxZoom: 21,
-          id: 'elasticm2m.nejp4l71',
-          accessToken: accessToken
+          id: 'mapbox.streets',
+          accessToken: accessToken,
+          /*
+          tileSize: 512,
+          zoomOffset: -1
+          */
         })
       };
 
       let satelliteLayer = {
-        label: "Satellite",
-        layer: L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}', {
+        label: 'Satellite',
+        layer: L.tileLayer('https://api.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
           maxZoom: 21,
           maxNativeZoom: 19,
-          id: 'elasticm2m.nejpcg33',
-          accessToken: accessToken
+          id: 'mapbox.satellite',
+          accessToken: accessToken,
+          /*
+          tileSize: 512,
+          zoomOffset: -1
+          */
         })
       };
       return [streetsLayer, satelliteLayer];

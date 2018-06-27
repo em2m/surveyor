@@ -2,7 +2,6 @@
   <span class="hidden-tablet-down" *ngIf="!iconOnly">
     <span *ngIf="primaryActions && primaryActions.length > 0">
       <span *ngFor="let action of primaryActions" class="button-wrapper">
-
         <button mat-button mat-raised-button color="primary" (click)="action.run()" [disabled]="!action.enabled"
                 style="font-size: 16px; font-weight: 400;">{{action.text}}</button>
       </span>

@@ -190,7 +190,7 @@ export class Searcher {
       if (constraint.not) {
         constraintString += constraint.not.toString();
       }
-      if (constraintItemString == constraintString && !(constraint.query instanceof BoolQuery)) {
+      if (constraintItemString === constraintString && !(constraint.query instanceof BoolQuery)) {
         addConstraint = false;
       }
     });

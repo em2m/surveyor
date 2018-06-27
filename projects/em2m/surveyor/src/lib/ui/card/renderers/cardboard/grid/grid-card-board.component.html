@@ -1,0 +1,4 @@
+<div fxLayout="row wrap" class="card-board content-grid" style="padding-right: 0; padding-left: 0;">
+  <surveyor-card *ngFor="let card of cards" (cardCreated)="created($event)" [cardId]="card.id" type="plain"
+                 fxFlex="100%" fxFlex.gt-sm="33%" style="padding: 0.5rem;"></surveyor-card>
+</div>
