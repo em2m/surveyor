@@ -1,6 +1,11 @@
 <form>
-    <surveyor-form-input *ngFor="let controlDef of controlDefinitions" [controlDefinition]="controlDef"
-                         [controlInstance]="getFormControl(controlDef)" [asyncValues]="asyncValues"
-                         [asyncOptions]="asyncOptions">
-    </surveyor-form-input>
+  <ng-container *ngFor="let controlDef of controlDefinitions">
+    <div *ngIf="!controlDef.hidden" style="padding-bottom: 0.75rem;">
+      <surveyor-form-input [controlDefinition]="controlDef"
+                           [controlInstance]="getFormControl(controlDef)"
+                           [asyncValues]="asyncValues"
+                           [asyncOptions]="asyncOptions">
+      </surveyor-form-input>
+    </div>
+  </ng-container>
 </form>

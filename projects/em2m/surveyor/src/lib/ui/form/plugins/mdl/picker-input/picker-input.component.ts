@@ -15,8 +15,6 @@ export class MdlPickerInputComponent extends SurveyorFormInputComponent implemen
   }
 
   ngAfterViewInit() {
-    // Hack required to get MDL to bind event handlers after a view change
-    window.dispatchEvent(new Event("load"));
   }
 
   setValue(val: any) {
@@ -35,6 +33,7 @@ export class MdlPickerInputComponent extends SurveyorFormInputComponent implemen
     options.pickerOptions.params["value"] = this.formControl.value;
     this.pickerService.pick(options.picker, options.pickerOptions)
       .subscribe((value: any) => {
+        console.log("Picked Value: ", value);
         this.setValue(value);
       });
   }

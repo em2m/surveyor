@@ -2,13 +2,14 @@
   <span class="hidden-tablet-down" *ngIf="!iconOnly">
     <span *ngIf="primaryActions && primaryActions.length > 0">
       <span *ngFor="let action of primaryActions" class="button-wrapper">
-        <button mat-button mat-raised-button color="primary" (click)="action.run()" [disabled]="!action.enabled"
-                style="font-size: 16px; font-weight: 400;">{{action.text}}</button>
+        <button mat-button mat-raised-button color="primary" (click)="action.run()" [disabled]="!action.enabled">
+          {{action.text}}
+        </button>
       </span>
     </span>
 
     <span *ngIf="secondaryActions && secondaryActions.length > 0" class="button-wrapper">
-      <button mat-button mat-raised-button color="primary" [matMenuTriggerFor]="actionMenu" style="font-size: 16px; font-weight: 400;">
+      <button mat-button mat-raised-button color="primary" [matMenuTriggerFor]="actionMenu">
         Actions <i class="fa fa-caret-down"></i>
       </button>
       <mat-menu #actionMenu="matMenu" yPosition="below" xPosition="before" [overlapTrigger]="false">
@@ -21,7 +22,7 @@
 
   <span class="hidden-desktop-up" *ngIf="!iconOnly">
     <span *ngIf="primaryActions?.length || secondaryActions?.length">
-      <button mat-button color="primary" mat-raised-button [matMenuTriggerFor]="actionMenu" style="font-size: 16px; font-weight: 400;">
+      <button mat-button color="primary" mat-raised-button [matMenuTriggerFor]="actionMenu">
         Actions <i class="fa fa-caret-down"></i>
       </button>
       <mat-menu #actionMenu="matMenu" yPosition="below" xPosition="before" [overlapTrigger]="false">

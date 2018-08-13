@@ -1,5 +1,5 @@
-import {FormControl} from "@angular/forms";
-import {ControlDefinition} from "./form.model";
+import {FormControl} from '@angular/forms';
+import {ControlDefinition} from './form.model';
 
 export class SurveyorFormInputComponent {
 
@@ -21,7 +21,7 @@ export class SurveyorFormInputComponent {
   }
 
   isInvalid(): boolean {
-    return this.formControl.errors && this.showErrors;
+    return this.formControl.errors && (this.formControl.touched); // && this.showErrors;
   }
 
   getErrors() {
@@ -31,10 +31,11 @@ export class SurveyorFormInputComponent {
     return [];
   }
 
-  getErrorMessage(key: string) {
+  getErrorMessage(key: string): string {
     let allValidations = this.controlDefinition.validators.concat(this.controlDefinition.asyncValidators);
-    return allValidations.find((validation) => {
-      return validation.key === key;
-    }).message || "";
+    let validation = allValidations.find((vdn) => {
+      return vdn.key === key;
+    });
+    return validation ? validation.message : null;
   }
 }

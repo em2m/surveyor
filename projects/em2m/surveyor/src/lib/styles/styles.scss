@@ -316,3 +316,23 @@ button::-moz-focus-inner {
   margin: 0 !important;
 }
 
+// Material Form Overrides
+
+.mat-form-field-appearance-outline .mat-form-field-wrapper {
+  margin: 0 !important;
+}
+
+.mat-checkbox-label {
+  font-size: 16px;
+}
+surveyor-mat-checkbox-input > .mat-checkbox-layout {
+  padding-bottom: 1rem;
+}
+
+.mdl-dialog__content {
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+.mat-input-element {
+  color: rgba(0, 0, 0, 0.87) !important;
+}
