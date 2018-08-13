@@ -1,17 +1,17 @@
-import {Injectable, Injector, Type} from "@angular/core";
-import {ExtensionService} from "../../core/extension/extension.service";
-import {Extension} from "../../core/extension/extension.model";
-import {ControlOptions, ControlValidator, FormDefinition, AsyncControlValidator, Mask} from "./form.model";
-import {AsyncValidatorFn, FormBuilder, ValidatorFn} from "@angular/forms";
-import {SurveyorFormInputComponent} from "./form-input-component";
+import {Injectable, Injector, Type} from '@angular/core';
+import {ExtensionService} from '../../core/extension/extension.service';
+import {Extension} from '../../core/extension/extension.model';
+import {ControlOptions, ControlValidator, FormDefinition, AsyncControlValidator, Mask} from './form.model';
+import {AsyncValidatorFn, FormBuilder, ValidatorFn} from '@angular/forms';
+import {SurveyorFormInputComponent} from './form-input-component';
 
 @Injectable()
 export class FormService {
 
-  private FORM_INPUT_EXTENSION_TYPE = "surveyor:form-input";
-  private FORM_MASK_EXTENSION_TYPE = "surveyor:form-mask";
-  private FORM_VALIDATOR_EXTENSION_TYPE = "surveyor:form-validator";
-  private FORM_ASYNC_VALIDATOR_EXTENSION_TYPE = "surveyor:form-async-validator";
+  private FORM_INPUT_EXTENSION_TYPE = 'surveyor:form-input';
+  private FORM_MASK_EXTENSION_TYPE = 'surveyor:form-mask';
+  private FORM_VALIDATOR_EXTENSION_TYPE = 'surveyor:form-validator';
+  private FORM_ASYNC_VALIDATOR_EXTENSION_TYPE = 'surveyor:form-async-validator';
 
   private formExtensionTypes = {
     [this.FORM_INPUT_EXTENSION_TYPE]: {},
@@ -63,7 +63,7 @@ export class FormService {
   }
 
   resolveStaticFn(key: string, params: any, extensionType: string): any {
-    let parts = key.split(":");
+    let parts = key.split(':');
     let type = parts[0];
     let service = this.formExtensionTypes[extensionType][type];
     if (service.injectable) { this.injector.get(service); }

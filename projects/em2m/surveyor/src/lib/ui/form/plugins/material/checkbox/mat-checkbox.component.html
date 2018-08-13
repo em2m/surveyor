@@ -1,0 +1,7 @@
+<div class="checkbox-wrapper">
+  <mat-checkbox [id]="controlDefinition.key"
+                [formControl]="formControl"
+                [required]="controlDefinition.required ? 'required' : null">
+    {{ controlDefinition.label }}
+  </mat-checkbox>
+</div>

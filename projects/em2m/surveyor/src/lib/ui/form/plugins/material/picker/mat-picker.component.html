@@ -1,0 +1,9 @@
+<mat-form-field appearance="outline" floatLabel="always" (click)="loadPicker()">
+  <mat-label>{{ controlDefinition.label }}</mat-label>
+  <input matInput [id]="controlDefinition.key" type="text" readonly
+         [required]="controlDefinition.required ? 'required' : null"
+         [placeholder]="label || controlDefinition.options.placeholder"/>
+  <mat-error *ngFor="let errorKey of getErrors()">
+    {{getErrorMessage(errorKey)}}
+  </mat-error>
+</mat-form-field>

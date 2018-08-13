@@ -5,11 +5,16 @@
       <div #modalTarget></div>
     </div>
     <div class="mdl-dialog__actions">
-      <button *ngIf="!hideSubmit" type="button" class="mdl-button mdl-button--colored" [disabled]="!canSubmit()" (click)="submit()">{{ submitLabel }}</button>
-      <button *ngIf="!hideCancel" type="button" class="mdl-button mdl-button--colored close" (click)="cancel()">{{ cancelLabel }}</button>
+      <button *ngIf="!hideSubmit" type="button" class="mdl-button mdl-button--colored" [disabled]="!canSubmit()" (click)="submit()">
+        {{ submitLabel }}
+      </button>
+      <button *ngIf="!hideCancel" type="button" class="mdl-button mdl-button--colored close" (click)="cancel()">
+        {{ cancelLabel }}
+      </button>
       <div class="mdl-layout-spacer"></div>
-      <button *ngIf="!hideDelete" type="button" class="mdl-button mdl-color-text--red" (click)="delete()">{{ deleteLabel }}</button>
-
+      <button *ngIf="!hideDelete" type="button" class="mdl-button mdl-color-text--red" (click)="delete()">
+        {{ deleteLabel }}
+      </button>
     </div>
   </div>
 </div>
