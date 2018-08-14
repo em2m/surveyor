@@ -4,19 +4,19 @@ import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/observable/of';
 
 @Injectable()
-export class GoogleMapsLoaderService {
+export class AppleMapkitLoaderService {
 
   private isLoaded = false;
 
   constructor() {}
 
-  loadApi(apiKey: string): Observable<boolean> {
+  loadApi(): Observable<boolean> {
     if (!this.isLoaded) {
       this.isLoaded = true;
 
-      return this.loadScript(`https://maps.googleapis.com/maps/api/js?key=${apiKey}`)
+      return this.loadScript('https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js')
         .concatMap(() => {
-          return this.loadScript('https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js');
+          return this.loadScript('https://unpkg.com/leaflet.mapkitmutant@latest/Leaflet.MapkitMutant.js');
         });
     } else {
       return Observable.of(true);
