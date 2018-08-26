@@ -1,4 +1,4 @@
-import {AsyncValidatorFn, FormBuilder, FormGroup, ValidatorFn} from "@angular/forms";
+import {AsyncValidatorFn, FormBuilder, FormGroup, ValidatorFn} from '@angular/forms';
 
 export interface ControlValidator {
   key: string;
@@ -15,7 +15,7 @@ export interface AsyncControlValidator {
 }
 
 export interface Mask {
-  masker: Function;
+  masker: Function | string;
   params?: Array<any>|any;
 }
 
@@ -25,6 +25,8 @@ export interface ControlOptions {
   component: any;
   value?: any;
   disabled?: boolean;
+  required?: boolean;
+  hidden?: boolean;
   options?: any;
   validators?: ControlValidator[];
   asyncValidators?: AsyncControlValidator[];
@@ -37,6 +39,8 @@ export class ControlDefinition {
   component: any;
   value: any;
   disabled: boolean;
+  required: boolean;
+  hidden: boolean;
   options: any;
   validators: ControlValidator[];
   asyncValidators: AsyncControlValidator[];
@@ -49,15 +53,20 @@ export class ControlDefinition {
     this.component = data.component;
     this.value = data.value;
     this.disabled = data.disabled || false;
+    this.required = data.required || false;
+    this.hidden = data.hidden || false;
     this.options = data.options || {};
     this.validators = data.validators || [];
     this.asyncValidators = data.asyncValidators || [];
-    this.width = data.width || "12";
+    this.width = data.width || '12';
   }
 
   buildFormControl() {
     return [
-      {value: this.value, disabled: this.disabled},
+      {
+        value: this.value,
+        disabled: this.disabled
+      },
       this.validators.map(v => v.validator),
       this.asyncValidators.map(v => v.validator)
     ];
@@ -67,7 +76,7 @@ export class ControlDefinition {
 export class FormDefinition {
   controls: ControlDefinition[];
   formBuilder: FormBuilder;
-  _form: FormGroup;
+  form: FormGroup;
 
   constructor(controls:  ControlOptions[], formBuilder: FormBuilder) {
     this.controls = controls.map( ctrl => new ControlDefinition(ctrl));
@@ -79,24 +88,30 @@ export class FormDefinition {
     this.controls.forEach((control) => {
       formControls[control.key] = control.buildFormControl();
     });
-    this._form = this.formBuilder.group(formControls);
-    return this._form;
+    this.form = this.formBuilder.group(formControls);
+    return this.form;
   }
 
   getValues(): any {
     let values = {};
     this.controls.forEach((control) => {
-      values[control.key] = this._form.controls[control.key].value;
+      values[control.key] = this.form.controls[control.key].value;
     });
     return values;
   }
 
   getValidity() {
-    return this._form.valid;
+    return this.form.valid;
   }
 
   pristine() {
-    return this._form.pristine;
+    return this.form.pristine;
+  }
+
+  markAllAsTouched() {
+    Object.keys(this.form.controls).forEach(controlKey => {
+      this.form.controls[controlKey].markAsTouched();
+    });
   }
 }
 

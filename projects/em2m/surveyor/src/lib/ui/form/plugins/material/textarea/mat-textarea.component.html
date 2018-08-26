@@ -1,0 +1,15 @@
+<mat-form-field appearance="outline">
+  <mat-label>{{ controlDefinition.label }}</mat-label>
+  <textarea matInput [id]="controlDefinition.key" type="text"
+            [formControl]="formControl"
+            [required]="controlDefinition.required ? 'required' : null"
+            (keydown)="applyMask($event)"
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            [cdkAutosizeMinRows]="controlDefinition.options['minRows'] || 3"
+            [cdkAutosizeMaxRows]="controlDefinition.options['maxRows'] || 5">
+  </textarea>
+  <mat-error *ngFor="let errorKey of getErrors()">
+    {{getErrorMessage(errorKey)}}
+  </mat-error>
+</mat-form-field>

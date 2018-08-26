@@ -1,6 +1,5 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
 import {SurveyorFormComponent} from './form.component';
 import {SurveyorFormInputWrapperComponent} from './form-input-wrapper.component';
 import {CommonModule} from '@angular/common';
@@ -14,12 +13,11 @@ import {MdlCheckboxInputComponent} from './plugins/mdl/checkbox-input/checkbox-i
 import {ConfirmedPasswordInputComponent} from './plugins/mdl/confirmed-password-input/confirmed-password-input.component';
 import {MdlPickerInputComponent} from './plugins/mdl/picker-input/picker-input.component';
 import {MdlPasswordInputComponent} from './plugins/mdl/password-input/password-input.component';
-
 import {MobileSelectInputComponent} from './plugins/mobile/select-input/select-input.component';
 import {MobileNumberInputComponent} from './plugins/mobile/number-input/number-input.component';
-import {MatSelectModule} from '@angular/material';
 import {MdlSelectInputComponent} from './plugins/mdl/select-input/select-input.component';
 import {MdlSelectableItemComponent} from './plugins/mdl/select-input/selectable-item.component';
+import {MaterialFormModule} from './plugins/material/material-form.module';
 
 export * from './form.component';
 export * from './form-input-component';
@@ -28,6 +26,8 @@ export * from './form.service';
 export * from './form-input-component';
 export * from './form-input-wrapper.component';
 export * from './file-upload.service';
+
+export * from './plugins/material/material-form.module';
 
 export * from './plugins/mdl/mdl-form-plugin';
 export * from './plugins/form-services/form-services-plugin';
@@ -55,13 +55,13 @@ const components = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatInputModule,
-    MatSelectModule
+    MaterialFormModule.forRoot()
   ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    MaterialFormModule,
     ...components
   ],
   declarations: [

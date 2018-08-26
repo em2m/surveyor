@@ -1,6 +1,7 @@
-import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {ControlDefinition, FormDefinition} from "./form.model";
-import {AbstractControl} from "@angular/forms";
+import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren} from '@angular/core';
+import {ControlDefinition, FormDefinition} from './form.model';
+import {AbstractControl} from '@angular/forms';
+import {SurveyorFormInputComponent} from './form-input-component';
 
 @Component({
   selector: 'surveyor-form',
@@ -29,6 +30,6 @@ export class SurveyorFormComponent implements OnInit {
   }
 
   getFormControl(def: ControlDefinition): AbstractControl {
-    return this.formDefinition._form.controls[def.key];
+    return this.formDefinition.form.controls[def.key];
   }
 }
