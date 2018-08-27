@@ -196,6 +196,7 @@ export class Searcher {
     });
     if (addConstraint) {
       this.constraints.push(constraint);
+      this.currentPage = 1;
     }
   }
 
