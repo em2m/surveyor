@@ -1,6 +1,5 @@
-import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import {SurveyorFormInputComponent} from '../../../form-input-component';
-import {MaskedValue} from '../../../../mask/mask.model';
 
 @Component({
   selector: 'surveyor-mat-checkbox-input',

@@ -1,5 +1,5 @@
-import {Observable} from "rxjs/Observable";
-import {EventEmitter} from "@angular/core";
+import {Observable} from 'rxjs';
+import {EventEmitter} from '@angular/core';
 
 export interface Card {
   id?: string;

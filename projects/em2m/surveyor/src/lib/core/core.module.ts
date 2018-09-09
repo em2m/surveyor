@@ -8,7 +8,6 @@ import {ContextService} from './extension/context.service';
 import {HttpModule} from '@angular/http';
 
 export * from './config/config.service';
-
 export * from './extension/extension.model';
 export * from './extension/extension.service';
 export * from './extension/context.service';
@@ -22,7 +21,6 @@ export * from './extension/filters/not.filter';
 export * from './extension/filters/or.filter';
 export * from './extension/filters/route.filter';
 export * from './extension/filters/visible.filter';
-
 export * from './state/state.service';
 
 @NgModule({

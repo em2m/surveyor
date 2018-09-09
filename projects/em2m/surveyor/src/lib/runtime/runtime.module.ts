@@ -1,7 +1,7 @@
 import {APP_INITIALIZER, ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 import {SurveyorApplicationModule} from './application/application.module';
 import {SurveyorCoreModule} from '../core/core.module';
 import {AppConfig} from '../core/config/config.service';
