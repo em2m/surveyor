@@ -1,18 +1,18 @@
-import {Injectable, Injector, Type} from "@angular/core";
-import {Card} from "./card.model";
-import {CardBoardRenderer} from "./renderers/cardboard/card-board.renderer";
-import {CardRenderer} from "./renderers/card/card.renderer";
-import {ExtensionService} from "../../core/extension/extension.service";
-import {Extension, FilterContext} from "../../core/extension/extension.model";
-import {Observable} from "rxjs/Observable";
-import {Subject} from "rxjs/Subject";
+import {Injectable, Type} from '@angular/core';
+import {Card} from './card.model';
+import {CardBoardRenderer} from './renderers/cardboard/card-board.renderer';
+import {CardRenderer} from './renderers/card/card.renderer';
+import {ExtensionService} from '../../core/extension/extension.service';
+import {Extension} from '../../core/extension/extension.model';
+import {Observable} from 'rxjs/Observable';
+import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class CardService {
 
-  private CARD_EXTENSION_TYPE = "surveyor:card";
-  private CARD_RENDERER_EXTENSION_TYPE = "surveyor:card-renderer";
-  private CARD_BOARD_RENDERER_EXTENSION_TYPE = "surveyor:card-board-renderer";
+  private CARD_EXTENSION_TYPE = 'surveyor:card';
+  private CARD_RENDERER_EXTENSION_TYPE = 'surveyor:card-renderer';
+  private CARD_BOARD_RENDERER_EXTENSION_TYPE = 'surveyor:card-board-renderer';
 
   private cardRenderers: {[type: string]: Type<CardRenderer>} = {};
   private cardBoardRenderers: {[type: string]: Type<CardBoardRenderer>} = {};

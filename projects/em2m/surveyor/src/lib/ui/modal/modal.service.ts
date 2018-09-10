@@ -1,14 +1,15 @@
-import {Injectable, Type, ComponentFactoryResolver, Injector, ViewContainerRef, ApplicationRef} from "@angular/core";
-import {Modal} from "./modal.component";
-import {ModalOptions, ModalResult} from "./modal.model";
-import {CenterModalContainer} from "./containers/center/center-modal-container.component";
-import {Observable} from "rxjs/Observable";
-import {Subject} from "rxjs/Subject";
-import "rxjs/add/operator/do";
-import {SideModalContainer} from "./containers/side/side-modal-container.component";
-import {InlineModalContainer} from "./containers/inline/inline-modal-container.component";
-import {ConfirmationModal} from "./modals/confirmation-modal/confirmation-modal.component";
-import {StatusModal} from "./modals/status-modal/status-modal.component";
+import {Injectable, Type, ComponentFactoryResolver, Injector, ViewContainerRef, ApplicationRef} from '@angular/core';
+import {Modal} from './modal.component';
+import {ModalOptions, ModalResult} from './modal.model';
+import {CenterModalContainer} from './containers/center/center-modal-container.component';
+import {Observable} from 'rxjs/Observable';
+import {Subject} from 'rxjs/Subject';
+import 'rxjs/add/operator/do';
+import {SideModalContainer} from './containers/side/side-modal-container.component';
+import {InlineModalContainer} from './containers/inline/inline-modal-container.component';
+import {ConfirmationModal} from './modals/confirmation-modal/confirmation-modal.component';
+import {StatusModal} from './modals/status-modal/status-modal.component';
+import {LoadingModal} from './modals/loading-modal/loading-modal.component';
 
 @Injectable()
 export class ModalService {
@@ -28,9 +29,9 @@ export class ModalService {
     }
 
     let modalContainer = CenterModalContainer;
-    if (options.type === "side") {
+    if (options.type === 'side') {
       modalContainer = SideModalContainer;
-    } else if (options.type === "inline") {
+    } else if (options.type === 'inline') {
       modalContainer = InlineModalContainer;
     }
     let containerRef = options.elementRef;
@@ -42,7 +43,7 @@ export class ModalService {
         let applicationRef: ApplicationRef = this.injector.get(ApplicationRef);
         containerRef = applicationRef['_rootComponents'][0]['_hostElement'].vcRef;
       } catch (e) {
-        throw new Error("RootViewContainerRef not initialized.  Call ModalService.setRootViewContainerRef() in AppComponent");
+        throw new Error('RootViewContainerRef not initialized.  Call ModalService.setRootViewContainerRef() in AppComponent');
       }
     }
 
@@ -70,10 +71,10 @@ export class ModalService {
 
   confirm(message: string): Observable<boolean> {
     let options = <ModalOptions> {
-      submitLabel: "Yes",
-      cancelLabel: "No",
+      submitLabel: 'Yes',
+      cancelLabel: 'No',
       params: { message: message },
-      type: "center"
+      type: 'center'
     };
 
     let confirmResponse = new Subject<boolean>();
@@ -92,19 +93,33 @@ export class ModalService {
       hideSubmit: true,
       hideCancel: true,
       params: { message: message },
-      type: "center"
+      type: 'center',
+      width: 400
     };
 
     return this.open(StatusModal, options);
+  }
+
+  loading(message: string): ModalResult {
+    let options = <ModalOptions> {
+      hideActions: true,
+      params: {
+        message: message
+      },
+      type: 'center',
+      width: 450
+    };
+
+    return this.open(LoadingModal, options);
   }
 
   message(message: string) {
     let options = <ModalOptions> {
       hideSubmit: true,
       hideCancel: false,
-      cancelLabel: "OK",
+      cancelLabel: 'OK',
       params: { message: message },
-      type: "center"
+      type: 'center'
     };
 
     let modal = this.open(ConfirmationModal, options);

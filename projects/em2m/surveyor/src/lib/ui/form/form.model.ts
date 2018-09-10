@@ -94,24 +94,34 @@ export class FormDefinition {
 
   getValues(): any {
     let values = {};
-    this.controls.forEach((control) => {
-      values[control.key] = this.form.controls[control.key].value;
-    });
+    if (this.form) {
+      this.controls.forEach((control) => {
+        values[control.key] = this.form.controls[control.key].value;
+      });
+    }
     return values;
   }
 
-  getValidity() {
+  getValidity(): boolean {
+    if (!this.form) {
+      return false;
+    }
     return this.form.valid;
   }
 
-  pristine() {
+  pristine(): boolean {
+    if (!this.form) {
+      return false;
+    }
     return this.form.pristine;
   }
 
   markAllAsTouched() {
-    Object.keys(this.form.controls).forEach(controlKey => {
-      this.form.controls[controlKey].markAsTouched();
-    });
+    if (this.form) {
+      Object.keys(this.form.controls).forEach(controlKey => {
+        this.form.controls[controlKey].markAsTouched();
+      });
+    }
   }
 }
 

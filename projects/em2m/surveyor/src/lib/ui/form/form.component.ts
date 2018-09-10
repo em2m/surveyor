@@ -1,7 +1,6 @@
-import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren} from '@angular/core';
+import {AfterContentInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren} from '@angular/core';
 import {ControlDefinition, FormDefinition} from './form.model';
 import {AbstractControl} from '@angular/forms';
-import {SurveyorFormInputComponent} from './form-input-component';
 
 @Component({
   selector: 'surveyor-form',

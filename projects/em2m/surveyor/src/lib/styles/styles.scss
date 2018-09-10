@@ -1,19 +1,17 @@
-@import "./variables.scss";
-@import "./rotate.scss";
-@import "~material-design-lite/dist/material.css";
-@import "~material-design-icons/iconfont/material-icons.css";
+@import './variables.scss';
+@import './rotate.scss';
+@import '~material-design-lite/dist/material.css';
+@import '~material-design-icons/iconfont/material-icons.css';
 @import '~font-awesome/css/font-awesome.css';
-//@import '~@angular-mdl/popover/popover.scss';
-//@import '~@angular-mdl/select/select.scss';
 @import '~animate.css';
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import "~leaflet/dist/leaflet.css";
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~leaflet/dist/leaflet.css';
 @import '~leaflet.markercluster/dist/MarkerCluster.css';
 @import '~leaflet.markercluster/dist/MarkerCluster.Default.css';
 
 body {
   margin: 0;
-  color: #555555;
+  color: rgba(0, 0, 0, 0.87) !important;
 }
 
 .flex-vertical {
@@ -30,6 +28,11 @@ body {
   overflow: auto;
 }
 
+.flex-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
 .flex-fill {
   flex: 1 !important;
 }
@@ -42,7 +45,7 @@ body {
   flex: 1 1 auto;
 }
 
-.flex-horizontal > ng-component, .flex-vertical > ng-component, ng-component > ng-component {
+.flex-horizontal > ng-component, .flex-vertical > ng-component, .flex-wrapper > ng-component, ng-component > ng-component {
   display: flex !important;
   flex-direction: column !important;
   flex: 1 !important;

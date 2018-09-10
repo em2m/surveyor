@@ -1,8 +1,8 @@
 import {
   Component, Input, ComponentFactoryResolver, EventEmitter, Output, ViewChild, ViewContainerRef, OnInit, OnChanges, OnDestroy
-} from "@angular/core";
-import {CardService} from "./card.service";
-import {Card} from "./card.model";
+} from '@angular/core';
+import {CardService} from './card.service';
+import {Card} from './card.model';
 
 @Component({
   selector: 'surveyor-card',
@@ -39,13 +39,13 @@ export class CardComponent implements OnInit, OnChanges, OnDestroy {
 
     let card = this.cardService.getCardConfig(this.cardId);
     if (!card) {
-      console.error("Unable to locate card: ID = " + this.cardId);
+      console.error('Unable to locate card: ID = ' + this.cardId);
     } else {
       let cardType = card.type || this.type;
 
       let renderer = this.cardService.resolveCardRenderer(cardType);
       if (!renderer) {
-        console.error("Unable to locate card renderer: Type = " + cardType);
+        console.error('Unable to locate card renderer: Type = ' + cardType);
       } else {
         let factory = this.resolver.resolveComponentFactory(renderer);
 
