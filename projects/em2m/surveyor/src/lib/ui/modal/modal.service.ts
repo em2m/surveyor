@@ -102,7 +102,9 @@ export class ModalService {
 
   loading(message: string): ModalResult {
     let options = <ModalOptions> {
-      hideActions: true,
+      hideSubmit: true,
+      hideCancel: true,
+      hideDelete: true,
       params: {
         message: message
       },
