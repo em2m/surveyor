@@ -3,6 +3,7 @@ import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {PickerService} from "./picker.service";
 import {TimeZonePicker} from "./pickers/time-zone-picker/time-zone-picker.component";
+import {ColorPicker} from './pickers/color-picker/color-picker.component';
 import {PickerPlugin} from "./picker.plugin";
 import {SurveyorModalModule} from "../modal/modal.module";
 
@@ -19,13 +20,16 @@ export * from './pickers/time-zone-picker/time-zone-picker.component';
     SurveyorModalModule
   ],
   exports: [
-    TimeZonePicker
+    TimeZonePicker,
+    ColorPicker
   ],
   declarations: [
-    TimeZonePicker
+    TimeZonePicker,
+    ColorPicker
   ],
   entryComponents: [
-    TimeZonePicker
+    TimeZonePicker,
+    ColorPicker
   ]
 })
 export class SurveyorPickerModule {

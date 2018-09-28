@@ -1,7 +1,11 @@
 <div class="nav-color-input">
-  <label>Color </label>
-  <div class="nav-color-preview" (click)="triggerColorSelect()"
-       [style.background]="color"></div>
+  <div class="selected larger-font" *ngIf="!selectedColor">Pick A Brand Color</div>
+  <div class="selected larger-font" *ngIf="selectedColor">{{selectedColor}}</div>
+  <div class="color-options-container">
+    <div class="color-options" *ngFor="let color of colors" (click)="clickMessage(color)" [style.background-color]="color"></div>
+  </div>
+  <input class="mdl-textfield__input searcher"
+         [(ngModel)]="selectedColor" placeholder="Add a color...">
 </div>
 <!--<input #navColorInput class="nav-color-picker"-->
        <!--[(colorPicker)]="color"-->
