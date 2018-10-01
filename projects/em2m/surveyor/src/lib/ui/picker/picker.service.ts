@@ -1,17 +1,17 @@
-import {Injectable, Type} from "@angular/core";
-import {Observable} from "rxjs/Observable";
-import {Subject} from "rxjs/Subject";
-import {Picker} from "./picker.component";
-import {PickerOptions} from "./picker.model";
-import {ModalService} from "../modal/modal.service";
-import {ExtensionService} from "../../core/extension/extension.service";
-import {Extension} from "../../core/extension/extension.model";
+import {Injectable, Type} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {Subject} from 'rxjs/Subject';
+import {Picker} from './picker.component';
+import {PickerOptions} from './picker.model';
+import {ModalService} from '../modal/modal.service';
+import {ExtensionService} from '../../core/extension/extension.service';
+import {Extension} from '../../core/extension/extension.model';
 
 @Injectable()
 export class PickerService {
 
   private pickers: {[type: string]: Type<Picker>} = {};
-  private PICKER_EXTENSION_TYPE = "surveyor:picker";
+  private PICKER_EXTENSION_TYPE = 'surveyor:picker';
 
   constructor(private extensionService: ExtensionService, private modalService: ModalService) {
     this.registerPickers();
@@ -35,11 +35,11 @@ export class PickerService {
     // Retrieve the picker for the specified type
     let picker = this.pickers[type];
     if (picker == null) {
-      return Observable.throw({error: "Unable to resolve picker for type: " + type});
+      return Observable.throw({error: 'Unable to resolve picker for type: ' + type});
     }
 
-    if (!pickerOptions) pickerOptions = {};
-    if (!pickerOptions.type) pickerOptions.type = "side";
+    if (!pickerOptions) { pickerOptions = {}; }
+    if (!pickerOptions.type) { pickerOptions.type = 'side'; }
 
     let pickerResponse = new Subject<any>();
     let modal = this.modalService.open(picker, pickerOptions);

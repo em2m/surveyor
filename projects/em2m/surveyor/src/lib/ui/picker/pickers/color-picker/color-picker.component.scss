@@ -1,17 +1,78 @@
+.color-palette-container {
+  display: flex;
+  flex-direction: row;
+  background-color: #777777;
+}
+
 .color-options-container {
-  width: 100%;
+  width: 15%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  background-color: white;
 }
 
 .color-options {
-  width: 20%;
-  margin: 2%;
-  height: 40px;
+  width: 70%;
+  margin: 8px 0;
+  height: 29px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.color-gradient-container {
+  width: 85%;
+  margin-left: 0.25%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: white;
+  justify-content: center;
+}
+
+.color-gradient {
+  width: 87%;
+  height: 8%;
+  border-radius: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.color-gradients-unselected {
+  width: 100%;
+  display: flex;
+}
+
+.color-gradients-selected {
+  display: flex;
+  min-width: 107%;
+  height: 100%;
+  align-items: center;
+  border-radius: 5%;
 }
 
 .larger-font {
   font-size: 16px;
+}
+
+.gradient-weight {
+  margin-left: 5%;
+  //min-width: 30%;
+  margin-right: auto;
+}
+
+.gradient-hex {
+  margin-left: auto;
+  //min-width: 30%;
+  margin-right: 5%;
+}
+
+.selected-hex {
+  min-width: 95%;
+}
+
+.fa-check {
+  color: white;
 }
