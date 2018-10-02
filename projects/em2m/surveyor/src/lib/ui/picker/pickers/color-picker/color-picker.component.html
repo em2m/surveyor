@@ -1,12 +1,28 @@
-<div class="nav-color-input">
-  <label>Color </label>
-  <div class="nav-color-preview" (click)="triggerColorSelect()"
-       [style.background]="color"></div>
+<mat-form-field appearance="outline">
+  <mat-label>Hex Code</mat-label>
+  <input matInput type="text" [required]="true" [(ngModel)]="selectedHexCode"/>
+  <!--
+  <mat-error *ngFor="let errorKey of getErrors()">
+    {{getErrorMessage(errorKey)}}
+  </mat-error>
+  -->
+</mat-form-field>
+<div class="color-palette-container">
+  <div class="color-options-container">
+    <div *ngFor="let color of materialColors" class="color-options" (click)="selectColor(color)" [style.background-color]="color.variations[5].hex"><span *ngIf="selectedColor === color.color"><i class="fa fa-check"></i></span></div>
+  </div>
+  <div class="color-gradient-container">
+    <h3 *ngIf="!selectedColor"> </h3>
+    <h3 *ngIf="selectedColor">{{selectedColor}}</h3>
+    <div class="color-gradient" *ngFor="let gradient of gradients" (click)="selectGradient(gradient)" [style.background-color]="gradient.hex">
+      <div *ngIf="selectedHexCode === gradient.hex; else unselectedGradient" class="color-gradients-selected" [style.background-color]="gradient.hex">
+        <span class="gradient-weight">{{gradient.weight}}</span><span class="gradient-hex">{{gradient.hex}}</span>
+      </div>
+      <ng-template #unselectedGradient class="color-gradients-unselected">
+        <div class="color-gradients-unselected">
+          <span class="gradient-weight">{{gradient.weight}}</span><span class="gradient-hex">{{gradient.hex}}</span>
+        </div>
+      </ng-template>
+    </div>
+  </div>
 </div>
-<!--<input #navColorInput class="nav-color-picker"-->
-       <!--[(colorPicker)]="color"-->
-       <!--[cpAlphaChannel]="'disabled'"-->
-       <!--[cpPosition]="left"-->
-       <!--[cpDialogDisplay]="'inline'"-->
-       <!--(colorPickerChange)="colorChanged($event)"-->
-       <!--[value]="color"/>-->
