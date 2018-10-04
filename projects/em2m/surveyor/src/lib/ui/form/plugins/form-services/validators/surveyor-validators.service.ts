@@ -12,12 +12,12 @@ export class SurveyorValidators {
   }
 
   static isValidPhoneFormat(c: AbstractControl) {
-      let temp = c.value.replace(/\D/g, '');
-      if (temp.length === 10) {
-        return null;
-      } else {
-        return { invalidPhoneNumber: true };
-      }
+    let temp = (c.value || '').replace(/\D/g, '');
+    if (temp.length === 10) {
+      return null;
+    } else {
+      return { invalidPhoneNumber: true };
+    }
   }
 
   static mustBeOneOf(array: Array<any>) {
