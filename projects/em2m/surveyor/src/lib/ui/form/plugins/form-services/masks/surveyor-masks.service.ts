@@ -57,7 +57,7 @@ export class SurveyorMasks {
     }
 
     function updateModelValue($event, value: string): string {
-      let eventVal = $event.key.replace(/[^$0-9\.]/g, '');
+      let eventVal = ($event.key || '').replace(/[^$0-9\.]/g, '');
       let newModelVal = value ? value.toString().replace(/[^$0-9\.]/g, '') + eventVal : eventVal;
       newModelVal = newModelVal.toString().replace('$', '');
 
