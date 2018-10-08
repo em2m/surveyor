@@ -46,7 +46,8 @@ export class SurveyorLeafletComponent implements AfterViewInit, OnDestroy {
       this.options = <MapOptions>{
         center: [37.8, -96],
         zoom: 4,
-        maxZoom: 20
+        maxZoom: 20,
+        //minZoom: 4
       };
     }
     this.options.zoomControl = false;

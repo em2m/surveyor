@@ -4,7 +4,7 @@
     <div class="mdl-dialog__content" [ngClass]="{ 'no-padding': noPadding}">
       <div #modalTarget></div>
     </div>
-    <div class="mdl-dialog__actions">
+    <div class="mdl-dialog__actions" *ngIf="!(hideSubmit && hideCancel && hideDelete)">
       <button *ngIf="!hideSubmit" type="button" class="mdl-button mdl-button--colored" [disabled]="!canSubmit()" (click)="submit()">
         {{ submitLabel }}
       </button>

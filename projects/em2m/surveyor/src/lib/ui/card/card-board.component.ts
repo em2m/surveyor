@@ -1,9 +1,9 @@
 import {
   Component, Input, ComponentFactoryResolver, EventEmitter, Output, ViewChild, ViewContainerRef, OnInit, OnChanges, OnDestroy
-} from "@angular/core";
-import {CardService} from "./card.service";
-import {ContextService} from "../../core/extension/context.service";
-import {Subscription} from "rxjs/index";
+} from '@angular/core';
+import {CardService} from './card.service';
+import {ContextService} from '../../core/extension/context.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'surveyor-card-board',
@@ -78,7 +78,7 @@ export class CardBoardComponent implements OnInit, OnChanges, OnDestroy {
       });
 
     } else {
-      console.error("Unable to locate card board renderer: Type = " + this.type);
+      console.error('Unable to locate card board renderer: Type = ' + this.type);
     }
   }
 

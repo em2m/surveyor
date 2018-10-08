@@ -1,6 +1,8 @@
 <mat-form-field appearance="outline">
   <mat-label>{{ controlDefinition.label }}</mat-label>
-  <input matInput [id]="controlDefinition.key" [formControl]="formControl" [type]="controlDefinition?.options?.type || 'text'"
+  <input matInput [id]="controlDefinition.key"
+         [formControl]="formControl"
+         [type]="controlDefinition?.options?.type || 'text'"
          [required]="controlDefinition.required ? 'required' : null"
          (keydown)="applyMask($event)"/>
   <mat-error *ngFor="let errorKey of getErrors()">

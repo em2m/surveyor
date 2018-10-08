@@ -1,9 +1,9 @@
-import {MaskedValue} from "../../../../mask/mask.model";
+import {MaskedValue} from '../../../../mask/mask.model';
 
 export class SurveyorMasks {
 
   static phoneNumberMask(params: any): any {
-    if (params.modelViewValue) {
+    if (params && params.modelViewValue) {
       return ($event: any, value: string): string => {
         let model = updateModelValue($event, value);
         return formatAsPhoneNumber(model);
@@ -19,19 +19,19 @@ export class SurveyorMasks {
       let eventVal = $event.key.replace(/\D/g, '');
       let newModelVal = value ? value.replace(/\D/g, '') + eventVal : eventVal;
 
-      if ($event.key === "Backspace") {
+      if ($event.key === 'Backspace') {
         newModelVal = newModelVal.substring(0, newModelVal.length - 1);
       }
 
       if (newModelVal.length > 10) {
-        newModelVal = newModelVal.substring(0, 10)
+        newModelVal = newModelVal.substring(0, 10);
       }
 
       return newModelVal;
     }
 
     function formatAsPhoneNumber(value: string): string {
-      let newVal = "";
+      let newVal = '';
       if (value.length === 0) {} else if (value.length <= 3) {
         newVal = value.replace(/^(\d{0,3})/, '($1)');
       } else if (value.length <= 6) {
@@ -44,7 +44,7 @@ export class SurveyorMasks {
   }
 
   static dollarMask(params: any): any {
-    if (params.modelViewValue) {
+    if (params && params.modelViewValue) {
       return ($event: any, value: string): string => {
         let model = updateModelValue($event, value);
         return formatAsDollarValue(model);
@@ -57,11 +57,11 @@ export class SurveyorMasks {
     }
 
     function updateModelValue($event, value: string): string {
-      let eventVal = $event.key.replace(/[^$0-9\.]/g, '');
+      let eventVal = ($event.key || '').replace(/[^$0-9\.]/g, '');
       let newModelVal = value ? value.toString().replace(/[^$0-9\.]/g, '') + eventVal : eventVal;
       newModelVal = newModelVal.toString().replace('$', '');
 
-      if ($event.key === "Backspace") {
+      if ($event.key === 'Backspace') {
         newModelVal = newModelVal.substring(0, newModelVal.length - 1);
       }
 
@@ -69,9 +69,9 @@ export class SurveyorMasks {
     }
 
     function formatAsDollarValue(value: string): string {
-      value = value.replace("$", "");
-      if (value.indexOf(".") > -1 && (Math.abs(value.indexOf(".") - value.length - 1) > 1)) {
-        value = value.substring(0, value.indexOf(".") + 3);
+      value = (value || '').replace('$', '');
+      if (value.indexOf('.') > -1 && (Math.abs(value.indexOf('.') - value.length - 1) > 1)) {
+        value = value.substring(0, value.indexOf('.') + 3);
       }
       return '$' + value;
     }

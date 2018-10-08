@@ -8,6 +8,7 @@ export interface ModalOptions {
   submitLabel?: string;
   cancelLabel?: string;
   deleteLabel?: string;
+  hideActions?: boolean;
   hideSubmit?: boolean;
   hideCancel?: boolean;
   hideDelete?: boolean;
