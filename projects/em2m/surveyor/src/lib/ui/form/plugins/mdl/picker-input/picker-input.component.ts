@@ -33,7 +33,6 @@ export class MdlPickerInputComponent extends SurveyorFormInputComponent implemen
     options.pickerOptions.params["value"] = this.formControl.value;
     this.pickerService.pick(options.picker, options.pickerOptions)
       .subscribe((value: any) => {
-        console.log("Picked Value: ", value);
         this.setValue(value);
       });
   }

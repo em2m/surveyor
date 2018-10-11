@@ -882,7 +882,6 @@ export class ColorPicker extends Picker implements OnInit {
 
   selectGradient(gradient): void {
     this.selectedHexCode = gradient.hex;
-    console.log()
     this.selectedStyle = 'color-gradients-selected';
   }
 
