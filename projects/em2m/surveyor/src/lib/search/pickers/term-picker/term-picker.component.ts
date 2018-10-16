@@ -36,7 +36,7 @@ export class TermPickerComponent extends Picker implements OnInit {
     this.agg = this.params.agg;
     this.key = this.agg.key;
     this.bucketSearchResults = this.buckets;
-    console.log(this.buckets);
+    // console.log(this.buckets);
   }
 
   clearSearch() {
