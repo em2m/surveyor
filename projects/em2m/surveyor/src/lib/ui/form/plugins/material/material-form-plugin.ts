@@ -6,6 +6,7 @@ import {MaterialCheckboxInputComponent} from './checkbox/mat-checkbox.component'
 import {MaterialTextAreaInputComponent} from './textarea/mat-textarea.component';
 import {MaterialPickerInputComponent} from './picker/mat-picker.component';
 import {MaterialPasswordInputComponent} from './password/mat-password.component';
+import {MaterialDollarsComponent} from './dollars/mat-dollars.component';
 
 export let MaterialFormPlugin: Plugin = <Plugin> {
   name: 'Material Forms Plugin',
@@ -39,6 +40,11 @@ export let MaterialFormPlugin: Plugin = <Plugin> {
       {
         value: MaterialPasswordInputComponent,
         config: {type: 'Password'},
+        priority: 50
+      },
+      {
+        value: MaterialDollarsComponent,
+        config: {type: 'Dollars'},
         priority: 50
       }
     ]
