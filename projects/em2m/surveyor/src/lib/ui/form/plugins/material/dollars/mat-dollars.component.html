@@ -1,0 +1,15 @@
+<mat-form-field appearance="outline">
+  <mat-label>{{ controlDefinition.label }}</mat-label>
+  <!--<span matPrefix class="input-icon">$&nbsp;</span>-->
+  <!--<span matSuffix class="input-icon">.00</span>-->
+  <mat-icon matPrefix class="input-icon">attach_money</mat-icon>
+  <input matInput [id]="controlDefinition.key"
+         [formControl]="formControl"
+         [type]="controlDefinition?.options?.type || 'text'"
+         [required]="controlDefinition.required ? 'required' : null"
+         (keydown)="applyMask($event)"
+  />
+  <mat-error *ngFor="let errorKey of getErrors()">
+    {{getErrorMessage(errorKey)}}
+  </mat-error>
+</mat-form-field>
