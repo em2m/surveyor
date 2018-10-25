@@ -5,7 +5,7 @@ import {MaskedValue} from './mask.model';
 export class MaskUtils {
 
   static phoneNumberMask(options: PhoneNumberMaskOptions) {
-    if (options.modelViewValue) {
+    if (options.displayMaskedValue) {
       return ($event: any, value: string): string => {
         let model = updateModelValue($event, value);
         return formatAsPhoneNumber(model);
@@ -52,5 +52,5 @@ export class MaskUtils {
 }
 
 export class PhoneNumberMaskOptions {
-  modelViewValue = false;
+  displayMaskedValue = false;
 }
