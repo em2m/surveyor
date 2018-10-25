@@ -3,7 +3,7 @@ import {MaskedValue} from '../../../../mask/mask.model';
 export class SurveyorMasks {
 
   static phoneNumberMask(params: any): any {
-    if (params && params.modelViewValue) {
+    if (params && params.displayMaskedValue) {
       return ($event: any, value: string): string => {
         let model = updateModelValue($event, value);
         return formatAsPhoneNumber(model);
@@ -44,7 +44,7 @@ export class SurveyorMasks {
   }
 
   static dollarMask(params: any): any {
-    if (params && params.modelViewValue) {
+    if (params && params.displayMaskedValue) {
       return ($event: any, value: string): string => {
         let model = updateModelValue($event, value);
         return formatAsDollarValue(model);
