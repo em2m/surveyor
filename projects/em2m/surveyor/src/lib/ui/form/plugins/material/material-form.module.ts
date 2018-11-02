@@ -10,6 +10,7 @@ import {MaterialTextAreaInputComponent} from './textarea/mat-textarea.component'
 import {MaterialCheckboxInputComponent} from './checkbox/mat-checkbox.component';
 import {MaterialPickerInputComponent} from './picker/mat-picker.component';
 import {MaterialPasswordInputComponent} from './password/mat-password.component';
+import {MaterialDollarsComponent} from './dollars/mat-dollars.component';
 
 export * from './material-form-plugin';
 export * from './select/mat-select.component';
@@ -26,6 +27,7 @@ const components = [
   MaterialCheckboxInputComponent,
   MaterialPickerInputComponent,
   MaterialPasswordInputComponent,
+  MaterialDollarsComponent,
 ];
 
 @NgModule({

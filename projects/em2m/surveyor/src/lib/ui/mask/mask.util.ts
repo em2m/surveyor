@@ -1,11 +1,11 @@
-import {Injectable} from "@angular/core";
-import {MaskedValue} from "./mask.model";
+import {Injectable} from '@angular/core';
+import {MaskedValue} from './mask.model';
 
 @Injectable()
 export class MaskUtils {
 
   static phoneNumberMask(options: PhoneNumberMaskOptions) {
-    if (options.modelViewValue) {
+    if (options.displayMaskedValue) {
       return ($event: any, value: string): string => {
         let model = updateModelValue($event, value);
         return formatAsPhoneNumber(model);
@@ -24,7 +24,7 @@ export class MaskUtils {
       let eventVal = $event.key.replace(/\D/g, '');
       let newModelVal = value ? value.replace(/\D/g, '') + eventVal : eventVal;
 
-      if ($event.key === "Backspace") {
+      if ($event.key === 'Backspace') {
         newModelVal = newModelVal.substring(0, newModelVal.length - 1);
       }
 
@@ -36,7 +36,7 @@ export class MaskUtils {
     }
 
     function formatAsPhoneNumber(value: string): string {
-      let newVal = "";
+      let newVal = '';
       if (value.length === 0) {
       } else if (value.length <= 3) {
         newVal = value.replace(/^(\d{0,3})/, '($1)');
@@ -52,5 +52,5 @@ export class MaskUtils {
 }
 
 export class PhoneNumberMaskOptions {
-  modelViewValue = false;
+  displayMaskedValue = false;
 }
