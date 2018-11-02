@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/observable/fromPromise';
-import 'rxjs/add/observable/of';
+import {Observable, from, of} from 'rxjs';
 
 @Injectable()
 export class AppleMapkitLoaderService {

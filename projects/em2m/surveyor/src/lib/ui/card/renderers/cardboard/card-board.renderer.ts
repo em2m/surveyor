@@ -1,5 +1,5 @@
 import {Input, Output} from "@angular/core";
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {BehaviorSubject} from "rxjs";
 import {Card} from "../../card.model";
 
 export abstract class CardBoardRenderer {

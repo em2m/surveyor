@@ -1,5 +1,6 @@
 import {ForwardGeocodeItem, ForwardGeocodeResult, GeoConfig, GeoProvider} from '../../geo.model';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
@@ -19,7 +20,7 @@ export class MapboxGeoProvider implements GeoProvider {
 
   forwardGeocode(placeName: string): Observable<ForwardGeocodeResult> {
     if (this.mapboxAccessToken) {
-      let url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${placeName}.json?access_token=${this.mapboxAccessToken}`;
+      const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${placeName}.json?access_token=${this.mapboxAccessToken}`;
       return this.http.get(url).map((res: any) => {
         return <ForwardGeocodeResult>{
           name: placeName,

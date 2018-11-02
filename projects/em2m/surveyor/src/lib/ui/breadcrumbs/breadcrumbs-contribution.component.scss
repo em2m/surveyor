@@ -1,0 +1,34 @@
+.nav-container {
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  position: relative
+}
+
+.nav-item {
+  font-size: 18px;
+  line-height: inherit;
+  display: flex;
+  align-items: center;
+}
+
+.nav-item a {
+  text-decoration: none;
+  color: #FFF;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.nav-item + .nav-item::before {
+  display: inline-block;
+  padding: 0 0.5rem;
+  content: '\E315';
+  font-family: 'Material Icons';
+  font-size: 24px;
+  color: #FFF;
+}
+

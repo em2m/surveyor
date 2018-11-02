@@ -3,7 +3,8 @@ import * as L from 'leaflet';
 import {Control, Map, MapOptions} from 'leaflet';
 import {ControlProvider, FeatureProvider, LayerDefinition, LayerProvider} from './leaflet.model';
 import LayersObject = Control.LayersObject;
-import {Observable} from 'rxjs';
+import {Observable, of, from} from 'rxjs';
+import {concat, merge, tap, mergeMap, concatMap} from 'rxjs/operators'
 import {LeafletService} from './leaflet.service';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/observable/of';

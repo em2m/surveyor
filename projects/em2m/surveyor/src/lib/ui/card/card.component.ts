@@ -37,19 +37,19 @@ export class CardComponent implements OnInit, OnChanges, OnDestroy {
   private loadCard() {
     this.destroyCard();
 
-    let card = this.cardService.getCardConfig(this.cardId);
+    const card = this.cardService.getCardConfig(this.cardId);
     if (!card) {
       console.error('Unable to locate card: ID = ' + this.cardId);
     } else {
-      let cardType = card.type || this.type;
+      const cardType = card.type || this.type;
 
-      let renderer = this.cardService.resolveCardRenderer(cardType);
+      const renderer = this.cardService.resolveCardRenderer(cardType);
       if (!renderer) {
         console.error('Unable to locate card renderer: Type = ' + cardType);
       } else {
-        let factory = this.resolver.resolveComponentFactory(renderer);
+        const factory = this.resolver.resolveComponentFactory(renderer);
 
-        let cardRendererRef = this.cardTarget.createComponent(factory);
+        const cardRendererRef = this.cardTarget.createComponent(factory);
         cardRendererRef.instance.cardId = this.cardId;
         cardRendererRef.instance.last = this.last;
         this.cardRendererRef = cardRendererRef;
