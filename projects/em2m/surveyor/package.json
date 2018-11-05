@@ -1,6 +1,6 @@
 {
   "name": "@em2m/surveyor",
-  "version": "1.11.0",
+  "version": "1.12.0",
   "dependencies": {
     "@angular-mdl/core": "^5.0.0",
     "@angular-mdl/select": "^5.0.0",

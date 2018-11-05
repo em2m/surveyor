@@ -821,7 +821,7 @@ export class ColorPicker extends Picker implements OnInit {
         },
         {
           weight: 900,
-          hex: '#212121'
+          hex: '#000000'
         }
         ]
     },
@@ -882,7 +882,6 @@ export class ColorPicker extends Picker implements OnInit {
 
   selectGradient(gradient): void {
     this.selectedHexCode = gradient.hex;
-    console.log()
     this.selectedStyle = 'color-gradients-selected';
   }
 
@@ -891,34 +890,11 @@ export class ColorPicker extends Picker implements OnInit {
     this.gradients = color.variations;
   }
 
-  // selectColorGradient(gradient): void {
-  //   this.selectedColorGradient = gradient;
-  // }
-
   canSubmit(): boolean {
-    return !!this.selectedColor;
+    return !!this.selectedHexCode;
   }
 
   submit() {
     this.pick(this.selectedHexCode);
   }
-
-
-  // triggerColorSelect() {
-  //   const event = this.getClickEvent();
-  //   this.navColorInput.nativeElement.dispatchEvent(event);
-  // }
-
-  // colorChanged(color) {
-  //   this.selectedColor = color;
-  //   this.pick(color);
-  // }
-
-//   getClickEvent(): MouseEvent {
-//     return new MouseEvent('click', {
-//       'view': window,
-//       'bubbles': true,
-//       'cancelable': true
-//     });
-//   }
 }

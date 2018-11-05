@@ -13,7 +13,7 @@ export class SurveyorValidators {
 
   static isValidPhoneFormat(c: AbstractControl) {
     let temp = (c.value || '').replace(/\D/g, '');
-    if (temp.length === 10) {
+    if (temp.length === 10 || temp.length === 0) {
       return null;
     } else {
       return { invalidPhoneNumber: true };
