@@ -2,4 +2,4 @@
 
 npm install
 
-ng build @em2m/surveyor
+./node_modules/.bin/ng build @em2m/surveyor
