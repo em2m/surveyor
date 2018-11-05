@@ -2,9 +2,8 @@ import {Injectable, Type, ComponentFactoryResolver, Injector, ViewContainerRef, 
 import {Modal} from './modal.component';
 import {ModalOptions, ModalResult} from './modal.model';
 import {CenterModalContainer} from './containers/center/center-modal-container.component';
-import {Observable} from 'rxjs/Observable';
-import {Subject} from 'rxjs/Subject';
-import 'rxjs/add/operator/do';
+import {Observable, Subject} from 'rxjs';
+import {tap} from 'rxjs/operators';
 import {SideModalContainer} from './containers/side/side-modal-container.component';
 import {InlineModalContainer} from './containers/inline/inline-modal-container.component';
 import {ConfirmationModal} from './modals/confirmation-modal/confirmation-modal.component';
@@ -40,7 +39,7 @@ export class ModalService {
     }
     if (!containerRef) {
       try {
-        let applicationRef: ApplicationRef = this.injector.get(ApplicationRef);
+        const applicationRef: ApplicationRef = this.injector.get(ApplicationRef);
         containerRef = applicationRef['_rootComponents'][0]['_hostElement'].vcRef;
       } catch (e) {
         throw new Error('RootViewContainerRef not initialized.  Call ModalService.setRootViewContainerRef() in AppComponent');
@@ -53,10 +52,12 @@ export class ModalService {
     modalContainerRef.instance.options = options;
 
     // Automatically destroy the modal on a cancel action
-    modalContainerRef.instance.onCancel.do(() => {
-      modalContainerRef.instance.dismiss();
-      setTimeout(() => modalContainerRef.destroy(), 1000);
-    }).subscribe();
+    modalContainerRef.instance.onCancel.pipe(
+      tap(() => {
+        modalContainerRef.instance.dismiss();
+        setTimeout(() => modalContainerRef.destroy(), 1000);
+      })
+    ).subscribe();
 
     return <ModalResult> {
       submit: modalContainerRef.instance.onSubmit,

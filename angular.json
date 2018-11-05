@@ -7,18 +7,13 @@
       "root": "projects/em2m/surveyor",
       "sourceRoot": "projects/em2m/surveyor/src",
       "projectType": "library",
-      "prefix": "lib",
+      "prefix": "surveyor",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
             "tsConfig": "projects/em2m/surveyor/tsconfig.lib.json",
             "project": "projects/em2m/surveyor/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "project": "projects/em2m/surveyor/ng-package.prod.json"
-            }
           }
         },
         "test": {

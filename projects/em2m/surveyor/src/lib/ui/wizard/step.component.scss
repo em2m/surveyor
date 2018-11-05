@@ -1,0 +1,13 @@
+:host {
+  position: absolute;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.step-wrapper {
+  padding: 1rem;
+}
+
+.animated {
+  animation-duration: 500ms;
+}

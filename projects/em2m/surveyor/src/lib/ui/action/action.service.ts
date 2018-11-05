@@ -12,12 +12,12 @@ export class ActionService {
   }
 
   findActions(target: string): Array<Action> {
-    let results = [];
+    const results = [];
 
     this.extensionService.getExtensionsForTypeAndTarget(this.ACTION_EXTENSION_TYPE, target)
       .forEach((extension: Extension) => {
-        let type = extension.value as Type<Action>;
-        let instance: Action = this.injector.get(type);
+        const type = extension.value as Type<Action>;
+        const instance: Action = this.injector.get(type);
         results.push(instance);
       });
     return results;

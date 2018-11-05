@@ -2,8 +2,8 @@ import {Injectable, Injector} from '@angular/core';
 import {ControlProvider, FeatureProvider, LayerProvider} from './leaflet.model';
 import {ExtensionService} from '../../core/extension/extension.service';
 import {Map, Control} from 'leaflet';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {Observable} from 'rxjs/Observable';
+import {BehaviorSubject} from 'rxjs';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class LeafletService {

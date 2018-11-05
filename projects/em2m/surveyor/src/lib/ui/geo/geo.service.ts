@@ -1,12 +1,12 @@
-import {Injectable, Injector} from "@angular/core";
-import {ForwardGeocodeResult, GeoConfig, GeoConfigResolver, GeoProvider} from "./geo.model";
-import {Observable} from "rxjs/Observable";
-import {ExtensionService} from "../../core/extension/extension.service";
+import {Injectable, Injector} from '@angular/core';
+import {ForwardGeocodeResult, GeoConfig, GeoConfigResolver, GeoProvider} from './geo.model';
+import {Observable} from 'rxjs';
+import {ExtensionService} from '../../core/extension/extension.service';
 
 @Injectable()
 export class GeoService {
 
-  private static GEO_PROVIDER_WIDGET_TYPE = "surveyor:geo-provider";
+  private static GEO_PROVIDER_WIDGET_TYPE = 'surveyor:geo-provider';
 
   private geoProvider?: GeoProvider;
 
@@ -61,8 +61,8 @@ export class GeoService {
       return this.getConfig()
         .map((config: GeoConfig) => {
           this.geoProvider = null;
-          for (let extension of this.extensionService.getExtensionsForType(GeoService.GEO_PROVIDER_WIDGET_TYPE)) {
-            if (extension && extension.config && extension.config["type"] === config.provider) {
+          for (const extension of this.extensionService.getExtensionsForType(GeoService.GEO_PROVIDER_WIDGET_TYPE)) {
+            if (extension && extension.config && extension.config['type'] === config.provider) {
               this.geoProvider = this.injector.get(extension.value) as GeoProvider;
               this.geoProvider.init(config);
               break;
