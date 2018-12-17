@@ -1,0 +1,77 @@
+:host {
+  display: flex;
+  flex: 1;
+}
+
+.step-selector {
+  display: flex;
+  background-color: #F4F4F4;
+  border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.step-controls {
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+  border-top: 1px solid rgba(0,0,0,.125);
+  background-color: #F4F4F4;
+  z-index: 100;
+}
+
+.steps {
+  flex: 1;
+  position: relative;
+  overflow: auto;
+}
+
+.step-item {
+  display: flex;
+  flex: 1;
+  padding: 1rem;
+  text-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.step-item-title {
+  font-size: 15px;
+  font-weight: bold;
+  color: #E0E0E0;
+  padding-top: 0.25rem;
+}
+
+.active-step {
+  color: #2B2B2B;
+}
+
+.step-item-icon {
+  font-size: 22px;
+  position: relative;
+  color: #E0E0E0;
+}
+.step-item-icon-active {
+  color: darkblue;
+}
+
+.step-item-connector {
+  position: absolute;
+  height: 2px;
+  background-color: #E0E0E0;
+  top: calc(50% - 2px);
+}
+
+.connector-left {
+  left: -1rem;
+  right: calc(50% + 11px);
+}
+.connector-right {
+  left: calc(50% + 11px);
+  right: -1rem;
+}
+.connector-active {
+  background-color: darkblue;
+}
+
+.fa-exclamation-circle {
+  color: red;
+}

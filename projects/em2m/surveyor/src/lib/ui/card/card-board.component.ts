@@ -48,11 +48,11 @@ export class CardBoardComponent implements OnInit, OnChanges, OnDestroy {
   private loadCardBoard() {
     this.destroyCardBoard();
 
-    let renderer = this.cardService.resolveCardBoardRenderer(this.type);
+    const renderer = this.cardService.resolveCardBoardRenderer(this.type);
     if (renderer != null) {
-      let factory = this.resolver.resolveComponentFactory(renderer);
+      const factory = this.resolver.resolveComponentFactory(renderer);
 
-      let cardBoardRef = this.cardBoardTarget.createComponent(factory);
+      const cardBoardRef = this.cardBoardTarget.createComponent(factory);
       cardBoardRef.instance.target = this.target;
       cardBoardRef.instance.title = this.title;
       cardBoardRef.instance.collapsed = this.collapsed;
@@ -67,7 +67,7 @@ export class CardBoardComponent implements OnInit, OnChanges, OnDestroy {
           card.hide.subscribe(hidden => {
             this.cardsHidden[card.id] = hidden;
             this.hidden = true;
-            for (let key in this.cardsHidden) {
+            for (const key in this.cardsHidden) {
               if (this.cardsHidden.hasOwnProperty(key)) {
                 this.hidden = this.hidden && this.cardsHidden[key];
               }

@@ -1,5 +1,5 @@
 import {Map, Layer, Control} from 'leaflet';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 export interface LayerDefinition {
   label: string;
