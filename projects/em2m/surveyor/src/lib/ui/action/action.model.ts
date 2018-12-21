@@ -1,4 +1,3 @@
-import {Observable, Subscription} from 'rxjs';
 
 export interface Selection {
   empty: boolean;
@@ -56,7 +55,7 @@ export abstract class ListSelectionAction extends ActionSupport implements Actio
   onSelectionChange(selection: Selection) {
     if (selection) {
       this.selection = <ItemSelection>selection;
-      let selectionCount = (selection as ItemSelection).items.length;
+      const selectionCount = (selection as ItemSelection).items.length;
       this.enabled = selectionCount >= this.minSelectionCount && selectionCount <= this.maxSelectionCount;
     }
   }

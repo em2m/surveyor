@@ -4,8 +4,8 @@ import {CardBoardRenderer} from './renderers/cardboard/card-board.renderer';
 import {CardRenderer} from './renderers/card/card.renderer';
 import {ExtensionService} from '../../core/extension/extension.service';
 import {Extension} from '../../core/extension/extension.model';
-import {Observable} from 'rxjs/Observable';
-import {Subject} from 'rxjs/Subject';
+import {Observable} from 'rxjs';
+import {Subject} from 'rxjs';
 
 @Injectable()
 export class CardService {
@@ -24,7 +24,7 @@ export class CardService {
   }
 
   getCardComponent(cardId: string): Type<Card> {
-    let extension = this.extensionService.getExtensionById(this.CARD_EXTENSION_TYPE, cardId);
+    const extension = this.extensionService.getExtensionById(this.CARD_EXTENSION_TYPE, cardId);
     if (extension) {
       return extension.value;
     } else {
@@ -33,7 +33,7 @@ export class CardService {
   }
 
   getCardConfig(cardId: string): Card {
-    let extension = this.extensionService.getExtensionById(this.CARD_EXTENSION_TYPE, cardId);
+    const extension = this.extensionService.getExtensionById(this.CARD_EXTENSION_TYPE, cardId);
     if (extension) {
       return extension.config;
     } else {
@@ -42,8 +42,7 @@ export class CardService {
   }
 
   findCards(target: string): Array<Card> {
-    let results = [];
-
+    const results = [];
     this.extensionService.getExtensionsForTypeAndTarget(this.CARD_EXTENSION_TYPE, target)
       .forEach((extension: Extension) => {
           results.push(extension.config);
@@ -70,14 +69,14 @@ export class CardService {
 
   private registerRenderers() {
     this.extensionService.getExtensionsForType(this.CARD_RENDERER_EXTENSION_TYPE).forEach((extension: Extension) => {
-      let rendererType = extension.config.type;
+      const rendererType = extension.config.type;
       if (rendererType) {
         this.cardRenderers[rendererType] = extension.value;
       }
     });
 
     this.extensionService.getExtensionsForType(this.CARD_BOARD_RENDERER_EXTENSION_TYPE).forEach((extension: Extension) => {
-      let rendererType = extension.config.type;
+      const rendererType = extension.config.type;
       if (rendererType) {
         this.cardBoardRenderers[rendererType] = extension.value;
       }

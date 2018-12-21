@@ -7,7 +7,8 @@ import {ModalService} from '../ui/modal/modal.service';
 })
 export class SurveyorRuntimeComponent {
 
-  constructor(private viewContainerRef: ViewContainerRef, private modalService: ModalService) {
+  constructor(private viewContainerRef: ViewContainerRef,
+              private modalService: ModalService) {
     this.viewContainerRef = viewContainerRef;
 
     // Configure viewContainerRef target for various dependencies

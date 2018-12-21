@@ -62,7 +62,7 @@ export class StandardFacetComponent {
   addConstraint(agg: any, bucket: any) {
     let key = bucket.key;
     let query: Query = new TermQuery(agg.field, key);
-    if (key.toLowerCase() === 'missing') {
+    if (typeof key === 'string' && key.toLowerCase() === 'missing') {
       query = new ExistsQuery(agg.key, false);
     }
     if (agg.op === 'missing') {

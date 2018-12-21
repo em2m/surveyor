@@ -1,7 +1,6 @@
 import {ModuleWithProviders, NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {TableComponent} from "./table.component";
-//import {MdlModule} from "@angular-mdl/core";
 import {FormsModule} from "@angular/forms";
 import {MatCheckboxModule} from "@angular/material";
 

@@ -1,6 +1,6 @@
 import {Injectable, Type} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {Subject} from 'rxjs/Subject';
+import {Observable} from 'rxjs';
+import {Subject} from 'rxjs';
 import {Picker} from './picker.component';
 import {PickerOptions} from './picker.model';
 import {ModalService} from '../modal/modal.service';

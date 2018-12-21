@@ -3,7 +3,7 @@ import {LayerDefinition, LayerProvider} from '../../leaflet.model';
 import {Injectable} from '@angular/core';
 import {AppConfig} from '../../../../core/config/config.service';
 import {GoogleMapsLoaderService} from './google-maps-loader.service';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {Layer} from 'leaflet';
 
 @Injectable()

@@ -40,7 +40,8 @@ export function routeLoader(loader: LoaderService) {
     SurveyorApplicationModule,
     SurveyorMaterialModule.forRoot(),
     SurveyorUiModule,
-    SurveyorSearchModule.forRoot()
+    SurveyorSearchModule.forRoot(),
+
   ],
   exports: [
     BrowserModule,
