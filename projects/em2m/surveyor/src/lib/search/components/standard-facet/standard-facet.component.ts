@@ -13,6 +13,7 @@ import {PickerService} from '../../../ui/picker/picker.service';
 export class StandardFacetComponent {
 
   requestAggs: { [key: string]: any} = {};
+  resultOpAggs: { [key: string]: string} = {};
 
   constructor(public searcher: Searcher, private pickerService: PickerService) {}
 
@@ -45,10 +46,8 @@ export class StandardFacetComponent {
   bucketsForAgg(key: string): Array<Bucket> {
     if (this.searcher.searchResult && this.searcher.searchResult.aggs && this.searcher.searchResult.aggs[key]) {
       let aggs = this.searcher.aggs.filter(agg => agg.key === key)[0];
-      if (this.searcher.searchResult.aggs[key].op) {
-        aggs.op = this.searcher.searchResult.aggs[key].op;
-      }
       this.requestAggs[key] = aggs;
+      this.resultOpAggs[key] = this.searcher.searchResult.aggs[key].op;
       let buckets = aggs.size ? this.searcher.searchResult.aggs[key].buckets.slice(0, aggs.size) :
         this.searcher.searchResult.aggs[key].buckets;
 
@@ -64,17 +63,18 @@ export class StandardFacetComponent {
 
   addConstraint(agg: any, bucket: any) {
     let key = bucket.key;
+    let op = this.resultOpAggs[agg.field] || agg.op;
     let query: Query = new TermQuery(agg.field, key);
     if (typeof key === 'string' && key.toLowerCase() === 'missing') {
       query = new ExistsQuery(agg.key, false);
     }
-    if (agg.op === 'missing') {
+    if (op === 'missing') {
       query = new ExistsQuery(agg.key, true);
     }
-    if (agg.op === 'filters') {
+    if (op === 'filters') {
       query = agg.filters[key];
     }
-    if (agg.op === 'range' || agg.op === 'date_range') {
+    if (op === 'range' || op === 'date_range') {
       let lt = bucket.to;
       let gte = bucket.from;
       query = new RangeQuery(agg.field, lt, null, null, gte, null);
