@@ -45,6 +45,9 @@ export class StandardFacetComponent {
   bucketsForAgg(key: string): Array<Bucket> {
     if (this.searcher.searchResult && this.searcher.searchResult.aggs && this.searcher.searchResult.aggs[key]) {
       let aggs = this.searcher.aggs.filter(agg => agg.key === key)[0];
+      if (this.searcher.searchResult.aggs[key].op) {
+        aggs.op = this.searcher.searchResult.aggs[key].op;
+      }
       this.requestAggs[key] = aggs;
       let buckets = aggs.size ? this.searcher.searchResult.aggs[key].buckets.slice(0, aggs.size) :
         this.searcher.searchResult.aggs[key].buckets;
