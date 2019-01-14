@@ -4,7 +4,7 @@ import {ActionService} from './action.service';
 import {ActionButtonGroupComponent} from './action-button-group.component';
 import {ActionButtonSelectionComponent} from './action-button-selection.component';
 import {NavigateBackAction} from './actions/back.action';
-import {MatButtonModule, MatMenuModule, MatIconModule} from '@angular/material';
+import {MatButtonModule, MatMenuModule, MatIconModule, MatTooltipModule} from '@angular/material';
 
 export * from './action.model';
 export * from './action.service';
@@ -22,7 +22,8 @@ const components = [
     CommonModule,
     MatButtonModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule
   ],
   exports: [
     ...components
