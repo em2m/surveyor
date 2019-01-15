@@ -14,3 +14,16 @@ button[mat-button] {
 .button-wrapper {
   padding-left: 0.25rem;
 }
+
+.mini-fab-icon-size {
+  height: 25px !important;
+  width: 25px !important;
+}
+
+.mini-fab-margin {
+  margin: 0rem 0.5rem 0rem 0.5rem;
+}
+
+.mini-fab-plus-icon::ng-deep span {
+  padding: 0px !important;
+}

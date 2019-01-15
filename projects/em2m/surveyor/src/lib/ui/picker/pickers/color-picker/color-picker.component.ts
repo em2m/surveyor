@@ -781,51 +781,6 @@ export class ColorPicker extends Picker implements OnInit {
         ]
     },
     {
-      color: 'Grey',
-      variations: [
-        {
-          weight: 50,
-          hex: '#FAFAFA'
-        },
-        {
-          weight: 100,
-          hex: '#F5F5F5'
-        },
-        {
-          weight: 200,
-          hex: '#EEEEEE'
-        },
-        {
-          weight: 300,
-          hex: '#E0E0E0'
-        },
-        {
-          weight: 400,
-          hex: '#BDBDBD'
-        },
-        {
-          weight: 500,
-          hex: '#9E9E9E'
-        },
-        {
-          weight: 600,
-          hex: '#757575'
-        },
-        {
-          weight: 700,
-          hex: '#616161'
-        },
-        {
-          weight: 800,
-          hex: '#424242'
-        },
-        {
-          weight: 900,
-          hex: '#000000'
-        }
-        ]
-    },
-    {
       color: 'Blue Grey',
       variations: [
         {
@@ -869,6 +824,51 @@ export class ColorPicker extends Picker implements OnInit {
           hex: '#263238'
         }
         ]
+    },
+    {
+      color: 'Grey/Black',
+      variations: [
+        {
+          weight: 50,
+          hex: '#FAFAFA'
+        },
+        {
+          weight: 100,
+          hex: '#F5F5F5'
+        },
+        {
+          weight: 200,
+          hex: '#EEEEEE'
+        },
+        {
+          weight: 300,
+          hex: '#E0E0E0'
+        },
+        {
+          weight: 400,
+          hex: '#BDBDBD'
+        },
+        {
+          weight: 500,
+          hex: '#9E9E9E'
+        },
+        {
+          weight: 600,
+          hex: '#757575'
+        },
+        {
+          weight: 700,
+          hex: '#616161'
+        },
+        {
+          weight: 800,
+          hex: '#424242'
+        },
+        {
+          weight: 900,
+          hex: '#000000'
+        }
+      ]
     }
   ];
 

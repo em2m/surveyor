@@ -26,6 +26,8 @@ export class ItemSelection implements Selection {
 export interface Action {
   enabled: boolean;
   text: string;
+  iconClass: string;
+  alwaysIcon: boolean;
   toolTipText: string;
   primary: boolean;
   onSelectionChange(selection: Selection);
@@ -36,6 +38,7 @@ export class ActionSupport implements Action {
   enabled = true;
   text: string;
   iconClass: string;
+  alwaysIcon: boolean;
   styleClass: string;
   toolTipText: string;
   primary = false;
