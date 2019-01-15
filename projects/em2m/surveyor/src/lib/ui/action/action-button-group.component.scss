@@ -20,6 +20,10 @@ button[mat-button] {
   width: 25px !important;
 }
 
+.mini-fab-margin {
+  margin: 0rem 0.5rem 0rem 0.5rem;
+}
+
 .mini-fab-plus-icon::ng-deep span {
   padding: 0px !important;
 }

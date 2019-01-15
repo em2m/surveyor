@@ -826,7 +826,7 @@ export class ColorPicker extends Picker implements OnInit {
         ]
     },
     {
-      color: 'Grey',
+      color: 'Grey/Black',
       variations: [
         {
           weight: 50,

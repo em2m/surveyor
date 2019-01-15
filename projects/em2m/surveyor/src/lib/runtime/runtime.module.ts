@@ -41,7 +41,6 @@ export function routeLoader(loader: LoaderService) {
     SurveyorMaterialModule.forRoot(),
     SurveyorUiModule,
     SurveyorSearchModule.forRoot(),
-
   ],
   exports: [
     BrowserModule,

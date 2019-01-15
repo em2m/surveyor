@@ -3,10 +3,7 @@
     <span *ngIf="primaryActions && primaryActions.length > 0">
       <span *ngFor="let action of primaryActions" class="button-wrapper">
         <button mat-button mat-raised-button color="primary" (click)="action.run()" [disabled]="!action.enabled">
-          <!--<i *ngIf="action.iconClass" class="{{action.iconClass}}"></i>-->
-          <!--<span *ngIf="!action.iconClass">-->
             {{action.text}}
-          <!--</span>-->
         </button>
       </span>
     </span>
@@ -42,14 +39,14 @@
   <span class="hidden-tablet-down" *ngIf="iconOnly">
     <span *ngIf="primaryActions && primaryActions.length > 0">
       <span *ngFor="let action of primaryActions">
-        <button mat-mini-fab class="mini-fab-plus-icon" color="primary" (click)="action.run()" [disabled]="!action.enabled">
+        <button mat-mini-fab class="mini-fab-plus-icon mini-fab-margin" color="primary" (click)="action.run()" [disabled]="!action.enabled">
           <mat-icon class="mini-fab-icon-size" matTooltip="{{action.text}}" aria-label="View Actions"><i class="{{action.iconClass}}"></i></mat-icon>
         </button>
       </span>
     </span>
 
     <span *ngIf="secondaryActions && secondaryActions.length > 0">
-        <button mat-mini-fab color="primary" [matMenuTriggerFor]="actionMenu">
+        <button mat-mini-fab color="primary" class="mini-fab-margin" [matMenuTriggerFor]="actionMenu">
           <mat-icon aria-label="View Actions">more_vert</mat-icon>
         </button>
     </span>
@@ -62,7 +59,7 @@
 
   <span class="hidden-desktop-up" *ngIf="iconOnly">
     <span *ngIf="primaryActions?.length || secondaryActions?.length">
-      <button mat-mini-fab color="primary" [matMenuTriggerFor]="actionMenu">
+      <button mat-mini-fab color="primary" class="mini-fab-margin" [matMenuTriggerFor]="actionMenu">
         <mat-icon aria-label="View Actions">more_vert</mat-icon>
       </button>
       <mat-menu #actionMenu="matMenu" yPosition="below" xPosition="before" [overlapTrigger]="false">
