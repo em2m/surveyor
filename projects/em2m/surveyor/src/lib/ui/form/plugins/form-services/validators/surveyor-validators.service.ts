@@ -22,7 +22,7 @@ export class SurveyorValidators {
 
   static isValidToken(c: AbstractControl) {
     let tokenRegex = /[a-z0-9]{6}/gi;
-    if (c.value && (c.value.length !== 6 || !tokenRegex.test(c.value))) {
+    if (c.value && !tokenRegex.test(c.value)) {
       return {invalidToken: true};
     } else {
       return null;
