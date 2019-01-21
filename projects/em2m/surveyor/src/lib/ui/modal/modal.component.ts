@@ -1,4 +1,4 @@
-import {EventEmitter, Output, Input} from "@angular/core";
+import {EventEmitter, Output, Input, HostListener} from "@angular/core";
 
 export abstract class Modal {
 
@@ -6,6 +6,10 @@ export abstract class Modal {
   @Output() onSubmit = new EventEmitter();
   @Output() onCancel = new EventEmitter();
   @Output() onDelete = new EventEmitter();
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event) {
+    this.cancel();
+  }
 
   constructor() {
   }
