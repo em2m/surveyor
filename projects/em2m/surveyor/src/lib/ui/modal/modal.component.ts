@@ -6,12 +6,13 @@ export abstract class Modal {
   @Output() onSubmit = new EventEmitter();
   @Output() onCancel = new EventEmitter();
   @Output() onDelete = new EventEmitter();
+
+  constructor() {
+  }
+
   @HostListener('window:popstate', ['$event'])
   onPopState(event) {
     this.cancel();
-  }
-
-  constructor() {
   }
 
   canSubmit(): boolean {
