@@ -16,6 +16,7 @@ export class ActionButtonGroupComponent implements OnInit, OnDestroy {
   @Input() raised = true;
   @Input() colored = true;
   @Input() iconOnly = false;
+  @Input() miniFab = false;
   primaryActions: Array<Action> = [];
   secondaryActions: Array<Action> = [];
   private contextSub: Subscription;
