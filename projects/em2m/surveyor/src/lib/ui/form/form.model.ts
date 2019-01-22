@@ -31,6 +31,7 @@ export interface ControlOptions {
   validators?: ControlValidator[];
   asyncValidators?: AsyncControlValidator[];
   width?: string;
+  flexWidth?: string;
 }
 
 export class ControlDefinition {
@@ -46,6 +47,7 @@ export class ControlDefinition {
   asyncValidators: AsyncControlValidator[];
   mask: Function;
   width?: string;
+  flexWidth?: string;
 
   constructor(data: ControlOptions) {
     this.key = data.key;
@@ -59,6 +61,7 @@ export class ControlDefinition {
     this.validators = data.validators || [];
     this.asyncValidators = data.asyncValidators || [];
     this.width = data.width || '12';
+    this.flexWidth = data.flexWidth || '100%';
   }
 
   buildFormControl() {

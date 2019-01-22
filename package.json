@@ -29,6 +29,7 @@
     "@types/leaflet.markercluster": "^1.0.3",
     "@types/moment-timezone": "^0.5.4",
     "animate.css": "^3.6.1",
+    "apple-mapkit-js": "^6.0.1",
     "core-js": "^2.5.4",
     "font-awesome": "^4.7.0",
     "leaflet": "1.2.0",
