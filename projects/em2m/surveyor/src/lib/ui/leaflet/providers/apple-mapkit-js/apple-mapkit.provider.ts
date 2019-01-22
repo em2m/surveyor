@@ -2,6 +2,7 @@ import * as L from 'leaflet';
 import {LayerDefinition, LayerProvider} from '../../leaflet.model';
 import {Injectable} from '@angular/core';
 import {AppConfig} from '../../../../core/config/config.service';
+import 'apple-mapkit-js';
 import 'leaflet.mapkitmutant';
 
 @Injectable()
@@ -12,26 +13,36 @@ export class AppleMapkitProvider implements LayerProvider {
   constructor(private appConfig: AppConfig) {}
 
   provide(): Array<LayerDefinition> | Array<LayerDefinition> {
-    let mapProvider = this.appConfig.get().map.provider;
+    const mapProvider = this.appConfig.get().map.provider;
     if (mapProvider === 'apple') {
-      let accessToken = this.appConfig.get().map.apple.token;
+      const accessToken = this.appConfig.get().map.apple.token;
 
-      let streetsLayer = <LayerDefinition>{
+      const streetsLayer = <LayerDefinition>{
         label: 'Streets',
         layer: (L as any).mapkitMutant({
-          type: 'standard',
+          maptype: 'default',
+          minZoom: 3,
           authorizationCallback: (done) => done(accessToken)
         })
       };
-      let satelliteLayer = <LayerDefinition>{
+      const hybridLayer = <LayerDefinition>{
+        label: 'Hybrid',
+        layer: (L as any).mapkitMutant({
+          maptype: 'hybrid',
+          minZoom: 3,
+          authorizationCallback: (done) => done(accessToken)
+        })
+      };
+      const satelliteLayer = <LayerDefinition>{
         label: 'Satellite',
         layer: (L as any).mapkitMutant({
-          type: 'hybrid',
+          maptype: 'satellite',
+          minZoom: 3,
           authorizationCallback: (done) => done(accessToken)
         })
       };
 
-      return [streetsLayer, satelliteLayer];
+      return [streetsLayer, hybridLayer, satelliteLayer];
     } else {
       return [];
     }
