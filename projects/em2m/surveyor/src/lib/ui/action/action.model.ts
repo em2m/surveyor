@@ -27,7 +27,6 @@ export interface Action {
   enabled: boolean;
   text: string;
   iconClass: string;
-  alwaysIcon: boolean;
   toolTipText: string;
   primary: boolean;
   onSelectionChange(selection: Selection);
