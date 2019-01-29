@@ -38,23 +38,23 @@
 
 
   <span class="hidden-tablet-down" *ngIf="iconOnly">
-    <div class="action-flex-container">
-      <span *ngIf="primaryActions && primaryActions.length > 0">
-        <span *ngFor="let action of primaryActions">
-          <button *ngIf="!miniFab" mat-icon-button class="mat-icon-button" matTooltip="{{action.text}}" aria-label="View Actions" (click)="action.run()" [disabled]="!action.enabled">
+    <div class="center-content">
+      <span class="center-content" *ngIf="primaryActions && primaryActions.length > 0">
+        <span class="center-content" *ngFor="let action of primaryActions">
+          <button *ngIf="!miniFab" mat-icon-button class="mat-icon-button center-content" matTooltip="{{action.text}}" aria-label="View Actions" (click)="action.run()" [disabled]="!action.enabled">
             <i class="{{action.iconClass}}"></i>
           </button>
-          <button *ngIf="miniFab" mat-mini-fab class="mini-fab-icon-size" color="primary" matTooltip="{{action.text}}" aria-label="Action" (click)="action.run()" [disabled]="!action.enabled">
-            <i class="{{action.iconClass}}"></i>
+          <button *ngIf="miniFab" mat-mini-fab class="mini-fab-icon-size center-content" color="primary" matTooltip="{{action.text}}" aria-label="Action" (click)="action.run()" [disabled]="!action.enabled">
+            <i class="{{action.iconClass}} center-content"></i>
           </button>
         </span>
       </span>
 
-      <span *ngIf="secondaryActions && secondaryActions.length > 0">
-          <button *ngIf="!miniFab" mat-icon-button color="primary" aria-label="View Actions" class="mat-icon-button" [matMenuTriggerFor]="actionMenu">
+      <span class="center-content" *ngIf="secondaryActions && secondaryActions.length > 0">
+          <button *ngIf="!miniFab" mat-icon-button color="primary" aria-label="View Actions" class="mat-icon-button center-content" [matMenuTriggerFor]="actionMenu">
             <mat-icon>more_vert</mat-icon>
           </button>
-          <button *ngIf="miniFab" mat-mini-fab class="mini-fab-icon-size more-actions-mini-fab" color="primary" matTooltip="View Actions" aria-label="View Actions" [matMenuTriggerFor]="actionMenu">
+          <button *ngIf="miniFab" mat-mini-fab class="mini-fab-icon-size more-actions-mini-fab center-content" color="primary" matTooltip="View Actions" aria-label="View Actions" [matMenuTriggerFor]="actionMenu">
             <mat-icon>more_vert</mat-icon>
           </button>
       </span>
@@ -66,12 +66,12 @@
     </mat-menu>
   </span>
 
-  <span class="hidden-desktop-up" *ngIf="iconOnly">
-    <span *ngIf="primaryActions?.length || secondaryActions?.length">
-      <button *ngIf="!miniFab" mat-icon-button color="primary" class="mat-icon-button" [matMenuTriggerFor]="actionMenu">
+  <span class="hidden-desktop-up center-content" *ngIf="iconOnly">
+    <span class="center-content" *ngIf="primaryActions?.length || secondaryActions?.length">
+      <button *ngIf="!miniFab" mat-icon-button color="primary" class="mat-icon-button center-content" [matMenuTriggerFor]="actionMenu">
         <mat-icon aria-label="View Actions">more_vert</mat-icon>
       </button>
-      <button *ngIf="miniFab" mat-mini-fab class="mini-fab-icon-size more-actions-mini-fab" color="primary" matTooltip="View Actions" aria-label="View Actions" [matMenuTriggerFor]="actionMenu">
+      <button *ngIf="miniFab" mat-mini-fab class="mini-fab-icon-size more-actions-mini-fab center-content" color="primary" matTooltip="View Actions" aria-label="View Actions" [matMenuTriggerFor]="actionMenu">
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #actionMenu="matMenu" yPosition="below" xPosition="before" [overlapTrigger]="false">
