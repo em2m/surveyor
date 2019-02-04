@@ -43,6 +43,16 @@ export class TimeZonePicker extends Picker {
     this.tzSearchResults = this.timezones;
   }
 
+  ngOnInit() {
+   if (this.params && this.params.value) {
+     let index = -1;
+     this.timezones.forEach((zone, i) => {
+       if (zone.name === this.params.value) index = i;
+     });
+     if (index >= 0) this.selectedTz = this.tzSearchResults[index];
+   }
+  }
+
   buildTimezoneList() {
     let validTimeZones = momentTz.tz.names()
       .filter((timeZone) => {
