@@ -28,6 +28,7 @@ button[mat-button] {
 
   ::ng-deep .mat-button-wrapper {
     padding: 0 !important;
+    display: flex;
   }
 }
 
