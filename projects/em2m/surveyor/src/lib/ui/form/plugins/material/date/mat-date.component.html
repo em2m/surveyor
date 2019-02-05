@@ -1,0 +1,9 @@
+<mat-form-field appearance="outline" floatLabel="always" (click)="datepicker.open()">
+  <mat-label>{{ controlDefinition.label }}</mat-label>
+  <input matInput readonly [min]="controlDefinition.options.min"
+         [max]="controlDefinition.options.max"
+         [matDatepicker]="datepicker"
+         [formControl]="formControl">
+  <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+  <mat-datepicker #datepicker disabled="false"></mat-datepicker>
+</mat-form-field>
