@@ -9,6 +9,7 @@ import {MobileSelectInputComponent} from './plugins/mobile/select-input/select-i
 import {MobileNumberInputComponent} from './plugins/mobile/number-input/number-input.component';
 import {MaterialFormModule} from './plugins/material/material-form.module';
 import {FormServicesPlugin} from './plugins/form-services/form-services-plugin';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 export * from './form.component';
 export * from './form-input-component';
@@ -37,6 +38,7 @@ const components = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    FlexLayoutModule,
     MaterialFormModule.forRoot()
   ],
   exports: [

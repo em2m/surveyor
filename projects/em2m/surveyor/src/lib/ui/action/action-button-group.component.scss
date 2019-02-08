@@ -14,3 +14,32 @@ button[mat-button] {
 .button-wrapper {
   padding-left: 0.25rem;
 }
+
+.mini-fab-icon-size {
+  height: 32px;
+  width: 32px;
+  font-size: 18px;
+  display: flex;
+}
+
+.center-content {
+  display: flex;
+  justify-content: center;
+
+  ::ng-deep .mat-button-wrapper {
+    padding: 0 !important;
+    display: flex;
+  }
+}
+
+.mat-icon-button {
+  font-size: 18px !important;
+  color: #787878;
+}
+
+.mat-icon-button:hover {
+  background: #eee;
+  i {
+    color: #333;
+  }
+}

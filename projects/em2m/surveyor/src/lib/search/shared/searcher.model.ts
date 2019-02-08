@@ -18,7 +18,7 @@ export interface SearchRequestSorts {
 export interface SearchResult {
   headers?: any;
   totalItems?: number;
-  fields?: Array<string>;
+  fields?: Array<SearchRequestFields>;
   aggs?: any;
   items?: Array<any>;
   rows?: Array<Array<any>>;

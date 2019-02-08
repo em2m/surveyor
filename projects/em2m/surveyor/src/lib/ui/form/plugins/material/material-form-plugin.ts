@@ -7,6 +7,7 @@ import {MaterialTextAreaInputComponent} from './textarea/mat-textarea.component'
 import {MaterialPickerInputComponent} from './picker/mat-picker.component';
 import {MaterialPasswordInputComponent} from './password/mat-password.component';
 import {MaterialDollarsComponent} from './dollars/mat-dollars.component';
+import {MaterialDateInputComponent} from './date/mat-date.component';
 
 export let MaterialFormPlugin: Plugin = <Plugin> {
   name: 'Material Forms Plugin',
@@ -45,6 +46,11 @@ export let MaterialFormPlugin: Plugin = <Plugin> {
       {
         value: MaterialDollarsComponent,
         config: {type: 'Dollars'},
+        priority: 50
+      },
+      {
+        value: MaterialDateInputComponent,
+        config: {type: 'Date'},
         priority: 50
       }
     ]

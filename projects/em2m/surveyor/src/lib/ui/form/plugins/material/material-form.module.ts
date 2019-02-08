@@ -2,7 +2,15 @@ import {ModuleWithProviders, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {CommonModule} from '@angular/common';
-import {MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatIconModule, MatSelectModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatDatepickerModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatNativeDateModule,
+  MatSelectModule
+} from '@angular/material';
 import {MaterialFormPlugin} from './material-form-plugin';
 import {MaterialSelectInputComponent} from './select/mat-select.component';
 import {MaterialTextInputComponent} from './text/mat-text.component';
@@ -11,6 +19,7 @@ import {MaterialCheckboxInputComponent} from './checkbox/mat-checkbox.component'
 import {MaterialPickerInputComponent} from './picker/mat-picker.component';
 import {MaterialPasswordInputComponent} from './password/mat-password.component';
 import {MaterialDollarsComponent} from './dollars/mat-dollars.component';
+import {MaterialDateInputComponent} from './date/mat-date.component';
 
 export * from './material-form-plugin';
 export * from './select/mat-select.component';
@@ -19,6 +28,7 @@ export * from './textarea/mat-textarea.component';
 export * from './checkbox/mat-checkbox.component';
 export * from './picker/mat-picker.component';
 export * from './password/mat-password.component';
+export * from './date/mat-date.component';
 
 const components = [
   MaterialSelectInputComponent,
@@ -28,6 +38,7 @@ const components = [
   MaterialPickerInputComponent,
   MaterialPasswordInputComponent,
   MaterialDollarsComponent,
+  MaterialDateInputComponent
 ];
 
 @NgModule({
@@ -40,7 +51,9 @@ const components = [
     MatCheckboxModule,
     MatFormFieldModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [
     CommonModule,

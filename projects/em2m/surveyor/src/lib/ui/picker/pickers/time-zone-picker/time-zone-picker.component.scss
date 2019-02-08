@@ -83,10 +83,11 @@
 .selected-container {
   width: 100%;
   position: relative;
+  margin: 15px;
 
   .local-btn {
     position: absolute;
-    right: 0;
+    right: 15px;
     top: -2px;
     background-color: #283593;
     color: #FFF;
