@@ -4,7 +4,14 @@ import {AbstractControl} from '@angular/forms';
 
 @Component({
   selector: 'surveyor-form',
-  templateUrl: './form.component.html'
+  templateUrl: './form.component.html',
+  styles: [
+    `
+      form :last-child {
+        margin-right: 8px;
+      }
+    `
+  ]
 })
 export class SurveyorFormComponent implements OnInit {
 

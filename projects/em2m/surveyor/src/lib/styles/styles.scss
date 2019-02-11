@@ -339,3 +339,35 @@ surveyor-mat-checkbox-input > .mat-checkbox-layout {
 .mat-input-element {
   color: rgba(0, 0, 0, 0.87) !important;
 }
+
+
+/* Custom Scrollbar Styles */
+.scrollable {
+  overflow: auto;
+}
+.scrollable-x {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.scrollable-y {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+/*
+.scrollable,.scrollable-x,.scrollable-y {
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  scrollbar-width: thin;
+  scrollbar-color: #aaaaaa #f0f0f0;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #aaaaaa;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+  }
+}
+*/

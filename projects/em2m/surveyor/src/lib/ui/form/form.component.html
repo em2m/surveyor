@@ -1,6 +1,6 @@
 <form fxLayout="row wrap" fxLayoutGap="8px">
   <ng-container *ngFor="let controlDef of controlDefinitions">
-    <div *ngIf="!controlDef.hidden" style="padding-bottom: 0.75rem;" fxFlex="100%" [fxFlex.gt-sm]="controlDef.flexWidth">
+    <div *ngIf="!controlDef.hidden" fxFlex="100%" [fxFlex.gt-sm]="controlDef.flexWidth">
       <surveyor-form-input [controlDefinition]="controlDef"
                            [controlInstance]="getFormControl(controlDef)"
                            [asyncValues]="asyncValues"
