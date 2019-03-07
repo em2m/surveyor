@@ -72,7 +72,7 @@ export class StandardFacetComponent {
       query = new ExistsQuery(agg.key, true);
     }
     if (op === 'filters') {
-      query = agg.filters[key];
+      query = bucket.query || agg.filters[key];
     }
     if (op === 'range' || op === 'date_range') {
       let lt = bucket.to;
