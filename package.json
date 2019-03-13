@@ -1,6 +1,6 @@
 {
   "name": "surveyor",
-  "version": "1.15.0-SNAPSHOT",
+  "version": "1.15.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
