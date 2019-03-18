@@ -12,7 +12,6 @@ import {FormServicesPlugin} from './plugins/form-services/form-services-plugin';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
 export * from './form.component';
-export * from './form-input-component';
 export * from './form.model';
 export * from './form.service';
 export * from './form-input-component';
