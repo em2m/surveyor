@@ -1,8 +1,12 @@
 <form style="padding-top: 0.5rem;">
   <div class="facet" *ngFor="let agg of searcher.aggs">
     <div *ngIf="hasBuckets(agg.key)">
-      <div>
+      <div style="display:flex; align-items:flex-start;">
         <span class="facet-nav facet-header">{{agg.label}}</span>
+        <span class="mdl-layout-spacer"></span>
+        <span class="facet-nav facet-header" *ngIf="isRangeAgg(agg)" (click)="loadDatePicker(agg)" matTooltip="Select a custom date range">
+          <i class="fa fa-calendar" style="font-size: 1.1rem; cursor: pointer; color: #555;"></i>
+        </span>
       </div>
       <div class="facet-nav checkboxes col-xs-12">
         <ul class="facet-nav">

@@ -12,6 +12,9 @@ import {TermPickerComponent} from './pickers/term-picker/term-picker.component';
 import {ToggleRecursiveComponent} from './components/toggle-recursive/toggle-recursive.component';
 import {ToggleArchivedComponent} from './components/toggle-archived/toggle-archived.component';
 import {SurveyorRegionModule} from '../ui/region/region.module';
+import {MatDatepickerModule, MatFormFieldModule, MatInputModule, MatTooltipModule} from '@angular/material';
+import {SurveyorModalModule} from '../ui/modal/modal.module';
+import {DateRangePickerComponent} from './pickers/date-range-picker/date-range-picker.component';
 
 export * from './shared/query.model';
 export * from './shared/searcher.model';
@@ -34,7 +37,8 @@ const components: any[] = [
   ToggleArchivedComponent,
   TermPickerComponent,
   QueryPickerComponent,
-  SearcherInputComponent
+  SearcherInputComponent,
+  DateRangePickerComponent
 ];
 
 @NgModule({
@@ -42,7 +46,12 @@ const components: any[] = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    SurveyorRegionModule
+    SurveyorRegionModule,
+    SurveyorModalModule,
+    MatTooltipModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatDatepickerModule
   ],
   exports: [
     ...components,
