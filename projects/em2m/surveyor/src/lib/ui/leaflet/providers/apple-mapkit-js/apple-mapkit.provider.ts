@@ -20,7 +20,7 @@ export class AppleMapkitProvider implements LayerProvider {
       const streetsLayer = <LayerDefinition>{
         label: 'Streets',
         layer: (L as any).mapkitMutant({
-          maptype: 'default',
+          maptype: 'Standard',
           minZoom: 3,
           authorizationCallback: (done) => done(accessToken)
         })
@@ -28,7 +28,7 @@ export class AppleMapkitProvider implements LayerProvider {
       const hybridLayer = <LayerDefinition>{
         label: 'Hybrid',
         layer: (L as any).mapkitMutant({
-          maptype: 'hybrid',
+          maptype: 'Hybrid',
           minZoom: 3,
           authorizationCallback: (done) => done(accessToken)
         })
@@ -36,7 +36,7 @@ export class AppleMapkitProvider implements LayerProvider {
       const satelliteLayer = <LayerDefinition>{
         label: 'Satellite',
         layer: (L as any).mapkitMutant({
-          maptype: 'satellite',
+          maptype: 'Satellite',
           minZoom: 3,
           authorizationCallback: (done) => done(accessToken)
         })
