@@ -37,7 +37,7 @@ export class SearcherInputComponent implements OnInit {
         constraint.query = new LuceneQuery(searchInput, '_all');
       } else {
         const outerQueries = [];
-        let tokenizedSearchInput = searchInput.split(' ');
+        const tokenizedSearchInput = searchInput.split(' ');
         this.searcher.fullTextFields.forEach(field => {
           const innerQueries = [];
           tokenizedSearchInput.forEach(queryString => {
