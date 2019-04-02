@@ -30,7 +30,7 @@ export class MatchAllQuery extends Query {
 }
 
 export class NamedQuery extends Query {
-  constructor(name: string, value: any = null) {
+  constructor(public name: string, public value: any = null) {
     super(OperationType.NAMED);
   }
 }
