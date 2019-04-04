@@ -23,7 +23,6 @@ export class HorizontalTabsComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit() {
     this.ctxSub = this.ctx.onContextChange()
       .subscribe(() => {
-        console.log(this.ctx.getValue('organization:active'));
         this.tabs = this.tabsService.findTabs(this.route, this.routes, this.queryParams);
       });
   }
