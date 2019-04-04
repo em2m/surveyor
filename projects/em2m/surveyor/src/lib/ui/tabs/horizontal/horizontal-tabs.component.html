@@ -1,6 +1,6 @@
 <div mdl class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect flex-vertical">
   <div style="width: 100%;">
-    <div class="mdl-tabs__tab-bar" [ngClass]="{'tabs-shadow': shadow}" style="background-color: white;">
+    <div class="mdl-tabs__tab-bar scrollable-x" [ngClass]="{'tabs-shadow': shadow}" style="background-color: white;">
       <span class="mdl-layout-spacer"></span>
       <a *ngFor="let tab of tabs" class="mdl-tabs__tab" [routerLink]="[tab.path]" [queryParams]="tab.queryParam"
          routerLinkActive="is-active" [routerLinkActiveOptions]="{exact:tab.exact}">
