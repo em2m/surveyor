@@ -1,7 +1,7 @@
 
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Searcher} from '../../shared/searcher.model';
-import {Bucket, ExistsQuery, Query, RangeQuery, TermQuery} from '../../shared/query.model';
+import {Bucket, ExistsQuery, NamedQuery, Query, RangeQuery, TermQuery} from '../../shared/query.model';
 import {PickerOptions} from '../../../ui/picker/picker.model';
 import {PickerService} from '../../../ui/picker/picker.service';
 import * as _moment from 'moment';
@@ -78,10 +78,13 @@ export class StandardFacetComponent {
     if (op === 'filters') {
       query = bucket.query || agg.filters[key];
     }
-    if (op === 'range' || op === 'date_range') {
+    if (op === 'range') {
       const lt = bucket.to;
       const gte = bucket.from;
       query = new RangeQuery(agg.field, lt, null, null, gte, null);
+    }
+    if (op === 'date_range') {
+      query = new NamedQuery(agg.key, bucket.key);
     }
     this.searcher.addConstraint({
       label: `${agg.label || agg.key} : ${bucket.label || bucket.key}`,
