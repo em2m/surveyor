@@ -1,0 +1,16 @@
+
+<form>
+  <mat-form-field appearance="outline" floatLabel="always" (click)="fromDatePicker.open()">
+    <mat-label>Start</mat-label>
+    <input matInput disabled [max]="toDate" [matDatepicker]="fromDatePicker" [value]="fromDate" (dateChange)="fromDateChanged($event)">
+    <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #fromDatePicker disabled="false"></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" floatLabel="always" (click)="toDatePicker.open()">
+    <mat-label>End</mat-label>
+    <input matInput disabled [min]="fromDate" [matDatepicker]="toDatePicker" [value]="toDate" (dateChange)="toDateChanged($event)">
+    <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #toDatePicker disabled="false"></mat-datepicker>
+  </mat-form-field>
+</form>
