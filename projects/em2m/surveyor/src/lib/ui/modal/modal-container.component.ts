@@ -14,6 +14,7 @@ export abstract class ModalContainer implements OnInit {
   submitLabel = "Ok";
   cancelLabel = "Cancel";
   deleteLabel = "Delete";
+  hideTitle = false;
   hideActions = false;
   hideSubmit = false;
   hideCancel = false;
