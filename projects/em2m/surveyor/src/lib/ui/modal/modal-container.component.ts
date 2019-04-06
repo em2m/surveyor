@@ -36,6 +36,7 @@ export abstract class ModalContainer implements OnInit {
     this.cancelLabel = this.options.cancelLabel || "Cancel";
     this.deleteLabel = this.options.deleteLabel || "Delete";
     this.hideActions = this.options.hideActions;
+    this.hideTitle = this.options.hideTitle;
     this.hideSubmit = this.options.hideSubmit;
     this.hideDelete = this.options.hideDelete != null && typeof(this.options.hideDelete) !== 'undefined'
       ? this.options.hideDelete : this.hideDelete;
