@@ -18,31 +18,33 @@ export class AppleMapkitProvider implements LayerProvider {
       const accessToken = this.appConfig.get().map.apple.token;
 
       const streetsLayer = <LayerDefinition>{
-        label: 'Standard',
+        label: 'Streets',
         layer: (L as any).mapkitMutant({
-          maptype: 'default',
+          type: 'standard',
           minZoom: 3,
           authorizationCallback: (done) => done(accessToken)
         })
       };
+      /*
       const hybridLayer = <LayerDefinition>{
         label: 'Hybrid',
         layer: (L as any).mapkitMutant({
-          maptype: 'Hybrid',
+          type: 'hybrid',
           minZoom: 3,
           authorizationCallback: (done) => done(accessToken)
         })
       };
+      */
       const satelliteLayer = <LayerDefinition>{
         label: 'Satellite',
         layer: (L as any).mapkitMutant({
-          maptype: 'Satellite',
+          type: 'hybrid',
           minZoom: 3,
           authorizationCallback: (done) => done(accessToken)
         })
       };
 
-      return [streetsLayer, hybridLayer, satelliteLayer];
+      return [streetsLayer, satelliteLayer];
     } else {
       return [];
     }
