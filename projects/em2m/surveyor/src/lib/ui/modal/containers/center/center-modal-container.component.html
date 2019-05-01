@@ -1,6 +1,6 @@
 <div class="modal-overlay animated fadeIn" [class.fadeOut]="isDismissed" (keyup.esc)="cancel()">
   <div class="mdl-dialog show-modal animated zoomIn" [class.zoomOut]="isDismissed" [style.width]="width+'px'">
-    <h4 class="mdl-dialog__title">{{ title }}</h4>
+    <h4 class="mdl-dialog__title" *ngIf="!hideTitle">{{ title }}</h4>
     <div class="mdl-dialog__content" [ngClass]="{ 'no-padding': noPadding}">
       <div #modalTarget></div>
     </div>
