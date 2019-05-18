@@ -42,7 +42,7 @@
       <span class="center-content" *ngIf="primaryActions && primaryActions.length > 0">
         <span class="center-content" *ngFor="let action of primaryActions">
           <button *ngIf="!miniFab" mat-icon-button class="mat-icon-button center-content" matTooltip="{{action.text}}" aria-label="View Actions" (click)="action.run()" [disabled]="!action.enabled">
-            <i class="{{action.iconClass}}"></i>
+            <i class="{{action.iconClass}} center-content"></i>
           </button>
           <button *ngIf="miniFab" mat-mini-fab class="mini-fab-icon-size center-content" color="primary" matTooltip="{{action.text}}" aria-label="Action" (click)="action.run()" [disabled]="!action.enabled">
             <i class="{{action.iconClass}} center-content"></i>
