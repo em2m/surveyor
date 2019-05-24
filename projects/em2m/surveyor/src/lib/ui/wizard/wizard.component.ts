@@ -18,7 +18,7 @@ export class SurveyorWizardComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.selectStep(0);
+    setTimeout(() => this.selectStep(0));
   }
 
   selectStep(newIndex: number) {
