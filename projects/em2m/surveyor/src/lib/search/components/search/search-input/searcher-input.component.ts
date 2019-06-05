@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {SearchConstraint, Searcher, SearchRequest} from '../../../shared/searcher.model';
 import {PickerService} from '../../../../ui/picker/picker.service';
 import {BoolQuery, LuceneQuery, OperationType, Query} from '../../../shared/query.model';
@@ -10,6 +10,7 @@ import {BoolQuery, LuceneQuery, OperationType, Query} from '../../../shared/quer
 })
 export class SearcherInputComponent implements OnInit {
 
+  @ViewChild('searchInputFocus') searchInputFocus: ElementRef;
   @Input() iconRegion = 'icon-region';
   @Input() searcher: Searcher;
   @Input() placeholder = 'Search ...';
@@ -27,7 +28,7 @@ export class SearcherInputComponent implements OnInit {
     }
   }
 
-  onSubmit(searchInput: string) {
+  onSubmit(searchInput) {
     if (searchInput && searchInput.trim().length > 0) {
       const constraint = <SearchConstraint>{
         label: searchInput
@@ -37,7 +38,7 @@ export class SearcherInputComponent implements OnInit {
         constraint.query = new LuceneQuery(searchInput, '_all');
       } else {
         const outerQueries = [];
-        let tokenizedSearchInput = searchInput.split(' ');
+        const tokenizedSearchInput = searchInput.split(' ');
         this.searcher.fullTextFields.forEach(field => {
           const innerQueries = [];
           tokenizedSearchInput.forEach(queryString => {
@@ -91,5 +92,13 @@ export class SearcherInputComponent implements OnInit {
         }
       });
     }
+  }
+
+  stopEventPropagation(event) {
+    event.stopPropagation();
+  }
+
+  focusSearchInput() {
+    this.searchInputFocus.nativeElement.focus();
   }
 }
