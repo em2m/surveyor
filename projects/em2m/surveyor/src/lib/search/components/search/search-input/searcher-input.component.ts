@@ -28,7 +28,7 @@ export class SearcherInputComponent implements OnInit {
     }
   }
 
-  onSubmit(searchInput) {
+  onSubmit(searchInput: string) {
     if (searchInput && searchInput.trim().length > 0) {
       const constraint = <SearchConstraint>{
         label: searchInput
