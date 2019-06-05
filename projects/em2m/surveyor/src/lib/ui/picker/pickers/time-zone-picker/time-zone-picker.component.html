@@ -4,7 +4,7 @@
   <div class="local-btn" (click)="selectLocal()">Use Local</div>
 </div>
 <div class="mdl-textfield mdl-js-textfield">
-  <input class="mdl-textfield__input searcher" (keyup)="search()"
+  <input #timeZoneFocus class="mdl-textfield__input searcher" (keyup)="search()"
          [(ngModel)]="searchText" placeholder="Search for a timezone...">
   <div class="clear-icon" *ngIf="clearVisible">
     <i class="fa fa-times-circle" (click)="clearSearch()"></i>
