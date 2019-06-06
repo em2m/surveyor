@@ -10,6 +10,7 @@ export class SurveyorWizardStepComponent {
   animateClass: string;
   @Input() active = false;
   @Input() loaded = false;
+  @Input() skipped = false;
   @Input() title: string;
   @Input() optional: boolean;
   @Input() complete: boolean;

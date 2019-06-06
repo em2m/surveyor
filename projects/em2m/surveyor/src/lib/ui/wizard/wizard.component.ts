@@ -21,9 +21,12 @@ export class SurveyorWizardComponent implements AfterViewInit {
     setTimeout(() => this.selectStep(0));
   }
 
-  selectStep(newIndex: number) {
+  selectStep(newIndex: number, ignoreSkipped = false) {
     if (this.activeIndex !== newIndex) {
       const steps = this.steps.toArray();
+      if (ignoreSkipped && steps[newIndex].skipped) {
+        return;
+      }
 
       // Make sure all previous steps have been completed before skipping ahead
       for (let i = 0; i < newIndex; i++) {
@@ -42,14 +45,18 @@ export class SurveyorWizardComponent implements AfterViewInit {
         }
       }
 
-      // Slide in the new step
-      const newStep = steps[newIndex];
-      if (this.activeIndex > newIndex) {
+      // Slide in the new step, skipping any steps with the 'skipped' flag
+      let nextIndex = newIndex;
+      while (steps[nextIndex].skipped) {
+        nextIndex += 1
+      }
+      const newStep = steps[nextIndex];
+      if (this.activeIndex > nextIndex) {
         newStep.showLeft();
       } else {
         newStep.showRight();
       }
-      this.activeIndex = newIndex;
+      this.activeIndex = nextIndex;
       newStep.loaded = true;
 
       this.select.emit(newStep);
@@ -71,7 +78,20 @@ export class SurveyorWizardComponent implements AfterViewInit {
       }
     }
 
-    return step.optional || step.complete || (this.skipInvalid && honorSkip && stepIndex !== this.steps.length - 1);
+    return step.optional || step.skipped || step.complete || (this.skipInvalid && honorSkip && stepIndex !== this.steps.length - 1);
+  }
+
+  isSkipped(stepIndex: number): boolean {
+    const step = this.steps.toArray()[stepIndex];
+    if (!step) {
+      return false;
+    }
+
+    return step.skipped;
+  }
+
+  isActive(stepIndex: number): boolean {
+    return stepIndex === this.activeIndex;
   }
 
   onComplete() {
