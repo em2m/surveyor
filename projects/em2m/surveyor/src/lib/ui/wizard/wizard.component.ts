@@ -11,6 +11,7 @@ export class SurveyorWizardComponent implements AfterViewInit {
   @Input() skipInvalid: boolean;
   @Output() complete: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() select: EventEmitter<SurveyorWizardStepComponent> = new EventEmitter<SurveyorWizardStepComponent>();
+  @Output() cancel: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ContentChildren(SurveyorWizardStepComponent) steps: QueryList<SurveyorWizardStepComponent>;
   activeIndex: number;
 
@@ -96,5 +97,9 @@ export class SurveyorWizardComponent implements AfterViewInit {
 
   onComplete() {
     this.complete.emit(true);
+  }
+
+  onCancel() {
+    this.cancel.emit(true);
   }
 }
