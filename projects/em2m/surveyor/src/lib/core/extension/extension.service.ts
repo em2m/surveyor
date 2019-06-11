@@ -61,6 +61,10 @@ export class ExtensionService {
     extensionsForTarget.push(extension);
   }
 
+  pluginIsLoaded(pluginName: string): boolean {
+    return !!this.pluginRegistry[pluginName]
+  }
+
   getExtensionById(type: string, id: string): Extension {
     for (let extension of this.extensionsByType[type] || []) {
       let config = extension.config || {};
