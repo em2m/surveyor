@@ -1,39 +1,40 @@
-import {Component} from "@angular/core";
-import {Picker} from "../../picker.component";
-import * as momentTz from "moment-timezone";
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Picker} from '../../picker.component';
+import * as momentTz from 'moment-timezone';
 
 @Component({
   selector: 'surveyor-time-zone-picker',
   templateUrl: './time-zone-picker.component.html',
   styleUrls: ['./time-zone-picker.component.scss']
 })
-export class TimeZonePicker extends Picker {
+export class TimeZonePicker extends Picker implements OnInit, AfterViewInit {
 
-  public timezones: Array<{name: string; displayName: string, offset: string, zone: string, zoneAbbr: string}> = [];
-  public tzSearchResults: Array<{name: string; displayName: string, offset: string, zone: string, zoneAbbr: string}> = [];
+  @ViewChild('timeZoneFocus') timeZoneFocus: ElementRef;
+  public timezones: Array<{ name: string; displayName: string, offset: string, zone: string, zoneAbbr: string }> = [];
+  public tzSearchResults: Array<{ name: string; displayName: string, offset: string, zone: string, zoneAbbr: string }> = [];
   public userTimezone: any;
   public searchText = '';
   public selectedTz: any = null;
   public clearVisible = false;
   private abbrsMap = {
-    EST : 'Eastern Standard Time',
-    EDT : 'Eastern Daylight Time',
-    CST : 'Central Standard Time',
-    CDT : 'Central Daylight Time',
-    MST : 'Mountain Standard Time',
-    MDT : 'Mountain Daylight Time',
-    PST : 'Pacific Standard Time',
-    PDT : 'Pacific Daylight Time',
+    EST: 'Eastern Standard Time',
+    EDT: 'Eastern Daylight Time',
+    CST: 'Central Standard Time',
+    CDT: 'Central Daylight Time',
+    MST: 'Mountain Standard Time',
+    MDT: 'Mountain Daylight Time',
+    PST: 'Pacific Standard Time',
+    PDT: 'Pacific Daylight Time',
     AKDT: 'Alaska Daylight Time',
     AKST: 'Alaska Standard Time',
-    ADT : 'Atlantic Daylight Time',
-    AST : 'Atlantic Standard Time',
-    GMT : 'Greenwich Mean Time',
-    NDT : 'Newfoundland Daylight Time',
-    NST : 'Newfoundland Standard Time',
-    HDT : 'Hawaii Daylight Time',
-    HST : 'Hawaii Standard Time',
-    SST : 'Samoa Standard Time',
+    ADT: 'Atlantic Daylight Time',
+    AST: 'Atlantic Standard Time',
+    GMT: 'Greenwich Mean Time',
+    NDT: 'Newfoundland Daylight Time',
+    NST: 'Newfoundland Standard Time',
+    HDT: 'Hawaii Daylight Time',
+    HST: 'Hawaii Standard Time',
+    SST: 'Samoa Standard Time',
   };
 
   constructor() {
@@ -44,22 +45,30 @@ export class TimeZonePicker extends Picker {
   }
 
   ngOnInit() {
-   if (this.params && this.params.value) {
-     let index = -1;
-     this.timezones.forEach((zone, i) => {
-       if (zone.name === this.params.value) index = i;
-     });
-     if (index >= 0) this.selectedTz = this.tzSearchResults[index];
-   }
+    if (this.params && this.params.value) {
+      let index = -1;
+      this.timezones.forEach((zone, i) => {
+        if (zone.name === this.params.value) {
+          index = i;
+        }
+      });
+      if (index >= 0) {
+        this.selectedTz = this.tzSearchResults[index];
+      }
+    }
+  }
+
+  ngAfterViewInit() {
+    this.timeZoneFocus.nativeElement.focus();
   }
 
   buildTimezoneList() {
-    let validTimeZones = momentTz.tz.names()
+    const validTimeZones = momentTz.tz.names()
       .filter((timeZone) => {
         return timeZone.indexOf('America/') > -1 || timeZone.indexOf('US/') > -1;
       });
     validTimeZones.forEach(item => {
-      let tz = this.parseTimezone(item);
+      const tz = this.parseTimezone(item);
       this.timezones.push(tz);
     });
     this.timezoneListSort();
@@ -67,22 +76,32 @@ export class TimeZonePicker extends Picker {
 
   timezoneListSort() {
     this.timezones.sort((a, b) => {
-      if (a.offset > b.offset) return 1;
-      if (a.offset < b.offset) return -1;
+      if (a.offset > b.offset) {
+        return 1;
+      }
+      if (a.offset < b.offset) {
+        return -1;
+      }
       if (a.offset === b.offset) {
-        if (a.name > b.name) return 1;
-        if (a.name < b.name) return -1;
+        if (a.name > b.name) {
+          return 1;
+        }
+        if (a.name < b.name) {
+          return -1;
+        }
       }
       return 0;
     });
   }
 
   parseTimezone(zone: string) {
-    let split = zone.split('/');
-    let displayName = split[split.length - 1].replace('_', ' ');
+    const split = zone.split('/');
+    const displayName = split[split.length - 1].replace('_', ' ');
 
     let zoneAbbr = momentTz.tz(zone).format('z');
-    if (zoneAbbr[0] === '-' || zoneAbbr[0] === '+') zoneAbbr = null;
+    if (zoneAbbr[0] === '-' || zoneAbbr[0] === '+') {
+      zoneAbbr = null;
+    }
 
     return {
       name: zone,
@@ -106,7 +125,7 @@ export class TimeZonePicker extends Picker {
   }
 
   getUserTimezone() {
-    let userTz = momentTz.tz.guess();
+    const userTz = momentTz.tz.guess();
     this.userTimezone = this.parseTimezone(userTz);
   }
 
@@ -121,13 +140,14 @@ export class TimeZonePicker extends Picker {
 
   search() {
     this.clearVisible = !(this.searchText === '');
-    let regex = this.searchText.toUpperCase().replace(' ', '');
+    const regex = this.searchText.toUpperCase().replace(' ', '');
     this.tzSearchResults = this.timezones.filter(tz => {
-      if (tz.zoneAbbr)
+      if (tz.zoneAbbr) {
         return !!(tz.name.toUpperCase().replace('_', '').match(regex)
           || tz.zoneAbbr.toUpperCase().match(regex) || tz.zone.toUpperCase().match(regex));
-      else
+      } else {
         return !!(tz.name.toUpperCase().replace('_', '').match(regex));
+      }
     });
   }
 
