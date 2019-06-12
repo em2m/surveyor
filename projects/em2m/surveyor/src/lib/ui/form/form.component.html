@@ -4,7 +4,8 @@
       <surveyor-form-input [controlDefinition]="controlDef"
                            [controlInstance]="getFormControl(controlDef)"
                            [asyncValues]="asyncValues"
-                           [asyncOptions]="asyncOptions">
+                           [asyncOptions]="asyncOptions"
+                           (onValueChange)="valueChanged()">
       </surveyor-form-input>
     </div>
   </ng-container>

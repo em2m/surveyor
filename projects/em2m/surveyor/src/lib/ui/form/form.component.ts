@@ -14,19 +14,10 @@ import {AbstractControl} from '@angular/forms';
   ]
 })
 export class SurveyorFormComponent implements OnInit {
-
-  @Input() formDefinition: FormDefinition;
-  @Input() asyncValues: any;
-  @Input() asyncOptions: any;
-  @Input() values: any;
-  @Input() readonly = false;
-  controlDefinitions: ControlDefinition[];
-
-  @Output() onCreate = new EventEmitter();
-
-  constructor(private changeDetector: ChangeDetectorRef) {}
-
-  ngOnInit() {
+  private _formDefinition: FormDefinition;
+  
+  @Input() set formDefinition(changes: any) {
+    this._formDefinition = changes;
     if (this.formDefinition) {
       this.formDefinition.buildForm();
       this.onCreate.emit(true);
@@ -34,8 +25,28 @@ export class SurveyorFormComponent implements OnInit {
       this.changeDetector.detectChanges();
     }
   }
+  get formDefinition() {
+    return this._formDefinition;
+  }
+  @Input() asyncValues: any;
+  @Input() asyncOptions: any;
+  @Input() values: any;
+  @Input() readonly = false;
+  controlDefinitions: ControlDefinition[];
+
+  @Output() onCreate = new EventEmitter();
+  @Output() onValueChange = new EventEmitter();
+
+  constructor(private changeDetector: ChangeDetectorRef) {}
+
+  ngOnInit() {
+  }
 
   getFormControl(def: ControlDefinition): AbstractControl {
     return this.formDefinition.form.controls[def.key];
+  }
+
+  valueChanged() {
+    this.onValueChange.emit(true);
   }
 }
