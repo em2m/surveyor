@@ -17,6 +17,14 @@
   align-items: center;
 }
 
+:host ::ng-deep {
+  .popover-overlay > ng-component {
+    width: 100%;
+  }
+}
+
+
+
 
 .modal-close {
   cursor: pointer;
