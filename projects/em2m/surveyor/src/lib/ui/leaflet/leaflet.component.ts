@@ -16,7 +16,9 @@ import 'rxjs/add/operator/concatMap';
 
 @Component({
   selector: 'surveyor-leaflet',
-  template: '<div [id]="mapId" style="height: 100%; width: 100%;"></div>',
+  template:
+      `<div [id]="mapId" style="height: 100%; width: 100%;">
+      </div>`,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SurveyorLeafletComponent implements AfterViewInit, OnDestroy {

@@ -1,0 +1,45 @@
+:host {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.popover-overlay {
+  width: inherit;
+  height: inherit;
+  min-height: 100%;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+:host ::ng-deep {
+  .popover-overlay > ng-component {
+    width: 100%;
+  }
+}
+
+
+
+
+.modal-close {
+  cursor: pointer;
+}
+
+.mdl-dialog {
+  background-color:white;
+  min-width: 350px;
+  max-width: 100%;
+}
+
+.mdl-dialog__title {
+  font-size: 1.75rem;
+}
+
+.animated {
+  animation-duration: 500ms;
+}
