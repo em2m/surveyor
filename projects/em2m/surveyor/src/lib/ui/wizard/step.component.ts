@@ -15,12 +15,12 @@ export class SurveyorWizardStepComponent {
   @Input() optional: boolean;
   _complete: boolean;
   @Input() set complete(changes: any) {
-    if (typeof changes == "boolean") {
-      this._complete = changes;
-    } else {
+    if (typeof changes.subscribe == "function") {
       changes.subscribe((complete) => {
         this._complete = complete;
       })
+    } else {
+      this._complete = !!changes;
     }
   }
   get complete() {
