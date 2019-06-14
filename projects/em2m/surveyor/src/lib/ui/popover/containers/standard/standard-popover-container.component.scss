@@ -20,11 +20,9 @@
 :host ::ng-deep {
   .popover-overlay > ng-component {
     width: 100%;
+    overflow-x: hidden;
   }
 }
-
-
-
 
 .modal-close {
   cursor: pointer;

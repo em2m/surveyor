@@ -22,6 +22,10 @@ export class ModalService {
     this.rootViewContainerRef = rootViewContainerRef;
   }
 
+  getRootViewContainerRef(): ViewContainerRef {
+    return this.rootViewContainerRef;
+  }
+
   open(modal: Type<Modal>, options?: ModalOptions): ModalResult {
     if (!options) {
       options = {};

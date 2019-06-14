@@ -18,14 +18,18 @@ export abstract class PopoverContainer implements OnInit {
   isDismissed = false;
   position = 'top';
 
+  maxWidth = 350;
   @HostBinding('style.width') width: string;
-  @HostBinding('style.height') height: string;
+  //@HostBinding('style.height') height: string;
+  @HostBinding('style.max-height') height: string;
   @HostBinding('style.top') top: string;
   @HostBinding('style.bottom') bottom: string;
   @HostBinding('style.right') right: string;
   @HostBinding('style.left') left: string;
+  @HostBinding('style.transform') transform: string;
 
-  constructor(private resolver: ComponentFactoryResolver, private changeDetectorRef: ChangeDetectorRef) {
+  protected constructor(private resolver: ComponentFactoryResolver,
+                        private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -37,8 +41,6 @@ export abstract class PopoverContainer implements OnInit {
     this.width = this.options.width + 'px';
     this.height = this.options.height + 'px';
     this.position = this.options.position;
-
-    this.calculatePositioning();
 
     const factory = this.resolver.resolveComponentFactory(this.popover);
     const popverRef = this.popoverTarget.createComponent(factory);
@@ -54,28 +56,164 @@ export abstract class PopoverContainer implements OnInit {
     popverRef.instance.onDelete.subscribe((value: any) => {
       this.onDelete.emit(value);
     });
-    this.popoverRef = popverRef;
+
+    //console.log('Popover Ref', popverRef);
+
+    this.cdr.detectChanges();
+
+    this.updatePosition();
   }
 
-  calculatePositioning() {
-    const boundingRect = this.targetElement.getBoundingClientRect() as DOMRect;
-    let pos = this.getPos(this.position, boundingRect);
+  updatePosition() {
+    const bounds = this.targetElement.getBoundingClientRect() as DOMRect;
+    bounds.width = 300;
+    bounds.height = 400;
 
-    if (!this.withinViewport(pos)) {
-      pos = this.getPos('left', boundingRect);
-    }
-    if (!this.withinViewport(pos)) {
-      pos = this.getPos('top', boundingRect);
-    }
-    if (!this.withinViewport(pos)) {
-      pos = this.getPos('right', boundingRect);
-    }
-    if (!this.withinViewport(pos)) {
-      pos = this.getPos('bottom', boundingRect);
+    let position = this.resolvePosition(this.position, bounds);
+    let top: number;
+    let bottom: number;
+    let left: number;
+    let right: number;
+    let height: number;
+    let width: number;
+    let transform: string;
+
+    switch (position) {
+      case 'left': {
+        top = bounds.y;
+        transform = 'translateY(-50%)';
+        width = bounds.width;
+
+        if (width > bounds.x - 10) {
+          width = bounds.x - 10;
+          left = 10;
+        } else {
+          left = bounds.x - width - 10;
+        }
+
+        if ((bounds.height / 2) + bounds.y + 10 > window.innerHeight) {
+          top = window.innerHeight - bounds.height + 10;
+          transform = null;
+        }
+        if (bounds.y - (bounds.height / 2) - 10 < 0) {
+          top = 10;
+          transform = null;
+        }
+
+        break;
+      }
+      case 'right': {
+        top = bounds.y;
+        transform = 'translateY(-50%)';
+        width = bounds.width;
+
+        if (width > window.innerWidth - bounds.x - 10) {
+          width = window.innerWidth - bounds.x - 10;
+          right = 10;
+        } else {
+          left = bounds.x + 40;
+        }
+
+        if ((bounds.height / 2) + bounds.y + 10 > window.innerHeight) {
+          top = window.innerHeight - bounds.height + 10;
+          transform = null;
+        }
+        if (bounds.y - (bounds.height / 2) - 10 < 0) {
+          top = 10;
+          transform = null;
+        }
+
+        break;
+      }
+      case 'bottom': {
+        break;
+      }
+      case 'top': {
+        break;
+      }
+      default: {
+      }
     }
 
-    this.left = pos[0] + 'px';
-    this.top = pos[1] + 'px';
+    if (left) {
+      this.left = left + 'px';
+    }
+    if (right) {
+      this.right = right + 'px';
+    }
+    if (top) {
+      this.top = top + 'px';
+    }
+    if (bottom) {
+      this.bottom = bottom + 'px';
+    }
+    if (width) {
+      this.width = width + 'px';
+    }
+    if (height) {
+      //this.height = height + 'px';
+    }
+    if (transform) {
+      this.transform = transform;
+    }
+  }
+
+  resolvePosition(preferredPosition: string, bounds: DOMRect): string {
+    let position = preferredPosition;
+
+    if (preferredPosition === 'left') {
+      // Check if the preferred side can fit the content fully
+      if (bounds.x - bounds.width - 10 < 0) {
+        // Check if the right side can fit the content fully
+        if (bounds.x + bounds.width + 10 < window.innerWidth) {
+          position = 'right';
+        } else {
+          // Check which side has more space if both can't fit
+          if (window.innerWidth - bounds.x > bounds.x) {
+            position = 'right';
+          }
+        }
+      }
+    } else if (preferredPosition === 'right') {
+      if (bounds.x + bounds.width + 10 > window.innerWidth) {
+        if (bounds.x - bounds.width - 10 > 0) {
+          position = 'left';
+        } else {
+          // Check which side has more space if both can't fit
+          if (window.innerWidth - bounds.x < bounds.x) {
+            position = 'left';
+          }
+        }
+      }
+    } else if (preferredPosition === 'top') {
+      // Check if the preferred side can fit the content fully
+      if (bounds.y - bounds.height - 10 < 0) {
+        // Check if the right side can fit the content fully
+        if (bounds.y + bounds.height + 10 < window.innerHeight) {
+          position = 'bottom';
+        } else {
+          // Check which side has more space if both can't fit
+          if (window.innerHeight - bounds.y > bounds.y) {
+            position = 'bottom';
+          }
+        }
+      }
+    } else if (preferredPosition === 'bottom') {
+      // Check if the preferred side can fit the content fully
+      if (bounds.y + bounds.height + 10 > window.innerHeight) {
+        // Check if the right side can fit the content fully
+        if (bounds.y - bounds.height - 10 > 0) {
+          position = 'top';
+        } else {
+          // Check which side has more space if both can't fit
+          if (window.innerHeight - bounds.y < bounds.y) {
+            position = 'top';
+          }
+        }
+      }
+    }
+
+    return position;
   }
 
   withinViewport(pos) {
@@ -93,32 +231,6 @@ export abstract class PopoverContainer implements OnInit {
       isWithin = false;
     }
     return isWithin;
-  }
-
-  getPos(position: string, boundingRect: DOMRect) {
-    let pos = []
-    switch (position) {
-      case 'left': {
-        pos = [boundingRect.x - this.options.width - 10, boundingRect.y - (this.options.height / 2) + (boundingRect.height / 2)];
-        break;
-      }
-      case 'right': {
-        pos = [boundingRect.x + boundingRect.width + 10, boundingRect.y - (this.options.height / 2) + (boundingRect.height / 2)];
-        break;
-      }
-      case 'bottom': {
-        pos = [boundingRect.x - (this.options.width / 2) + (boundingRect.width / 2), boundingRect.y + boundingRect.height + 10];
-        break;
-      }
-      case 'top': {
-        pos = [boundingRect.x - (this.options.width / 2) + (boundingRect.width / 2), boundingRect.y - this.options.height - 10];
-        break;
-      }
-      default: {
-        pos = [boundingRect.x - this.options.width - 10, boundingRect.y - (this.options.height / 2) + (boundingRect.height / 2)];
-      }
-    }
-    return pos;
   }
 
   canSubmit(): boolean {
