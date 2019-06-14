@@ -25,6 +25,7 @@ export class MaterialPickerInputComponent extends SurveyorFormInputComponent {
       }
       if (options.valueResolver) {
         this.formControl.setValue(options.valueResolver(val));
+        this.formControl.updateValueAndValidity();
       }
     }
   }

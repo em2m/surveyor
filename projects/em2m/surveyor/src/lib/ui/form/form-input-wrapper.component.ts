@@ -1,5 +1,6 @@
 import {
-  Component, ComponentFactoryResolver, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef
+  Component, ComponentFactoryResolver, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef,
+  EventEmitter, Output
 } from '@angular/core';
 import {ControlDefinition} from './form.model';
 import {FormControl} from '@angular/forms';
@@ -17,6 +18,7 @@ export class SurveyorFormInputWrapperComponent implements OnInit, OnDestroy {
   @Input() asyncOptions: any;
   @Input() value: any;
   @Input() readonly = false;
+  @Output() onValueChange = new EventEmitter();
 
   currentComponent: any;
   private asyncValSubscription: any;
@@ -30,7 +32,9 @@ export class SurveyorFormInputWrapperComponent implements OnInit, OnDestroy {
     component.instance.controlDefinition = this.controlDefinition;
     component.instance.formControl = this.controlInstance;
     component.instance.readonly = this.readonly;
-
+    this.controlInstance.valueChanges.subscribe(() => {
+      this.onValueChange.emit(true);
+    })
     this.inputTarget.insert(component.hostView);
 
     if (this.currentComponent) {

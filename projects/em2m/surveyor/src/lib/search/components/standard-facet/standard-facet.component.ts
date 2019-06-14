@@ -1,10 +1,11 @@
 
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Searcher} from '../../shared/searcher.model';
 import {Bucket, ExistsQuery, NamedQuery, Query, RangeQuery, TermQuery} from '../../shared/query.model';
 import {PickerOptions} from '../../../ui/picker/picker.model';
 import {PickerService} from '../../../ui/picker/picker.service';
 import * as _moment from 'moment';
+import {Subscription} from 'rxjs';
 const moment = _moment;
 
 @Component({
@@ -12,27 +13,34 @@ const moment = _moment;
   templateUrl: './standard-facet.component.html',
   styleUrls: ['./standard-facet.component.scss']
 })
-export class StandardFacetComponent {
+export class StandardFacetComponent implements OnInit, OnDestroy {
 
   requestAggs: { [key: string]: any} = {};
   resultOpAggs: { [key: string]: string} = {};
   DAY_IN_MILLIS = 1000 * 60 * 60 * 24;
+  moreSubscription: Subscription;
 
   constructor(public searcher: Searcher,
-              private pickerService: PickerService) {}
+              private pickerService: PickerService) {
+  }
 
-  showMoreAggs(agg) {
-    this.pickerService.pick('term-picker', <PickerOptions> {
-      title: 'Select a value',
-      params: {
-        agg: agg,
-        buckets: this.searcher.searchResult.aggs[agg.key].buckets
-      }
-    }).subscribe((item: any) => {
+  ngOnInit(): void {
+    this.moreSubscription = this.searcher.whenMoreResultPublished.subscribe(item => {
       if (item && item.agg) {
         this.addConstraint(item.agg, item.bucket);
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.moreSubscription) {
+      this.searcher.moreResult = null;
+      this.moreSubscription.unsubscribe();
+    }
+  }
+
+  showMoreAggs(agg) {
+    this.searcher.moreRequest = agg;
   }
 
   hasBuckets(key: string): boolean {

@@ -10,9 +10,22 @@ export class SurveyorWizardStepComponent {
   animateClass: string;
   @Input() active = false;
   @Input() loaded = false;
+  @Input() skipped = false;
   @Input() title: string;
   @Input() optional: boolean;
-  @Input() complete: boolean;
+  _complete: boolean;
+  @Input() set complete(changes: any) {
+    if (typeof changes.subscribe == "function") {
+      changes.subscribe((complete) => {
+        this._complete = complete;
+      })
+    } else {
+      this._complete = !!changes;
+    }
+  }
+  get complete() {
+    return this._complete;
+  }
 
   constructor() {
   }

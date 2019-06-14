@@ -1,16 +1,20 @@
 <div class="wizard-wrapper flex-vertical" *ngIf="steps && steps?.length > 0">
   <div class="step-selector">
-    <div class="step-item" *ngFor="let step of steps; let $index = index;" (click)="selectStep($index)">
+    <div class="step-item" *ngFor="let step of steps; let $index = index;" (click)="selectStep($index, true)">
       <div style="flex: 1">
         <div class="step-item-icon">
           <div *ngIf="$index !== 0" class="step-item-connector connector-left"
                [ngClass]="{'connector-active': $index <= activeIndex }"></div>
           <div *ngIf="$index !== steps?.length - 1" class="step-item-connector connector-right"
                [ngClass]="{'connector-active': $index < activeIndex }"></div>
-          <i *ngIf="activeIndex === $index" class="far fa-circle step-item-icon-active"></i>
-          <i *ngIf="activeIndex < $index" class="fas fa-circle"></i>
-          <i *ngIf="activeIndex > $index" class="fas fa-check-circle step-item-icon-active"
-             [ngClass]="isComplete($index) ? 'fa-check-circle' : 'fa-exclamation-circle'"></i>
+          <i [ngClass]="{
+          'far': isActive($index), 
+          'fas': !isActive($index) && !isSkipped($index), 
+          'step-item-icon-active': isActive($index) || (isComplete($index) && activeIndex > $index), 
+          'fa-circle': activeIndex <= $index && !isSkipped($index),
+          'fa fa-ban': isSkipped($index),
+          'fa-check-circle': isComplete($index) && !isSkipped($index) && activeIndex >= $index
+        }"></i>
         </div>
         <div class="step-item-title" [ngClass]="{'active-step': activeIndex === $index}">{{ step.title }}</div>
       </div>
@@ -20,6 +24,8 @@
     <ng-content></ng-content>
   </div>
   <div class="step-controls">
+    <button mat-flat-button style="flex: 1;" *ngIf="cancel" (click)="onCancel()">CANCEL</button>
+    <div *ngIf="cancel" style="flex: 0.5;"></div>
     <button mat-flat-button color="primary" style="flex: 1;" [disabled]="!isComplete(activeIndex, true)"
             *ngIf="activeIndex !== steps?.length - 1" (click)="selectStep(activeIndex + 1)">NEXT</button>
     <button mat-flat-button color="primary" style="flex: 1;" [disabled]="!isComplete(activeIndex)"

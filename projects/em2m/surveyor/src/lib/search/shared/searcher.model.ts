@@ -65,7 +65,7 @@ export interface SearcherSettings {
 export class Searcher {
   public aggs: Array<Agg>;
   public sortModel: SortModel;
-  public aggsMapper: {[key: string]: any};
+  public aggsMapper: { [key: string]: any };
   public fields: Array<Field> = [];
   public constraints: Array<SearchConstraint> = [];
   public sorts: Array<Sort> = [];
@@ -80,12 +80,20 @@ export class Searcher {
   private _currentPage = 1;
   private _searchRequest: SearchRequest = {};
   private _searchResult: SearchResult = {};
+  private _moreRequest: Agg;
+  private _moreResult: any = {};
 
   private requestSubject: Subject<SearchRequest> = new BehaviorSubject(this._searchRequest);
   public whenRequestPublished: Observable<SearchRequest> = this.requestSubject.asObservable();
 
   private resultSubject: Subject<SearchResult> = new BehaviorSubject(this._searchResult);
   public whenResultPublished: Observable<SearchResult> = this.resultSubject.asObservable();
+
+  private moreRequestSubject: Subject<Agg> = new BehaviorSubject(this._moreRequest);
+  public whenMoreRequestPublished: Observable<Agg> = this.moreRequestSubject.asObservable();
+
+  private moreResultSubject: Subject<any> = new BehaviorSubject(this._moreResult);
+  public whenMoreResultPublished: Observable<any> = this.moreResultSubject.asObservable();
 
   constructor(settings: SearcherSettings) {
     const searchRequest = <SearchRequest>{};
@@ -105,14 +113,13 @@ export class Searcher {
   get searchRequest(): SearchRequest {
     // Build the fields array
 
-    let MAX_AGG_SIZE = 2000;
     this._searchRequest.fields = [];
     this.fields.forEach(field => {
       const request: any = {
-        name : field.name,
-        label : field.label,
-        expr : field.expr,
-        settings : field.settings
+        name: field.name,
+        label: field.label,
+        expr: field.expr,
+        settings: field.settings
       };
       this._searchRequest.fields.push(request);
     });
@@ -137,9 +144,11 @@ export class Searcher {
     this._searchRequest.sorts = this.sorts;
     this._searchRequest.limit = this.pageSize;
 
-    this._searchRequest.aggs.forEach(agg => { if (agg.size) {
-      agg.size = MAX_AGG_SIZE;
-    } });
+    this._searchRequest.aggs.forEach(agg => {
+      if (agg.size) {
+        agg.size = agg.size + 1;
+      }
+    });
 
     return this._searchRequest;
   }
@@ -157,15 +166,33 @@ export class Searcher {
   set searchResult(searchResult: SearchResult) {
     this._searchResult = searchResult;
     this.pageStart = (this.currentPage - 1) * this.pageSize + 1;
-    this.pageEnd = Math.min(this.pageStart + this.pageSize - 1, this.searchResult.totalItems );
+    this.pageEnd = Math.min(this.pageStart + this.pageSize - 1, this.searchResult.totalItems);
     this.broadcastResult();
+  }
+
+  get moreRequest(): Agg {
+    return this._moreRequest;
+  }
+
+  set moreRequest(agg: Agg) {
+    this._moreRequest = agg;
+    this.broadcasetMoreRequest();
+  }
+
+  get moreResult(): any {
+    return this._moreResult;
+  }
+
+  set moreResult(result: any) {
+    this._moreResult = result;
+    this.broadcastMoreResult();
   }
 
   get pageSize(): number {
     return this._pageSize;
   }
 
-  set pageSize(pageSize: number)  {
+  set pageSize(pageSize: number) {
     this._pageSize = pageSize;
     this._searchRequest.limit = pageSize;
   }
@@ -174,7 +201,7 @@ export class Searcher {
     return this._currentPage;
   }
 
-  set currentPage(currentPage: number)  {
+  set currentPage(currentPage: number) {
     this._currentPage = currentPage;
     this._searchRequest.offset = (this.currentPage - 1) * this.pageSize;
   }
@@ -210,6 +237,14 @@ export class Searcher {
 
   public broadcastResult() {
     this.resultSubject.next(this._searchResult);
+  }
+
+  public broadcastMoreResult() {
+    this.moreResultSubject.next(this._moreResult);
+  }
+
+  public broadcasetMoreRequest() {
+    this.moreRequestSubject.next(this._moreRequest);
   }
 }
 

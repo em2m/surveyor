@@ -1,4 +1,4 @@
-import {Input, Type, ComponentFactoryResolver, ViewChild, ViewContainerRef, Output, EventEmitter, OnInit} from "@angular/core";
+import {Input, Type, ComponentFactoryResolver, ViewChild, ViewContainerRef, Output, EventEmitter, OnInit, HostListener} from "@angular/core";
 import {Modal} from "./modal.component";
 import {ModalOptions} from "./modal.model";
 
@@ -89,5 +89,12 @@ export abstract class ModalContainer implements OnInit {
 
   dismiss() {
     this.isDismissed = true;
+  }
+
+  @HostListener('document:keyup', ['$event'])
+  onKeyUp(ev:KeyboardEvent) {
+    if (ev.keyCode == 27) {
+      this.cancel();
+    }
   }
 }
