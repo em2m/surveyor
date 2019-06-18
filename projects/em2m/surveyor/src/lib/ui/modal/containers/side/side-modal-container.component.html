@@ -1,4 +1,4 @@
-<div class="modal-overlay animated fadeIn" [class.fadeOut]="isDismissed" (keyup.esc)="cancel()">
+<div class="modal-overlay animated fadeIn" [class.fadeOut]="isDismissed" (keyup.esc)="cancel()" (click)="$event.stopPropagation()">
   <div class="mdl-dialog show-modal animated slideInRight" [class.slideOutRight]="isDismissed">
     <h4 class="mdl-dialog__title">{{ title }}</h4>
     <div class="mdl-dialog__content" [ngClass]="{ 'no-padding': noPadding}">
