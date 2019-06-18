@@ -20,8 +20,6 @@ export class SurveyorFormInputWrapperComponent implements OnInit, OnDestroy {
   _readonly = false;
   @Input() set readonly(bool) {
     this._readonly = bool;
-    console.log(this.controlInstance);
-    console.log(this._readonly);
     if (this.controlInstance) {
       if (this._readonly) {
         this.controlInstance.disable();
