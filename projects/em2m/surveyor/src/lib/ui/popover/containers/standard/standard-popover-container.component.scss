@@ -1,7 +1,5 @@
 :host {
   position: absolute;
-  top: 20px;
-  right: 20px;
   z-index: 1000;
   overflow-y: auto;
 }
@@ -21,6 +19,9 @@
   .popover-overlay > ng-component {
     width: 100%;
     overflow-x: hidden;
+  }
+  .em2m-card-container {
+    margin-bottom: 0;
   }
 }
 

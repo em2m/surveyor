@@ -66,6 +66,7 @@ export abstract class PopoverContainer implements OnInit {
 
   updatePosition() {
     const bounds = this.targetElement.getBoundingClientRect() as DOMRect;
+    let sourceWidth = bounds.width;
     bounds.width = 300;
     bounds.height = 400;
 
@@ -84,19 +85,21 @@ export abstract class PopoverContainer implements OnInit {
         transform = 'translateY(-50%)';
         width = bounds.width;
 
-        if (width > bounds.x - 10) {
-          width = bounds.x - 10;
-          left = 10;
+        if (width > bounds.x - 5) {
+          width = bounds.x - 5;
+          left = 5;
         } else {
-          left = bounds.x - width - 10;
+          left = bounds.x - width - 5;
         }
 
-        if ((bounds.height / 2) + bounds.y + 10 > window.innerHeight) {
-          top = window.innerHeight - bounds.height + 10;
+        if ((bounds.height / 2) + bounds.y + 5 > window.innerHeight) {
+          //top = window.innerHeight - bounds.height + 10;
+          bottom = 5;
+          top = null;
           transform = null;
         }
-        if (bounds.y - (bounds.height / 2) - 10 < 0) {
-          top = 10;
+        if (bounds.y - (bounds.height / 2) - 5 < 0) {
+          top = 5;
           transform = null;
         }
 
@@ -107,19 +110,21 @@ export abstract class PopoverContainer implements OnInit {
         transform = 'translateY(-50%)';
         width = bounds.width;
 
-        if (width > window.innerWidth - bounds.x - 10) {
-          width = window.innerWidth - bounds.x - 10;
-          right = 10;
+        if (width > window.innerWidth - bounds.x - 5) {
+          width = window.innerWidth - bounds.x - 5;
+          right = 5;
         } else {
-          left = bounds.x + 40;
+          left = bounds.x + sourceWidth + 5;
         }
 
-        if ((bounds.height / 2) + bounds.y + 10 > window.innerHeight) {
-          top = window.innerHeight - bounds.height + 10;
+        if ((bounds.height / 2) + bounds.y + 5 > window.innerHeight) {
+          //top = window.innerHeight - bounds.height + 10;
+          bottom = 5;
+          top = null;
           transform = null;
         }
-        if (bounds.y - (bounds.height / 2) - 10 < 0) {
-          top = 10;
+        if (bounds.y - (bounds.height / 2) - 5 < 0) {
+          top = 5;
           transform = null;
         }
 
