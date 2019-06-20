@@ -35,6 +35,7 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.moreSubscription) {
       this.searcher.moreResult = null;
+      this.searcher.moreRequest = null;
       this.moreSubscription.unsubscribe();
     }
   }
