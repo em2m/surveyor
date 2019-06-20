@@ -17,7 +17,21 @@ export class SurveyorFormInputWrapperComponent implements OnInit, OnDestroy {
   @Input() asyncValues: any;
   @Input() asyncOptions: any;
   @Input() value: any;
-  @Input() readonly = false;
+  _readonly = false;
+  @Input() set readonly(bool) {
+    this._readonly = bool;
+    if (this.controlInstance) {
+      if (this._readonly) {
+        this.controlInstance.disable();
+      } else {
+        this.controlInstance.enable();
+      }
+    }
+  }
+
+  get readonly() {
+    return this._readonly
+  }
   @Output() onValueChange = new EventEmitter();
 
   currentComponent: any;
@@ -32,6 +46,7 @@ export class SurveyorFormInputWrapperComponent implements OnInit, OnDestroy {
     component.instance.controlDefinition = this.controlDefinition;
     component.instance.formControl = this.controlInstance;
     component.instance.readonly = this.readonly;
+
     this.controlInstance.valueChanges.subscribe(() => {
       this.onValueChange.emit(true);
     })

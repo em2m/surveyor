@@ -1,3 +1,10 @@
 <div class="popover-overlay animated fadeIn" (keyup.esc)="cancel()">
+  <div class="popup-anchor"
+       [style.top]="anchorTop"
+       [style.bottom]="anchorBottom"
+       [style.left]="anchorLeft"
+       [style.right]="anchorRight"
+       [ngClass]="resolvedPosition">
+  </div>
   <div #popovertarget></div>
 </div>

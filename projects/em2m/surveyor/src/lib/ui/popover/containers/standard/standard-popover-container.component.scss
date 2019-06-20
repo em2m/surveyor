@@ -1,26 +1,29 @@
 :host {
   position: absolute;
-  top: 20px;
-  right: 20px;
   z-index: 1000;
-  overflow-y: auto;
+  //overflow-y: auto;
 }
 
 .popover-overlay {
   width: inherit;
   height: inherit;
   min-height: 100%;
+  overflow: hidden;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.0);
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 6px;
 }
 
 :host ::ng-deep {
   .popover-overlay > ng-component {
     width: 100%;
     overflow-x: hidden;
+  }
+  .em2m-card-container {
+    margin-bottom: 0;
   }
 }
 
@@ -40,4 +43,27 @@
 
 .animated {
   animation-duration: 500ms;
+}
+
+.popup-anchor {
+  position: absolute;
+  width: 0;
+  height: 0;
+  z-index: 100000;
+  box-sizing: border-box;
+
+  &.left {
+    right: calc(-0.75rem + 2px);
+    border-top: 0.75rem solid transparent;
+    border-bottom: 0.75rem solid transparent;
+    border-left: 0.75rem solid white;
+    transform: translateY(-0.4rem);
+  }
+  &.right {
+    left: calc(-0.75rem + 2px);
+    border-top: 0.75rem solid transparent;
+    border-bottom: 0.75rem solid transparent;
+    border-right: 0.75rem solid white;
+    transform: translateY(-0.4rem);
+  }
 }
