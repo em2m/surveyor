@@ -1,0 +1,24 @@
+{
+    "name": "@types/leaflet",
+    "version": "1.2.0",
+    "description": "TypeScript definitions for Leaflet.js",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Alejandro Sánchez",
+            "url": "https://github.com/alejo90",
+            "githubUsername": "alejo90"
+        }
+    ],
+    "main": "",
+    "repository": {
+        "type": "git",
+        "url": "https://www.github.com/DefinitelyTyped/DefinitelyTyped.git"
+    },
+    "scripts": {},
+    "dependencies": {
+        "@types/geojson": "*"
+    },
+    "typesPublisherContentHash": "f2624f38c8716fc43a6c262fc52ed31449ecda952d58afbf2c3593a423d1216d",
+    "typeScriptVersion": "2.3"
+}

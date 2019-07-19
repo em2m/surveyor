@@ -1,4 +1,4 @@
-import {AfterContentInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ControlDefinition, FormDefinition} from './form.model';
 import {AbstractControl} from '@angular/forms';
 
@@ -6,7 +6,7 @@ import {AbstractControl} from '@angular/forms';
   selector: 'surveyor-form',
   templateUrl: './form.component.html',
   styles: [
-    `
+      `
       form :last-child {
         margin-right: 8px;
       }
@@ -15,7 +15,7 @@ import {AbstractControl} from '@angular/forms';
 })
 export class SurveyorFormComponent implements OnInit {
   private _formDefinition: FormDefinition;
-  
+
   @Input() set formDefinition(changes: any) {
     this._formDefinition = changes;
     if (this.formDefinition) {
@@ -25,9 +25,11 @@ export class SurveyorFormComponent implements OnInit {
       this.changeDetector.detectChanges();
     }
   }
+
   get formDefinition() {
     return this._formDefinition;
   }
+
   @Input() asyncValues: any;
   @Input() asyncOptions: any;
   @Input() values: any;
@@ -37,7 +39,8 @@ export class SurveyorFormComponent implements OnInit {
   @Output() onCreate = new EventEmitter();
   @Output() onValueChange = new EventEmitter();
 
-  constructor(private changeDetector: ChangeDetectorRef) {}
+  constructor(private changeDetector: ChangeDetectorRef) {
+  }
 
   ngOnInit() {
   }
