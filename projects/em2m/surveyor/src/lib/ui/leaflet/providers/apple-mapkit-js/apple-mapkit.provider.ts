@@ -44,7 +44,7 @@ export class AppleMapkitProvider implements LayerProvider {
         })
       };
 
-      return [streetsLayer, satelliteLayer];
+      return [satelliteLayer, streetsLayer];
     } else {
       return [];
     }
