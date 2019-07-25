@@ -1,7 +1,4 @@
-import {
-  Component, ComponentFactoryResolver, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef,
-  EventEmitter, Output
-} from '@angular/core';
+import {Component, ComponentFactoryResolver, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, ViewContainerRef} from '@angular/core';
 import {ControlDefinition} from './form.model';
 import {FormControl} from '@angular/forms';
 
@@ -30,15 +27,17 @@ export class SurveyorFormInputWrapperComponent implements OnInit, OnDestroy {
   }
 
   get readonly() {
-    return this._readonly
+    return this._readonly;
   }
+
   @Output() onValueChange = new EventEmitter();
 
   currentComponent: any;
   private asyncValSubscription: any;
   private asyncOptsSubscription: any;
 
-  constructor(private resolver: ComponentFactoryResolver) {}
+  constructor(private resolver: ComponentFactoryResolver) {
+  }
 
   ngOnInit() {
     let factory = this.resolver.resolveComponentFactory(this.controlDefinition.component);
@@ -48,8 +47,10 @@ export class SurveyorFormInputWrapperComponent implements OnInit, OnDestroy {
     component.instance.readonly = this.readonly;
 
     this.controlInstance.valueChanges.subscribe(() => {
-      this.onValueChange.emit(true);
-    })
+      setTimeout(() => {
+        this.onValueChange.emit(true);
+      }, 0);
+    });
     this.inputTarget.insert(component.hostView);
 
     if (this.currentComponent) {
@@ -57,19 +58,25 @@ export class SurveyorFormInputWrapperComponent implements OnInit, OnDestroy {
     }
     this.currentComponent = component;
     let syncVal = this.controlDefinition.value;
-    if (syncVal && this.currentComponent) { this.currentComponent.instance.setValue(syncVal); }
+    if (syncVal && this.currentComponent) {
+      this.currentComponent.instance.setValue(syncVal);
+    }
 
     if (this.asyncValues && this.asyncValues.subscribe) {
       this.asyncValSubscription = this.asyncValues.subscribe((vals: any) => {
         let val = vals[this.controlDefinition.key];
-        if (val && this.currentComponent) { this.currentComponent.instance.setValue(val); }
+        if (val && this.currentComponent) {
+          this.currentComponent.instance.setValue(val);
+        }
       });
     }
 
     if (this.asyncOptions && this.asyncOptions.subscribe) {
       this.asyncOptsSubscription = this.asyncOptions.subscribe((data: any) => {
         let opts = data[this.controlDefinition.key];
-        if (opts && this.currentComponent) { this.currentComponent.instance.setOptions(opts); }
+        if (opts && this.currentComponent) {
+          this.currentComponent.instance.setOptions(opts);
+        }
       });
     }
   }
