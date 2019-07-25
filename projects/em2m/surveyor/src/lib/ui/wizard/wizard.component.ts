@@ -49,7 +49,7 @@ export class SurveyorWizardComponent implements AfterViewInit {
       // Slide in the new step, skipping any steps with the 'skipped' flag
       let nextIndex = newIndex;
       while (steps[nextIndex].skipped) {
-        nextIndex += 1
+        nextIndex += 1;
       }
       const newStep = steps[nextIndex];
       if (this.activeIndex > nextIndex) {
