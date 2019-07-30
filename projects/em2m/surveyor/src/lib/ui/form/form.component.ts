@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ControlDefinition, FormDefinition} from './form.model';
 import {AbstractControl} from '@angular/forms';
-
+import {BehaviorSubject, Observable} from 'rxjs';
 @Component({
   selector: 'surveyor-form',
   templateUrl: './form.component.html',
@@ -30,7 +30,14 @@ export class SurveyorFormComponent implements OnInit {
     return this._formDefinition;
   }
 
-  @Input() asyncValues: any;
+  private _asyncValues = new BehaviorSubject<any>({});
+  @Input() set asyncValues(obs: Observable<any>) {
+    obs.subscribe(this._asyncValues);
+  }
+  get asyncValues() {
+    return this._asyncValues;
+  }
+
   @Input() asyncOptions: any;
   @Input() values: any;
   @Input() readonly = false;
