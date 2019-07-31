@@ -5,20 +5,19 @@
 
 .page-header {
   background-color: #F4F4F4;
-  padding-top: 1rem;
   z-index: 1;
   position: relative;
-  min-height: 50px;
 }
 
 .page-title {
   font-size: 20px;
   line-height: 28px;
   text-align: center;
-  padding: 0 1rem;
+  padding: 1rem 1rem 0rem 1rem;
   font-weight: 300;
   flex: 1;
   align-items: center;
+  min-height: 2rem;
 }
 
 .close-button {
