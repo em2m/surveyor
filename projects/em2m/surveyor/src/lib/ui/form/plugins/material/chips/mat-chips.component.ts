@@ -14,7 +14,7 @@ export class MaterialChipsInputComponent extends SurveyorFormInputComponent impl
     
     ngOnInit() {
         setTimeout(() => {
-            this.tags = this.formControl.value;
+            this.tags = this.formControl.value || [];
         }, 100)
     }
 
