@@ -9,7 +9,8 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatNativeDateModule,
-  MatSelectModule
+  MatSelectModule,
+  MatChipsModule
 } from '@angular/material';
 import {MaterialFormPlugin} from './material-form-plugin';
 import {MaterialSelectInputComponent} from './select/mat-select.component';
@@ -20,6 +21,7 @@ import {MaterialPickerInputComponent} from './picker/mat-picker.component';
 import {MaterialPasswordInputComponent} from './password/mat-password.component';
 import {MaterialDollarsComponent} from './dollars/mat-dollars.component';
 import {MaterialDateInputComponent} from './date/mat-date.component';
+import {MaterialChipsInputComponent} from './chips/mat-chips.component';
 
 export * from './material-form-plugin';
 export * from './select/mat-select.component';
@@ -29,6 +31,7 @@ export * from './checkbox/mat-checkbox.component';
 export * from './picker/mat-picker.component';
 export * from './password/mat-password.component';
 export * from './date/mat-date.component';
+export * from './chips/mat-chips.component';
 
 const components = [
   MaterialSelectInputComponent,
@@ -38,7 +41,8 @@ const components = [
   MaterialPickerInputComponent,
   MaterialPasswordInputComponent,
   MaterialDollarsComponent,
-  MaterialDateInputComponent
+  MaterialDateInputComponent,
+  MaterialChipsInputComponent
 ];
 
 @NgModule({
@@ -53,7 +57,8 @@ const components = [
     MatButtonModule,
     MatIconModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatChipsModule
   ],
   exports: [
     CommonModule,
@@ -65,6 +70,7 @@ const components = [
     MatFormFieldModule,
     MatButtonModule,
     MatIconModule,
+    MatChipsModule,
     ...components
   ],
   declarations: [
