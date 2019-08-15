@@ -64,6 +64,14 @@ export class SurveyorLeafletComponent implements AfterViewInit, OnDestroy {
     let leafletContainerDiv = this.elementRef.nativeElement.querySelector('.leaflet-container');
     this.renderer.removeClass(leafletContainerDiv, 'leaflet-touch');
 
+    if (typeof window['elementResizeDetectorMaker'] === 'function') {
+      const erd = window['elementResizeDetectorMaker']({strategy: 'scroll'})
+      erd.listenTo(leafletContainerDiv, (element) => {
+        this.map.invalidateSize()
+      })
+    }
+
+
     let baseLayerObs = Observable.from(this.leafletService.findBaseLayers(this.mapId))
       .concatMap((provider: LayerProvider) => {
         let layerDefsObs = provider.provide(this.map);
