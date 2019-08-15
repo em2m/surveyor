@@ -104,6 +104,9 @@ export class LeafletService {
       source = new BehaviorSubject<Map>(null);
       this.mapSources[mapId] = source;
     }
+    source.subscribe((map) => {
+      if (map) { map.invalidateSize(); }
+    })
     return source;
   }
 }
