@@ -9,6 +9,7 @@ import {SurveyorWizardStepComponent} from './step.component';
 export class SurveyorWizardComponent implements AfterViewInit {
 
   @Input() skipInvalid: boolean;
+  @Input() title: string;
   @Output() complete: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() select: EventEmitter<SurveyorWizardStepComponent> = new EventEmitter<SurveyorWizardStepComponent>();
   @Output() cancel: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -49,7 +50,7 @@ export class SurveyorWizardComponent implements AfterViewInit {
       // Slide in the new step, skipping any steps with the 'skipped' flag
       let nextIndex = newIndex;
       while (steps[nextIndex].skipped) {
-        nextIndex += 1
+        nextIndex += 1;
       }
       const newStep = steps[nextIndex];
       if (this.activeIndex > nextIndex) {

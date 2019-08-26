@@ -8,6 +8,7 @@ import {MaterialPickerInputComponent} from './picker/mat-picker.component';
 import {MaterialPasswordInputComponent} from './password/mat-password.component';
 import {MaterialDollarsComponent} from './dollars/mat-dollars.component';
 import {MaterialDateInputComponent} from './date/mat-date.component';
+import {MaterialChipsInputComponent} from './chips/mat-chips.component';
 
 export let MaterialFormPlugin: Plugin = <Plugin> {
   name: 'Material Forms Plugin',
@@ -51,6 +52,11 @@ export let MaterialFormPlugin: Plugin = <Plugin> {
       {
         value: MaterialDateInputComponent,
         config: {type: 'Date'},
+        priority: 50
+      },
+      {
+        value: MaterialChipsInputComponent,
+        config: {type: 'Chips'},
         priority: 50
       }
     ]

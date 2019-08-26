@@ -88,12 +88,14 @@ export class SurveyorLeafletComponent implements AfterViewInit, OnDestroy {
           layerDefsObs = Observable.of(layerDefsObs);
         }
         return layerDefsObs.do(layerDefs => {
-          layerDefs.forEach((layerDef: LayerDefinition) => {
-            this.overlays[layerDef.label] = layerDef.layer;
-            if ((provider.config && provider.config.enabled && layerDef.enabled !== false) || layerDef.enabled) {
-              layerDef.layer.addTo(this.map);
-            }
-          });
+          if (layerDefs) {
+            layerDefs.forEach((layerDef: LayerDefinition) => {
+              this.overlays[layerDef.label] = layerDef.layer;
+              if ((provider.config && provider.config.enabled && layerDef.enabled !== false) || layerDef.enabled) {
+                layerDef.layer.addTo(this.map);
+              }
+            });
+          }
         });
       });
 

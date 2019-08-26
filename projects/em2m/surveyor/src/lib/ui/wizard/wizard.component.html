@@ -1,4 +1,9 @@
 <div class="wizard-wrapper flex-vertical" *ngIf="steps && steps?.length > 0">
+  <div class="page-header">
+    <div class="page-title">{{title}}</div>
+    <a class="mdl-button mdl-js-button icon-button close-button" (click)="onCancel()"><i
+      class="material-icons">close</i></a>
+  </div>
   <div class="step-selector">
     <div class="step-item" *ngFor="let step of steps; let $index = index;" (click)="selectStep($index, true)">
       <div style="flex: 1">
@@ -24,12 +29,17 @@
     <ng-content></ng-content>
   </div>
   <div class="step-controls">
-    <button mat-flat-button style="flex: 1;" *ngIf="cancel" (click)="onCancel()">CANCEL</button>
-    <div *ngIf="cancel" style="flex: 0.5;"></div>
+    <button mat-flat-button style="flex: 1;" *ngIf="activeIndex === 0" (click)="onCancel()">CANCEL</button>
+    <button mat-flat-button style="flex: 1;"
+            *ngIf="activeIndex > 0" (click)="selectStep(activeIndex - 1)">BACK
+    </button>
+    <div style="flex: 0.5;"></div>
     <button mat-flat-button color="primary" style="flex: 1;" [disabled]="!isComplete(activeIndex, true)"
-            *ngIf="activeIndex !== steps?.length - 1" (click)="selectStep(activeIndex + 1)">NEXT</button>
+            *ngIf="activeIndex !== steps?.length - 1" (click)="selectStep(activeIndex + 1)">NEXT
+    </button>
     <button mat-flat-button color="primary" style="flex: 1;" [disabled]="!isComplete(activeIndex)"
-            *ngIf="activeIndex === steps?.length - 1" (click)="onComplete()">COMPLETE</button>
+            *ngIf="activeIndex === steps?.length - 1" (click)="onComplete()">COMPLETE
+    </button>
   </div>
 </div>
 
