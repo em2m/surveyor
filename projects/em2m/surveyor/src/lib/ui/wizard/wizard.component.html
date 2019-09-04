@@ -13,9 +13,9 @@
           <div *ngIf="$index !== steps?.length - 1" class="step-item-connector connector-right"
                [ngClass]="{'connector-active': $index < activeIndex }"></div>
           <i [ngClass]="{
-          'far': isActive($index), 
-          'fas': !isActive($index) && !isSkipped($index), 
-          'step-item-icon-active': isActive($index) || (isComplete($index) && activeIndex > $index), 
+          'far': isActive($index),
+          'fas': !isActive($index) && !isSkipped($index),
+          'step-item-icon-active': isActive($index) || (isComplete($index) && activeIndex > $index),
           'fa-circle': activeIndex <= $index && !isSkipped($index),
           'fa fa-ban': isSkipped($index),
           'fa-check-circle': isComplete($index) && !isSkipped($index) && activeIndex >= $index
