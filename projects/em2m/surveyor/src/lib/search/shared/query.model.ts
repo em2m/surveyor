@@ -127,6 +127,7 @@ export interface Agg {
   label?: string;
   size?: number;
   time_zone?: string;
+  multiSelect?: boolean;
   aggs?: { [ key: string ]: Agg; };
 }
 
