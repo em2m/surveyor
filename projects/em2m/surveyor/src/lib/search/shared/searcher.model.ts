@@ -47,7 +47,10 @@ export interface SearchConstraint {
   query: Query;
   op?: string;
   not?: boolean;
+  key?: string;
   type?: string;
+  values?: Array<string>;
+  buckets?: Array<any>;
 }
 
 export interface SearcherSettings {
@@ -64,6 +67,7 @@ export interface SearcherSettings {
 
 export class Searcher {
   public aggs: Array<Agg>;
+  public initialAggs: Array<Agg>;
   public sortModel: SortModel;
   public aggsMapper: { [key: string]: any };
   public fields: Array<Field> = [];
@@ -246,6 +250,55 @@ export class Searcher {
   public broadcasetMoreRequest() {
     this.moreRequestSubject.next(this._moreRequest);
   }
+}
+
+export class SearcherHelper {
+
+  constructor() {
+  }
+
+  public static removeConstraint(constraints: Array<SearchConstraint>, constraintKey: string): Array<SearchConstraint> {
+    const searchConstraints = constraints.filter((constraint: SearchConstraint) => constraint.key !== constraintKey);
+    return searchConstraints;
+  }
+
+  public static buildSearchRequestFromConstraints(searcher: Searcher, constraints: Array<SearchConstraint>): SearchRequest {
+    // Build the fields array
+    const searchRequest: SearchRequest = {};
+    searchRequest.fields = [];
+
+    searcher.fields.forEach(field => {
+      const request: any = {
+        name: field.name,
+        label: field.label,
+        expr: field.expr,
+        settings: field.settings
+      };
+      searchRequest.fields.push(request);
+    });
+
+    // Build the query using the supplied constraints
+    const queries = [];
+    if (searcher.filter) {
+      queries.push(searcher.filter);
+    }
+    for (const constraint of constraints) {
+      if (constraint) {
+        if (constraint.not) {
+          queries.push(new NotQuery([constraint.query]));
+        } else {
+          queries.push(constraint.query);
+        }
+      }
+    }
+
+    searchRequest.query = new AndQuery(queries);
+    searchRequest.aggs = JSON.parse(JSON.stringify(searcher.aggs));
+    searchRequest.sorts = searcher.sorts;
+    searchRequest.limit = searcher.pageSize;
+    return searchRequest;
+  }
+
 }
 
 

@@ -15,6 +15,7 @@ import {SurveyorRegionModule} from '../ui/region/region.module';
 import {MatDatepickerModule, MatFormFieldModule, MatInputModule, MatTooltipModule} from '@angular/material';
 import {SurveyorModalModule} from '../ui/modal/modal.module';
 import {DateRangePickerComponent} from './pickers/date-range-picker/date-range-picker.component';
+import {MultipleTermPickerComponent} from './pickers/multiple-term-picker/multiple-term-picker.component';
 
 export * from './shared/query.model';
 export * from './shared/searcher.model';
@@ -25,6 +26,7 @@ export * from './components/total-results/total-results.component';
 export * from './components/toggle-archived/toggle-archived.component';
 export * from './components/standard-facet/standard-facet.component';
 export * from './components/toggle-recursive/toggle-recursive.component';
+export * from './pickers/multiple-term-picker/multiple-term-picker.component';
 export * from './pickers/term-picker/term-picker.component';
 export * from './pickers/query-picker/query-picker.component';
 export * from './search.plugin';
@@ -38,7 +40,8 @@ const components: any[] = [
   TermPickerComponent,
   QueryPickerComponent,
   SearcherInputComponent,
-  DateRangePickerComponent
+  DateRangePickerComponent,
+  MultipleTermPickerComponent
 ];
 
 @NgModule({
