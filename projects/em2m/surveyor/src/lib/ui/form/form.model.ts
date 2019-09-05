@@ -42,6 +42,7 @@ export class ControlDefinition {
   disabled: boolean;
   required: boolean;
   hidden: boolean;
+  autoComplete?: string;
   options: any;
   validators: ControlValidator[];
   asyncValidators: AsyncControlValidator[];

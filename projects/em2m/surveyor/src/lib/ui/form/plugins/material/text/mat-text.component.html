@@ -1,6 +1,6 @@
 <mat-form-field appearance="outline">
   <mat-label>{{ controlDefinition.label }}</mat-label>
-  <input matInput [id]="controlDefinition.key"
+  <input [autocomplete]="controlDefinition?.autoComplete || 'off' " matInput [id]="controlDefinition.key"
          [formControl]="formControl"
          [type]="controlDefinition?.options?.type || 'text'"
          [required]="controlDefinition.required ? 'required' : null"
