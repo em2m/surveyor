@@ -33,7 +33,7 @@ export class MapboxProvider implements LayerProvider {
         layer: L.tileLayer('https://api.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
           maxZoom: 21,
           maxNativeZoom: 19,
-          id: 'mapbox.satellite',
+          id: 'mapbox.streets-satellite',
           accessToken: accessToken,
           /*
           tileSize: 512,

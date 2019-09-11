@@ -1,7 +1,7 @@
 import {Injectable, Injector} from '@angular/core';
 import {ControlProvider, FeatureProvider, LayerProvider} from './leaflet.model';
 import {ExtensionService} from '../../core/extension/extension.service';
-import {Map, Control} from 'leaflet';
+import {Map, Control, Layer} from 'leaflet';
 import {BehaviorSubject} from 'rxjs';
 import {Observable} from 'rxjs';
 
@@ -15,64 +15,65 @@ export class LeafletService {
 
   private mapSources: { [mapId: string]: BehaviorSubject<Map>; } = {};
   private mapControlLayers: { [mapId: string]: Control.Layers } = {};
+  private mapBaseLayers: { [mapId: string]: Array<any> } = {};
 
   constructor(private injector: Injector, private extensionService: ExtensionService) {}
 
   findBaseLayers(target: string): Array<LayerProvider> {
-    let extensions = [
+    const extensions = [
       ...this.extensionService.getExtensionsForTypeAndTarget(this.BASE_LAYER_EXTENSION_TYPE, 'global'),
       ...this.extensionService.getExtensionsForTypeAndTarget(this.BASE_LAYER_EXTENSION_TYPE, target)
     ];
 
     return extensions.filter(extension => extension !== null).map(extension => {
-      let type = extension.value;
+      const type = extension.value;
 
-      let layer = this.injector.get(type) as LayerProvider;
+      const layer = this.injector.get(type) as LayerProvider;
       layer.config = extension.config;
       return layer;
     });
   }
 
   findOverlays(target: string): Array<LayerProvider> {
-    let extensions = [
+    const extensions = [
       ...this.extensionService.getExtensionsForTypeAndTarget(this.OVERLAY_EXTENSION_TYPE, 'global'),
       ...this.extensionService.getExtensionsForTypeAndTarget(this.OVERLAY_EXTENSION_TYPE, target)
     ];
 
     return extensions.filter(extension => extension !== null).map(extension => {
-      let type = extension.value;
+      const type = extension.value;
 
-      let layer = this.injector.get(type) as LayerProvider;
+      const layer = this.injector.get(type) as LayerProvider;
       layer.config = extension.config;
       return layer;
     });
   }
 
   findFeatures(target: string): Array<FeatureProvider> {
-    let extensions = [
+    const extensions = [
       ...this.extensionService.getExtensionsForTypeAndTarget(this.FEATURE_EXTENSION_TYPE, 'global'),
       ...this.extensionService.getExtensionsForTypeAndTarget(this.FEATURE_EXTENSION_TYPE, target)
     ];
 
     return extensions.filter(extension => extension !== null).map(extension => {
-      let type = extension.value;
+      const type = extension.value;
 
-      let layer = this.injector.get(type) as FeatureProvider;
+      const layer = this.injector.get(type) as FeatureProvider;
       layer.config = extension.config;
       return layer;
     });
   }
 
   findControls(target: string): Array<ControlProvider> {
-    let extensions = [
+    const extensions = [
       ...this.extensionService.getExtensionsForTypeAndTarget(this.CONTROL_EXTENSION_TYPE, 'global'),
       ...this.extensionService.getExtensionsForTypeAndTarget(this.CONTROL_EXTENSION_TYPE, target)
     ];
 
     return extensions.filter(extension => extension !== null).map(extension => {
-      let type = extension.value;
+      const type = extension.value;
 
-      let layer = this.injector.get(type) as ControlProvider;
+      const layer = this.injector.get(type) as ControlProvider;
       layer.config = extension.config;
       return layer;
     });
@@ -98,6 +99,14 @@ export class LeafletService {
     return this.mapControlLayers[mapId];
   }
 
+  getMapBaseLayers(mapId): Array<{layerName: string, layer: Layer}> {
+    return this.mapBaseLayers[mapId];
+  }
+
+  setMapBaseLayers(mapId: string, baseLayers: Array<any>) {
+    this.mapBaseLayers[mapId] = baseLayers;
+  }
+
   private getMapSource(mapId: string): BehaviorSubject<Map> {
     let source = this.mapSources[mapId];
     if (!source) {
@@ -106,7 +115,7 @@ export class LeafletService {
     }
     source.subscribe((map) => {
       if (map) { map.invalidateSize(); }
-    })
+    });
     return source;
   }
 }
