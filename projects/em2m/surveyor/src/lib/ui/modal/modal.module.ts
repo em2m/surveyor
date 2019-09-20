@@ -5,6 +5,7 @@ import {CenterModalContainer} from './containers/center/center-modal-container.c
 import {SideModalContainer} from './containers/side/side-modal-container.component';
 import {InlineModalContainer} from './containers/inline/inline-modal-container.component';
 import {ConfirmationModal} from './modals/confirmation-modal/confirmation-modal.component';
+import {FixedModalContainer} from './containers/fixed/fixed-modal-container.component';
 import {StatusModal} from './modals/status-modal/status-modal.component';
 import {LoadingModal} from './modals/loading-modal/loading-modal.component';
 
@@ -15,6 +16,7 @@ export * from './modal-container.component';
 export * from './containers/center/center-modal-container.component';
 export * from './containers/side/side-modal-container.component';
 export * from './containers/inline/inline-modal-container.component';
+export * from './containers/fixed/fixed-modal-container.component';
 export * from './modals/confirmation-modal/confirmation-modal.component';
 export * from './modals/status-modal/status-modal.component';
 export * from './modals/loading-modal/loading-modal.component';
@@ -27,6 +29,7 @@ export * from './modals/loading-modal/loading-modal.component';
     CenterModalContainer,
     SideModalContainer,
     InlineModalContainer,
+    FixedModalContainer,
     ConfirmationModal,
     StatusModal,
     LoadingModal
@@ -35,6 +38,7 @@ export * from './modals/loading-modal/loading-modal.component';
     CenterModalContainer,
     SideModalContainer,
     InlineModalContainer,
+    FixedModalContainer,
     ConfirmationModal,
     StatusModal,
     LoadingModal
@@ -43,6 +47,7 @@ export * from './modals/loading-modal/loading-modal.component';
     CenterModalContainer,
     SideModalContainer,
     InlineModalContainer,
+    FixedModalContainer,
     ConfirmationModal,
     StatusModal,
     LoadingModal

@@ -3,7 +3,7 @@ import {ViewContainerRef} from "@angular/core";
 
 export interface ModalOptions {
   params?: any;
-  type?: "center" | "side" | "inline";
+  type?: "center" | "side" | "inline" | "fixed";
   title?: string;
   submitLabel?: string;
   cancelLabel?: string;
