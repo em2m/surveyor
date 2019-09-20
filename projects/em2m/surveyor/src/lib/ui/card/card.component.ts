@@ -6,7 +6,7 @@ import {Card} from './card.model';
 
 @Component({
   selector: 'surveyor-card',
-  template: `<div class="flex-vertical" style="height: 100%;" [hidden]="hide"><div #cardTarget></div></div>`,
+  template: `<div [hidden]="hide"><div #cardTarget></div></div>`,
 })
 export class CardComponent implements OnInit, OnChanges, OnDestroy {
 
