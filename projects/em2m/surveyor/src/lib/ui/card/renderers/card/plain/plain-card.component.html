@@ -1,4 +1,4 @@
-<div [ngClass]="{'mdl-shadow--4dp': card?.style != 'none'}">
+<div [ngClass]="{'mdl-shadow--4dp flex-vertical': card?.style != 'none'}">
   <h3 *ngIf="failed">Unable to load Widget</h3>
   <div #cardTarget></div>
 </div>
