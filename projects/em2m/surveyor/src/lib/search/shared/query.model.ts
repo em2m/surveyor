@@ -65,6 +65,12 @@ export class PrefixQuery extends FieldedQuery {
   }
 }
 
+export class WildcardQuery extends FieldedQuery {
+  constructor(field: string, public value: string) {
+    super(field, OperationType.WILDCARD);
+  }
+}
+
 export class RangeQuery extends FieldedQuery {
   constructor(field: string, public lt, public lte, public gt, public gte, public timeZone: string) {
     super(field, OperationType.RANGE);
@@ -111,6 +117,7 @@ export class OperationType {
   static TERM = 'term';
   static REGEX = 'regex';
   static PREFIX = 'prefix';
+  static WILDCARD = 'wildcard';
   static MATCH = 'match';
   static EXISTS = 'exists';
   static LUCENE = 'lucene';

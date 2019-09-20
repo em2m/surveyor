@@ -53,10 +53,8 @@ export class IntentService {
         .filter(resolveInfo => resolveInfo !== null)
         .toArray()
         .subscribe((resolutions: Array<ResolveInfo>) => {
-          if (resolutions.length === 1) {
+          if (resolutions.length > 0) {
             resolutions[0].handler.handleIntent(intent);
-          } else if (resolutions.length > 1) {
-            // TODO: SHOW INTENT PICKER TO SELECT HANDLER TO RUN
           }
         });
     }

@@ -34,6 +34,7 @@ export class CollapsibleCardComponent extends BaseCardComponent implements OnIni
       let cardConfig = this.cardService.getCardConfig(this.cardId);
       if (cardConfig.title !== undefined) { this.card.title = cardConfig.title; }
       if (cardConfig.style !== undefined) { this.card.style = cardConfig.style; }
+      if (cardConfig.config !== undefined) { this.card.config = cardConfig.config; }
 
       this.loadedObs.emit(this.cardRef.instance);
     }
