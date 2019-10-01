@@ -4,18 +4,22 @@ import {Injectable} from '@angular/core';
 import {AppConfig} from '../../../../core/config/config.service';
 import 'apple-mapkit-js';
 import 'leaflet.mapkitmutant';
+import {ContextService} from '../../../../core/extension/context.service';
 
 @Injectable()
-export class AppleMapkitProvider implements LayerProvider {
+export class AppleMapkitProvider extends LayerProvider {
 
   config: any;
 
-  constructor(private appConfig: AppConfig) {}
+  constructor(private appConfig: AppConfig, private ctx: ContextService) {
+    super();
+  }
 
   provide(): Array<LayerDefinition> | Array<LayerDefinition> {
-    const mapProvider = this.appConfig.get().map.provider;
-    if (mapProvider === 'apple') {
-      const accessToken = this.appConfig.get().map.apple.token;
+    this.resolveProvider(this.appConfig, this.ctx);
+
+    if (this.mapProvider === 'apple') {
+      const accessToken = this.mapConfig.appleKey || this.mapConfig.token;
 
       const streetsLayer = <LayerDefinition>{
         label: 'Streets',
