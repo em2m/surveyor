@@ -4,29 +4,31 @@ import {Injectable} from '@angular/core';
 import {AppConfig} from '../../../../core/config/config.service';
 import {GoogleMapsLoaderService} from './google-maps-loader.service';
 import {Observable} from 'rxjs';
-import {Layer} from 'leaflet';
+import {ContextService} from '../../../../core/extension/context.service';
 
 @Injectable()
-export class GoogleMapsProvider implements LayerProvider {
+export class GoogleMapsProvider extends LayerProvider {
 
   config: any;
 
-  constructor(private appConfig: AppConfig, private googleMaps: GoogleMapsLoaderService) {}
+  constructor(private appConfig: AppConfig, private ctx: ContextService, private googleMaps: GoogleMapsLoaderService) {
+    super();
+  }
 
   provide(): Array<LayerDefinition> | Observable<Array<LayerDefinition>> {
+    this.resolveProvider(this.appConfig, this.ctx);
 
-    let mapProvider = this.appConfig.get().map.provider;
-    if (mapProvider === 'google') {
-      let accessToken = this.appConfig.get().map.google.apiKey;
+    if (this.mapProvider === 'google') {
+      const accessToken = this.mapConfig.googleKey || this.mapConfig.apiKey;
 
       return this.googleMaps.loadApi(accessToken)
         .map(() => {
-          let gridLayer = L.gridLayer as any;
-          let streetsLayer = <LayerDefinition>{
+          const gridLayer = L.gridLayer as any;
+          const streetsLayer = <LayerDefinition>{
             label: 'Streets',
             layer: gridLayer.googleMutant({ type: 'roadmap' })
           };
-          let satelliteLayer = <LayerDefinition>{
+          const satelliteLayer = <LayerDefinition>{
             label: 'Satellite',
             layer: gridLayer.googleMutant({type: 'hybrid'})
           };
