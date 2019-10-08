@@ -5,7 +5,6 @@
   top: 0;
   right: 0;
   z-index: 1000;
-  overflow-y: auto;
 }
 
 .modal-overlay {
@@ -23,10 +22,16 @@
 }
 
 .mdl-dialog {
+  display: flex;
+  flex-direction: column;
   background-color:white;
-  min-width: 350px;
+  width: 350px;
+  position: fixed;
+  border: none;
+  border-radius: 0;
   max-width: 100%;
   margin: 1rem 0;
+  max-height: 90%;
 }
 
 .mdl-dialog__title {
@@ -38,4 +43,12 @@
   -moz-animation-duration: 500ms;
   -o-animation-duration: 500ms;
   animation-duration: 500ms;
+}
+
+.mdl-dialog__content {
+  display: flex;
+  flex-flow: column;
+  flex: 1;
+  overflow: auto;
+  padding: 1rem;
 }
