@@ -125,7 +125,7 @@ export class PopoverService {
     return this.popoverClassPrefix + Math.random();
   }
 
-  private destroy() {
+  destroy() {
     //Remove the class definition for the target element
     if (this.targetElement != null) {
       this.targetElement.classList.forEach((className) => {
