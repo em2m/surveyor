@@ -12,7 +12,7 @@ export interface PopoverOptions {
   elementRef?: ViewContainerRef;
   closeOnHoverOff?: boolean;
   closeOnClickOff?: boolean;
-  pinOnClick?: false;
+  pinOnClick?: boolean;
 }
 
 export interface PopoverResult {
