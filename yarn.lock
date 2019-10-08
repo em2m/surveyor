@@ -235,13 +235,6 @@
   dependencies:
     tslib "^1.9.0"
 
-"@auth0/angular-jwt@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@auth0/angular-jwt/-/angular-jwt-2.0.0.tgz#c0b2861824a24fb62d9d2e1fdb03a326e8a1e203"
-  integrity sha512-RVlXFpcqQ+9uCpzboU7Tm1ubaRVO2FrR5+RYuwHtTT4BXquVMEwOSbAuuaArFud/kMc00XYoGgiP1JkCfOAfpA==
-  dependencies:
-    url "^0.11.0"
-
 "@babel/code-frame@^7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"
@@ -396,10 +389,17 @@
   dependencies:
     "@types/leaflet" "*"
 
-"@types/leaflet@*", "@types/leaflet@^1.2.0":
+"@types/leaflet@*":
   version "1.2.11"
   resolved "https://registry.yarnpkg.com/@types/leaflet/-/leaflet-1.2.11.tgz#a80f6d49a200698a24351e93dae654308cacf239"
   integrity sha512-mFr7FkRvxtf9KvensAlss/o78CJ5UumvckwM+0xqF9jxgbMh0gVZq57kUe6jTqybQEavFgqIlSXzTnx3CRG/QQ==
+  dependencies:
+    "@types/geojson" "*"
+
+"@types/leaflet@1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@types/leaflet/-/leaflet-1.2.0.tgz#5f15f5012b24d30507f3c4dc3271c88acbe4be49"
+  integrity sha512-XUDDcg/BlXzlqiESP07FI/coDflHP7nO+zmEKDuehj47Aj7miZZ6Xy26DYfyNG3NysWSpnwRNy9g8SfL328ZbQ==
   dependencies:
     "@types/geojson" "*"
 
@@ -760,6 +760,11 @@ append-transform@^1.0.0:
   integrity sha512-P009oYkeHyU742iSZJzZZywj4QRJdnTWffaKuJQLablCZ1uz6/cW4yaRgcDaoQ+uwOxxnt0gRUcwfsNP2ri0gw==
   dependencies:
     default-require-extensions "^2.0.0"
+
+apple-mapkit-js@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/apple-mapkit-js/-/apple-mapkit-js-6.0.1.tgz#953dc789c06b3a72314b34eb9e111ca03475fd99"
+  integrity sha512-N7y/zqK5fMKkbgWCIXOTTOw3XFkKH67Heq3O8BhZXibjK9QsvVpRVIP90S26poPPkPmiETqVkQ7UA8dW+wc6WQ==
 
 aproba@^1.0.3, aproba@^1.1.1:
   version "1.2.0"
@@ -4327,10 +4332,10 @@ leaflet.markercluster@^1.2.0:
   resolved "https://registry.yarnpkg.com/leaflet.markercluster/-/leaflet.markercluster-1.4.1.tgz#b53f2c4f2ca7306ddab1dbb6f1861d5e8aa6c5e5"
   integrity sha512-ZSEpE/EFApR0bJ1w/dUGwTSUvWlpalKqIzkaYdYB7jaftQA/Y2Jav+eT4CMtEYFj+ZK4mswP13Q2acnPBnhGOw==
 
-leaflet@^1.2.0:
-  version "1.3.4"
-  resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.3.4.tgz#7f006ea5832603b53d7269ef5c595fd773060a40"
-  integrity sha512-FYL1LGFdj6v+2Ifpw+AcFIuIOqjNggfoLUwuwQv6+3sS21Za7Wvapq+LhbSE4NDXrEj6eYnW3y7LsaBICpyXtw==
+leaflet@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.2.0.tgz#fd5d93d9cb00091f5f8a69206d0d6744c1c82697"
+  integrity sha512-Bold8phAE6WcRsuwhofrQ7cOK1REFHaYIkKuj7+TBYK3ONKRpGGIb5oXR5akYotFnrWN0TWKh6Svlhflm3dogg==
 
 less-loader@4.1.0:
   version "4.1.0"
@@ -4821,9 +4826,9 @@ mississippi@^3.0.0:
     through2 "^2.0.0"
 
 mixin-deep@^1.2.0:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/mixin-deep/-/mixin-deep-1.3.1.tgz#a49e7268dce1a0d9698e45326c5626df3543d0fe"
-  integrity sha512-8ZItLHeEgaqEvd5lYBXfm4EZSFCX29Jb9K+lAHhDKzReKBQKj3R+7NOF6tjqYi9t4oI8VUfaWITJQm86wnXGNQ==
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/mixin-deep/-/mixin-deep-1.3.2.tgz#1120b43dc359a785dce65b55b82e257ccf479566"
+  integrity sha512-WRoDn//mXBiJ1H40rqa3vH0toePwSsGb45iInWlTySa+Uu4k3tYUSxa2v1KqAiLtvlrSzaExqS1gtk96A9zvEA==
   dependencies:
     for-in "^1.0.2"
     is-extendable "^1.0.1"
