@@ -23,25 +23,29 @@ export class GoogleMapsLoaderService {
 
   private loadScript(scriptUrl: string): Observable<boolean> {
     return Observable.create(observer => {
-
-      let script: any = document.createElement('script');
+      const script: any = document.createElement('script');
 
       if (script.readyState) {  // IE
         script.onreadystatechange = () => {
           if (script.readyState === 'loaded' || script.readyState === 'complete') {
             script.onreadystatechange = null;
             observer.next(true);
+            observer.complete();
           }
         };
       } else {  // Others
         script.onload = function() {
-          observer.next(true);
+            observer.next(true);
+            observer.complete();
         };
       }
 
       script.src = scriptUrl;
       script.type = 'text/javascript';
+      script.async = false;
+      script.charset = 'utf-8';
 
+      console.log('head is' + document.getElementsByTagName('head')[0]);
       document.getElementsByTagName('head')[0].appendChild(script);
     });
   }
