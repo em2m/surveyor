@@ -13,10 +13,10 @@
   <div class="facet-item" *ngFor="let bucketItem of bucketSearchResults; let i = index">
     <span style="cursor: pointer; display:flex; align-items:center;">
       <span style="display:flex; align-items: center">
-        <span class="mdl-checkbox__input">
+        <label class="mdl-checkbox__input">
           <input type="checkbox" [(checked)]="bucketItem.checked" (change)="toggleBox(bucketItem)">
-        </span>
-        <span class="checkbox_label">{{bucketItem.label || bucketItem.key}}</span>
+          {{bucketItem.label || bucketItem.key}}
+        </label>
       </span>
       <span class="mdl-layout-spacer"></span>
       <span class="facet_count"> {{bucketItem.count}} </span>
