@@ -21,6 +21,7 @@ export class MaterialTextInputComponent extends SurveyorFormInputComponent {
         let values: MaskedValue = maskedVal;
         this.formControl.setValue(values.modelValue, {});
       }
+      this.formControl.markAsDirty();
     }
   }
 
@@ -37,6 +38,7 @@ export class MaterialTextInputComponent extends SurveyorFormInputComponent {
       // Hacked in by JackVCurtis, who hangs his head in shame until TODO: fix view value not updating on load
       setTimeout(() => {
         this.applyMask(fakeEvent);
+        this.formControl.markAsPristine();
       });
     } else {
       this.formControl.setValue(val, {});
