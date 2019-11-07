@@ -54,7 +54,7 @@ export class ActionButtonGroupComponent implements OnInit, OnDestroy {
     this.primaryActions = [];
     this.secondaryActions = [];
     this.actionService.findActions(this.actionTarget).forEach(action => {
-      if (action.primary) {
+      if (action && action.primary) {
         this.primaryActions.push(action);
       } else {
         this.secondaryActions.push(action);
