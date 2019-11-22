@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Subscription} from 'rxjs';
 import {StateService} from '../../../core/state/state.service';
+import {ContextService} from '../../../core/extension/context.service';
 
 @Component({
   selector: 'surveyor-application-wrapper',
@@ -12,11 +13,14 @@ export class ApplicationWrapperComponent implements OnInit, OnDestroy {
 
   isMobile = true;
   brandColor: string;
+  hideHeader = false;
+  private blackListedRoles: Array<string> = ['recoveryAgentAnonymous'];
   private breakpointSub: Subscription;
   private brandSub: Subscription;
 
-  constructor(private stateService: StateService,
-              private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver,
+              private ctx: ContextService,
+              private stateService: StateService) {}
 
   ngOnInit() {
     this.breakpointSub = this.breakpointObserver.observe([Breakpoints.Handset, Breakpoints.Tablet]).subscribe(result => {
@@ -28,6 +32,20 @@ export class ApplicationWrapperComponent implements OnInit, OnDestroy {
         this.brandColor = brand.settings.navColor;
       }
     });
+
+    this.hideHeader = this.accountRoleBlackListed();
+  }
+
+  private accountRoleBlackListed(): boolean {
+    let result = false;
+    const accountRoles = this.ctx.getValue('roles');
+    this.blackListedRoles.forEach(role => {
+      if (accountRoles.includes(role)) {
+        result = true;
+      }
+    });
+
+    return result;
   }
 
   ngOnDestroy() {
