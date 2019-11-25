@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {Picker} from '../../picker.component';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'surveyor-color-picker',
@@ -10,6 +11,7 @@ import {Picker} from '../../picker.component';
 export class ColorPicker extends Picker implements OnInit {
 
   @ViewChild('navColorInput') navColorInput: ElementRef;
+  formControl: FormControl;
   selectedColor = null;
   gradients = null;
   selectedHexCode = null;
@@ -896,5 +898,6 @@ export class ColorPicker extends Picker implements OnInit {
 
   submit() {
     this.pick(this.selectedHexCode);
+    this.formControl.markAsDirty();
   }
 }
