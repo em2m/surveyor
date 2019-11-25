@@ -39,6 +39,7 @@ export class MaterialPickerInputComponent extends SurveyorFormInputComponent {
     this.pickerService.pick(options.picker, options.pickerOptions)
       .subscribe((value: any) => {
         this.setValue(value);
+        this.formControl.markAsDirty();
       });
   }
 
