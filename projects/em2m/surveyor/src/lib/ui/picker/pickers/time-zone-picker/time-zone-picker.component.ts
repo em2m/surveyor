@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Picker} from '../../picker.component';
 import * as momentTz from 'moment-timezone';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'surveyor-time-zone-picker',
@@ -16,6 +17,7 @@ export class TimeZonePicker extends Picker implements OnInit, AfterViewInit {
   public searchText = '';
   public selectedTz: any = null;
   public clearVisible = false;
+  formControl: FormControl;
   private abbrsMap = {
     EST: 'Eastern Standard Time',
     EDT: 'Eastern Daylight Time',
@@ -122,6 +124,7 @@ export class TimeZonePicker extends Picker implements OnInit, AfterViewInit {
 
   submit() {
     this.pick(this.selectedTz.name);
+    this.formControl.markAsDirty();
   }
 
   getUserTimezone() {
