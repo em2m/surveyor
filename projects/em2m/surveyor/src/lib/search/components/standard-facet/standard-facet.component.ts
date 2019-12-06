@@ -137,8 +137,14 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
         values.push(b.key);
         buckets.push(b);
       });
+      let valueDisplay
+      if (values.length > 1) {
+        valueDisplay = 'Multiple';
+      } else {
+        valueDisplay = values[0];
+      }
       this.searcher.addConstraint({
-        label: `${agg.label || agg.key} : Multiple`,
+        label: `${agg.label || agg.key} : ${valueDisplay}`,
         query: new OrQuery(queries),
         key: `${agg.label || agg.key}`,
         values: values,
