@@ -1,7 +1,6 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Searcher} from '../../shared/searcher.model';
-import {Bucket, ExistsQuery, NamedQuery, OrQuery, Query, RangeQuery, TermQuery} from '../../shared/query.model';
-import {PickerOptions} from '../../../ui/picker/picker.model';
+import {Bucket, ExistsQuery, OrQuery, Query, RangeQuery, TermQuery} from '../../shared/query.model';
 import {PickerService} from '../../../ui/picker/picker.service';
 import * as _moment from 'moment';
 import {Subscription} from 'rxjs';
@@ -64,26 +63,6 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
     return this.bucketsForAgg(key).length > 0;
   }
 
-  bucketLength(key: string): number {
-    let bucketLength = 0;
-    if (this.searcher.searchResult && this.searcher.searchResult.aggs && this.searcher.searchResult.aggs[key]) {
-      bucketLength = this.searcher.searchResult.aggs[key].buckets.length;
-    }
-    return bucketLength;
-  }
-
-  showMoreChoice(agg: any) {
-    if (this.showMultiChoice(agg)) {
-      return false;
-    }
-
-    if (agg.size < this.bucketLength(agg.key)) {
-      return true;
-    }
-
-    return false;
-  }
-
   showMultiChoice(agg: any) {
 
     let multiSelected = false;
@@ -92,16 +71,8 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
         multiSelected = true;
       }
     });
-
-    let shouldShow = false;
-    const resultAgg = this.searcher.searchResult.aggs[agg.key];
-    if (agg.op === 'terms') {
-      shouldShow = true;
-    } else {
-      shouldShow = false;
-    }
-
-    return multiSelected || shouldShow;
+    const op = this.getAggOp(agg);
+    return multiSelected || op === 'terms' || op === 'filters';
   }
 
   bucketsForAgg(key: string): Array<Bucket> {
@@ -122,57 +93,63 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
     return [];
   }
 
-  addConstraintCheck(agg: any, bucket: any) {
-
-  }
-
   addConstraint(agg: any, bucket: any) {
     if (Array.isArray(bucket)) {
       const queries = [];
       const values = [];
       const buckets = [];
-      const op = this.resultOpAggs[agg.field] || agg.op;
       bucket.forEach(b => {
-        queries.push(new TermQuery(agg.field, b.key));
+        const query = this.buildBucketQuery(agg, b);
+        queries.push(query);
         values.push(b.key);
         buckets.push(b);
       });
+      const aggLabel = values.length > 1 ? 'Multiple' : values[0];
       this.searcher.addConstraint({
-        label: `${agg.label || agg.key} : Multiple`,
+        label: `${agg.label || agg.key} : ${aggLabel}`,
         query: new OrQuery(queries),
         key: `${agg.label || agg.key}`,
         values: values,
         buckets: buckets
       });
     } else {
-      const key = bucket.key;
-      const op = this.resultOpAggs[agg.field] || agg.op;
-      let query: Query = new TermQuery(agg.field, key);
-      if (typeof key === 'string' && key.toLowerCase() === 'missing') {
-        query = new ExistsQuery(agg.key, false);
-      }
-      if (op === 'missing') {
-        query = new ExistsQuery(agg.key, true);
-      }
-      if (op === 'filters') {
-        query = bucket.query || agg.filters[key];
-      }
-      if (op === 'range' || op === 'date_range') {
-        const lt = bucket.to;
-        const gte = bucket.from;
-        query = new RangeQuery(agg.field, lt, null, null, gte, null);
-      }
+      const query = this.buildBucketQuery(agg, bucket);
       this.searcher.addConstraint({
         label: `${agg.label || agg.key} : ${bucket.label || bucket.key}`,
         query: query,
-        values : [bucket.key]
+        values: [bucket.key]
       });
     }
     this.searcher.broadcastRequest();
   }
 
+  private getAggOp(agg: any) {
+    return this.resultOpAggs[agg.field] || agg.op;
+  }
+
+  private buildBucketQuery(agg: any, bucket: any): Query {
+    const op = this.getAggOp(agg);
+    const key = bucket.key;
+    let query: Query = new TermQuery(agg.field, key);
+    if (typeof key === 'string' && key.toLowerCase() === 'missing') {
+      query = new ExistsQuery(agg.key, false);
+    }
+    if (op === 'missing') {
+      query = new ExistsQuery(agg.key, true);
+    }
+    if (op === 'filters') {
+      query = bucket.query || agg.filters[key];
+    }
+    if (op === 'range' || op === 'date_range') {
+      const lt = bucket.to;
+      const gte = bucket.from;
+      query = new RangeQuery(agg.field, lt, null, null, gte, null);
+    }
+    return query;
+  }
+
   isRangeAgg(agg: any): boolean {
-    return (this.resultOpAggs[agg.field] || agg.op) === 'date_range';
+    return this.getAggOp(agg) === 'date_range';
   }
 
   loadDatePicker(agg: any) {
