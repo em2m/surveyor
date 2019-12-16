@@ -1,6 +1,6 @@
 {
   "name": "@em2m/surveyor",
-  "version": "1.28.0",
+  "version": "1.29.0-SNAPSHOT",
   "dependencies": {
     "@angular/cdk": "^7.0.0",
     "@angular/flex-layout": "^7.0.0-beta.19",
