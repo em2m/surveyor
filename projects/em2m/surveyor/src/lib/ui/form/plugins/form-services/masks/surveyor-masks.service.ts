@@ -76,4 +76,42 @@ export class SurveyorMasks {
       return '$' + value;
     }
   }
+
+
+  static internationalPhoneNumberMask(params: any): any {
+    if (params && params.displayMaskedValue) {
+      return ($event: any, value: string): string => {
+        let model = updateModelValue($event, value);
+        return formatAsPhoneNumber(model);
+      };
+    } else {
+      return ($event: any, value: string): MaskedValue => {
+        let model = updateModelValue($event, value);
+        return {modelValue: model, viewValue: formatAsPhoneNumber(model)};
+      };
+    }
+
+    function updateModelValue($event: any, value: string): string {
+      let eventVal = $event.key.replace(/\D/g, '');
+      let newModelVal = value ? value.replace(/\D/g, '') + eventVal : eventVal;
+
+      if ($event.key === 'Backspace') {
+        newModelVal = newModelVal.substring(0, newModelVal.length - 1);
+      }
+
+      if (newModelVal.length > 15) {
+        newModelVal = newModelVal.substring(0, 15);
+      }
+
+      return newModelVal;
+    }
+
+    function formatAsPhoneNumber(value: string): string {
+      let newVal = '';
+      if (value.length === 0) {} else if (value.length <= 15) {
+        newVal = value.replace(/^(\d{0,15})/, '$1');
+      }
+      return newVal;
+    }
+  }
 }
