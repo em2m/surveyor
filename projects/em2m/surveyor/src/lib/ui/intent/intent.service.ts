@@ -2,9 +2,9 @@ import {Intent, IntentResolver, ResolveInfo} from './intent.model';
 import {Injectable, Injector, Type} from '@angular/core';
 import {Observable, merge} from 'rxjs';
 import {filter, toArray} from 'rxjs/operators';
-import 'rxjs/add/observable/merge';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/toArray';
+
+
+
 import {ExtensionService} from '../../core/extension/extension.service';
 import {Extension} from '../../core/extension/extension.model';
 
@@ -48,11 +48,10 @@ export class IntentService {
       });
       */
 
-      Observable
-        .merge(...this.resolvers[intent.action].map(resolver => resolver.resolveHandlers(intent)))
-        .filter(resolveInfo => resolveInfo !== null)
-        .toArray()
-        .subscribe((resolutions: Array<ResolveInfo>) => {
+      merge(...this.resolvers[intent.action].map(resolver => resolver.resolveHandlers(intent))).pipe(
+        filter(resolveInfo => resolveInfo !== null),
+        toArray()
+      ).subscribe((resolutions: Array<ResolveInfo>) => {
           if (resolutions.length > 0) {
             resolutions[0].handler.handleIntent(intent);
           }

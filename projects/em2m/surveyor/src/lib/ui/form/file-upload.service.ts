@@ -1,6 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Observable} from "rxjs";
-import {Observer} from "rxjs";
+import {Observable, Observer} from "rxjs";
 
 @Injectable()
 export class FileUploadService {
