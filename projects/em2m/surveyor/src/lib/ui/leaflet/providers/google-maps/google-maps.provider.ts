@@ -1,3 +1,5 @@
+
+import {map} from 'rxjs/operators';
 import * as L from 'leaflet';
 import {LayerDefinition, LayerProvider} from '../../leaflet.model';
 import {Injectable} from '@angular/core';
@@ -21,8 +23,8 @@ export class GoogleMapsProvider extends LayerProvider {
     if (this.mapProvider === 'google') {
       const accessToken = this.mapConfig.googleKey || this.mapConfig.apiKey;
 
-      return this.googleMaps.loadApi(accessToken)
-        .map(() => {
+      return this.googleMaps.loadApi(accessToken).pipe(
+        map(() => {
           const gridLayer = L.gridLayer as any;
           const streetsLayer = <LayerDefinition>{
             label: 'Streets',
@@ -34,7 +36,7 @@ export class GoogleMapsProvider extends LayerProvider {
           };
 
           return [streetsLayer, satelliteLayer];
-        });
+        }));
     } else {
       return [];
     }

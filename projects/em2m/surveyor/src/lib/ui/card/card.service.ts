@@ -4,8 +4,7 @@ import {CardBoardRenderer} from './renderers/cardboard/card-board.renderer';
 import {CardRenderer} from './renderers/card/card.renderer';
 import {ExtensionService} from '../../core/extension/extension.service';
 import {Extension} from '../../core/extension/extension.model';
-import {Observable} from 'rxjs';
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 
 @Injectable()
 export class CardService {

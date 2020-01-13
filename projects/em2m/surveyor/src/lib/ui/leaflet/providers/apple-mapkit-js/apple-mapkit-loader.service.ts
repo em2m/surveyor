@@ -1,3 +1,5 @@
+
+import {concatMap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {Observable, from, of} from 'rxjs';
 
@@ -12,12 +14,12 @@ export class AppleMapkitLoaderService {
     if (!this.isLoaded) {
       this.isLoaded = true;
 
-      return this.loadScript('https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js')
-        .concatMap(() => {
+      return this.loadScript('https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js').pipe(
+        concatMap(() => {
           return this.loadScript('https://unpkg.com/leaflet.mapkitmutant@latest/Leaflet.MapkitMutant.js');
-        });
+        }));
     } else {
-      return Observable.of(true);
+      return observableOf(true);
     }
   }
 

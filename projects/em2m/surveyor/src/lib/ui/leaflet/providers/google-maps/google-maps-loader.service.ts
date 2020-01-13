@@ -1,5 +1,8 @@
+
+import {of as observableOf, Observable} from 'rxjs';
+
+import {concatMap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
 
 @Injectable()
 export class GoogleMapsLoaderService {
@@ -12,12 +15,12 @@ export class GoogleMapsLoaderService {
     if (!this.isLoaded) {
       this.isLoaded = true;
 
-      return this.loadScript(`https://maps.googleapis.com/maps/api/js?key=${apiKey}`)
-        .concatMap(() => {
+      return this.loadScript(`https://maps.googleapis.com/maps/api/js?key=${apiKey}`).pipe(
+        concatMap(() => {
           return this.loadScript('https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js');
-        });
+        }));
     } else {
-      return Observable.of(true);
+      return observableOf(true);
     }
   }
 
