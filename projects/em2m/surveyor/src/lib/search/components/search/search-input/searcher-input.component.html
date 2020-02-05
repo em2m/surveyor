@@ -12,11 +12,14 @@
         </span>
       </li>
       <li class="search-input-wrapper">
-        <input #searchInputFocus autofocus class="search-input" [(ngModel)]="searchInput" [placeholder]="placeholder" (keyup.enter)="onSubmit(searchInput)"/>
+        <input #searchInputFocus autofocus class="search-input" [(ngModel)]="searchInput" [placeholder]="placeholder"
+               (keyup.enter)="onSubmit(searchInput)"
+               (keyup.shift.enter)="onSubmit(searchInput)"
+        />
       </li>
     </ul>
     <div>
-      <surveyor-region [regionId]="iconRegion"></surveyor-region>
+      <surveyor-region type="horizontal" [regionId]="iconRegion"></surveyor-region>
     </div>
   </div>
 </div>

@@ -1,5 +1,8 @@
+
+import {of as observableOf, Observable} from 'rxjs';
+
+import {map} from 'rxjs/operators';
 import {ForwardGeocodeItem, ForwardGeocodeResult, GeoConfig, GeoProvider} from '../../geo.model';
-import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
@@ -18,7 +21,7 @@ export class MapquestGeoProvider implements GeoProvider {
   forwardGeocode(placeName: string): Observable<ForwardGeocodeResult> {
     if (this.mapquestKey) {
       const url = `https://www.mapquestapi.com/geocoding/v1/address?key=${this.mapquestKey}&inFormat=kvp&outFormat=json&location=${placeName}`;
-      return this.http.get(url).map((res: any) => {
+      return this.http.get(url).pipe(map((res: any) => {
         return <ForwardGeocodeResult>{
           name: placeName,
           items: res.results.map((item: any) => {
@@ -30,14 +33,14 @@ export class MapquestGeoProvider implements GeoProvider {
             };
           })
         };
-      });
+      }));
     } else {
-      return Observable.of(null);
+      return observableOf(null);
     }
   }
 
   staticImageUrl(lng: number, lat: number, zoom: number, width: number, height: number): Observable<string> {
-    return Observable.of(`${this.baseUrl}?key=${this.mapquestKey}&size=${width},${height}` +
+    return observableOf(`${this.baseUrl}?key=${this.mapquestKey}&size=${width},${height}` +
       `&type=map&zoom=${zoom}&scalebar=false&traffic=false&center=${lat},${lng}`);
   }
 }

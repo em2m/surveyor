@@ -2,8 +2,7 @@ import {Injectable, Injector} from '@angular/core';
 import {ControlProvider, FeatureProvider, LayerProvider} from './leaflet.model';
 import {ExtensionService} from '../../core/extension/extension.service';
 import {Map, Control, Layer} from 'leaflet';
-import {BehaviorSubject} from 'rxjs';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable()
 export class LeafletService {
@@ -99,7 +98,7 @@ export class LeafletService {
     return this.mapControlLayers[mapId];
   }
 
-  getMapBaseLayers(mapId): Array<{layerName: string, layer: Layer}> {
+  getMapBaseLayers(mapId): Array<{label: string, layer: Layer}> {
     return this.mapBaseLayers[mapId];
   }
 

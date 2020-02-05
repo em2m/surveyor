@@ -1,6 +1,4 @@
-import {Observable} from "rxjs";
-import {Subject} from "rxjs";
-import {BehaviorSubject} from "rxjs";
+import {Observable, Subject, BehaviorSubject} from "rxjs";
 import {ItemSelection} from "../action/action.model";
 
 export interface Column {

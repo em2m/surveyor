@@ -1,6 +1,6 @@
+
+import {throwError as observableThrowError, Observable, Subject} from 'rxjs';
 import {Injectable, Type} from '@angular/core';
-import {Observable} from 'rxjs';
-import {Subject} from 'rxjs';
 import {Picker} from './picker.component';
 import {PickerOptions} from './picker.model';
 import {ModalService} from '../modal/modal.service';
@@ -35,7 +35,7 @@ export class PickerService {
     // Retrieve the picker for the specified type
     let picker = this.pickers[type];
     if (picker == null) {
-      return Observable.throw({error: 'Unable to resolve picker for type: ' + type});
+      return observableThrowError({error: 'Unable to resolve picker for type: ' + type});
     }
 
     if (!pickerOptions) { pickerOptions = {}; }
