@@ -35,7 +35,7 @@ export function routeLoader(loader: LoaderService) {
     CommonModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot([]),
+    RouterModule.forRoot([], {onSameUrlNavigation: 'reload'}),
     SurveyorCoreModule.forRoot(),
     SurveyorApplicationModule,
     SurveyorMaterialModule.forRoot(),
