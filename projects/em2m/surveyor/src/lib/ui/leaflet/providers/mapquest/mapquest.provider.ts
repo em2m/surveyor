@@ -17,7 +17,7 @@ export class MapquestProvider extends LayerProvider {
     this.resolveProvider(this.appConfig, this.ctx);
 
     if (this.mapProvider === 'mapquest') {
-      const accessToken = this.mapConfig.mapquestKey || this.mapConfig.accessToken;
+      const accessToken = this.mapConfig.accessToken || this.mapConfig.mapquestKey;
 
       const streetsLayer = {
         label: 'Streets',
