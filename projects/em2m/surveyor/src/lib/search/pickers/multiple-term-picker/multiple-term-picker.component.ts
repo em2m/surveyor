@@ -19,6 +19,8 @@ export class MultipleTermPickerComponent extends Picker implements OnInit {
 
   key = '';
   agg: any;
+  label = '';
+  submitEnabled = false;
 
   submit() {
     this.buckets.forEach(bucket => {
@@ -31,12 +33,16 @@ export class MultipleTermPickerComponent extends Picker implements OnInit {
     });
   }
 
+  canSubmit(): boolean {
+    return this.submitEnabled;
+  }
+
   ngOnInit() {
     this.buckets = this.params.buckets;
     this.agg = this.params.agg;
     this.constraints = this.params.constraints;
     this.key = this.agg.key;
-
+    this.label = this.agg.label;
 
     this.bucketSearchResults = this.buckets.map(bucketItem => {
       bucketItem.checked = false;
@@ -92,9 +98,19 @@ export class MultipleTermPickerComponent extends Picker implements OnInit {
 
   }
 
-  toggleBox(item: any) {
+  toggleBox(item: any): void {
     item.checked = !item.checked;
     this.selectedItems[item.key] = item.checked;
+
+    const keys = Object.keys(this.selectedItems);
+
+    for (const key in keys) {
+      if (this.selectedItems[keys[key]] === true) {
+        this.submitEnabled = true;
+        return;
+      }
+    }
+    this.submitEnabled = false;
   }
 
   clearSearch() {
