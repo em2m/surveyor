@@ -14,7 +14,7 @@ export class ApplicationWrapperComponent implements OnInit, OnDestroy {
   isMobile = true;
   brandColor: string;
   hideHeader = false;
-  private blackListedRoles: Array<string> = ['recoveryAgentAnonymous'];
+  private blackListedRoles: Array<string> = ['recoveryAgentAnonymous', 'dealerAccessAnonymous'];
   private breakpointSub: Subscription;
   private brandSub: Subscription;
 
