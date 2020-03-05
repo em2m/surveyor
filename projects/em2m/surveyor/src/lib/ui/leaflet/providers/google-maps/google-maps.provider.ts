@@ -26,16 +26,19 @@ export class GoogleMapsProvider extends LayerProvider {
       return this.googleMaps.loadApi(accessToken).pipe(
         map(() => {
           const gridLayer = L.gridLayer as any;
-          const streetsLayer = <LayerDefinition>{
-            label: 'Streets',
-            layer: gridLayer.googleMutant({ type: 'roadmap' })
-          };
-          const satelliteLayer = <LayerDefinition>{
-            label: 'Satellite',
-            layer: gridLayer.googleMutant({type: 'hybrid'})
-          };
-
-          return [streetsLayer, satelliteLayer];
+          if (gridLayer.googleMutant) {
+            const streetsLayer = <LayerDefinition>{
+              label: 'Streets',
+              layer: gridLayer.googleMutant({type: 'roadmap'})
+            };
+            const satelliteLayer = <LayerDefinition>{
+              label: 'Satellite',
+              layer: gridLayer.googleMutant({type: 'hybrid'})
+            };
+            return [streetsLayer, satelliteLayer];
+          } else {
+            return [];
+          }
         }));
     } else {
       return [];
