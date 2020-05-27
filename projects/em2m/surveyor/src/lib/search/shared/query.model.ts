@@ -77,6 +77,12 @@ export class RangeQuery extends FieldedQuery {
   }
 }
 
+export class DateRangeQuery extends FieldedQuery {
+  constructor(field: string, public lt, public lte, public gt, public gte, public timeZone: string) {
+    super(field, OperationType.DATE_RANGE);
+  }
+}
+
 export class RegexQuery extends FieldedQuery {
   constructor(field: string, public value) {
     super(field, OperationType.REGEX);
@@ -112,6 +118,7 @@ export class OperationType {
   static AND = 'and';
   static OR = 'or';
   static RANGE = 'range';
+  static DATE_RANGE = 'date_range';
   static NATIVE = 'native';
   static PHRASE = 'phrase';
   static TERM = 'term';
