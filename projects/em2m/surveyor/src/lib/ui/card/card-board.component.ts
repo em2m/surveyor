@@ -40,7 +40,9 @@ export class CardBoardComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.ctxSub.unsubscribe();
+    if (this.ctxSub) {
+      this.ctxSub.unsubscribe();
+    }
 
     this.destroyCardBoard();
   }

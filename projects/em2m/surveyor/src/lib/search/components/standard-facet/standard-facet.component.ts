@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Searcher} from '../../shared/searcher.model';
-import {Bucket, ExistsQuery, OrQuery, Query, RangeQuery, TermQuery} from '../../shared/query.model';
+import {Bucket, DateRangeQuery, ExistsQuery, OperationType, OrQuery, Query, RangeQuery, TermQuery} from '../../shared/query.model';
 import {PickerService} from '../../../ui/picker/picker.service';
 import * as _moment from 'moment';
 import {Subscription} from 'rxjs';
@@ -140,16 +140,21 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
     if (op === 'filters') {
       query = bucket.query || agg.filters[key];
     }
-    if (op === 'range' || op === 'date_range') {
+    if (op === 'range') {
       const lt = bucket.to;
       const gte = bucket.from;
       query = new RangeQuery(agg.field, lt, null, null, gte, null);
+    }
+    if (op === 'date_range') {
+      const lt = bucket.to;
+      const gte = bucket.from;
+      query = new DateRangeQuery(agg.field, lt, null, null, gte, null);
     }
     return query;
   }
 
   isRangeAgg(agg: any): boolean {
-    return this.getAggOp(agg) === 'date_range';
+    return this.getAggOp(agg) === OperationType.DATE_RANGE;
   }
 
   loadDatePicker(agg: any) {
