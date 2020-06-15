@@ -19,14 +19,14 @@ export class AppleMapkitLoaderService {
           return this.loadScript('https://unpkg.com/leaflet.mapkitmutant@latest/Leaflet.MapkitMutant.js');
         }));
     } else {
-      return observableOf(true);
+      return of(true);
     }
   }
 
   private loadScript(scriptUrl: string): Observable<boolean> {
     return Observable.create(observer => {
 
-      let script: any = document.createElement('script');
+      const script: any = document.createElement('script');
 
       if (script.readyState) {  // IE
         script.onreadystatechange = () => {
@@ -36,7 +36,7 @@ export class AppleMapkitLoaderService {
           }
         };
       } else {  // Others
-        script.onload = function() {
+        script.onload = () => {
           observer.next(true);
         };
       }

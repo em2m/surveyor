@@ -1,4 +1,4 @@
-import {EventEmitter, Output, Input, HostListener} from "@angular/core";
+import {EventEmitter, Output, Input, HostListener} from '@angular/core';
 
 export abstract class Popover {
 

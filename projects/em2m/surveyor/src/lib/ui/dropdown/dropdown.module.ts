@@ -21,7 +21,7 @@ export * from './dropdown.component';
   ]
 })
 export class SurveyorDropdownModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<SurveyorDropdownModule> {
     return {
       ngModule: SurveyorDropdownModule
     };

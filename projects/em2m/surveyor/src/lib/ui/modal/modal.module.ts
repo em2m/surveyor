@@ -54,7 +54,7 @@ export * from './modals/loading-modal/loading-modal.component';
   ]
 })
 export class SurveyorModalModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<SurveyorModalModule> {
     return {
       ngModule: SurveyorModalModule,
       providers: [

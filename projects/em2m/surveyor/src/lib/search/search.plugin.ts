@@ -4,7 +4,7 @@ import {QueryPickerComponent} from './pickers/query-picker/query-picker.componen
 import {DateRangePickerComponent} from './pickers/date-range-picker/date-range-picker.component';
 import {MultipleTermPickerComponent} from './pickers/multiple-term-picker/multiple-term-picker.component';
 
-export let SearchPlugin: Plugin = <Plugin> {
+export let SearchPlugin: Plugin = {
   name: 'Search Plugin',
   extensions: {
     'surveyor:picker': [

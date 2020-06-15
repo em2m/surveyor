@@ -4,9 +4,9 @@
   "newProjectRoot": "projects",
   "projects": {
     "@em2m/surveyor": {
+      "projectType": "library",
       "root": "projects/em2m/surveyor",
       "sourceRoot": "projects/em2m/surveyor/src",
-      "projectType": "library",
       "prefix": "surveyor",
       "architect": {
         "build": {
@@ -14,6 +14,11 @@
           "options": {
             "tsConfig": "projects/em2m/surveyor/tsconfig.lib.json",
             "project": "projects/em2m/surveyor/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/em2m/surveyor/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -37,7 +42,6 @@
           }
         }
       }
-    }
-  },
+    }},
   "defaultProject": "@em2m/surveyor"
 }

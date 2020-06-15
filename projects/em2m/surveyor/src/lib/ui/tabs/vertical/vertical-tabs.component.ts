@@ -12,9 +12,9 @@ import {Subscription} from 'rxjs/internal/Subscription';
 export class VerticalTabsComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() routes?: Routes;
-  @Input() queryParams?: {};
-  @Input() tabsGridWidth? = 2;
-  @Input() contentGridWidth? = 10;
+  @Input() queryParams ?: {};
+  @Input() tabsGridWidth ?= 2;
+  @Input() contentGridWidth ?= 10;
 
   public tabs: any[] = [];
   private ctxSub: Subscription;

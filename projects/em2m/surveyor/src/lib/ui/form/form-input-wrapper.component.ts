@@ -8,7 +8,7 @@ import {FormControl} from '@angular/forms';
 })
 export class SurveyorFormInputWrapperComponent implements OnInit, OnDestroy {
 
-  @ViewChild('inputTarget', {read: ViewContainerRef}) inputTarget: any;
+  @ViewChild('inputTarget', {read: ViewContainerRef, static: true}) inputTarget: any;
   @Input() controlDefinition: ControlDefinition;
   @Input() controlInstance: FormControl;
   @Input() asyncValues: any;
@@ -40,8 +40,8 @@ export class SurveyorFormInputWrapperComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    let factory = this.resolver.resolveComponentFactory(this.controlDefinition.component);
-    let component = this.inputTarget.createComponent(factory);
+    const factory = this.resolver.resolveComponentFactory(this.controlDefinition.component);
+    const component = this.inputTarget.createComponent(factory);
     component.instance.controlDefinition = this.controlDefinition;
     component.instance.formControl = this.controlInstance;
     component.instance.readonly = this.readonly;
@@ -57,14 +57,14 @@ export class SurveyorFormInputWrapperComponent implements OnInit, OnDestroy {
       this.currentComponent.destroy();
     }
     this.currentComponent = component;
-    let syncVal = this.controlDefinition.value;
+    const syncVal = this.controlDefinition.value;
     if (syncVal && this.currentComponent) {
       this.currentComponent.instance.setValue(syncVal);
     }
 
     if (this.asyncValues && this.asyncValues.subscribe) {
       this.asyncValSubscription = this.asyncValues.subscribe((vals: any) => {
-        let val = vals[this.controlDefinition.key];
+        const val = vals[this.controlDefinition.key];
         if (val && this.currentComponent) {
           this.currentComponent.instance.setValue(val);
         }
@@ -73,7 +73,7 @@ export class SurveyorFormInputWrapperComponent implements OnInit, OnDestroy {
 
     if (this.asyncOptions && this.asyncOptions.subscribe) {
       this.asyncOptsSubscription = this.asyncOptions.subscribe((data: any) => {
-        let opts = data[this.controlDefinition.key];
+        const opts = data[this.controlDefinition.key];
         if (opts && this.currentComponent) {
           this.currentComponent.instance.setOptions(opts);
         }

@@ -27,9 +27,9 @@ export class ExtensionService {
         // console.log('Loading Plugin: ' + plugin.name);
 
         if (plugin.extensions) {
-          for (let extensionType in plugin.extensions) {
+          for (const extensionType in plugin.extensions) {
             if (plugin.extensions.hasOwnProperty(extensionType)) {
-              let extensions = plugin.extensions[extensionType];
+              const extensions = plugin.extensions[extensionType];
               extensions.forEach((ext: Extension) => {
                 // console.log("Registering Extension: ", extensionType, ext);
                 this.registerExtension(extensionType, ext.target, ext);
@@ -62,12 +62,12 @@ export class ExtensionService {
   }
 
   pluginIsLoaded(pluginName: string): boolean {
-    return !!this.pluginRegistry[pluginName]
+    return !!this.pluginRegistry[pluginName];
   }
 
   getExtensionById(type: string, id: string): Extension {
-    for (let extension of this.extensionsByType[type] || []) {
-      let config = extension.config || {};
+    for (const extension of this.extensionsByType[type] || []) {
+      const config = extension.config || {};
       if (config.id === id) {
         return extension;
       }
@@ -76,7 +76,7 @@ export class ExtensionService {
   }
 
   getExtensionsForType(type: string): Array<Extension> {
-    let extensions = this.extensionsByType[type] || [];
+    const extensions = this.extensionsByType[type] || [];
     return extensions
       .map(extension => {
         if (extension.priority === undefined) {
@@ -85,7 +85,7 @@ export class ExtensionService {
         return extension;
       })
       .filter((extension: Extension) => {
-        let filterContext = this.contextService.getContext();
+        const filterContext = this.contextService.getContext();
         return FilterUtils.isPermitted(filterContext, extension.filters);
       })
       .sort((ext1: Extension, ext2: Extension) => {
@@ -96,7 +96,7 @@ export class ExtensionService {
   }
 
   getExtensionsForTypeAndTarget(type: string, target: string): Array<Extension> {
-    let extensions = this.extensionsByType[type] || [];
+    const extensions = this.extensionsByType[type] || [];
     return extensions
       .map(extension => {
         if (extension.priority === undefined) {
@@ -108,7 +108,7 @@ export class ExtensionService {
         return ext.target === target;
       })
       .filter((extension: Extension) => {
-        let filterContext = this.contextService.getContext();
+        const filterContext = this.contextService.getContext();
         return FilterUtils.isPermitted(filterContext, extension.filters);
       })
       .sort((ext1: Extension, ext2: Extension) => {
@@ -119,7 +119,7 @@ export class ExtensionService {
   }
 
   getExtensionsForTarget(target: string): Array<Extension> {
-    let extensions = this.extensionsByTarget[target] || [];
+    const extensions = this.extensionsByTarget[target] || [];
     return extensions
       .map(extension => {
         if (extension.priority === undefined) {
@@ -131,7 +131,7 @@ export class ExtensionService {
         return ext.target === target;
       })
       .filter((extension: Extension) => {
-        let filterContext = this.contextService.getContext();
+        const filterContext = this.contextService.getContext();
         return FilterUtils.isPermitted(filterContext, extension.filters);
       })
       .sort((ext1: Extension, ext2: Extension) => {

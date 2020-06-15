@@ -22,12 +22,12 @@ export class MapquestGeoProvider implements GeoProvider {
     if (this.mapquestKey) {
       const url = `https://www.mapquestapi.com/geocoding/v1/address?key=${this.mapquestKey}&inFormat=kvp&outFormat=json&location=${placeName}`;
       return this.http.get(url).pipe(map((res: any) => {
-        return <ForwardGeocodeResult>{
+        return {
           name: placeName,
           items: res.results.map((item: any) => {
             const loc = item.locations[0];
 
-            return <ForwardGeocodeItem>{
+            return {
               name: [loc.street, loc.adminArea5, loc.adminArea3, loc.adminArea1].filter(val => val && val.length > 0).join(', '),
               center: [item.latLng.lat, item.latLng.lng]
             };

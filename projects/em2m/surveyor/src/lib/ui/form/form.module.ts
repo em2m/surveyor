@@ -17,11 +17,8 @@ export * from './form.service';
 export * from './form-input-component';
 export * from './form-input-wrapper.component';
 export * from './file-upload.service';
-
 export * from './plugins/material/material-form.module';
-
 export * from './plugins/form-services/form-services-plugin';
-
 export * from './plugins/mobile/select-input/select-input.component';
 export * from './plugins/mobile/number-input/number-input.component';
 
@@ -55,7 +52,7 @@ const components = [
   ]
 })
 export class SurveyorFormModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<SurveyorFormModule> {
     return {
       ngModule: SurveyorFormModule,
       providers: [

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SurveyorFormInputComponent} from '../../../form-input-component';
-import {MatChipInputEvent} from '@angular/material';
+import {MatChipInputEvent} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 
 @Component({
@@ -11,7 +11,7 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 export class MaterialChipsInputComponent extends SurveyorFormInputComponent implements OnInit {
     public tags: Array<string> = [];
     readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-    
+
     ngOnInit() {
         setTimeout(() => {
             this.tags = this.formControl.value || [];

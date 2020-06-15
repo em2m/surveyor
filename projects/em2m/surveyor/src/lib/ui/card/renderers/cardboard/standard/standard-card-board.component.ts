@@ -1,7 +1,7 @@
-import {Component, EventEmitter, OnChanges, OnInit, Output} from "@angular/core";
-import {CardService} from "../../../card.service";
-import {Card} from "../../../card.model";
-import {CardBoardRenderer} from "../card-board.renderer";
+import {Component, EventEmitter, OnChanges, OnInit, Output} from '@angular/core';
+import {CardService} from '../../../card.service';
+import {Card} from '../../../card.model';
+import {CardBoardRenderer} from '../card-board.renderer';
 
 @Component({
   selector: 'surveyor-standard-card-board',
@@ -27,21 +27,21 @@ export class StandardCardBoardRenderer extends CardBoardRenderer implements OnIn
   }
 
   updateCards() {
-    let cardRows = [];
+    const cardRows = [];
 
-    let cards = this.cardService.findCards(this.target).reverse();
+    const cards = this.cardService.findCards(this.target).reverse();
 
     while (cards.length > 0) {
-      let cardRow = [];
+      const cardRow = [];
 
       let rowFilled = false;
       let rowSize = 0;
 
       // Iterate over all the cards to make bes fit rows maintaining perfect order
       while (!rowFilled && cards.length > 0) {
-        let card = cards.pop();
+        const card = cards.pop();
         card.gridWidth = card.gridWidth || 12;
-        card.width = (card.gridWidth / 12) * 100 + "%";
+        card.width = (card.gridWidth / 12) * 100 + '%';
         if (rowSize + card.gridWidth <= 12) {
           cardRow.push(card);
           rowSize += card.gridWidth;

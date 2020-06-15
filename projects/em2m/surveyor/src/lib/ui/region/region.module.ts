@@ -1,7 +1,7 @@
-import {ModuleWithProviders, NgModule} from "@angular/core";
-import {RouterModule} from "@angular/router";
-import {CommonModule} from "@angular/common";
-import {RegionComponent} from "./region.component";
+import {ModuleWithProviders, NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
+import {CommonModule} from '@angular/common';
+import {RegionComponent} from './region.component';
 
 export * from './region.component';
 
@@ -21,7 +21,7 @@ export * from './region.component';
   ]
 })
 export class SurveyorRegionModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<SurveyorRegionModule> {
     return {
       ngModule: SurveyorRegionModule,
       providers: []

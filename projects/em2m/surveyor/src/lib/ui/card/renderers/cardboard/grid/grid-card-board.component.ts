@@ -1,7 +1,7 @@
-import {Component, EventEmitter, OnChanges, OnInit, Output} from "@angular/core";
-import {CardService} from "../../../card.service";
-import {Card} from "../../../card.model";
-import {CardBoardRenderer} from "../card-board.renderer";
+import {Component, EventEmitter, OnChanges, OnInit, Output} from '@angular/core';
+import {CardService} from '../../../card.service';
+import {Card} from '../../../card.model';
+import {CardBoardRenderer} from '../card-board.renderer';
 
 @Component({
   selector: 'surveyor-grid-card-board',

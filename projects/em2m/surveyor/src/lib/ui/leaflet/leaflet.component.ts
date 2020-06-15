@@ -1,19 +1,11 @@
 
 import {concat as observableConcat, from as observableFrom, of as observableOf, Observable} from 'rxjs';
-
 import {map, concatMap, tap} from 'rxjs/operators';
 import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, NgZone, OnDestroy, Output, Renderer2} from '@angular/core';
 import * as L from 'leaflet';
 import {Control, Map, MapOptions} from 'leaflet';
 import {ControlProvider, FeatureProvider, LayerDefinition, LayerProvider} from './leaflet.model';
 import {LeafletService} from './leaflet.service';
-
-
-
-
-
-
-
 import LayersObject = Control.LayersObject;
 
 @Component({
@@ -62,7 +54,7 @@ export class SurveyorLeafletComponent implements AfterViewInit, OnDestroy {
     });
 
     // Hacks to remove the touch capabilities from leaflet which causes large buttons and boxes
-    window['L'].Browser['touch'] = false;
+    (window['L'].Browser as any).touch = false;
     const leafletContainerDiv = this.elementRef.nativeElement.querySelector('.leaflet-container');
     this.renderer.removeClass(leafletContainerDiv, 'leaflet-touch');
 

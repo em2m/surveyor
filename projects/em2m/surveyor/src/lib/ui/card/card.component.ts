@@ -1,5 +1,15 @@
 import {
-  Component, Input, ComponentFactoryResolver, EventEmitter, Output, ViewChild, ViewContainerRef, OnInit, OnChanges, OnDestroy
+  Component,
+  Input,
+  ComponentFactoryResolver,
+  EventEmitter,
+  Output,
+  ViewChild,
+  ViewContainerRef,
+  OnInit,
+  OnChanges,
+  OnDestroy,
+  ChangeDetectorRef
 } from '@angular/core';
 import {CardService} from './card.service';
 import {Card} from './card.model';
@@ -15,11 +25,13 @@ export class CardComponent implements OnInit, OnChanges, OnDestroy {
   @Input() last = false;
   @Output() hidden ?: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() cardCreated ?: EventEmitter<Card> = new EventEmitter<Card>();
-  @ViewChild('cardTarget', {read: ViewContainerRef}) cardTarget: any;
+  @ViewChild('cardTarget', {read: ViewContainerRef, static: true}) cardTarget: any;
   private cardRendererRef: any;
   public hide = false;
 
-  constructor(private resolver: ComponentFactoryResolver, private cardService: CardService) {
+  constructor(private resolver: ComponentFactoryResolver,
+              private cardService: CardService,
+              private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -68,6 +80,7 @@ export class CardComponent implements OnInit, OnChanges, OnDestroy {
         }
       }
     }
+    this.cdr.detectChanges();
   }
 
   private destroyCard() {

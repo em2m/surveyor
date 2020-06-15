@@ -1,6 +1,6 @@
-import {Component, ComponentFactoryResolver, Input, OnInit} from "@angular/core";
-import {CardService} from "../../../card.service";
-import {BaseCardComponent} from "../base-card.component";
+import {Component, ComponentFactoryResolver, Input, OnInit} from '@angular/core';
+import {CardService} from '../../../card.service';
+import {BaseCardComponent} from '../base-card.component';
 
 @Component({
   selector: 'surveyor-collapsible-card',

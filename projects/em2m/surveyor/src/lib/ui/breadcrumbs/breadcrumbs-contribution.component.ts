@@ -1,10 +1,10 @@
-import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild, ViewContainerRef} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {BreadcrumbItem} from './breadcrumbs.model';
 import {Subscription} from 'rxjs';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {ContextService} from '../../core/extension/context.service';
-import {MatMenuTrigger} from '@angular/material';
+import {MatMenuTrigger} from '@angular/material/menu';
 
 @Component({
   templateUrl: './breadcrumbs-contribution.component.html',
@@ -16,7 +16,7 @@ export class BreadcrumbsContribution implements OnInit, OnDestroy {
   tabletScreen: boolean;
   windowSizeTrackerSub: Subscription;
   private routerSub: Subscription;
-  @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
+  @ViewChild(MatMenuTrigger, {static: true}) trigger: MatMenuTrigger;
 
   constructor(private router: Router,
               private breakpoint: BreakpointObserver,
@@ -55,7 +55,7 @@ export class BreadcrumbsContribution implements OnInit, OnDestroy {
   }
 
   openMenu() {
-    //this.trigger.openMenu();
+    // this.trigger.openMenu();
   }
 
   private parseRouteState(route: ActivatedRoute): Array<ActivatedRoute> {

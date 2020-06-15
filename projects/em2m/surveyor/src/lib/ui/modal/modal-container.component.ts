@@ -9,7 +9,7 @@ export abstract class ModalContainer implements OnInit {
   @Output() onSubmit = new EventEmitter();
   @Output() onCancel = new EventEmitter();
   @Output() onDelete = new EventEmitter();
-  @ViewChild('modalTarget', {read: ViewContainerRef}) modalTarget: any;
+  @ViewChild('modalTarget', {read: ViewContainerRef, static: true}) modalTarget: any;
   title: string;
   submitLabel = "Ok";
   cancelLabel = "Cancel";

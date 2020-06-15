@@ -31,8 +31,8 @@ export class QueryPickerComponent extends Picker {
 
   loadQuery(params: any) {
     if (params) {
-      if (params['query'] && params['query'] instanceof OrQuery) {
-        let orQuery = params['query'] as OrQuery;
+      if (params.query && params.query instanceof OrQuery) {
+        const orQuery = params.query as OrQuery;
         orQuery.of.forEach((query: any) => {
           if (query instanceof TermQuery) {
             query = query as TermQuery;
@@ -67,10 +67,10 @@ export class QueryPickerComponent extends Picker {
   }
 
   submit() {
-    let matchField = this.getMatchField();
-    let bulkQuery = new OrQuery(this.queries.map(query => {
+    const matchField = this.getMatchField();
+    const bulkQuery = new OrQuery(this.queries.map(query => {
       if (query.indexOf(':') > 0) {
-        let querySplit = query.split(':');
+        const querySplit = query.split(':');
         return new TermQuery(querySplit[0], querySplit[1]);
       } else {
         return new MatchQuery(matchField, query);
@@ -85,16 +85,16 @@ export class QueryPickerComponent extends Picker {
   }
 
   getMatchField(): string {
-    return this.params['field'] || '_all';
+    return this.params.field || '_all';
   }
 
   private loadAudio() {
-    let successAudio = new Audio();
+    const successAudio = new Audio();
     successAudio.src = 'http://soundbible.com/grab.php?id=819&type=mp3';
     successAudio.load();
     this.successAudio = successAudio;
 
-    let errorAudio = new Audio();
+    const errorAudio = new Audio();
     errorAudio.src = 'http://soundbible.com/grab.php?id=1682&type=mp3';
     errorAudio.load();
     this.errorAudio = errorAudio;

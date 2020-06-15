@@ -24,7 +24,7 @@ export * from './containers/standard/standard-popover-container.component';
   ]
 })
 export class SurveyorPopoverModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<SurveyorPopoverModule> {
     return {
       ngModule: SurveyorPopoverModule,
       providers: [

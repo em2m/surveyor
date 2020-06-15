@@ -5,18 +5,18 @@ export class SurveyorMasks {
   static phoneNumberMask(params: any): any {
     if (params && params.displayMaskedValue) {
       return ($event: any, value: string): string => {
-        let model = updateModelValue($event, value);
+        const model = updateModelValue($event, value);
         return formatAsPhoneNumber(model);
       };
     } else {
       return ($event: any, value: string): MaskedValue => {
-        let model = updateModelValue($event, value);
+        const model = updateModelValue($event, value);
         return {modelValue: model, viewValue: formatAsPhoneNumber(model)};
       };
     }
 
     function updateModelValue($event: any, value: string): string {
-      let eventVal = $event.key.replace(/\D/g, '');
+      const eventVal = $event.key.replace(/\D/g, '');
       let newModelVal = value ? value.replace(/\D/g, '') + eventVal : eventVal;
 
       if ($event.key === 'Backspace') {
@@ -46,18 +46,18 @@ export class SurveyorMasks {
   static dollarMask(params: any): any {
     if (params && params.displayMaskedValue) {
       return ($event: any, value: string): string => {
-        let model = updateModelValue($event, value);
+        const model = updateModelValue($event, value);
         return formatAsDollarValue(model);
       };
     } else {
       return ($event: any, value: string): MaskedValue => {
-        let model = updateModelValue($event, value);
+        const model = updateModelValue($event, value);
         return {modelValue: model, viewValue: formatAsDollarValue(model)};
       };
     }
 
     function updateModelValue($event, value: string): string {
-      let eventVal = ($event.key || '').replace(/[^$0-9\.]/g, '');
+      const eventVal = ($event.key || '').replace(/[^$0-9\.]/g, '');
       let newModelVal = value ? value.toString().replace(/[^$0-9\.]/g, '') + eventVal : eventVal;
       newModelVal = newModelVal.toString().replace('$', '');
 
@@ -81,18 +81,18 @@ export class SurveyorMasks {
   static internationalPhoneNumberMask(params: any): any {
     if (params && params.displayMaskedValue) {
       return ($event: any, value: string): string => {
-        let model = updateModelValue($event, value);
+        const model = updateModelValue($event, value);
         return formatAsPhoneNumber(model);
       };
     } else {
       return ($event: any, value: string): MaskedValue => {
-        let model = updateModelValue($event, value);
+        const model = updateModelValue($event, value);
         return {modelValue: model, viewValue: formatAsPhoneNumber(model)};
       };
     }
 
     function updateModelValue($event: any, value: string): string {
-      let eventVal = $event.key.replace(/\D/g, '');
+      const eventVal = $event.key.replace(/\D/g, '');
       let newModelVal = value ? value.replace(/\D/g, '') + eventVal : eventVal;
 
       if ($event.key === 'Backspace') {

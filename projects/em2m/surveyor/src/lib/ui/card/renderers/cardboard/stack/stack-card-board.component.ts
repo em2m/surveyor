@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Output, OnInit, OnChanges} from "@angular/core";
-import {CardService} from "../../../card.service";
-import {CardBoardRenderer} from "../card-board.renderer";
+import {Component, EventEmitter, Output, OnInit, OnChanges} from '@angular/core';
+import {CardService} from '../../../card.service';
+import {CardBoardRenderer} from '../card-board.renderer';
 
 @Component({
   selector: 'surveyor-stack-card-board',

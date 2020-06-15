@@ -2,17 +2,17 @@ export interface Envelope extends Array<number> {
 }
 
 export class Query {
-  constructor(public op: OperationType) { }
+  constructor(public op: string) { }
 }
 
 export class BoolQuery extends Query {
-  constructor(opType: OperationType, public of: Array<Query>) {
+  constructor(opType: string, public of: Array<Query>) {
     super(opType);
   }
 }
 
 export abstract class FieldedQuery extends Query {
-  constructor(public field: string, opType: OperationType) {
+  constructor(public field: string, opType: string) {
     super(opType);
   }
 }
@@ -77,12 +77,6 @@ export class RangeQuery extends FieldedQuery {
   }
 }
 
-export class DateRangeQuery extends FieldedQuery {
-  constructor(field: string, public lt, public lte, public gt, public gte, public timeZone: string) {
-    super(field, OperationType.DATE_RANGE);
-  }
-}
-
 export class RegexQuery extends FieldedQuery {
   constructor(field: string, public value) {
     super(field, OperationType.REGEX);
@@ -118,7 +112,6 @@ export class OperationType {
   static AND = 'and';
   static OR = 'or';
   static RANGE = 'range';
-  static DATE_RANGE = 'date_range';
   static NATIVE = 'native';
   static PHRASE = 'phrase';
   static TERM = 'term';

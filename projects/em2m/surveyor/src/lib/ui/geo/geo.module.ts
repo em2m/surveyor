@@ -17,7 +17,7 @@ export * from './providers/mapquest/mapquest.provider';
   ]
 })
 export class SurveyorGeoModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<SurveyorGeoModule> {
     return {
       ngModule: SurveyorGeoModule,
       providers: [

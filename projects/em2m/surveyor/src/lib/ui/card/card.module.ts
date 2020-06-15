@@ -66,7 +66,7 @@ const components = [
   ]
 })
 export class SurveyorCardModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<SurveyorCardModule> {
     return {
       ngModule: SurveyorCardModule,
       providers: [

@@ -1,7 +1,7 @@
 import {
   Component, Input, ComponentFactoryResolver, ViewChild, ViewContainerRef, OnInit, OnChanges, OnDestroy
-} from "@angular/core";
-import {ExtensionService} from "../../core/extension/extension.service";
+} from '@angular/core';
+import {ExtensionService} from '../../core/extension/extension.service';
 
 @Component({
   selector: 'surveyor-region',
@@ -11,7 +11,7 @@ export class RegionComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() regionId: string;
   @Input() type?: 'vertical' | 'horizontal' = 'vertical';
-  @ViewChild('regionTarget', {read: ViewContainerRef}) regionTarget: any;
+  @ViewChild('regionTarget', {read: ViewContainerRef, static: true}) regionTarget: any;
   private regionComponents: Array<any> = [];
 
   constructor(private resolver: ComponentFactoryResolver,
@@ -33,15 +33,15 @@ export class RegionComponent implements OnInit, OnChanges, OnDestroy {
   private loadRegion() {
     this.destroyRegion();
 
-    let extensions = this.extensionService.getExtensionsForTarget(this.regionId) || [];
+    const extensions = this.extensionService.getExtensionsForTarget(this.regionId) || [];
     extensions.forEach(extension => {
-      let factory = this.resolver.resolveComponentFactory(extension.value);
+      const factory = this.resolver.resolveComponentFactory(extension.value);
 
       // Dynamically render the new region component
-      let regionComponentRef = this.regionTarget.createComponent(factory);
+      const regionComponentRef = this.regionTarget.createComponent(factory);
 
       // Update the component with each of the configuration attributes from the extension
-      for (let configKey in extension.config) {
+      for (const configKey in extension.config) {
         if (extension.config.hasOwnProperty(configKey)) {
           regionComponentRef.instance[configKey] = extension.config[configKey];
         }

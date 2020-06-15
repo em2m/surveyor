@@ -3,21 +3,21 @@ import {IntentComponent} from './intent.component';
 import {IntentGuard} from './intent.guard';
 import {Plugin} from '../../core/extension/extension.model';
 
-export let IntentPlugin: Plugin = <Plugin> {
+export let IntentPlugin: Plugin = {
 
   name: 'Intent Plugin',
   extensions: {
 
     'surveyor:page': [
       {
-        value: <Route> {
+        value: {
           path: 'action/:actionId',
           component: IntentComponent,
           canActivate: [ IntentGuard ],
           data: {
             target: 'intent:actions'
           }
-        },
+        } as Route,
         target: 'surveyor:apps',
         priority: 10
       }

@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Searcher} from '../../shared/searcher.model';
-import {Bucket, DateRangeQuery, ExistsQuery, OperationType, OrQuery, Query, RangeQuery, TermQuery} from '../../shared/query.model';
+import {SearchConstraint, Searcher} from '../../shared/searcher.model';
+import {Bucket, ExistsQuery, OrQuery, Query, RangeQuery, TermQuery} from '../../shared/query.model';
 import {PickerService} from '../../../ui/picker/picker.service';
 import * as _moment from 'moment';
 import {Subscription} from 'rxjs';
@@ -25,7 +25,7 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.moreSubscription = this.searcher.whenMoreResultPublished.subscribe(item => {
-      //loop through constraint list
+      // loop through constraint list
       let constraintAlreadyExists = false;
       this.searcher.constraints.forEach(constraint => {
         if (item && item.agg && (constraint.key === item.agg.label || constraint.key === item.agg.key)) {
@@ -109,14 +109,14 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
         label: `${agg.label || agg.key} : ${aggLabel}`,
         query: new OrQuery(queries),
         key: `${agg.label || agg.key}`,
-        values: values,
-        buckets: buckets
-      });
+        values,
+        buckets
+      } as any);
     } else {
       const query = this.buildBucketQuery(agg, bucket);
       this.searcher.addConstraint({
         label: `${agg.label || agg.key} : ${bucket.label || bucket.key}`,
-        query: query,
+        query,
         values: [bucket.key]
       });
     }
@@ -140,21 +140,16 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
     if (op === 'filters') {
       query = bucket.query || agg.filters[key];
     }
-    if (op === 'range') {
+    if (op === 'range' || op === 'date_range') {
       const lt = bucket.to;
       const gte = bucket.from;
       query = new RangeQuery(agg.field, lt, null, null, gte, null);
-    }
-    if (op === 'date_range') {
-      const lt = bucket.to;
-      const gte = bucket.from;
-      query = new DateRangeQuery(agg.field, lt, null, null, gte, null);
     }
     return query;
   }
 
   isRangeAgg(agg: any): boolean {
-    return this.getAggOp(agg) === OperationType.DATE_RANGE;
+    return this.getAggOp(agg) === 'date_range';
   }
 
   loadDatePicker(agg: any) {
@@ -166,7 +161,7 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
 
         this.searcher.addConstraint({
           label: `${agg.label || agg.key} : ${moment(from).format('LL')} to ${moment(to).format('LL')}`,
-          query: query
+          query
         });
         this.searcher.broadcastRequest();
       }

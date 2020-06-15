@@ -1,5 +1,9 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SortComponent} from './components/search/sort/sort.component';
 import {TotalResultComponent} from './components/total-results/total-results.component';
@@ -12,7 +16,6 @@ import {TermPickerComponent} from './pickers/term-picker/term-picker.component';
 import {ToggleRecursiveComponent} from './components/toggle-recursive/toggle-recursive.component';
 import {ToggleArchivedComponent} from './components/toggle-archived/toggle-archived.component';
 import {SurveyorRegionModule} from '../ui/region/region.module';
-import {MatDatepickerModule, MatFormFieldModule, MatInputModule, MatTooltipModule} from '@angular/material';
 import {SurveyorModalModule} from '../ui/modal/modal.module';
 import {DateRangePickerComponent} from './pickers/date-range-picker/date-range-picker.component';
 import {MultipleTermPickerComponent} from './pickers/multiple-term-picker/multiple-term-picker.component';
@@ -29,6 +32,8 @@ export * from './components/toggle-recursive/toggle-recursive.component';
 export * from './pickers/multiple-term-picker/multiple-term-picker.component';
 export * from './pickers/term-picker/term-picker.component';
 export * from './pickers/query-picker/query-picker.component';
+export * from './pickers/date-range-picker/date-range-picker.component';
+export * from './pickers/multiple-term-picker/multiple-term-picker.component';
 export * from './search.plugin';
 
 const components: any[] = [
@@ -62,13 +67,10 @@ const components: any[] = [
   ],
   declarations: [
     ...components
-  ],
-  entryComponents: [
-    ...components
   ]
 })
 export class SurveyorSearchModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<SurveyorSearchModule> {
     return {
       ngModule: SurveyorSearchModule,
       providers: [

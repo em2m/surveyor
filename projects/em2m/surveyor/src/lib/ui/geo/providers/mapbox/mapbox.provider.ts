@@ -23,10 +23,10 @@ export class MapboxGeoProvider implements GeoProvider {
     if (this.mapboxAccessToken) {
       const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${placeName}.json?access_token=${this.mapboxAccessToken}`;
       return this.http.get(url).pipe(map((res: any) => {
-        return <ForwardGeocodeResult>{
+        return {
           name: placeName,
           items: res.features.map((feature: any) => {
-            return <ForwardGeocodeItem>{
+            return {
               name: feature.place_name,
               center: feature.center,
               bbox: feature.bbox

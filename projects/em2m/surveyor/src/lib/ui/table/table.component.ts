@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {Observable} from "rxjs";
-import {TableModel, Column} from "./table.model";
-import {Selection, ItemSelection} from "../action/action.model";
+import {Component, Input, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
+import {TableModel, Column} from './table.model';
+import {Selection, ItemSelection} from '../action/action.model';
 
 @Component({
   selector: 'surveyor-table',
@@ -27,7 +27,7 @@ export class TableComponent implements OnInit {
     this.whenSelections = this.model.selection;
     this.model.rows.subscribe((rows) => {
       this.rows = rows.map((row) => {
-        let result: any = {};
+        const result: any = {};
         result.orig = row;
         result.selected = row.selected;
         result.values = {};

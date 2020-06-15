@@ -8,7 +8,7 @@ import {PopoverContainer} from '../../popover-container.component';
 })
 export class StandardPopoverContainer extends PopoverContainer {
 
-  //@HostBinding('class') styleClass = 'scrollable-y';
+  // @HostBinding('class') styleClass = 'scrollable-y';
 
   constructor(resolver: ComponentFactoryResolver, changeDetectorRef: ChangeDetectorRef) {
     super(resolver, changeDetectorRef);
