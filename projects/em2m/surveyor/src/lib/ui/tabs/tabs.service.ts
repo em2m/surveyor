@@ -5,7 +5,7 @@ import {FilterUtils} from '../../core/extension/filters/filter.util';
 import {Filter} from '../../core/extension/extension.model';
 import {ContextService} from '../../core/extension/context.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class TabsService {
 
   constructor(private router: Router,

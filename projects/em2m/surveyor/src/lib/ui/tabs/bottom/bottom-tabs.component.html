@@ -1,0 +1,14 @@
+<div class="flex-vertical" style="overflow: hidden;">
+  <div class="flex-vertical flex-scroll">
+    <router-outlet></router-outlet>
+  </div>
+
+  <div style="width: 100%;">
+    <div class="tabs-bar animated slideInUp">
+      <a *ngFor="let tab of tabs" class="tabs-tab" [routerLink]="[tab.path]" [queryParams]="tab.queryParam"
+         routerLinkActive="selected" [routerLinkActiveOptions]="{exact:tab.exact}">
+        <i [ngClass]="tab.icon"></i><br/> {{ tab.title }}
+      </a>
+    </div>
+  </div>
+</div>
