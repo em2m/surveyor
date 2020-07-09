@@ -12,7 +12,7 @@ export abstract class PopoverContainer implements OnInit {
   @Output() onCancel = new EventEmitter();
   @Output() onDelete = new EventEmitter();
   @Output() onMouseNotEver = new EventEmitter();
-  @ViewChild('popovertarget', {read: ViewContainerRef}) popoverTarget: any;
+  @ViewChild('popovertarget', {read: ViewContainerRef, static: true}) popoverTarget: any;
   title: string;
   popoverRef: any;
   isDismissed = false;
@@ -21,7 +21,7 @@ export abstract class PopoverContainer implements OnInit {
 
   maxWidth = 350;
   @HostBinding('style.width') width: string;
-  //@HostBinding('style.height') height: string;
+  // @HostBinding('style.height') height: string;
   @HostBinding('style.max-height') height: string;
   @HostBinding('style.top') top: string;
   @HostBinding('style.bottom') bottom: string;
@@ -62,7 +62,7 @@ export abstract class PopoverContainer implements OnInit {
       this.onDelete.emit(value);
     });
 
-    //console.log('Popover Ref', popverRef);
+    // console.log('Popover Ref', popverRef);
 
     this.cdr.detectChanges();
 
@@ -71,18 +71,18 @@ export abstract class PopoverContainer implements OnInit {
 
   updatePosition() {
     const bounds = this.targetElement.getBoundingClientRect() as DOMRect;
-    let sourceWidth = bounds.width;
-    let sourceHeight = bounds.height;
+    const sourceWidth = bounds.width;
+    const sourceHeight = bounds.height;
     bounds.width = 300;
     bounds.height = 400;
 
-    let position = this.resolvePosition(this.position, bounds);
+    const position = this.resolvePosition(this.position, bounds);
     this.resolvedPosition = position;
     let top: number;
     let bottom: number;
     let left: number;
     let right: number;
-    let height: number;
+    // let height: number;
     let width: number;
     let transform: string;
 
@@ -101,7 +101,7 @@ export abstract class PopoverContainer implements OnInit {
         }
 
         if ((bounds.height / 2) + bounds.y + 5 > window.innerHeight) {
-          //top = window.innerHeight - bounds.height + 10;
+          // top = window.innerHeight - bounds.height + 10;
           bottom = 5;
           top = null;
           transform = null;
@@ -132,7 +132,7 @@ export abstract class PopoverContainer implements OnInit {
         }
 
         if ((bounds.height / 2) + bounds.y + 5 > window.innerHeight) {
-          //top = window.innerHeight - bounds.height + 10;
+          // top = window.innerHeight - bounds.height + 10;
           bottom = 5;
           top = null;
           transform = null;
@@ -174,9 +174,11 @@ export abstract class PopoverContainer implements OnInit {
     if (width) {
       this.width = width + 'px';
     }
+    /*
     if (height) {
-      //this.height = height + 'px';
+      // this.height = height + 'px';
     }
+     */
     if (transform) {
       this.transform = transform;
     }

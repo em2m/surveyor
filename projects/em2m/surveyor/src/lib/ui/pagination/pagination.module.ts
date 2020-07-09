@@ -19,7 +19,7 @@ export * from "./pagination.component";
   ]
 })
 export class SurveyorPaginationModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<SurveyorPaginationModule> {
     return {
       ngModule: SurveyorPaginationModule
     };

@@ -1,11 +1,11 @@
-import {ActivatedRoute, Router, Routes, Route} from "@angular/router";
-import {Injectable} from "@angular/core";
-import {CardService} from "../card/card.service";
-import {FilterUtils} from "../../core/extension/filters/filter.util";
-import {Filter} from "../../core/extension/extension.model";
-import {ContextService} from "../../core/extension/context.service";
+import {ActivatedRoute, Router, Routes, Route} from '@angular/router';
+import {Injectable} from '@angular/core';
+import {CardService} from '../card/card.service';
+import {FilterUtils} from '../../core/extension/filters/filter.util';
+import {Filter} from '../../core/extension/extension.model';
+import {ContextService} from '../../core/extension/context.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class TabsService {
 
   constructor(private router: Router,
@@ -14,7 +14,7 @@ export class TabsService {
   }
 
   findTabs(activatedRoute: ActivatedRoute, routes: Routes, queryParams: any): Array<any> {
-    let tabs = [];
+    const tabs = [];
     if (!routes) {
       // If custom routes were not provided, automatically use the child routes of the current route
       routes = activatedRoute.routeConfig.children;
@@ -29,20 +29,20 @@ export class TabsService {
 
           if (!route.data.hidden) {
             if (route.data.cardboardId) {
-              let cards = this.cardService.findCards(route.data.cardboardId);
+              const cards = this.cardService.findCards(route.data.cardboardId);
               if (cards.length === 0) {
                 return;
               }
             }
 
             // Only add the tab if it passes all filter checks
-            if (FilterUtils.isPermitted(this.contextService.getContext(), route.data["filters"] as Array<Filter>)) {
+            if (FilterUtils.isPermitted(this.contextService.getContext(), route.data.filters as Array<Filter>)) {
               tabs.push({
-                title: route.data["title"] || route.path,
+                title: route.data.title || route.path,
                 path: `./${route.path}`,
                 exact: route.path.trim().length === 0,
                 queryParam: queryParams,
-                icon: route.data["icon"]
+                icon: route.data.icon
               });
             }
           }

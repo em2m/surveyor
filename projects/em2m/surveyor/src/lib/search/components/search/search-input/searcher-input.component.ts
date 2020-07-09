@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {SearchConstraint, Searcher, SearchRequest} from '../../../shared/searcher.model';
 import {PickerService} from '../../../../ui/picker/picker.service';
 import {BoolQuery, LuceneQuery, OperationType, Query, WildcardQuery} from '../../../shared/query.model';
@@ -10,7 +10,7 @@ import {BoolQuery, LuceneQuery, OperationType, Query, WildcardQuery} from '../..
 })
 export class SearcherInputComponent implements OnInit {
 
-  @ViewChild('searchInputFocus') searchInputFocus: ElementRef;
+  @ViewChild('searchInputFocus', {static: true}) searchInputFocus: ElementRef;
   @Input() iconRegion = 'icon-region';
   @Input() searcher: Searcher;
   @Input() placeholder = 'Search ...';
@@ -30,9 +30,9 @@ export class SearcherInputComponent implements OnInit {
 
   onSubmit(searchInput: string) {
     if (searchInput && searchInput.trim().length > 0) {
-      const constraint = <SearchConstraint>{
+      const constraint = {
         label: searchInput
-      };
+      } as SearchConstraint;
 
       if (searchInput.indexOf(':') > -1 || searchInput.indexOf('(') > -1 || searchInput.indexOf('*') > -1) {
         constraint.query = new LuceneQuery(searchInput, '_all');
@@ -83,7 +83,7 @@ export class SearcherInputComponent implements OnInit {
       this.searcher.broadcastRequest();
     } else {
       const pickerOptions = this.searcher.pickerOptions;
-      pickerOptions.params['query'] = this.searcher.constraints[constraint.key].query;
+      pickerOptions.params.query = this.searcher.constraints[constraint.key].query;
 
       this.pickerService.pick('query', this.searcher.pickerOptions).subscribe((searchConstraint) => {
         if (searchConstraint) {

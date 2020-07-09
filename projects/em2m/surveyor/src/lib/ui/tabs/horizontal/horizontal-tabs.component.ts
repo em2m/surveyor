@@ -13,7 +13,7 @@ export class HorizontalTabsComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() routes?: Routes;
   @Input() queryParams?: {};
-  @Input() shadow? = false;
+  @Input() shadow ?= false;
   tabs: any[] = [];
   private ctxSub: Subscription;
 

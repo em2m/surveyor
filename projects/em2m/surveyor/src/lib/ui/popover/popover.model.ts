@@ -1,5 +1,5 @@
-import {Observable} from "rxjs";
-import {ViewContainerRef} from "@angular/core";
+import {Observable} from 'rxjs';
+import {ViewContainerRef} from '@angular/core';
 
 export interface PopoverOptions {
   params?: any;

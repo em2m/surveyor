@@ -1,11 +1,11 @@
-import {Input, EventEmitter, ComponentRef, ViewChild, ViewContainerRef} from "@angular/core";
-import {Card} from "../../card.model";
+import {Input, EventEmitter, ComponentRef, ViewChild, ViewContainerRef} from '@angular/core';
+import {Card} from '../../card.model';
 
 export abstract class BaseCardComponent {
 
   @Input() cardId: string;
   @Input() last?: boolean;
-  @ViewChild('cardTarget', {read: ViewContainerRef}) target: any;
+  @ViewChild('cardTarget', {read: ViewContainerRef, static: true}) target: any;
   cardRef: ComponentRef<any>;
   card: Card;
   failed = false;

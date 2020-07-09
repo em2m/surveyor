@@ -1,6 +1,6 @@
-import {Component, ComponentFactoryResolver, OnInit} from "@angular/core";
-import {CardService} from "../../../card.service";
-import {BaseCardComponent} from "../base-card.component";
+import {Component, ComponentFactoryResolver, OnInit} from '@angular/core';
+import {CardService} from '../../../card.service';
+import {BaseCardComponent} from '../base-card.component';
 
 @Component({
   selector: 'surveyor-stack-card',
@@ -20,11 +20,11 @@ export class StackCardComponent extends BaseCardComponent implements OnInit {
   }
 
   loadCard() {
-    let cardType = this.cardService.getCardComponent(this.cardId);
+    const cardType = this.cardService.getCardComponent(this.cardId);
     if (!cardType) {
       this.failed = true;
     } else {
-      let factory = this.resolver.resolveComponentFactory(cardType);
+      const factory = this.resolver.resolveComponentFactory(cardType);
       this.hidden = false;
       this.cardRef = this.target.createComponent(factory);
       this.cardRef.instance.id = this.cardId;
@@ -34,7 +34,7 @@ export class StackCardComponent extends BaseCardComponent implements OnInit {
         this.card.hide.subscribe(res => { this.hidden = res.hidden; });
       }
 
-      let cardConfig = this.cardService.getCardConfig(this.cardId);
+      const cardConfig = this.cardService.getCardConfig(this.cardId);
       if (cardConfig.name !== undefined) { this.card.name = cardConfig.name; }
       if (cardConfig.category !== undefined) { this.card.category = cardConfig.category; }
       if (cardConfig.title !== undefined) { this.card.title = cardConfig.title; }

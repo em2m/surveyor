@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, ElementRef, ViewChild} from "@angular/core";
-import {SurveyorFormInputComponent} from "../../../form-input-component";
-import {MaskedValue} from "../../../../mask/mask.model";
+import {AfterViewInit, Component, ElementRef, ViewChild, ViewContainerRef} from '@angular/core';
+import {SurveyorFormInputComponent} from '../../../form-input-component';
+import {MaskedValue} from '../../../../mask/mask.model';
 
 @Component({
   selector: 'surveyor-number-input',
@@ -9,26 +9,26 @@ import {MaskedValue} from "../../../../mask/mask.model";
 })
 export class MobileNumberInputComponent extends SurveyorFormInputComponent implements AfterViewInit {
 
-  @ViewChild("mdlInput") el: ElementRef;
+  @ViewChild('mdlInput', {static: true}) el: ElementRef;
 
-  controlKeys = ["Backspace", "ArrowLeft", "ArrowRight"];
+  controlKeys = ['Backspace', 'ArrowLeft', 'ArrowRight'];
 
   ngAfterViewInit() {
     // Hack required to get MDL to bind event handlers after a view change
-    window.dispatchEvent(new Event("load"));
+    window.dispatchEvent(new Event('load'));
   }
 
   applyMask($event: any) {
     if (this.controlDefinition.options.mask && this.controlKeys.indexOf($event.key) === -1) {
       $event.preventDefault();
-      let maskedVal = this.controlDefinition.options.mask.masker($event, this.formControl.value);
-      if (typeof maskedVal === "string") {
+      const maskedVal = this.controlDefinition.options.mask.masker($event, this.formControl.value);
+      if (typeof maskedVal === 'string') {
         this.formControl.setValue(maskedVal, {});
-        this.el.nativeElement.dispatchEvent(new Event("input"));
+        this.el.nativeElement.dispatchEvent(new Event('input'));
       } else {
-        let values: MaskedValue = maskedVal;
+        const values: MaskedValue = maskedVal;
         this.formControl.setValue(values.modelValue, {});
-        this.el.nativeElement.dispatchEvent(new Event("input"));
+        this.el.nativeElement.dispatchEvent(new Event('input'));
         this.el.nativeElement.value = values.viewValue;
       }
     }
@@ -36,11 +36,11 @@ export class MobileNumberInputComponent extends SurveyorFormInputComponent imple
 
   setValue(val: string) {
     if (this.controlDefinition.options.mask) {
-      let lastKey = val.substring(val.length - 1);
-      let priorVal = val.substring(0, val.length - 1);
+      const lastKey = val.substring(val.length - 1);
+      const priorVal = val.substring(0, val.length - 1);
       this.formControl.setValue(priorVal);
 
-      let fakeEvent = {
+      const fakeEvent = {
         key: lastKey,
         preventDefault: () => {}
       };
@@ -50,7 +50,7 @@ export class MobileNumberInputComponent extends SurveyorFormInputComponent imple
       });
     } else {
       this.formControl.setValue(val, {});
-      this.el.nativeElement.dispatchEvent(new Event("input"));
+      this.el.nativeElement.dispatchEvent(new Event('input'));
     }
   }
 }

@@ -1,11 +1,9 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
-import {AppConfig} from './config/config.service';
+import {ContextService} from './extension/context.service';
 import {ExtensionService} from './extension/extension.service';
 import {StateService} from './state/state.service';
-import {ContextService} from './extension/context.service';
-import {HttpModule} from '@angular/http';
 
 export * from './config/config.service';
 export * from './extension/extension.model';
@@ -26,24 +24,21 @@ export * from './state/state.service';
 @NgModule({
   imports: [
     CommonModule,
-    HttpModule,
     HttpClientModule
   ],
   exports: [
     CommonModule,
-    HttpModule,
     HttpClientModule
   ]
 })
 export class SurveyorCoreModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<SurveyorCoreModule> {
     return {
       ngModule: SurveyorCoreModule,
       providers: [
         ContextService,
         ExtensionService,
-        StateService,
-        AppConfig
+        StateService
       ]
     };
   }

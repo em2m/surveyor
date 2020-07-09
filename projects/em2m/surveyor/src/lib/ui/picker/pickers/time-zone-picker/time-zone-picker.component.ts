@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {Picker} from '../../picker.component';
 import * as momentTz from 'moment-timezone';
 import {FormControl} from '@angular/forms';
@@ -10,7 +10,7 @@ import {FormControl} from '@angular/forms';
 })
 export class TimeZonePicker extends Picker implements OnInit, AfterViewInit {
 
-  @ViewChild('timeZoneFocus') timeZoneFocus: ElementRef;
+  @ViewChild('timeZoneFocus', {static: true}) timeZoneFocus: ElementRef;
   public timezones: Array<{ name: string; displayName: string, offset: string, zone: string, zoneAbbr: string }> = [];
   public tzSearchResults: Array<{ name: string; displayName: string, offset: string, zone: string, zoneAbbr: string }> = [];
   public userTimezone: any;

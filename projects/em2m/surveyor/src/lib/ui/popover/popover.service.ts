@@ -45,7 +45,7 @@ export class PopoverService {
   }
 
   bindPopover(popover: Type<Popover>, targetElement: HTMLElement, parentContainer?: HTMLElement, options?: PopoverOptions): PopoverResult {
-    //noop if this is the same popover
+    // noop if this is the same popover
     if (targetElement.classList.contains(this.currentClass)) {
       return;
     } else {
@@ -89,7 +89,7 @@ export class PopoverService {
 
     this.registerMouseLeave();
 
-    return <PopoverResult>{
+    return {
       submit: this.popoverContainerRef.instance.onSubmit,
       cancel: this.popoverContainerRef.instance.onCancel,
       delete: this.popoverContainerRef.instance.onDelete,
@@ -97,7 +97,7 @@ export class PopoverService {
         this.popoverContainerRef.instance.dismiss();
         setTimeout(() => this.popoverContainerRef.destroy(), 1000);
       }
-    };
+    } as PopoverResult;
   }
 
   private insideClick() {
@@ -126,7 +126,7 @@ export class PopoverService {
   }
 
   destroy() {
-    //Remove the class definition for the target element
+    // Remove the class definition for the target element
     if (this.targetElement != null) {
       this.targetElement.classList.forEach((className) => {
         if (className.indexOf(this.popoverClassPrefix) > -1) {

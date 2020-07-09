@@ -8,22 +8,12 @@ export * from './text/text-contribution.component';
 export * from './text/text-contribution.model';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule
-  ],
-  exports: [
-    TextMenuContribution
-  ],
-  declarations: [
-    TextMenuContribution
-  ],
-  entryComponents: [
-    TextMenuContribution
-  ]
+  imports: [CommonModule, RouterModule],
+  exports: [TextMenuContribution],
+  declarations: [TextMenuContribution]
 })
 export class SurveyorMenuModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<SurveyorMenuModule> {
     return {
       ngModule: SurveyorMenuModule
     };

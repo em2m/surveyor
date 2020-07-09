@@ -3,7 +3,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SurveyorWizardComponent} from './wizard.component';
 import {SurveyorWizardStepComponent} from './step.component';
 import {CommonModule} from '@angular/common';
-import {MatButtonModule} from '@angular/material';
+import {MatButtonModule} from '@angular/material/button';
 
 export * from './step.component';
 export * from './wizard.component';
@@ -36,7 +36,7 @@ const components = [
   ]
 })
 export class SurveyorWizardModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<SurveyorWizardModule> {
     return {
       ngModule: SurveyorWizardModule,
       providers: [

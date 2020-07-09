@@ -2,16 +2,14 @@ import {ModuleWithProviders, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {CommonModule} from '@angular/common';
-import {
-  MatButtonModule,
-  MatCheckboxModule,
-  MatDatepickerModule,
-  MatFormFieldModule,
-  MatIconModule,
-  MatNativeDateModule,
-  MatSelectModule,
-  MatChipsModule
-} from '@angular/material';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+//import {MatNativeDateModule} from '@angular/material';
+import {MatSelectModule} from '@angular/material/select';
+import {MatChipsModule} from '@angular/material/chips';
 import {MaterialFormPlugin} from './material-form-plugin';
 import {MaterialSelectInputComponent} from './select/mat-select.component';
 import {MaterialTextInputComponent} from './text/mat-text.component';
@@ -32,6 +30,7 @@ export * from './picker/mat-picker.component';
 export * from './password/mat-password.component';
 export * from './date/mat-date.component';
 export * from './chips/mat-chips.component';
+export * from './dollars/mat-dollars.component';
 
 const components = [
   MaterialSelectInputComponent,
@@ -57,7 +56,7 @@ const components = [
     MatButtonModule,
     MatIconModule,
     MatDatepickerModule,
-    MatNativeDateModule,
+//    MatNativeDateModule,
     MatChipsModule
   ],
   exports: [

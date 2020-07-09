@@ -2,13 +2,10 @@ import {Intent, IntentResolver, ResolveInfo} from './intent.model';
 import {Injectable, Injector, Type} from '@angular/core';
 import {Observable, merge} from 'rxjs';
 import {filter, toArray} from 'rxjs/operators';
-
-
-
 import {ExtensionService} from '../../core/extension/extension.service';
 import {Extension} from '../../core/extension/extension.model';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class IntentService {
 
   private INTENT_RESOLVER_EXTENSION_TYPE = 'surveyor:intent-resolver';
@@ -16,10 +13,10 @@ export class IntentService {
   private resolvers: { [action: string]: Array<IntentResolver> } = {};
 
   constructor(private injector: Injector, private extensionService: ExtensionService) {
-    this.registerResolvers();
+    // this.registerResolvers();
   }
 
-  private registerResolvers() {
+  registerResolvers() {
     this.extensionService.getExtensionsForType(this.INTENT_RESOLVER_EXTENSION_TYPE)
       .forEach((extension: Extension) => {
         const action = extension.config.action;

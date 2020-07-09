@@ -1,4 +1,4 @@
-import {Input} from "@angular/core";
+import {Input} from '@angular/core';
 
 export abstract class CardRenderer {
 

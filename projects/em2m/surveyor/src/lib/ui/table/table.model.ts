@@ -1,5 +1,5 @@
-import {Observable, Subject, BehaviorSubject} from "rxjs";
-import {ItemSelection} from "../action/action.model";
+import {Observable, Subject, BehaviorSubject} from 'rxjs';
+import {ItemSelection} from '../action/action.model';
 
 export interface Column {
   key: any;
@@ -33,8 +33,8 @@ export class DefaultTableModel implements TableModel {
   }
 
   cellValue(row: any, col: Column) {
-    let val = row[col.key];
-    let format = (<any>col).format;
+    const val = row[col.key];
+    const format = (col as any).format;
     let result = val;
     if (format) {
       try {
@@ -55,10 +55,10 @@ export class DefaultTableModel implements TableModel {
   setSelected(row: any, value: boolean) {
 
     row.selected = value;
-    let selected = this.rows.getValue().filter((it: any) => {
+    const selected = this.rows.getValue().filter((it: any) => {
       return it.selected;
     });
-    let itemSelection = new ItemSelection(selected);
+    const itemSelection = new ItemSelection(selected);
     itemSelection.allOnPage = selected.length === this.rows.getValue().length;
 
     this.selection.next(itemSelection);

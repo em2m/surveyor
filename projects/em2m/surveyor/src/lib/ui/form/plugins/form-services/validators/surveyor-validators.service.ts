@@ -1,9 +1,9 @@
-import {AbstractControl} from "@angular/forms";
+import {AbstractControl} from '@angular/forms';
 
 export class SurveyorValidators {
 
   static isValidEmailFormat(c: AbstractControl) {
-    let EMAIL_REGEXP = /\S+@\S+\.\S+/;
+    const EMAIL_REGEXP = /\S+@\S+\.\S+/;
     if (c.value && !EMAIL_REGEXP.test(c.value)) {
       return {invalidEmail: true};
     } else {
@@ -12,7 +12,7 @@ export class SurveyorValidators {
   }
 
   static isValidPhoneFormat(c: AbstractControl) {
-    let temp = (c.value || '').replace(/\D/g, '');
+    const temp = (c.value || '').replace(/\D/g, '');
     if (temp.length === 10 || temp.length === 0) {
       return null;
     } else {
@@ -21,7 +21,7 @@ export class SurveyorValidators {
   }
 
   static isValidToken(c: AbstractControl) {
-    let tokenRegex = /[a-z0-9]{6}/gi;
+    const tokenRegex = /[a-z0-9]{6}/gi;
     if (c.value && !tokenRegex.test(c.value)) {
       return {invalidToken: true};
     } else {

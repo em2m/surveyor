@@ -23,7 +23,7 @@ export * from './phone/phone-mask.directive';
   ]
 })
 export class SurveyorMaskModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<SurveyorMaskModule> {
     return {
       ngModule: SurveyorMaskModule,
       providers: [

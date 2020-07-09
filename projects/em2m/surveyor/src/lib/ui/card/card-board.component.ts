@@ -16,7 +16,7 @@ export class CardBoardComponent implements OnInit, OnChanges, OnDestroy {
   @Input() title?: string;
   @Input() collapsed = false;
   @Output() isHidden: EventEmitter<boolean> = new EventEmitter();
-  @ViewChild('cardBoardTarget', {read: ViewContainerRef}) cardBoardTarget: any;
+  @ViewChild('cardBoardTarget', {read: ViewContainerRef, static: true}) cardBoardTarget: any;
   cardsHidden: Map<string, boolean> = new Map<string, boolean>();
   hidden = false;
 
@@ -40,9 +40,7 @@ export class CardBoardComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.ctxSub) {
-      this.ctxSub.unsubscribe();
-    }
+    this.ctxSub.unsubscribe();
 
     this.destroyCardBoard();
   }

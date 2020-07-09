@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {AppConfig} from '../config/config.service';
 import {Router} from '@angular/router';
-import {FilterContext} from './extension.model';
+import {ContextOptions, FilterContext} from './extension.model';
 
 @Injectable()
 export class ContextService {
@@ -57,7 +57,7 @@ export class ContextService {
   }
 
   hasAction(action: string): boolean {
-    for (let availableAction of (this.context.actions || [])) {
+    for (const availableAction of (this.context.actions || [])) {
       // If the action matches just one of the available actions then the action is permitted
       if (action.search('^' + availableAction.replace('*', '(.*)') + '$') >= 0) {
         return true;
@@ -66,6 +66,15 @@ export class ContextService {
     return false;
   }
 
+  setValue(key: string, value: any, options?: ContextOptions) {
+    this.context.values[key] = value;
+    if (options?.broadcast !== false) {
+      this.notifyValue(key);
+      this.notifyContext();
+    }
+  }
+
+  /*
   setValue(key: string, value: any) {
     let prevValue = this.context.values[key];
     // if (!prevValue || JSON.stringify(prevValue) !== JSON.stringify(value)) {
@@ -74,6 +83,7 @@ export class ContextService {
       this.notifyContext();
     // }
   }
+   */
 
   getValue(key: string): any {
     return this.context.values[key];
@@ -81,7 +91,7 @@ export class ContextService {
 
   clearValues() {
     this.context.values = {};
-    for (let key in this.valueSubjects) {
+    for (const key in this.valueSubjects) {
       if (this.valueSubjects.hasOwnProperty(key)) {
         this.notifyValue(key);
 

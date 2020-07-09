@@ -1,8 +1,8 @@
 import {
   Component, ViewChild, ViewChildren, ElementRef, QueryList, OnInit,
-  AfterViewInit
-} from "@angular/core";
-import {SurveyorFormInputComponent} from "../../../form-input-component";
+  AfterViewInit, ViewContainerRef
+} from '@angular/core';
+import {SurveyorFormInputComponent} from '../../../form-input-component';
 
 @Component({
   selector: 'surveyor-select-input',
@@ -11,8 +11,8 @@ import {SurveyorFormInputComponent} from "../../../form-input-component";
 })
 export class MobileSelectInputComponent extends SurveyorFormInputComponent implements AfterViewInit {
 
-  @ViewChild("inputBox") inputBox: ElementRef;
-  @ViewChild("myPopover") popover: ElementRef;
+  @ViewChild('inputBox', {static: true}) inputBox: ElementRef;
+  @ViewChild('myPopover', {static: true}) popover: ElementRef;
 
   items: any[] = [];
   selectedIndex: number;
@@ -29,9 +29,9 @@ export class MobileSelectInputComponent extends SurveyorFormInputComponent imple
   initialize() {
     this.items = JSON.parse(JSON.stringify(this.controlDefinition.options.selections || []));
 
-    let index = this.items.map(item => {
-      if (item === undefined) return item;
-      else return item.value;
+    const index = this.items.map(item => {
+      if (item === undefined) { return item; }
+      else { return item.value; }
     }).indexOf(this.controlDefinition.value);
 
     if (index > -1) {
@@ -40,8 +40,8 @@ export class MobileSelectInputComponent extends SurveyorFormInputComponent imple
     } else {
       if (this.items.length > 0){
         this.selectedIndex = 0;
-        let value = this.items[0].value || this.items[0];
-        this.setValue(value)
+        const value = this.items[0].value || this.items[0];
+        this.setValue(value);
       } else {
         this.setValue(null);
       }
@@ -50,7 +50,7 @@ export class MobileSelectInputComponent extends SurveyorFormInputComponent imple
 
   itemSelect(item) {
     if (item) {
-      let value = (item.value === undefined) ? item : item.value;
+      const value = (item.value === undefined) ? item : item.value;
       this.formControl.setValue(value, {
         emitEvent: false,
         emitModelToViewChange: false
@@ -60,9 +60,9 @@ export class MobileSelectInputComponent extends SurveyorFormInputComponent imple
 
   setValue(val: any) {
     if (this.items) {
-      let item = this.items.find(i => {
-        if (i.value === undefined) return i === val;
-        else return i.value === val;
+      const item = this.items.find(i => {
+        if (i.value === undefined) { return i === val; }
+        else { return i.value === val; }
       });
       if (item) {
         this.itemSelect(item.value || item);

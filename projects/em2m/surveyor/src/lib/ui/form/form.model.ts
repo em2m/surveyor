@@ -82,13 +82,13 @@ export class FormDefinition {
   formBuilder: FormBuilder;
   form: FormGroup;
 
-  constructor(controls:  ControlOptions[], formBuilder: FormBuilder) {
+  constructor(controls: ControlOptions[], formBuilder: FormBuilder) {
     this.controls = controls.map( ctrl => new ControlDefinition(ctrl));
     this.formBuilder = formBuilder;
   }
 
   buildForm() {
-    let formControls = {};
+    const formControls = {};
     this.controls.forEach((control) => {
       formControls[control.key] = control.buildFormControl();
     });
@@ -97,7 +97,7 @@ export class FormDefinition {
   }
 
   getValues(): any {
-    let values = {};
+    const values = {};
     if (this.form) {
       this.controls.forEach((control) => {
         values[control.key] = this.form.controls[control.key].value;

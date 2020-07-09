@@ -50,7 +50,7 @@ export class GeoService {
     return this.resolveProvider().pipe(
       mergeMap(() => {
         if (this.geoProvider) {
-          //return this.geoProvider.staticImageUrl(lng, lat, zoom, width, height);
+          // return this.geoProvider.staticImageUrl(lng, lat, zoom, width, height);
         } else {
           return observableOf(null);
         }
@@ -65,7 +65,7 @@ export class GeoService {
         map((config: GeoConfig) => {
           this.geoProvider = null;
           for (const extension of this.extensionService.getExtensionsForType(GeoService.GEO_PROVIDER_WIDGET_TYPE)) {
-            if (extension && extension.config && extension.config['type'] === config.provider) {
+            if (extension && extension.config && extension.config.type === config.provider) {
               this.geoProvider = this.injector.get(extension.value) as GeoProvider;
               this.geoProvider.init(config);
               break;

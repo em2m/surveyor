@@ -1,7 +1,7 @@
-import {Component} from "@angular/core";
+import {Component} from '@angular/core';
 
 @Component({
-  template: "<horizontal-tabs></horizontal-tabs>",
+  template: '<horizontal-tabs></horizontal-tabs>',
 })
 export class HorizontalTabsPage {
 

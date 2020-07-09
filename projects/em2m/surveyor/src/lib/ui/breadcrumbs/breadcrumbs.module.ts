@@ -1,8 +1,10 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {MatButtonModule, MatMenuModule, MatIconModule} from '@angular/material';
-import {BreadcrumbsContribution} from './breadcrumbs-contribution.component';
+import {MatButtonModule} from '@angular/material/button';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
 import {RouterModule} from '@angular/router';
+import {BreadcrumbsContribution} from './breadcrumbs-contribution.component';
 
 export * from './breadcrumbs.model';
 export * from './breadcrumbs-contribution.component';
@@ -35,7 +37,7 @@ const components = [
   ]
 })
 export class SurveyorBreadcrumbsModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<SurveyorBreadcrumbsModule> {
     return {
       ngModule: SurveyorBreadcrumbsModule,
       providers: []

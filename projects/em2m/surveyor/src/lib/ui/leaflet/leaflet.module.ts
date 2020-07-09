@@ -10,7 +10,7 @@ import {ZoomControlProvider} from './providers/zoomcontrol/zoom-control.provider
 import {GoogleMapsProvider} from './providers/google-maps/google-maps.provider';
 import {GoogleMapsLoaderService} from './providers/google-maps/google-maps-loader.service';
 import {GoogleStreetViewControlProvider} from './providers/google-maps/google-street-view-control.provider';
-import {AppleMapkitProvider} from './providers/apple-mapkit-js/apple-mapkit.provider';
+//import {AppleMapkitProvider} from './providers/apple-mapkit-js/apple-mapkit.provider';
 //import {AppleMapkitLoaderService} from './providers/apple-mapkit-js/apple-mapkit-loader.service';
 
 export * from './leaflet.component';
@@ -40,7 +40,7 @@ export * from './providers/zoomcontrol/zoom-control.provider';
   ]
 })
 export class SurveyorLeafletModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<SurveyorLeafletModule> {
     return {
       ngModule: SurveyorLeafletModule,
       providers: [
@@ -49,7 +49,7 @@ export class SurveyorLeafletModule {
         MapquestProvider,
         GoogleMapsProvider,
         GoogleMapsLoaderService,
-        AppleMapkitProvider,
+        //AppleMapkitProvider,
         //AppleMapkitLoaderService,
         OpenStreetMapProvider,
         ZoomControlProvider,

@@ -1,6 +1,5 @@
 
-import {of as observableOf, Observable} from 'rxjs';
-
+import {of, Observable} from 'rxjs';
 import {concatMap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 
@@ -20,7 +19,7 @@ export class GoogleMapsLoaderService {
           return this.loadScript('https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js');
         }));
     } else {
-      return observableOf(true);
+      return of(true);
     }
   }
 

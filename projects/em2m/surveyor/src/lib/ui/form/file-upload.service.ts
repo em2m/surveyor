@@ -1,5 +1,5 @@
-import {Injectable} from "@angular/core";
-import {Observable, Observer} from "rxjs";
+import {Injectable} from '@angular/core';
+import {Observable, Observer} from 'rxjs';
 
 @Injectable()
 export class FileUploadService {
@@ -22,10 +22,10 @@ export class FileUploadService {
       };
 
       xhr.open('POST', url, true);
-      xhr.setRequestHeader("Authorization", "Bearer " + token);
+      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
 
       const formData = new FormData();
-      formData.append("file", file, file.name);
+      formData.append('file', file, file.name);
       for (const key in additionalParams) {
         if (additionalParams.hasOwnProperty(key)) {
           formData.append(key, additionalParams[key]);

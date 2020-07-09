@@ -1,5 +1,5 @@
-import {Component} from "@angular/core";
-import {BaseCardComponent} from "../base-card.component";
+import {Component} from '@angular/core';
+import {BaseCardComponent} from '../base-card.component';
 
 @Component({
   selector: 'surveyor-html-card',

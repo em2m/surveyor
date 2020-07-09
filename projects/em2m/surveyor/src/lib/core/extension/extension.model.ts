@@ -51,3 +51,8 @@ export class FilterContext {
     this.values = {};
   }
 }
+
+export interface ContextOptions {
+  broadcast: boolean;
+  storage: 'NONE' | 'LOCAL' | 'SESSION';
+}
