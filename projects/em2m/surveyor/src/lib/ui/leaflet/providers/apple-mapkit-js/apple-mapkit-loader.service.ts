@@ -1,7 +1,7 @@
 
 import {concatMap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
-import {Observable, from, of} from 'rxjs';
+import {Observable, of} from 'rxjs';
 
 @Injectable()
 export class AppleMapkitLoaderService {
@@ -24,8 +24,7 @@ export class AppleMapkitLoaderService {
   }
 
   private loadScript(scriptUrl: string): Observable<boolean> {
-    return Observable.create(observer => {
-
+    return new Observable(observer => {
       const script: any = document.createElement('script');
 
       if (script.readyState) {  // IE
@@ -33,16 +32,20 @@ export class AppleMapkitLoaderService {
           if (script.readyState === 'loaded' || script.readyState === 'complete') {
             script.onreadystatechange = null;
             observer.next(true);
+            observer.complete();
           }
         };
       } else {  // Others
         script.onload = () => {
           observer.next(true);
+          observer.complete();
         };
       }
 
       script.src = scriptUrl;
       script.type = 'text/javascript';
+      script.async = false;
+      script.charset = 'utf-8';
 
       document.getElementsByTagName('head')[0].appendChild(script);
     });
