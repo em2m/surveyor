@@ -28,8 +28,8 @@ export class MapquestGeoProvider implements GeoProvider {
             const loc = item.locations[0];
 
             return {
-              name: [loc.street, loc.adminArea5, loc.adminArea3, loc.adminArea1].filter(val => val && val.length > 0).join(', '),
-              center: [item.latLng.lat, item.latLng.lng]
+              center: [loc?.latLng?.lng, loc?.latLng?.lat],
+              name: [loc?.street, loc?.adminArea5, loc?.adminArea3, loc?.adminArea1].filter( (val) => val?.length > 0).join(', ')
             };
           })
         };
