@@ -79,7 +79,7 @@ export class ContextService {
   setValue(key: string, value: any, options?: ContextOptions) {
     const prevValue = this.context.values[key];
     this.context.values[key] = value;
-    if ((!prevValue || JSON.stringify(prevValue) !== JSON.stringify(value)) && options?.broadcast !== false) {
+    if ((!prevValue /* || JSON.stringify(prevValue) !== JSON.stringify(value)*/) && options?.broadcast !== false) {
       this.notifyValue(key);
       this.notifyContext();
     }
