@@ -35,7 +35,7 @@ export class CardComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit() {
-    this.loadCard();
+    // this.loadCard();
   }
 
   ngOnChanges() {

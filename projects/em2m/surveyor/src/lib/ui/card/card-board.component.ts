@@ -36,7 +36,7 @@ export class CardBoardComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges() {
-    this.loadCardBoard();
+    //this.loadCardBoard();
   }
 
   ngOnDestroy() {
