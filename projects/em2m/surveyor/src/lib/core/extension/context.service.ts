@@ -66,7 +66,6 @@ export class ContextService {
     return false;
   }
 
-  /*
   setValue(key: string, value: any, options?: ContextOptions) {
     this.context.values[key] = value;
     if (options?.broadcast !== false) {
@@ -74,16 +73,15 @@ export class ContextService {
       this.notifyContext();
     }
   }
-  */
 
-  setValue(key: string, value: any, options?: ContextOptions) {
-    const prevValue = this.context.values[key];
-    this.context.values[key] = value;
-    if ((!prevValue /* || JSON.stringify(prevValue) !== JSON.stringify(value)*/) && options?.broadcast !== false) {
-      this.notifyValue(key);
-      this.notifyContext();
-    }
-  }
+  // setValue(key: string, value: any, options?: ContextOptions) {
+  //   const prevValue = this.context.values[key];
+  //   this.context.values[key] = value;
+  //   if ((!prevValue /* || JSON.stringify(prevValue) !== JSON.stringify(value)*/) && options?.broadcast !== false) {
+  //     this.notifyValue(key);
+  //     this.notifyContext();
+  //   }
+  // }
 
   getValue(key: string): any {
     return this.context.values[key];
