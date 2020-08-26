@@ -51,19 +51,21 @@ export class ActionButtonGroupComponent implements OnInit, OnDestroy {
   }
 
   private findActions() {
-    this.primaryActions = [];
-    this.secondaryActions = [];
-    this.actionService.findActions(this.actionTarget).forEach(action => {
-      if (action && action.primary) {
-        this.primaryActions.push(action);
-      } else {
-        this.secondaryActions.push(action);
-      }
+    setTimeout(() => {
+      this.primaryActions = [];
+      this.secondaryActions = [];
+      this.actionService.findActions(this.actionTarget).forEach(action => {
+        if (action && action.primary) {
+          this.primaryActions.push(action);
+        } else {
+          this.secondaryActions.push(action);
+        }
 
-      if (this.selectionValue) {
-        action.onSelectionChange(this.selectionValue);
-      }
-    });
+        if (this.selectionValue) {
+          action.onSelectionChange(this.selectionValue);
+        }
+      });
+    }, 0);
   }
 
   private updateSelectionValue(selection: Selection)  {

@@ -3,7 +3,7 @@ import {AbstractControl} from '@angular/forms';
 export class SurveyorValidators {
 
   static isValidEmailFormat(c: AbstractControl) {
-    const EMAIL_REGEXP = /\S+@\S+\.\S+/;
+    const EMAIL_REGEXP = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (c.value && !EMAIL_REGEXP.test(c.value)) {
       return {invalidEmail: true};
     } else {

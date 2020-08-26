@@ -5,7 +5,7 @@ import {ExtensionService} from '../../core/extension/extension.service';
 
 @Component({
   selector: 'surveyor-region',
-  template: `<div id="region-{{regionId}}"><div #regionTarget></div></div>`,
+  template: `<div [ngClass]="{'flex-horizontal': type == 'horizontal'}" id="region-{{regionId}}"><div #regionTarget></div></div>`,
 })
 export class RegionComponent implements OnInit, OnChanges, OnDestroy {
 

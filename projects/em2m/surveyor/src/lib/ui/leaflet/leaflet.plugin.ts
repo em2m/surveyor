@@ -36,7 +36,6 @@ export let LeafletPlugin: Plugin = <Plugin> {
         target: 'global',
         priority: 6
       }
-
        */
     ],
     'surveyor:leaflet-control': [
