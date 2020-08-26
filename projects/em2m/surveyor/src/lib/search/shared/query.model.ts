@@ -47,6 +47,12 @@ export class TermQuery extends FieldedQuery {
   }
 }
 
+export class TermsQuery extends FieldedQuery {
+  constructor(field: string, public value: Array<any>) {
+    super(field, OperationType.TERMS);
+  }
+}
+
 export class MatchQuery extends FieldedQuery {
   constructor(field: string, public value: any) {
     super(field, OperationType.MATCH);
@@ -115,6 +121,7 @@ export class OperationType {
   static NATIVE = 'native';
   static PHRASE = 'phrase';
   static TERM = 'term';
+  static TERMS = 'terms';
   static REGEX = 'regex';
   static PREFIX = 'prefix';
   static WILDCARD = 'wildcard';
