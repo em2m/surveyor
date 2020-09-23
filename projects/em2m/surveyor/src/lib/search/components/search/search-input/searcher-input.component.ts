@@ -42,7 +42,11 @@ export class SearcherInputComponent implements OnInit {
         this.searcher.fullTextFields.forEach(field => {
           const innerQueries = [];
           tokenizedSearchInput.forEach(queryString => {
-            innerQueries.push(new LuceneQuery(`${field}:*${queryString}*`, field));
+            if (isNaN(Number(queryString))) {
+              innerQueries.push(new LuceneQuery(`${field}:*${queryString}*`, field));
+            } else {
+              innerQueries.push(new LuceneQuery(`${field}:*\"${queryString}\"*`, field));
+            }
           });
           outerQueries.push(new BoolQuery(OperationType.AND, innerQueries));
         });
