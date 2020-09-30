@@ -7,9 +7,9 @@
         <span class="mdl-layout-spacer"></span>
         <span *ngIf="showMultiChoice(agg, bucketsForAgg(agg.key)) || isRangeAgg(agg)" class="hidden-menu">
       <button class="menu-button" [matMenuTriggerFor]="actionMenu">
-        <i style="transform: none" class="fas fa-ellipsis-v"></i>
+        <i style="transform: none" class="far fa-ellipsis-v"></i>
       </button>
-      <mat-menu #actionMenu="matMenu" yPosition="below" xPosition="before">
+      <mat-menu #actionMenu="matMenu" yPosition="below" xPosition="after">
         <button mat-menu-item *ngIf="showMultiChoice(agg, bucketsForAgg(agg.key))" (click)="showMoreAggs(agg)">
           Select multiple
         </button>
