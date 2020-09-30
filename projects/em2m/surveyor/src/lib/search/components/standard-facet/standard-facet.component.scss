@@ -24,6 +24,7 @@ form {
     }
   }
 }
+
 ul.facet-nav {
   list-style-type: none;
   padding-left: 15px;
@@ -64,7 +65,7 @@ ul.active-filters .filter {
 }
 
 .facet_label {
-  padding-left:0.25rem;
+  padding-left: 0.25rem;
   //font-size: 0.8em;
 }
 
@@ -103,4 +104,24 @@ div.facet-nav span {
 
 .facet-header {
   font-weight: 900;
+}
+
+.parent-menu:hover .hidden-menu {
+  display: inline-block;
+}
+
+.hidden-menu {
+  display: none;
+}
+
+.menu-button {
+  text-align: right;
+  border: none;
+  padding-right: 0px;
+  width: 1.5rem;
+  outline: none;
+}
+
+.menu-button:focus {
+  outline: none;
 }

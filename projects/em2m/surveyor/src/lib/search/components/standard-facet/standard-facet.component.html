@@ -1,12 +1,23 @@
 <form style="padding-top: 0.5rem;">
   <div class="facet" *ngFor="let agg of searcher.aggs">
-    <div *ngIf="hasBuckets(agg.key)">
+    <div *ngIf="hasBuckets(agg.key)" class="parent-menu">
       <div style="display:flex; align-items:flex-start;">
+
         <span class="facet-nav facet-header">{{agg.label}}</span>
         <span class="mdl-layout-spacer"></span>
-        <span class="facet-nav facet-header" *ngIf="isRangeAgg(agg)" (click)="loadDatePicker(agg)" matTooltip="Select a custom date range">
-          <i class="fa fa-calendar" style="font-size: 1.1rem; cursor: pointer; color: #555;"></i>
-        </span>
+        <span *ngIf="showMultiChoice(agg, bucketsForAgg(agg.key)) || isRangeAgg(agg)" class="hidden-menu">
+      <button class="menu-button" [matMenuTriggerFor]="actionMenu">
+        <i style="transform: none" class="fas fa-ellipsis-v"></i>
+      </button>
+      <mat-menu #actionMenu="matMenu" yPosition="below" xPosition="before">
+        <button mat-menu-item *ngIf="showMultiChoice(agg, bucketsForAgg(agg.key))" (click)="showMoreAggs(agg)">
+          Select multiple
+        </button>
+        <button mat-menu-item *ngIf="isRangeAgg(agg)" (click)="loadDatePicker(agg)">
+          Custom date range
+        </button>
+      </mat-menu>
+    </span>
       </div>
       <div class="facet-nav checkboxes col-xs-12">
         <ul class="facet-nav">
@@ -17,12 +28,6 @@
               <span class="facet_count"> {{bucket.count}} </span>
             </div>
           </li>
-          <div>
-            <span *ngIf="showMultiChoice(agg)">
-            <span style="cursor:pointer; margin-left: 4px; font-size: 12px; color: rgb(63,81,181);"
-                  (click)="showMoreAggs(agg)">More...</span>
-          </span>
-          </div>
         </ul>
       </div>
     </div>

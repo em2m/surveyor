@@ -143,6 +143,7 @@ export interface Agg {
   time_zone?: string;
   multiSelect?: boolean;
   aggs?: { [ key: string ]: Agg; };
+  type?: string;
 }
 
 export class Field {
