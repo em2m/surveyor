@@ -41,7 +41,7 @@ export class MapboxGeoProvider implements GeoProvider {
 
   staticImageUrl(lng: number, lat: number, zoom: number, width: number, height: number): Observable<string> {
     return observableOf(
-      `https://api.mapbox.com/styles/v1/mapbox/streets-v10/static/${lng},${lat},${zoom}/${width}x${height}?access_token=${this.mapboxAccessToken}`
+      `https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/${lng},${lat},${zoom}/${width}x${height}?access_token=${this.mapboxAccessToken}`
     );
   }
 }

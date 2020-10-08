@@ -21,28 +21,24 @@ export class MapboxProvider extends LayerProvider {
 
       const streetsLayer = {
         label: 'Streets',
-        layer: L.tileLayer('https://api.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        layer: L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
           maxZoom: 21,
-          id: 'mapbox.streets',
+          id: 'mapbox/streets-v11',
           accessToken: accessToken,
-          /*
           tileSize: 512,
           zoomOffset: -1
-          */
         })
       };
 
       const satelliteLayer = {
         label: 'Satellite',
-        layer: L.tileLayer('https://api.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        layer: L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
           maxZoom: 21,
           maxNativeZoom: 19,
-          id: 'mapbox.streets-satellite',
+          id: 'mapbox/satellite-streets-v11',
           accessToken: accessToken,
-          /*
           tileSize: 512,
           zoomOffset: -1
-          */
         })
       };
       return [streetsLayer, satelliteLayer];
