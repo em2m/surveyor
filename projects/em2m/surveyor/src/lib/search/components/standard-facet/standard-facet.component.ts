@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SearchConstraint, Searcher} from '../../shared/searcher.model';
-import {Bucket, ExistsQuery, OrQuery, Query, RangeQuery, TermQuery} from '../../shared/query.model';
+import {Bucket, DateRangeQuery, ExistsQuery, OrQuery, Query, RangeQuery, TermQuery} from '../../shared/query.model';
 import {PickerService} from '../../../ui/picker/picker.service';
 import * as _moment from 'moment';
 import {Subscription} from 'rxjs';
@@ -16,6 +16,7 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
 
   requestAggs: { [key: string]: any } = {};
   resultOpAggs: { [key: string]: string } = {};
+  resultTypeAggs: { [key: string]: string } = {};
   DAY_IN_MILLIS = 1000 * 60 * 60 * 24;
   moreSubscription: Subscription;
 
@@ -63,7 +64,7 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
     return this.bucketsForAgg(key).length > 0;
   }
 
-  showMultiChoice(agg: any) {
+  showMultiChoice(agg: any, bucket: any) {
 
     let multiSelected = false;
     this.searcher.constraints.forEach(constraint => {
@@ -71,8 +72,9 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
         multiSelected = true;
       }
     });
+    const multipleBuckets = bucket.length > 1;
     const op = this.getAggOp(agg);
-    return multiSelected || op === 'terms' || op === 'filters';
+    return (multiSelected || op === 'terms' || op === 'filters' || op === 'date_range') && multipleBuckets;
   }
 
   bucketsForAgg(key: string): Array<Bucket> {
@@ -80,6 +82,7 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
       const aggs = this.searcher.aggs.filter(agg => agg.key === key)[0];
       this.requestAggs[key] = aggs;
       this.resultOpAggs[key] = this.searcher.searchResult.aggs[key].op;
+      this.resultTypeAggs[key] = this.searcher.searchResult.aggs[key].type;
       const buckets = aggs.size ? this.searcher.searchResult.aggs[key].buckets.slice(0, aggs.size) :
         this.searcher.searchResult.aggs[key].buckets;
 
@@ -91,6 +94,10 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
       return buckets;
     }
     return [];
+  }
+
+  private getAggType(agg: any) {
+    return this.resultTypeAggs[agg.key];
   }
 
   addConstraint(agg: any, bucket: any) {
@@ -140,16 +147,21 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
     if (op === 'filters') {
       query = bucket.query || agg.filters[key];
     }
-    if (op === 'range' || op === 'date_range') {
+    if (op === 'range') {
       const lt = bucket.to;
       const gte = bucket.from;
       query = new RangeQuery(agg.field, lt, null, null, gte, null);
+    }
+    if (op === 'date_range') {
+      const lt = bucket.to;
+      const gte = bucket.from;
+      query = new DateRangeQuery(agg.field, lt, null, null, gte, null);
     }
     return query;
   }
 
   isRangeAgg(agg: any): boolean {
-    return this.getAggOp(agg) === 'date_range';
+    return this.getAggType(agg) === 'date' || this.getAggOp(agg) === 'date_range';
   }
 
   loadDatePicker(agg: any) {

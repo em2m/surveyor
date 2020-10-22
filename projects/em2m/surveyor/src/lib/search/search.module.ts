@@ -19,6 +19,7 @@ import {SurveyorRegionModule} from '../ui/region/region.module';
 import {SurveyorModalModule} from '../ui/modal/modal.module';
 import {DateRangePickerComponent} from './pickers/date-range-picker/date-range-picker.component';
 import {MultipleTermPickerComponent} from './pickers/multiple-term-picker/multiple-term-picker.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 export * from './shared/query.model';
 export * from './shared/searcher.model';
@@ -59,7 +60,8 @@ const components: any[] = [
     MatTooltipModule,
     MatInputModule,
     MatFormFieldModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatMenuModule
   ],
   exports: [
     ...components,

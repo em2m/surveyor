@@ -83,6 +83,12 @@ export class RangeQuery extends FieldedQuery {
   }
 }
 
+export class DateRangeQuery extends FieldedQuery {
+  constructor(field: string, public lt, public lte, public gt, public gte, public timeZone: string) {
+    super(field, OperationType.DATE);
+  }
+}
+
 export class RegexQuery extends FieldedQuery {
   constructor(field: string, public value) {
     super(field, OperationType.REGEX);
@@ -117,6 +123,7 @@ export class OperationType {
   static NOT = 'not';
   static AND = 'and';
   static OR = 'or';
+  static DATE = 'date_range';
   static RANGE = 'range';
   static NATIVE = 'native';
   static PHRASE = 'phrase';
@@ -143,6 +150,7 @@ export interface Agg {
   time_zone?: string;
   multiSelect?: boolean;
   aggs?: { [ key: string ]: Agg; };
+  type?: string;
 }
 
 export class Field {
