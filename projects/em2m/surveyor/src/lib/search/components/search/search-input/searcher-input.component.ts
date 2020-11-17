@@ -42,6 +42,7 @@ export class SearcherInputComponent implements OnInit {
         this.searcher.fullTextFields.forEach(field => {
           const innerQueries = [];
           tokenizedSearchInput.forEach(queryString => {
+              if (field === "_all") queryString = queryString.toLowerCase();
               innerQueries.push(new WildcardQuery(field, `*${queryString}*`));
           });
           outerQueries.push(new BoolQuery(OperationType.AND, innerQueries));
