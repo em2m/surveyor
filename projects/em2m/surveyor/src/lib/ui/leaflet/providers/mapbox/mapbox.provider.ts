@@ -23,7 +23,7 @@ export class MapboxProvider extends LayerProvider {
         label: 'Streets',
         layer: L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
           maxZoom: 21,
-          id: 'mapbox/streets-v11',
+          id: 'mbem2m/ckhoelgfc1r6819mw9ht86r0i',//'mapbox/streets-v11',
           accessToken: accessToken,
           tileSize: 512,
           zoomOffset: -1
