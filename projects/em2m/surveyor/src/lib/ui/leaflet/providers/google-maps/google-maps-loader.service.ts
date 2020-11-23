@@ -16,7 +16,7 @@ export class GoogleMapsLoaderService {
 
       return this.loadScript(`https://maps.googleapis.com/maps/api/js?key=${apiKey}`).pipe(
         concatMap(() => {
-          return this.loadScript('https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js');
+          return this.loadScript('https://unpkg.com/leaflet.gridlayer.googlemutant@0.10.0/Leaflet.GoogleMutant.js');
         }));
     } else {
       return of(true);
