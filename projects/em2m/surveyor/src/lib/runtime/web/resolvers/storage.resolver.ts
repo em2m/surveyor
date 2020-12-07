@@ -8,7 +8,7 @@ export class WebStorageResolver implements Resolve<any> {
   constructor(private router: Router,
               private ctx: ContextService) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<any> {
+  async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<any> {
     // Load Local Storage variables into the context service
     for (const key of Object.keys(localStorage)) {
       const value = localStorage.getItem(key);
