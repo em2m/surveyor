@@ -18,12 +18,15 @@ export class MapquestProvider extends LayerProvider {
 
     if (this.mapProvider === 'mapquest') {
       const accessToken = this.mapConfig.accessToken || this.mapConfig.mapquestKey;
+      const streetLayerId = this.mapConfig.mapquestStreetLayerId || 'mapquest.streets-mb';
+      const satelliteLayerId = this.mapConfig.mapquestSatelliteLayerId || 'mapquest.satellitenolabels';
+      const hybridLayerId = this.mapConfig.mapquestHybridLayerId || 'mapquest.satellite';
 
       const streetsLayer = {
         label: 'Streets',
         layer: L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
           maxZoom: 21,
-          id: 'mapquest.streets-mb',
+          id: streetLayerId,
           accessToken: accessToken
         })
       };
@@ -33,7 +36,7 @@ export class MapquestProvider extends LayerProvider {
         layer: L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
           maxZoom: 21,
           maxNativeZoom: 19,
-          id: 'mapquest.satellitenolabels',
+          id: satelliteLayerId,
           accessToken: accessToken
         })
       };
@@ -43,7 +46,7 @@ export class MapquestProvider extends LayerProvider {
         layer: L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}', {
           maxZoom: 21,
           maxNativeZoom: 19,
-          id: 'mapquest.satellite',
+          id: hybridLayerId,
           accessToken: accessToken
         })
       };
