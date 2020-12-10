@@ -6,6 +6,7 @@ export abstract class Modal {
   @Output() onSubmit = new EventEmitter();
   @Output() onCancel = new EventEmitter();
   @Output() onDelete = new EventEmitter();
+  private submitted = false;
 
   constructor() {
   }
@@ -24,7 +25,10 @@ export abstract class Modal {
   }
 
   submitWithValue(value: any) {
-    this.onSubmit.emit(value);
+    if (!this.submitted) {
+      this.onSubmit.emit(value);
+      this.submitted = true;
+    }
   }
 
   cancel() {

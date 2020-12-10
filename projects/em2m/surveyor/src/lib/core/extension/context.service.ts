@@ -84,7 +84,15 @@ export class ContextService {
   // }
 
   getValue(key: string): any {
-    return this.context.values[key];
+    let value = this.context.values[key];
+    if (!value) {
+      const storedValue = sessionStorage.getItem(key) || localStorage.getItem(key);
+      if (storedValue) {
+        value = JSON.parse(storedValue);
+      }
+      this.context.values[key] = value;
+    }
+    return value;
   }
 
   clearValues() {

@@ -33,8 +33,7 @@ export class SearcherInputComponent implements OnInit {
       const constraint = {
         label: searchInput
       } as SearchConstraint;
-
-      if (searchInput.indexOf(':') > -1 || searchInput.indexOf('(') > -1 || searchInput.indexOf('*') > -1) {
+      if (searchInput.indexOf(':') > -1 || searchInput.indexOf('(') > -1 || searchInput.indexOf('*') > -1 || (searchInput.indexOf('"') > -1)) {
         constraint.query = new LuceneQuery(searchInput, '_all');
       } else {
         const outerQueries = [];
