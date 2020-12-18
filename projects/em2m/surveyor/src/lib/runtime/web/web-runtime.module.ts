@@ -24,6 +24,7 @@ import {ApplicationFooterComponent} from './application/footer/footer.component'
 import {ApplicationHeaderComponent} from './application/header/header.component';
 import {ApplicationSidenavComponent} from './application/sidenav/sidenav.component';
 import {WebContextService} from './context/web-context.service';
+import {WebStorageResolver} from './resolvers/storage.resolver';
 
 export * from './web-runtime.component';
 export * from './application/footer/footer.component';
@@ -34,6 +35,7 @@ export * from './application/sidenav/sidenav.service';
 export * from './application/unknown/unknown.component';
 export * from './application/wrapper/wrapper.component';
 export * from './context/web-context.service';
+export * from './resolvers/storage.resolver';
 
 export const routes: Routes = [
   {
