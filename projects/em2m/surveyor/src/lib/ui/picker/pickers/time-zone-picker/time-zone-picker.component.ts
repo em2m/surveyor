@@ -41,8 +41,8 @@ export class TimeZonePicker extends Picker implements OnInit, AfterViewInit {
 
   constructor() {
     super();
-    this.buildTimezoneList();
     this.getUserTimezone();
+    this.buildTimezoneList();
     this.tzSearchResults = this.timezones;
   }
 
@@ -86,18 +86,32 @@ export class TimeZonePicker extends Picker implements OnInit, AfterViewInit {
 
   timezoneListSort() {
     this.timezones.sort((a, b) => {
-      if (a.offset > b.offset) {
+
+      const aDiff = Math.abs(Math.abs(Number(a.offset.split(':')[0])) - Math.abs(Number(this.userTimezone?.offset.split(':')[0])));
+      const bDiff = Math.abs(Math.abs(Number(b.offset.split(':')[0])) - Math.abs(Number(this.userTimezone?.offset.split(':')[0])));
+      // Pick time zones closest to user time zone
+      if (aDiff > bDiff) {
         return 1;
       }
-      if (a.offset < b.offset) {
+      if (aDiff < bDiff) {
         return -1;
       }
-      if (a.offset === b.offset) {
-        if (a.name > b.name) {
+      // Fall back to closest to Greenwich TZ (00:00)
+      if (aDiff === bDiff) {
+        if (a.offset > b.offset) {
           return 1;
         }
-        if (a.name < b.name) {
+        if (a.offset < b.offset) {
           return -1;
+        }
+        // Fall back to alphabetical order
+        if (a.offset === b.offset) {
+          if (a.name > b.name) {
+            return 1;
+          }
+          if (a.name < b.name) {
+            return -1;
+          }
         }
       }
       return 0;
