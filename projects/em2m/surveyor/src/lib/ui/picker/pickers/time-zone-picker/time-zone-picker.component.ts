@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Picker} from '../../picker.component';
 import * as momentTz from 'moment-timezone';
 import {FormControl} from '@angular/forms';
@@ -67,7 +67,15 @@ export class TimeZonePicker extends Picker implements OnInit, AfterViewInit {
   buildTimezoneList() {
     const validTimeZones = momentTz.tz.names()
       .filter((timeZone) => {
-        return timeZone.indexOf('America/') > -1 || timeZone.indexOf('US/') > -1;
+        const allowedTimeZones = ['America/', 'US/', 'Australia/', 'NZ', 'Auckland', 'Chatham'];
+        let timeZoneAllowed = false;
+        allowedTimeZones.forEach(filterVal => {
+          if (timeZone.indexOf(filterVal) > -1) {
+            timeZoneAllowed = true;
+          }
+        });
+
+        return timeZoneAllowed;
       });
     validTimeZones.forEach(item => {
       const tz = this.parseTimezone(item);
@@ -98,7 +106,10 @@ export class TimeZonePicker extends Picker implements OnInit, AfterViewInit {
 
   parseTimezone(zone: string) {
     const split = zone.split('/');
-    const displayName = split[split.length - 1].replace('_', ' ');
+    let displayName = split[split.length - 1].replace('_', ' ');
+    if (displayName === 'NZ') {
+      displayName = 'New Zealand';
+    }
 
     let zoneAbbr = momentTz.tz(zone).format('z');
     if (zoneAbbr[0] === '-' || zoneAbbr[0] === '+') {
@@ -107,10 +118,10 @@ export class TimeZonePicker extends Picker implements OnInit, AfterViewInit {
 
     return {
       name: zone,
-      displayName: displayName,
+      displayName,
       offset: momentTz.tz(zone).format('Z'),
       zone: zoneAbbr ? this.abbrsMap[zoneAbbr] : null,
-      zoneAbbr: zoneAbbr
+      zoneAbbr
     };
   }
 
@@ -143,13 +154,16 @@ export class TimeZonePicker extends Picker implements OnInit, AfterViewInit {
 
   search() {
     this.clearVisible = !(this.searchText === '');
-    const regex = this.searchText.toUpperCase().replace(' ', '');
+    const regex = this.searchText?.toUpperCase().replace(' ', '');
     this.tzSearchResults = this.timezones.filter(tz => {
       if (tz.zoneAbbr) {
-        return !!(tz.name.toUpperCase().replace('_', '').match(regex)
-          || tz.zoneAbbr.toUpperCase().match(regex) || tz.zone.toUpperCase().match(regex));
+        return !!(tz.name?.toUpperCase().replace('_', '').match(regex)
+          || tz.zoneAbbr?.toUpperCase().match(regex)
+          || tz.zone?.toUpperCase().match(regex)
+          || tz.displayName?.toUpperCase().replace(' ', '').match(regex));
       } else {
-        return !!(tz.name.toUpperCase().replace('_', '').match(regex));
+        return !!(tz.name?.toUpperCase().replace('_', '').match(regex)
+          || tz.displayName?.toUpperCase().replace(' ', '').match(regex));
       }
     });
   }
