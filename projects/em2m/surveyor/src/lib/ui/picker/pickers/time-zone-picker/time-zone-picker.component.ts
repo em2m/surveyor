@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Picker} from '../../picker.component';
 import * as momentTz from 'moment-timezone';
 import {FormControl} from '@angular/forms';
@@ -41,8 +41,8 @@ export class TimeZonePicker extends Picker implements OnInit, AfterViewInit {
 
   constructor() {
     super();
-    this.buildTimezoneList();
     this.getUserTimezone();
+    this.buildTimezoneList();
     this.tzSearchResults = this.timezones;
   }
 
@@ -67,7 +67,15 @@ export class TimeZonePicker extends Picker implements OnInit, AfterViewInit {
   buildTimezoneList() {
     const validTimeZones = momentTz.tz.names()
       .filter((timeZone) => {
-        return timeZone.indexOf('America/') > -1 || timeZone.indexOf('US/') > -1;
+        const allowedTimeZones = ['America/', 'US/', 'Australia/', 'NZ', 'Auckland', 'Chatham'];
+        let timeZoneAllowed = false;
+        allowedTimeZones.forEach(filterVal => {
+          if (timeZone.indexOf(filterVal) > -1) {
+            timeZoneAllowed = true;
+          }
+        });
+
+        return timeZoneAllowed;
       });
     validTimeZones.forEach(item => {
       const tz = this.parseTimezone(item);
@@ -78,18 +86,32 @@ export class TimeZonePicker extends Picker implements OnInit, AfterViewInit {
 
   timezoneListSort() {
     this.timezones.sort((a, b) => {
-      if (a.offset > b.offset) {
+
+      const aDiff = Math.abs(Math.abs(Number(a.offset.split(':')[0])) - Math.abs(Number(this.userTimezone?.offset.split(':')[0])));
+      const bDiff = Math.abs(Math.abs(Number(b.offset.split(':')[0])) - Math.abs(Number(this.userTimezone?.offset.split(':')[0])));
+      // Pick time zones closest to user time zone
+      if (aDiff > bDiff) {
         return 1;
       }
-      if (a.offset < b.offset) {
+      if (aDiff < bDiff) {
         return -1;
       }
-      if (a.offset === b.offset) {
-        if (a.name > b.name) {
+      // Fall back to closest to Greenwich TZ (00:00)
+      if (aDiff === bDiff) {
+        if (a.offset > b.offset) {
           return 1;
         }
-        if (a.name < b.name) {
+        if (a.offset < b.offset) {
           return -1;
+        }
+        // Fall back to alphabetical order
+        if (a.offset === b.offset) {
+          if (a.name > b.name) {
+            return 1;
+          }
+          if (a.name < b.name) {
+            return -1;
+          }
         }
       }
       return 0;
@@ -98,7 +120,10 @@ export class TimeZonePicker extends Picker implements OnInit, AfterViewInit {
 
   parseTimezone(zone: string) {
     const split = zone.split('/');
-    const displayName = split[split.length - 1].replace('_', ' ');
+    let displayName = split[split.length - 1].replace('_', ' ');
+    if (displayName === 'NZ') {
+      displayName = 'New Zealand';
+    }
 
     let zoneAbbr = momentTz.tz(zone).format('z');
     if (zoneAbbr[0] === '-' || zoneAbbr[0] === '+') {
@@ -107,10 +132,10 @@ export class TimeZonePicker extends Picker implements OnInit, AfterViewInit {
 
     return {
       name: zone,
-      displayName: displayName,
+      displayName,
       offset: momentTz.tz(zone).format('Z'),
       zone: zoneAbbr ? this.abbrsMap[zoneAbbr] : null,
-      zoneAbbr: zoneAbbr
+      zoneAbbr
     };
   }
 
@@ -143,13 +168,16 @@ export class TimeZonePicker extends Picker implements OnInit, AfterViewInit {
 
   search() {
     this.clearVisible = !(this.searchText === '');
-    const regex = this.searchText.toUpperCase().replace(' ', '');
+    const regex = this.searchText?.toUpperCase().replace(' ', '');
     this.tzSearchResults = this.timezones.filter(tz => {
       if (tz.zoneAbbr) {
-        return !!(tz.name.toUpperCase().replace('_', '').match(regex)
-          || tz.zoneAbbr.toUpperCase().match(regex) || tz.zone.toUpperCase().match(regex));
+        return !!(tz.name?.toUpperCase().replace('_', '').match(regex)
+          || tz.zoneAbbr?.toUpperCase().match(regex)
+          || tz.zone?.toUpperCase().match(regex)
+          || tz.displayName?.toUpperCase().replace(' ', '').match(regex));
       } else {
-        return !!(tz.name.toUpperCase().replace('_', '').match(regex));
+        return !!(tz.name?.toUpperCase().replace('_', '').match(regex)
+          || tz.displayName?.toUpperCase().replace(' ', '').match(regex));
       }
     });
   }
