@@ -29,7 +29,7 @@ export class MultipleTermPickerComponent extends Picker implements OnInit {
     const results = this.buckets.filter(bucket => bucket.checked);
     this.pick({
       agg: this.agg,
-      bucket: results
+      bucket: results.length > 1 ? results : results[0]
     });
   }
 
@@ -75,7 +75,7 @@ export class MultipleTermPickerComponent extends Picker implements OnInit {
       });
     }
 
-    //resort
+    // resort
     if (this.agg.sort && this.agg.sort.type === 'Lexical' && this.agg.sort.direction === 'Descending') {
       this.buckets.sort(sortDescending);
       this.bucketSearchResults.sort(sortDescending);
