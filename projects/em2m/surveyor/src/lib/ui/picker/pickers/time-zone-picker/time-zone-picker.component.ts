@@ -74,6 +74,8 @@ export class TimeZonePicker extends Picker implements OnInit, AfterViewInit {
             timeZoneAllowed = true;
           }
         });
+        const blacklistedTimeZones = ['US/Pacific-New'];
+        timeZoneAllowed = (blacklistedTimeZones.includes(timeZone)) ? false : timeZoneAllowed;
 
         return timeZoneAllowed;
       });
