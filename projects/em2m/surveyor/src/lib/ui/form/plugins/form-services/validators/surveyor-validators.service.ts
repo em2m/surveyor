@@ -40,4 +40,16 @@ export class SurveyorValidators {
     };
     */
   }
+  static hasRoleSelected(c: AbstractControl) {
+    const temp = c.value;
+    if (temp !== undefined) {
+      for (const roles of temp) {
+        if ( roles.selected){
+          return true;
+          }
+      }
+    }else {
+      return false;
+    }
+  }
 }
