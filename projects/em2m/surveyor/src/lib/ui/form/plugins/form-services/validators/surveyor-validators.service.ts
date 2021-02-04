@@ -1,4 +1,5 @@
 import {AbstractControl} from '@angular/forms';
+import has = Reflect.has;
 
 export class SurveyorValidators {
 
@@ -42,14 +43,16 @@ export class SurveyorValidators {
   }
   static hasRoleSelected(c: AbstractControl) {
     const temp = c.value;
+    let inValidRole = true;
     if (temp !== undefined) {
-      for (const roles of temp) {
-        if ( roles.selected){
-          return true;
-          }
+      for (const role of temp) {
+        if (role.selected) {
+          inValidRole = false;
+        }
       }
-    }else {
-      return false;
+      return inValidRole ? {inValidRole} : null;
+    } else {
+      return {inValidRole};
     }
   }
 }
