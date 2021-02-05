@@ -18,13 +18,13 @@ export class MapquestProvider extends LayerProvider {
 
     if (this.mapProvider === 'mapquest') {
       const accessToken = this.mapConfig.accessToken || this.mapConfig.mapquestKey;
-      const streetLayerId = this.mapConfig.mapquestStreetLayerId || 'mapquest.streets-mb';
-      const satelliteLayerId = this.mapConfig.mapquestSatelliteLayerId || 'mapquest.satellitenolabels';
-      const hybridLayerId = this.mapConfig.mapquestHybridLayerId || 'mapquest.satellite';
+      const streetLayerId = this.mapConfig.mapquestStreetLayerId || 'mapquest/ck62awhdx0g1g1iqqv9u80q6i';
+      const satelliteLayerId = this.mapConfig.mapquestSatelliteLayerId || 'mapquest/ck62b7u670gx81irs634q9hzs';
+      //const hybridLayerId = this.mapConfig.mapquestHybridLayerId || 'mapquest/ck62b7u670gx81irs634q9hzs';
 
       const streetsLayer = {
         label: 'Streets',
-        layer: L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        layer: L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}@2x?access_token={accessToken}', {
           maxZoom: 21,
           id: streetLayerId,
           accessToken: accessToken
@@ -33,7 +33,7 @@ export class MapquestProvider extends LayerProvider {
 
       const satelliteLayer = {
         label: 'Satellite',
-        layer: L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        layer: L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}@2x?access_token={accessToken}', {
           maxZoom: 21,
           maxNativeZoom: 19,
           id: satelliteLayerId,
@@ -41,16 +41,16 @@ export class MapquestProvider extends LayerProvider {
         })
       };
 
-      const hybridLayer = {
-        label: 'Hybrid',
-        layer: L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}', {
-          maxZoom: 21,
-          maxNativeZoom: 19,
-          id: hybridLayerId,
-          accessToken: accessToken
-        })
-      };
-      return [streetsLayer, satelliteLayer, hybridLayer];
+      // const hybridLayer = {
+      //   label: 'Hybrid',
+      //   layer: L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+      //     maxZoom: 21,
+      //     maxNativeZoom: 19,
+      //     id: hybridLayerId,
+      //     accessToken: accessToken
+      //   })
+      //};
+      return [streetsLayer, satelliteLayer]//, hybridLayer];
     } else {
       return [];
     }
