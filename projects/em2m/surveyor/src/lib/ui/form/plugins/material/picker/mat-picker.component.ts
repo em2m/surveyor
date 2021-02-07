@@ -23,14 +23,14 @@ export class MaterialPickerInputComponent extends SurveyorFormInputComponent {
 
   setValue(val: any) {
     if (val) {
-      let options = this.controlDefinition.options;
+      const options = this.controlDefinition.options;
       if (options.labelResolver) {
         this.label = options.labelResolver(val);
-        this.formControlDirective.valueAccessor.writeValue(this.label);
+        this.formControlDirective?.valueAccessor?.writeValue(this.label);
       }
       if (options.valueResolver) {
-        this.formControlDirective.control.setValue(options.valueResolver(val), { emitModelToViewChange: false });
-        this.formControlDirective.control.updateValueAndValidity();
+        this.formControlDirective?.control?.setValue(options.valueResolver(val), { emitModelToViewChange: false });
+        this.formControlDirective?.control?.updateValueAndValidity();
       }
     }
   }
