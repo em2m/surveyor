@@ -1,8 +1,6 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {SurveyorFormInputComponent} from '../../../form-input-component';
 import {PickerService} from '../../../../picker/picker.service';
-import {MaskedValue} from '../../../../mask/mask.model';
-import {Function} from 'estree';
 import {FormControlDirective} from '@angular/forms';
 
 @Component({
@@ -10,7 +8,7 @@ import {FormControlDirective} from '@angular/forms';
   templateUrl: './mat-picker.component.html',
   styleUrls: ['./mat-picker.component.scss']
 })
-export class MaterialPickerInputComponent extends SurveyorFormInputComponent {
+export class MaterialPickerInputComponent extends SurveyorFormInputComponent implements AfterViewInit {
 
   @ViewChild('picker', {read: FormControlDirective})
   formControlDirective: FormControlDirective;
@@ -19,6 +17,10 @@ export class MaterialPickerInputComponent extends SurveyorFormInputComponent {
 
   constructor(private pickerService: PickerService) {
     super();
+  }
+
+  ngAfterViewInit() {
+    this.setValue(this.controlDefinition.value);
   }
 
   setValue(val: any) {
