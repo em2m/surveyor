@@ -1,15 +1,17 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {SurveyorFormInputComponent} from '../../../form-input-component';
 import {PickerService} from '../../../../picker/picker.service';
-import {MaskedValue} from '../../../../mask/mask.model';
-import {Function} from 'estree';
+import {FormControlDirective} from '@angular/forms';
 
 @Component({
   selector: 'surveyor-mat-picker-input',
   templateUrl: './mat-picker.component.html',
   styleUrls: ['./mat-picker.component.scss']
 })
-export class MaterialPickerInputComponent extends SurveyorFormInputComponent {
+export class MaterialPickerInputComponent extends SurveyorFormInputComponent implements AfterViewInit {
+
+  @ViewChild('picker', {read: FormControlDirective})
+  formControlDirective: FormControlDirective;
 
   label = '';
 
@@ -17,15 +19,20 @@ export class MaterialPickerInputComponent extends SurveyorFormInputComponent {
     super();
   }
 
+  ngAfterViewInit() {
+    this.setValue(this.controlDefinition.value);
+  }
+
   setValue(val: any) {
     if (val) {
-      let options = this.controlDefinition.options;
+      const options = this.controlDefinition.options;
       if (options.labelResolver) {
         this.label = options.labelResolver(val);
+        this.formControlDirective?.valueAccessor?.writeValue(this.label);
       }
       if (options.valueResolver) {
-        this.formControl.setValue(options.valueResolver(val));
-        this.formControl.updateValueAndValidity();
+        this.formControlDirective?.control?.setValue(options.valueResolver(val), { emitModelToViewChange: false });
+        this.formControlDirective?.control?.updateValueAndValidity();
       }
     }
   }
