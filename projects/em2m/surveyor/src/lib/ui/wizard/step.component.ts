@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'surveyor-step',
@@ -8,6 +9,7 @@ import {Component, Input} from '@angular/core';
 export class SurveyorWizardStepComponent {
 
   animateClass: string;
+  @Input() onStepCompleted: Observable<boolean> = null;
   @Input() active = false;
   @Input() loaded = false;
   @Input() skipped = false;
