@@ -42,6 +42,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "@em2m/surveyor"
+    }
+  },
+  "defaultProject": "@em2m/surveyor",
+  "cli": {
+    "analytics": "4d201df1-be42-4840-8a03-963062316ec3"
+  }
 }

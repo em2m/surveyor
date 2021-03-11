@@ -40,33 +40,48 @@ export class SurveyorWizardComponent implements AfterViewInit {
       // Slide out the current step if one is active
       if (this.activeIndex !== undefined) {
         const currentStep = steps[this.activeIndex];
-        if (this.activeIndex > newIndex) {
-          currentStep.hideRight();
+        if (currentStep.onStepCompleted && typeof currentStep.onStepCompleted?.subscribe === 'function') {
+          currentStep.onStepCompleted.subscribe(proceed => {
+            if (proceed) {
+              this.completeSelectStep(newIndex, steps, currentStep);
+            } else {
+              return;
+            }
+          })
         } else {
-          currentStep.hideLeft();
+          this.completeSelectStep(newIndex, steps, currentStep)
         }
-      }
-
-      // Slide in the new step, skipping any steps with the 'skipped' flag
-      let nextIndex = newIndex;
-      while (steps[nextIndex].skipped) {
-        if (this.activeIndex > nextIndex) {
-          nextIndex -= 1;
-        } else {
-          nextIndex += 1;
-        }
-      }
-      const newStep = steps[nextIndex];
-      if (this.activeIndex > nextIndex) {
-        newStep.showLeft();
-      } else {
-        newStep.showRight();
-      }
-      this.activeIndex = nextIndex;
-      newStep.loaded = true;
-
-      this.select.emit(newStep);
+      } else this.completeSelectStep(newIndex, steps)
     }
+  }
+
+  completeSelectStep(newIndex, steps, currentStep = null) {
+    if (currentStep) {
+      if (this.activeIndex > newIndex) {
+        currentStep.hideRight();
+      } else {
+        currentStep.hideLeft();
+      }
+    }
+    // Slide in the new step, skipping any steps with the 'skipped' flag
+    let nextIndex = newIndex;
+    while (steps[nextIndex].skipped) {
+      if (this.activeIndex > nextIndex) {
+        nextIndex -= 1;
+      } else {
+        nextIndex += 1;
+      }
+    }
+    const newStep = steps[nextIndex];
+    if (this.activeIndex > nextIndex) {
+      newStep.showLeft();
+    } else {
+      newStep.showRight();
+    }
+    this.activeIndex = nextIndex;
+    newStep.loaded = true;
+
+    this.select.emit(newStep);
   }
 
   isComplete(stepIndex: number, honorSkip?: boolean): boolean {
