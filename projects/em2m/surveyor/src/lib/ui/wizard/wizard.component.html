@@ -31,7 +31,7 @@
   <div class="step-controls">
     <button mat-flat-button style="flex: 1;" *ngIf="activeIndex === 0" (click)="onCancel()">CANCEL</button>
     <button mat-flat-button style="flex: 1;"
-            *ngIf="activeIndex > 0" (click)="selectStep(activeIndex - 1)">BACK
+            *ngIf="activeIndex > 0" (click)="selectStep(activeIndex - 1)" [disabled]="!hasActiveSteps(activeIndex)">BACK
     </button>
     <div style="flex: 0.5;"></div>
     <button mat-flat-button color="primary" style="flex: 1;" [disabled]="!isComplete(activeIndex, true)"
