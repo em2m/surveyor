@@ -47,11 +47,13 @@ export class SurveyorWizardComponent implements AfterViewInit {
             } else {
               return;
             }
-          })
+          });
         } else {
-          this.completeSelectStep(newIndex, steps, currentStep)
+          this.completeSelectStep(newIndex, steps, currentStep);
         }
-      } else this.completeSelectStep(newIndex, steps)
+      } else {
+        this.completeSelectStep(newIndex, steps);
+      }
     }
   }
 
@@ -100,6 +102,16 @@ export class SurveyorWizardComponent implements AfterViewInit {
     }
 
     return step.optional || step.skipped || step.complete || (this.skipInvalid && honorSkip && stepIndex !== this.steps.length - 1);
+  }
+
+  hasActiveSteps(stepIndex: number) {
+    const steps = this.steps.toArray();
+    for (let i = stepIndex - 1; i >= 0; i--) {
+      if (!steps[i]?.skipped) {
+        return true;
+      }
+    }
+    return false;
   }
 
   isSkipped(stepIndex: number): boolean {
