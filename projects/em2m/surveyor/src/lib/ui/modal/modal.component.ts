@@ -24,10 +24,13 @@ export abstract class Modal {
     this.onSubmit.emit();
   }
 
-  submitWithValue(value: any) {
+  submitWithValue(value: any, allowSubmitOnce: boolean = true) {
     if (!this.submitted) {
       this.onSubmit.emit(value);
-      this.submitted = true;
+
+      if (allowSubmitOnce) {
+        this.submitted = true;
+      }
     }
   }
 
