@@ -2,7 +2,8 @@
   <mat-label>{{ controlDefinition?.label }}</mat-label>
   <mat-select [formControl]="formControl"
               [required]="controlDefinition.required || false"
-              [multiple]="controlDefinition.options?.multiple || false">
+              [multiple]="controlDefinition.options?.multiple || false"
+              [disabled]="controlDefinition.disabled">
     <mat-option *ngIf="!controlDefinition.options?.multiple">---</mat-option>
     <mat-option *ngFor="let item of items" [value]="item.value">{{ item.label }}</mat-option>
   </mat-select>

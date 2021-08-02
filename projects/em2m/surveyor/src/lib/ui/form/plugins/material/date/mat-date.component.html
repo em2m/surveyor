@@ -3,6 +3,7 @@
   <input matInput readonly [min]="controlDefinition.options.min"
          [max]="controlDefinition.options.max"
          [matDatepicker]="datepicker"
+         [disabled]="controlDefinition.disabled"
          [formControl]="formControl">
   <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
   <mat-datepicker #datepicker disabled="false"></mat-datepicker>
