@@ -74,21 +74,21 @@ export class BreadcrumbsContribution implements OnInit, OnDestroy {
     let stopIndex = 0;
     return Array.prototype.concat(
       ...routes.map((route: ActivatedRoute) => {
-        const title = route.routeConfig && route.routeConfig.data && route.routeConfig.data.title;
+        const title = route?.routeConfig?.data?.title;
         url = url + '/' + route.snapshot.url.map(segment => segment.path).join('/');
         stopIndex = stopIndex + 1;
 
         // There are two conditionals here because we don't want a child` breadcrumb to overwrite hideBreadcrumbsRecursive. This way, we only need to
         // set the hideBreadcrumb data to be true in the first breadcrumb we want to stop at. All of its children will also be hidden.
         if (title && !hideBreadcrumbsRecursive) {
-          hideBreadcrumbsRecursive = route.routeConfig && route.routeConfig.data && route.routeConfig.data.hideBreadcrumb;
+          hideBreadcrumbsRecursive = route?.routeConfig?.data?.hideBreadcrumb;
         }
         if (title && !hideBreadcrumbsRecursive && this.tabletScreen) {
-          if (typeof title === 'string') {
+          if (typeof title === 'string' || typeof title === 'number') {
             navigationArray.push({label: title, href: url});
           } else if (typeof title === 'function') {
             let evaluatedTitles = title(this.ctx.getContext());
-            if (typeof evaluatedTitles === 'string') {
+            if (typeof evaluatedTitles === 'string' || typeof evaluatedTitles === 'number') {
               // For single title breadcrumbs (i.e. devices or vehicles) we want to add them straight into the drop down nav.
               navigationArray.push({label: evaluatedTitles, href: url});
             } else {
@@ -103,7 +103,7 @@ export class BreadcrumbsContribution implements OnInit, OnDestroy {
           }
         } else if (title && !hideBreadcrumbsRecursive && !this.tabletScreen) {
           navigationArray = [];
-          if (typeof title === 'string') {
+          if (typeof title === 'string' || typeof title === 'number') {
             return [{label: title, href: url}];
           } else if (typeof title === 'function') {
             let evaluatedTitles = title(this.ctx.getContext());
@@ -111,7 +111,7 @@ export class BreadcrumbsContribution implements OnInit, OnDestroy {
               evaluatedTitles = [evaluatedTitles];
             }
             return evaluatedTitles.filter(evaluatedTitle => !!evaluatedTitle).map((evaluatedTitle) => {
-              if (typeof evaluatedTitle === 'string') {
+              if (typeof evaluatedTitle === 'string' || typeof evaluatedTitle === 'number') {
                 return {label: evaluatedTitle, href: url};
               } else {
                 if (!evaluatedTitle.href) {
