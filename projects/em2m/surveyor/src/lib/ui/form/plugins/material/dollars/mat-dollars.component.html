@@ -7,6 +7,7 @@
          [formControl]="formControl"
          [type]="controlDefinition?.options?.type || 'text'"
          [required]="controlDefinition.required ? 'required' : null"
+         [disabled]="controlDefinition.disabled"
          (keydown)="applyMask($event)"
   />
   <mat-error *ngFor="let errorKey of getErrors()">

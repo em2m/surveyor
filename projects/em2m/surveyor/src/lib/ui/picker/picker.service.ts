@@ -40,6 +40,11 @@ export class PickerService {
 
     if (!pickerOptions) { pickerOptions = {}; }
     if (!pickerOptions.type) { pickerOptions.type = 'side'; }
+    if (pickerOptions.type === 'side') {
+      if (!pickerOptions.width) {
+        pickerOptions.width = 350;
+      }
+    }
 
     let pickerResponse = new Subject<any>();
     let modal = this.modalService.open(picker, pickerOptions);
