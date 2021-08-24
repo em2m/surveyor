@@ -3,6 +3,7 @@
   <input [autocomplete]="controlDefinition?.autoComplete || 'off' " matInput [id]="controlDefinition.key"
          [formControl]="formControl"
          [type]="controlDefinition?.options?.type || 'text'"
+         [readonly]="controlDefinition?.options?.readonly"
          [required]="controlDefinition.required ? 'required' : null"
          [disabled]="controlDefinition.disabled"
          (keydown)="applyMask($event)"
