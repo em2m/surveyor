@@ -122,7 +122,9 @@ export class MultipleTermPickerComponent extends Picker implements OnInit {
     this.clearVisible = !(this.searchText === '');
     const regex = this.searchText.toUpperCase().replace(' ', '');
     this.bucketSearchResults = this.buckets.filter(bucket => {
-      return !!(bucket.key.toUpperCase().replace('_', '').match(regex));
+      const {label, key } = bucket;
+      const arg = label ? label : key;
+      return !!(arg.toUpperCase().replace('_', '').match(regex));
     });
     this.bucketSearchResults.forEach(bucket => {
       bucket.checked = this.selectedItems[bucket.key];
