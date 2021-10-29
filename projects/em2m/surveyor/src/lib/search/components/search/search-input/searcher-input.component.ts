@@ -1,7 +1,7 @@
 import {Component, ElementRef, Input, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {SearchConstraint, Searcher, SearchRequest} from '../../../shared/searcher.model';
 import {PickerService} from '../../../../ui/picker/picker.service';
-import {BoolQuery, LuceneQuery, OperationType, Query, WildcardQuery} from '../../../shared/query.model';
+import {BoolQuery, LuceneQuery, MatchQuery, OperationType, Query, WildcardQuery} from '../../../shared/query.model';
 
 @Component({
   selector: 'surveyor-searcher-input',
@@ -42,8 +42,12 @@ export class SearcherInputComponent implements OnInit {
           const innerQueries = [];
           tokenizedSearchInput.forEach(queryString => {
               if (field === '_all') queryString = queryString.toLowerCase();
-              if (field === 'all') field = '_all';
-              innerQueries.push(new WildcardQuery(field, `*${queryString}*`));
+              if (field === 'all') {
+                field = '_all';
+                innerQueries.push(new MatchQuery(field, `*${queryString}*`));
+              } else {
+                innerQueries.push(new WildcardQuery(field, `*${queryString}*`));
+              }
           });
           outerQueries.push(new BoolQuery(OperationType.AND, innerQueries));
         });
