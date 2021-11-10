@@ -881,7 +881,7 @@ export class ColorPicker extends Picker implements OnInit {
 
   ngOnInit() {
     let isColorInArray = false;
-    this.selectedHexCode = this.params.value;
+    this.selectedHexCode = this.params?.value;
     this.materialColors.forEach(color => {
       const variations = color.variations.map(variation => variation.hex);
       if (variations.includes(this.selectedHexCode)){
