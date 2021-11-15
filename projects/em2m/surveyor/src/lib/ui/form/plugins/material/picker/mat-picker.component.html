@@ -3,6 +3,7 @@
   <input matInput #picker [id]="controlDefinition.key" type="text" readonly
          [formControl]="formControl"
          [required]="controlDefinition.required ? 'required' : null"
+         [disabled]="controlDefinition.disabled"
          [placeholder]="label || controlDefinition.options.placeholder"/>
   <mat-error *ngFor="let errorKey of getErrors()">
     {{getErrorMessage(errorKey)}}

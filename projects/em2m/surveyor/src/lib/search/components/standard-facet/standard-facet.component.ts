@@ -65,7 +65,6 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
   }
 
   showMultiChoice(agg: any, bucket: any) {
-
     let multiSelected = false;
     this.searcher.constraints.forEach(constraint => {
       if (agg && (constraint.key === agg.label || constraint.key === agg.key)) {
@@ -83,9 +82,9 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
       this.requestAggs[key] = aggs;
       this.resultOpAggs[key] = this.searcher.searchResult.aggs[key].op;
       this.resultTypeAggs[key] = this.searcher.searchResult.aggs[key].type;
-      const buckets = aggs.size ? this.searcher.searchResult.aggs[key].buckets.slice(0, aggs.size) :
+      let buckets = aggs.size ? this.searcher.searchResult.aggs[key].buckets.slice(0, aggs.size) :
         this.searcher.searchResult.aggs[key].buckets;
-
+      buckets = buckets.filter(bucket => bucket.key || bucket.label);
       if (this.searcher.aggsMapper && this.searcher.aggsMapper[key]) {
         buckets.forEach(item => {
           item.label = this.searcher.aggsMapper[key][item.key];
