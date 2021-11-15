@@ -27,4 +27,8 @@ export class ConfirmationModal extends Modal implements OnInit {
   cancel() {
     this.submitWithValue(false);
   }
+
+  delete() {
+    this.submitWithValue("DELETE");
+  }
 }
