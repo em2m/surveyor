@@ -1,9 +1,9 @@
 import {Component, ViewContainerRef} from '@angular/core';
-import {Capacitor} from '@capacitor/core';
+import {Capacitor, Plugins} from '@capacitor/core';
 import 'hammerjs';
 import {PopoverService} from '../../ui/popover/popover.service';
 import {ModalService} from '../../ui/modal/modal.service';
-import {SplashScreen} from '@capacitor/splash-screen';
+const {SplashScreen} = Plugins;
 
 @Component({
   selector: 'surveyor-runtime',
