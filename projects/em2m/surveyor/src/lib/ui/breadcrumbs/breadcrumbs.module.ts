@@ -8,6 +8,7 @@ import {BreadcrumbsContribution} from './breadcrumbs-contribution.component';
 
 export * from './breadcrumbs.model';
 export * from './breadcrumbs-contribution.component';
+export * from './breadcrumb.service';
 
 const components = [
   BreadcrumbsContribution
