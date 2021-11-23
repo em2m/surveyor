@@ -1,10 +1,12 @@
-import {Component, OnInit, OnDestroy, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {BreadcrumbItem} from './breadcrumbs.model';
 import {Subscription} from 'rxjs';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {ContextService} from '../../core/extension/context.service';
 import {MatMenuTrigger} from '@angular/material/menu';
+import {BreadcrumbService} from './breadcrumb.service';
+
 
 @Component({
   templateUrl: './breadcrumbs-contribution.component.html',
@@ -15,17 +17,22 @@ export class BreadcrumbsContribution implements OnInit, OnDestroy {
   items: Array<BreadcrumbItem> = [];
   tabletScreen: boolean;
   windowSizeTrackerSub: Subscription;
-  private routerSub: Subscription;
   @ViewChild(MatMenuTrigger, {static: true}) trigger: MatMenuTrigger;
+  private routerSub: Subscription;
+  private breadcrumbsSub: Subscription;
 
   constructor(private router: Router,
               private breakpoint: BreakpointObserver,
-              private ctx: ContextService) {
+              private ctx: ContextService,
+              private breadcrumbsService: BreadcrumbService) {
   }
 
   ngOnInit() {
     // this.tabletScreen is checked to display the full or collapsed breadcrumbs.
     this.tabletScreen = this.breakpoint.isMatched('(max-width: 839px)');
+    this.breadcrumbsSub = this.breadcrumbsService.onRefresh().subscribe(refresh => {
+      this.items = this.buildItems();
+    });
 
     this.routerSub = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -51,6 +58,9 @@ export class BreadcrumbsContribution implements OnInit, OnDestroy {
     }
     if (this.routerSub) {
       this.routerSub.unsubscribe();
+    }
+    if (this.breadcrumbsSub){
+      this.breadcrumbsSub.unsubscribe();
     }
   }
 

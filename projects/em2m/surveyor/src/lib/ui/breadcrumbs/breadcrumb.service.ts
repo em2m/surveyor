@@ -1,9 +1,10 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 
-
-@Injectable({providedIn: 'root'})
-export class BreadcrumbsService {
+@Injectable({
+  providedIn: 'root'
+})
+export class BreadcrumbService {
   private updateSubject = new BehaviorSubject<boolean>(true);
 
   constructor() {
@@ -14,6 +15,6 @@ export class BreadcrumbsService {
   }
 
   refresh() {
-    this.updateSubject.next(this);
+    this.updateSubject.next(true);
   }
 }
