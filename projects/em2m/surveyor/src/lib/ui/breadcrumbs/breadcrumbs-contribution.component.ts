@@ -24,13 +24,13 @@ export class BreadcrumbsContribution implements OnInit, OnDestroy {
   constructor(private router: Router,
               private breakpoint: BreakpointObserver,
               private ctx: ContextService,
-              private breadcrumbsService: BreadcrumbService) {
+              private breadcrumbService: BreadcrumbService) {
   }
 
   ngOnInit() {
     // this.tabletScreen is checked to display the full or collapsed breadcrumbs.
     this.tabletScreen = this.breakpoint.isMatched('(max-width: 839px)');
-    this.breadcrumbsSub = this.breadcrumbsService.onRefresh().subscribe(refresh => {
+    this.breadcrumbsSub = this.breadcrumbService.onRefresh().subscribe(refresh => {
       this.items = this.buildItems();
     });
 
