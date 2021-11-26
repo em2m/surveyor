@@ -89,7 +89,7 @@ export function capacitorRouteLoader(loader: LoaderService) {
   ]
 })
 export class SurveyorCapacitorRuntimeModule {
-  static forRoot(config: any): ModuleWithProviders {
+  static forRoot(config: any): ModuleWithProviders<SurveyorCapacitorRuntimeModule> {
     return {
       ngModule: SurveyorCapacitorRuntimeModule,
       providers: [

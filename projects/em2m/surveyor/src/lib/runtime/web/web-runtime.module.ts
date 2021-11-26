@@ -134,7 +134,7 @@ const components = [
   ]
 })
 export class SurveyorWebRuntimeModule {
-  static forRoot(config: any): ModuleWithProviders {
+  static forRoot(config: any): ModuleWithProviders<SurveyorWebRuntimeModule> {
     return {
       ngModule: SurveyorWebRuntimeModule,
       providers: [

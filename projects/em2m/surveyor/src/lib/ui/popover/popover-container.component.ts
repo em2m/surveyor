@@ -1,8 +1,9 @@
-import {Input, Type, ComponentFactoryResolver, ViewChild, ViewContainerRef, Output, EventEmitter, OnInit, ChangeDetectorRef, HostBinding} from '@angular/core';
+import { Input, Type, ComponentFactoryResolver, ViewChild, ViewContainerRef, Output, EventEmitter, OnInit, ChangeDetectorRef, HostBinding, Directive } from '@angular/core';
 import {PopoverOptions} from './popover.model';
 import {Popover} from './popover.component';
 
 
+@Directive()
 export abstract class PopoverContainer implements OnInit {
 
   @Input() popover: Type<Popover>;

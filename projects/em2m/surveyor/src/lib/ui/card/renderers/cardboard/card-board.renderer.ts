@@ -1,7 +1,8 @@
-import {Input, Output} from '@angular/core';
+import { Input, Output, Directive } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {Card} from '../../card.model';
 
+@Directive()
 export abstract class CardBoardRenderer {
 
   @Input() target: string;
