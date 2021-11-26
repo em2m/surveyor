@@ -37,7 +37,7 @@ export * from './application/wrapper/wrapper.component';
 export * from './context/web-context.service';
 export * from './resolvers/storage.resolver';
 
-export const routes: Routes = [
+const routes: Routes = [
   {
     path: '',
     data: { target: 'surveyor:root' },

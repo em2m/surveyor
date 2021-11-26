@@ -10,5 +10,5 @@
       "@capacitor/core": "@capacitor/core"
     }
   },
-  "whitelistedNonPeerDependencies": ["."]
+  "allowedNonPeerDependencies": ["."]
 }

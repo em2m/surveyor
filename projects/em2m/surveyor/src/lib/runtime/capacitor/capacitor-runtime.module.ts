@@ -1,6 +1,6 @@
 import {APP_INITIALIZER, ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {Data, Route, RouterModule} from '@angular/router';
+import {Data, Route, RouterModule, Routes} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {Title} from '@angular/platform-browser';
 import {CapacitorRootPage} from './application/root/root.page';
@@ -30,7 +30,7 @@ const components: any[] = [
   Capacitor404Page
 ];
 
-const routes: Route[] = [
+const routes: Routes = [
   {
     path: '',
     component: CapacitorRootPage,
