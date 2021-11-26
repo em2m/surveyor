@@ -18,9 +18,6 @@ export * from './containers/standard/standard-popover-container.component';
   ],
   declarations: [
     StandardPopoverContainer
-  ],
-  entryComponents: [
-    StandardPopoverContainer
   ]
 })
 export class SurveyorPopoverModule {

@@ -7,17 +7,16 @@ export let IntentPlugin: Plugin = {
 
   name: 'Intent Plugin',
   extensions: {
-
     'surveyor:page': [
       {
         value: {
           path: 'action/:actionId',
           component: IntentComponent,
-          canActivate: [ IntentGuard ],
+          canActivate: [IntentGuard],
           data: {
             target: 'intent:actions'
           }
-        } as Route,
+        },
         target: 'surveyor:apps',
         priority: 10
       }

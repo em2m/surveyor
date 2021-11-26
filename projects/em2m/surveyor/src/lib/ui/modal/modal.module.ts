@@ -42,15 +42,6 @@ export * from './modals/loading-modal/loading-modal.component';
     ConfirmationModal,
     StatusModal,
     LoadingModal
-  ],
-  entryComponents: [
-    CenterModalContainer,
-    SideModalContainer,
-    InlineModalContainer,
-    FixedModalContainer,
-    ConfirmationModal,
-    StatusModal,
-    LoadingModal
   ]
 })
 export class SurveyorModalModule {

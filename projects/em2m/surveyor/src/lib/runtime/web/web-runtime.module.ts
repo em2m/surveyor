@@ -125,10 +125,6 @@ const components = [
     SurveyorWebRuntime,
     ...components
   ],
-  entryComponents: [
-    SurveyorWebRuntime,
-    ...components
-  ],
   bootstrap: [
     SurveyorWebRuntime
   ]
