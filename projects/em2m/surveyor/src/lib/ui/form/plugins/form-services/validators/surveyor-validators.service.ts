@@ -22,8 +22,8 @@ export class SurveyorValidators {
   }
 
   static isValidCreditCard(c: AbstractControl) {
-    const temp = (c.value || '').replace(/\D/g, '');
-    if (temp.length >= 15 && temp.length <= 19) {
+    const temp = (c.value || '').replace(/\s/g, '');
+    if (temp.length >= 15 && temp.length <= 19 && Number(temp)) {
       return null;
     } else {
       return { invalidCreditCard: true };
