@@ -1,6 +1,6 @@
 import {APP_INITIALIZER, ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {RouterModule} from '@angular/router';
+import {Data, Route, RouterModule, Routes} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {Title} from '@angular/platform-browser';
 import {CapacitorRootPage} from './application/root/root.page';
@@ -30,7 +30,7 @@ const components: any[] = [
   Capacitor404Page
 ];
 
-const routes = [
+const routes: Routes = [
   {
     path: '',
     component: CapacitorRootPage,
@@ -83,13 +83,10 @@ export function capacitorRouteLoader(loader: LoaderService) {
   ],
   declarations: [
     ...components
-  ],
-  entryComponents: [
-    ...components
   ]
 })
 export class SurveyorCapacitorRuntimeModule {
-  static forRoot(config: any): ModuleWithProviders {
+  static forRoot(config: any): ModuleWithProviders<SurveyorCapacitorRuntimeModule> {
     return {
       ngModule: SurveyorCapacitorRuntimeModule,
       providers: [

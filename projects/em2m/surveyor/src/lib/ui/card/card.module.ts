@@ -60,9 +60,6 @@ const components = [
   ],
   exports: [
     ...components
-  ],
-  entryComponents: [
-    ...components
   ]
 })
 export class SurveyorCardModule {

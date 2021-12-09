@@ -84,7 +84,7 @@ export class Searcher {
   private _currentPage = 1;
   private _searchRequest: SearchRequest = {};
   private _searchResult: SearchResult = {};
-  private _moreRequest: Agg;
+  private _moreRequest: Agg = null;
   private _moreResult: any = {};
 
   private requestSubject: Subject<SearchRequest> = new BehaviorSubject(this._searchRequest);
@@ -100,7 +100,7 @@ export class Searcher {
   public whenMoreResultPublished: Observable<any> = this.moreResultSubject.asObservable();
 
   constructor(settings: SearcherSettings) {
-    const searchRequest = <SearchRequest>{};
+    const searchRequest: SearchRequest = {};
     this.aggs = settings.aggs;
     this.sorts = settings.sorts;
     this.fields = settings.fields || [];
@@ -300,8 +300,3 @@ export class SearcherHelper {
   }
 
 }
-
-
-
-
-

@@ -74,13 +74,10 @@ const components = [
   ],
   declarations: [
     ...components
-  ],
-  entryComponents: [
-    ...components
   ]
 })
 export class MaterialFormModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<MaterialFormModule> {
     return {
       ngModule: MaterialFormModule,
       providers: [

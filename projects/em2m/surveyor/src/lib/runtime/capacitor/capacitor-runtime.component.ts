@@ -1,6 +1,5 @@
 import {Component, ViewContainerRef} from '@angular/core';
 import {Capacitor, Plugins} from '@capacitor/core';
-import 'hammerjs';
 import {PopoverService} from '../../ui/popover/popover.service';
 import {ModalService} from '../../ui/modal/modal.service';
 const {SplashScreen} = Plugins;

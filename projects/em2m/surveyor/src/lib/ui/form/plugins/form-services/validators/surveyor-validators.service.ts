@@ -21,6 +21,15 @@ export class SurveyorValidators {
     }
   }
 
+  static isValidCreditCard(c: AbstractControl) {
+    const temp = (c.value || '').replace(/\s/g, '');
+    if (temp.length >= 15 && temp.length <= 19 && Number(temp)) {
+      return null;
+    } else {
+      return { invalidCreditCard: true };
+    }
+  }
+
   static isValidToken(c: AbstractControl) {
     const tokenRegex = /[a-z0-9]{6}/gi;
     if (c.value && !tokenRegex.test(c.value)) {

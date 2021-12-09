@@ -34,9 +34,6 @@ export * from './providers/zoomcontrol/zoom-control.provider';
   ],
   declarations: [
     SurveyorLeafletComponent
-  ],
-  entryComponents: [
-    SurveyorLeafletComponent
   ]
 })
 export class SurveyorLeafletModule {

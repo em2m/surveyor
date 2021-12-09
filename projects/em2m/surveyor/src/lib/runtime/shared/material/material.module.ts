@@ -16,7 +16,7 @@ export * from './material-upgrade.directive';
   ]
 })
 export class SurveyorMaterialModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<SurveyorMaterialModule> {
     return {
       ngModule: SurveyorMaterialModule
     };

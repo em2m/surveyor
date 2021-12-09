@@ -36,9 +36,6 @@ const components = [
   ],
   declarations: [
     ...components
-  ],
-  entryComponents: [
-    ...components
   ]
 })
 export class SurveyorTabsModule {

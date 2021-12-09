@@ -15,9 +15,6 @@ export * from './dropdown.component';
   ],
   declarations: [
     DropdownComponent
-  ],
-  entryComponents: [
-    DropdownComponent
   ]
 })
 export class SurveyorDropdownModule {

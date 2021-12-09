@@ -5,10 +5,10 @@ import {IntentComponent} from './intent.component';
 import {IntentSelectPicker} from './pickers/intent-select/intent-select.picker';
 import {IntentService} from './intent.service';
 
+export {IntentPlugin} from './intent-plugin';
 export * from './intent.model';
 export * from './intent.service';
 export * from './intent.guard';
-export * from './intent-plugin';
 export * from './intent.component';
 export * from './pickers/intent-select/intent-select.picker';
 
@@ -31,9 +31,6 @@ const components = [
     ...components
   ],
   declarations: [
-    ...components
-  ],
-  entryComponents: [
     ...components
   ]
 })

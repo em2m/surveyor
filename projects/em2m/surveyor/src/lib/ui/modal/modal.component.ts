@@ -1,5 +1,6 @@
-import {EventEmitter, Output, Input, HostListener} from "@angular/core";
+import { EventEmitter, Output, Input, HostListener, Directive } from "@angular/core";
 
+@Directive()
 export abstract class Modal {
 
   @Input() params: any;

@@ -39,6 +39,7 @@ export class MultipleTermPickerComponent extends Picker implements OnInit {
 
   ngOnInit() {
     this.buckets = this.params.buckets;
+    this.buckets =  this.buckets.filter(bucket => bucket.label || bucket.key);
     this.agg = this.params.agg;
     this.constraints = this.params.constraints;
     this.key = this.agg.key;

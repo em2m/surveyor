@@ -7,8 +7,24 @@ export * from './lib/search/search.module';
 export * from './lib/ui/ui.module';
 export * from './lib/runtime/shared/loader/loader.module';
 export * from './lib/runtime/shared/material/material.module';
-export * from './lib/runtime/capacitor/capacitor-runtime.module';
-export * from './lib/runtime/web/web-runtime.module';
+export {SurveyorCapacitorRuntimeModule} from './lib/runtime/capacitor/capacitor-runtime.module';
+export * from './lib/runtime/capacitor/capacitor-runtime.component';
+export * from './lib/runtime/capacitor/application/404/404.page';
+export * from './lib/runtime/capacitor/application/root/root.page';
+export * from './lib/runtime/capacitor/context/capacitor-context.service';
+export * from './lib/runtime/capacitor/resolvers/device-info.resolver';
+export * from './lib/runtime/capacitor/resolvers/storage.resolver';
+export {SurveyorWebRuntimeModule} from './lib/runtime/web/web-runtime.module';
+export * from './lib/runtime/web/web-runtime.component';
+export * from './lib/runtime/web/application/footer/footer.component';
+export * from './lib/runtime/web/application/header/header.component';
+export * from './lib/runtime/web/application/header/header.service';
+export * from './lib/runtime/web/application/sidenav/sidenav.component';
+export * from './lib/runtime/web/application/sidenav/sidenav.service';
+export * from './lib/runtime/web/application/unknown/unknown.component';
+export * from './lib/runtime/web/application/wrapper/wrapper.component';
+export * from './lib/runtime/web/context/web-context.service';
+export * from './lib/runtime/web/resolvers/storage.resolver';
 
 /*
 export * from './lib/core/core.module';
@@ -171,4 +187,4 @@ export * from './lib/ui/wizard/wizard.module';
 export * from './lib/ui/wizard/step.component';
 export * from './lib/ui/wizard/wizard.component';
 export * from './lib/ui/wizard/wizard.model';
-*/
+ */

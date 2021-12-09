@@ -15,9 +15,6 @@ export * from './region.component';
   ],
   declarations: [
     RegionComponent
-  ],
-  entryComponents: [
-    RegionComponent
   ]
 })
 export class SurveyorRegionModule {
