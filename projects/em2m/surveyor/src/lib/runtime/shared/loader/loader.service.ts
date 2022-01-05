@@ -55,8 +55,14 @@ export class LoaderService {
             if (!route.canActivateChild) {
               route.canActivateChild = [];
             }
-            route.canActivate.push(guardExt.value);
-            route.canActivateChild.push(guardExt.value);
+
+            if (guardExt.config.canActivate !== false) {
+              route.canActivate.push(guardExt.value);
+            }
+
+            if (guardExt.config.canActivateChild !== false) {
+              route.canActivateChild.push(guardExt.value);
+            }
           });
 
           // Process each child in the tree recursively

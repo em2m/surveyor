@@ -16,6 +16,8 @@ import {ContextService, SurveyorCoreModule} from '../../core/core.module';
 import {SurveyorModalModule} from '../../ui/modal/modal.module';
 import {SurveyorFormModule} from '../../ui/form/form.module';
 import {CapacitorContextService} from './context/capacitor-context.service';
+import {StorageGuard} from './guards/storage.guard';
+import {DeviceInfoGuard} from './guards/device-info.guard';
 
 export * from './capacitor-runtime.component';
 export * from './application/404/404.page';
@@ -35,7 +37,8 @@ const routes: Routes = [
     path: '',
     component: CapacitorRootPage,
     data: { target: 'surveyor:root' },
-    resolve: { deviceInfo: DeviceInfoResolver, storage: StorageResolver },
+    // resolve: { deviceInfo: DeviceInfoResolver, storage: StorageResolver },
+    canActivate: [StorageGuard, DeviceInfoGuard],
     children: [
       {
         path: '404',
