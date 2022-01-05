@@ -42,7 +42,7 @@ export class StorageGuard implements CanActivate, CanActivateChild {
     console.log('Finished Storage Guard');
     this.loaded = true;
 
-    return true;
+    return Promise.resolve(true);
   }
 
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean>{
