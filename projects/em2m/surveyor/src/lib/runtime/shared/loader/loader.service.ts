@@ -56,11 +56,11 @@ export class LoaderService {
               route.canActivateChild = [];
             }
 
-            if (guardExt.config.canActivate !== false) {
+            if (guardExt.config?.canActivate !== false) {
               route.canActivate.push(guardExt.value);
             }
 
-            if (guardExt.config.canActivateChild !== false) {
+            if (guardExt.config?.canActivateChild !== false) {
               route.canActivateChild.push(guardExt.value);
             }
           });
