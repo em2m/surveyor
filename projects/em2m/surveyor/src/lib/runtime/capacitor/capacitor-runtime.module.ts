@@ -24,6 +24,8 @@ export * from './application/404/404.page';
 export * from './application/root/root.page';
 export * from './resolvers/device-info.resolver';
 export * from './resolvers/storage.resolver';
+export * from './guards/device-info.guard';
+export * from './guards/storage.guard';
 export * from './context/capacitor-context.service';
 
 const components: any[] = [
