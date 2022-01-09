@@ -1,14 +1,7 @@
 import {Injectable} from '@angular/core';
-import {
-  Router,
-  Resolve,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  CanActivate,
-  CanActivateChild
-} from '@angular/router';
-import {Plugins} from '@capacitor/core';
+import {Router, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate, CanActivateChild} from '@angular/router';
 import {ContextService} from '../../../core/extension/context.service';
+import {Plugins} from '@capacitor/core';
 const Storage = Plugins.Storage;
 
 @Injectable({ providedIn: 'root' })
@@ -24,8 +17,6 @@ export class StorageGuard implements CanActivate, CanActivateChild {
       return Promise.resolve(true);
     }
 
-    console.log('Started Storage Guard');
-
     return Storage.keys().then(keys => {
       const promises = keys.keys
         .filter(key => {
@@ -39,7 +30,6 @@ export class StorageGuard implements CanActivate, CanActivateChild {
 
       return Promise.all(promises)
         .then(() => {
-          console.log('Finished Storage Guard');
           this.loaded = true;
           return true;
         });

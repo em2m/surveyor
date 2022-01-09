@@ -17,13 +17,9 @@ export class DeviceInfoGuard implements CanActivate, CanActivateChild {
       return Promise.resolve(true);
     }
 
-    console.log('Started Device Info Guard');
-
     return Device.getInfo().then(deviceInfo => {
       this.ctx.setValue('deviceInfo', deviceInfo, { broadcast: false, storage: 'NONE' });
       this.loaded = true;
-      console.log('Finished Device Info Guard');
-
       return true;
     });
   }
