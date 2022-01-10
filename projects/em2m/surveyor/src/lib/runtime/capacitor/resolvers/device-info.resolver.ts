@@ -1,9 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Router, Resolve, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 import {ContextService} from '../../../core/extension/context.service';
-import { DeviceInfo } from '@capacitor/device';
-import { Plugins } from '@capacitor/core';
-const { Device } = Plugins;
+import { Device, DeviceInfo } from '@capacitor/device';
 
 @Injectable({ providedIn: 'root' })
 export class DeviceInfoResolver implements Resolve<any> {
