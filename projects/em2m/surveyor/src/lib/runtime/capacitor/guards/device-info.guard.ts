@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Router, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate, CanActivateChild} from '@angular/router';
-import {Plugins} from '@capacitor/core';
 import {ContextService} from '../../../core/extension/context.service';
-const Device = Plugins.Device;
+import {Device} from '@capacitor/device';
+import {App} from '@capacitor/app';
 
 @Injectable({ providedIn: 'root' })
 export class DeviceInfoGuard implements CanActivate, CanActivateChild {

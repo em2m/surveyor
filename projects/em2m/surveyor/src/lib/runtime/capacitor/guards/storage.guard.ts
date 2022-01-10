@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Router, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate, CanActivateChild} from '@angular/router';
 import {ContextService} from '../../../core/extension/context.service';
-import {Plugins} from '@capacitor/core';
-const Storage = Plugins.Storage;
+import {Storage} from '@capacitor/storage';
 
 @Injectable({ providedIn: 'root' })
 export class StorageGuard implements CanActivate, CanActivateChild {

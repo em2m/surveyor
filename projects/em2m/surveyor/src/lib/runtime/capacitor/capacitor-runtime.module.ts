@@ -1,12 +1,10 @@
 import {APP_INITIALIZER, ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {Data, Route, RouterModule, Routes} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {Title} from '@angular/platform-browser';
 import {CapacitorRootPage} from './application/root/root.page';
 import {Capacitor404Page} from './application/404/404.page';
-import {DeviceInfoResolver} from './resolvers/device-info.resolver';
-import {StorageResolver} from './resolvers/storage.resolver';
 import {LoaderService, SurveyorLoaderModule} from '../shared/loader/loader.module';
 import {SurveyorCapacitorRuntime} from './capacitor-runtime.component';
 import {SurveyorMaterialModule} from '../shared/material/material.module';
