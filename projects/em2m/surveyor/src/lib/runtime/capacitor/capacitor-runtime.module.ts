@@ -1,12 +1,10 @@
 import {APP_INITIALIZER, ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {Data, Route, RouterModule, Routes} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {Title} from '@angular/platform-browser';
 import {CapacitorRootPage} from './application/root/root.page';
 import {Capacitor404Page} from './application/404/404.page';
-import {DeviceInfoResolver} from './resolvers/device-info.resolver';
-import {StorageResolver} from './resolvers/storage.resolver';
 import {LoaderService, SurveyorLoaderModule} from '../shared/loader/loader.module';
 import {SurveyorCapacitorRuntime} from './capacitor-runtime.component';
 import {SurveyorMaterialModule} from '../shared/material/material.module';
@@ -16,12 +14,16 @@ import {ContextService, SurveyorCoreModule} from '../../core/core.module';
 import {SurveyorModalModule} from '../../ui/modal/modal.module';
 import {SurveyorFormModule} from '../../ui/form/form.module';
 import {CapacitorContextService} from './context/capacitor-context.service';
+import {StorageGuard} from './guards/storage.guard';
+import {DeviceInfoGuard} from './guards/device-info.guard';
 
 export * from './capacitor-runtime.component';
 export * from './application/404/404.page';
 export * from './application/root/root.page';
 export * from './resolvers/device-info.resolver';
 export * from './resolvers/storage.resolver';
+export * from './guards/device-info.guard';
+export * from './guards/storage.guard';
 export * from './context/capacitor-context.service';
 
 const components: any[] = [
@@ -35,7 +37,8 @@ const routes: Routes = [
     path: '',
     component: CapacitorRootPage,
     data: { target: 'surveyor:root' },
-    resolve: { deviceInfo: DeviceInfoResolver, storage: StorageResolver },
+    // resolve: { deviceInfo: DeviceInfoResolver, storage: StorageResolver },
+    canActivate: [StorageGuard, DeviceInfoGuard],
     children: [
       {
         path: '404',
