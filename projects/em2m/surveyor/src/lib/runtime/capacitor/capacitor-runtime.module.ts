@@ -5,6 +5,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {Title} from '@angular/platform-browser';
 import {CapacitorRootPage} from './application/root/root.page';
 import {Capacitor404Page} from './application/404/404.page';
+import {CapacitorWrapperPage} from './application/wrapper/wrapper.page';
 import {LoaderService, SurveyorLoaderModule} from '../shared/loader/loader.module';
 import {SurveyorCapacitorRuntime} from './capacitor-runtime.component';
 import {SurveyorMaterialModule} from '../shared/material/material.module';
@@ -29,6 +30,7 @@ export * from './context/capacitor-context.service';
 const components: any[] = [
   SurveyorCapacitorRuntime,
   CapacitorRootPage,
+  CapacitorWrapperPage,
   Capacitor404Page
 ];
 
@@ -41,9 +43,22 @@ const routes: Routes = [
     canActivate: [StorageGuard, DeviceInfoGuard],
     children: [
       {
+        path: '',
+        component: CapacitorWrapperPage,
+        data: {target: 'surveyor:apps'},
+        children: [
+          {
+            path: '404',
+            component: Capacitor404Page
+          }
+        ]
+      }
+      /*
+      {
         path: '404',
         component: Capacitor404Page
       },
+       */
       /*
       {
         path: "**",
