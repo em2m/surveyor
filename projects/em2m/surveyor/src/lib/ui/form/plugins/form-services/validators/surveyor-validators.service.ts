@@ -70,4 +70,10 @@ export class SurveyorValidators {
     const validUrlRegex = /^[A-Za-z][A-Za-z\d.+-]*:\/*(?:\w+(?::\w+)?@)?[^\s/]+(?::\d+)?(?:\/[\w#!:.?+=&%@\-/]*)?$/;
     return validUrlRegex.test(controlValue);
   }
+
+  static isValidZip(c: AbstractControl) {
+    if (!c.value) return false;
+    var validZipRegex = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
+    return validZipRegex.test(c.value);
+  }
 }

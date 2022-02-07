@@ -23,5 +23,30 @@ describe('URL validation', () => {
     expect(zipValidator(new FormControl('http://example.com:9999/~~``'))).toBe(
       false
     );
+describe('ZipCodeValidation', () => {
+  const zipValidator = SurveyorValidators.isValidZip;
+
+  it('should validate real zip codes', () => {
+    expect(zipValidator(new FormControl('90210'))).toBeTrue();
+    expect(zipValidator(new FormControl('22401-4703'))).toBeTrue();
+  });
+
+  it('should reject non-numeric zip codes', () => {
+    expect(zipValidator(new FormControl('abcde'))).toBeFalse();
+    expect(zipValidator(new FormControl('123ab-1234'))).toBeFalse();
+    expect(zipValidator(new FormControl('-%$6a'))).toBeFalse();
+  });
+
+  it('should reject zip codes with wrong length', () => {
+    expect(zipValidator(new FormControl('9021'))).toBeFalse();
+    expect(zipValidator(new FormControl('902101'))).toBeFalse();
+    expect(zipValidator(new FormControl('90210-123'))).toBeFalse();
+    expect(zipValidator(new FormControl('90210-12345'))).toBeFalse();
+  });
+
+  it('should reject falsey values', () => {
+    expect(zipValidator(new FormControl(null))).toBeFalse();
+    expect(zipValidator(new FormControl(undefined))).toBeFalse();
+    expect(zipValidator(new FormControl(''))).toBeFalse();
   });
 });
