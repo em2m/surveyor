@@ -23,6 +23,9 @@ describe('URL validation', () => {
     expect(zipValidator(new FormControl('http://example.com:9999/~~``'))).toBe(
       false
     );
+  });
+});
+
 describe('ZipCodeValidation', () => {
   const zipValidator = SurveyorValidators.isValidZip;
 
