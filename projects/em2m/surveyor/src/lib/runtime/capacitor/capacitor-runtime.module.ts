@@ -1,22 +1,25 @@
-import {APP_INITIALIZER, ModuleWithProviders, NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {RouterModule, Routes} from '@angular/router';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {Title} from '@angular/platform-browser';
-import {CapacitorRootPage} from './application/root/root.page';
-import {Capacitor404Page} from './application/404/404.page';
-import {CapacitorWrapperPage} from './application/wrapper/wrapper.page';
-import {LoaderService, SurveyorLoaderModule} from '../shared/loader/loader.module';
-import {SurveyorCapacitorRuntime} from './capacitor-runtime.component';
-import {SurveyorMaterialModule} from '../shared/material/material.module';
-import {SurveyorPopoverModule} from '../../ui/popover/popover.module';
-import {AppConfig} from '../../core/config/config.service';
-import {ContextService, SurveyorCoreModule} from '../../core/core.module';
-import {SurveyorModalModule} from '../../ui/modal/modal.module';
-import {SurveyorFormModule} from '../../ui/form/form.module';
-import {CapacitorContextService} from './context/capacitor-context.service';
-import {StorageGuard} from './guards/storage.guard';
-import {DeviceInfoGuard} from './guards/device-info.guard';
+import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Title } from '@angular/platform-browser';
+import { CapacitorRootPage } from './application/root/root.page';
+import { Capacitor404Page } from './application/404/404.page';
+import { CapacitorWrapperPage } from './application/wrapper/wrapper.page';
+import {
+  LoaderService,
+  SurveyorLoaderModule
+} from '../shared/loader/loader.module';
+import { SurveyorCapacitorRuntime } from './capacitor-runtime.component';
+import { SurveyorMaterialModule } from '../shared/material/material.module';
+import { SurveyorPopoverModule } from '../../ui/popover/popover.module';
+import { AppConfig } from '../../core/config/config.service';
+import { ContextService, SurveyorCoreModule } from '../../core/core.module';
+import { SurveyorModalModule } from '../../ui/modal/modal.module';
+import { SurveyorFormModule } from '../../ui/form/form.module';
+import { CapacitorContextService } from './context/capacitor-context.service';
+import { StorageGuard } from './guards/storage.guard';
+import { DeviceInfoGuard } from './guards/device-info.guard';
 
 export * from './capacitor-runtime.component';
 export * from './application/404/404.page';
@@ -26,6 +29,7 @@ export * from './resolvers/storage.resolver';
 export * from './guards/device-info.guard';
 export * from './guards/storage.guard';
 export * from './context/capacitor-context.service';
+export * from './application/wrapper/wrapper.page';
 
 const components: any[] = [
   SurveyorCapacitorRuntime,
@@ -45,7 +49,7 @@ const routes: Routes = [
       {
         path: '',
         component: CapacitorWrapperPage,
-        data: {target: 'surveyor:apps'},
+        data: { target: 'surveyor:apps' },
         children: [
           {
             path: '404',
@@ -99,18 +103,23 @@ export function capacitorRouteLoader(loader: LoaderService) {
     SurveyorFormModule,
     ...components
   ],
-  declarations: [
-    ...components
-  ]
+  declarations: [...components]
 })
 export class SurveyorCapacitorRuntimeModule {
-  static forRoot(config: any): ModuleWithProviders<SurveyorCapacitorRuntimeModule> {
+  static forRoot(
+    config: any
+  ): ModuleWithProviders<SurveyorCapacitorRuntimeModule> {
     return {
       ngModule: SurveyorCapacitorRuntimeModule,
       providers: [
         Title,
         { provide: AppConfig, useValue: new AppConfig(config) },
-        { provide: APP_INITIALIZER, useFactory: capacitorRouteLoader, deps: [LoaderService], multi: true },
+        {
+          provide: APP_INITIALIZER,
+          useFactory: capacitorRouteLoader,
+          deps: [LoaderService],
+          multi: true
+        },
         { provide: ContextService, useExisting: CapacitorContextService }
         // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
       ]
