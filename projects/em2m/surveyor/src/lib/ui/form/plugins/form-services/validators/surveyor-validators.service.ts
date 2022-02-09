@@ -64,10 +64,10 @@ export class SurveyorValidators {
     }
   }
 
-  static isValidUrl(c: AbstractControl) {
+  static isValidUrl(c: AbstractControl): { invalidUrl: boolean } {
     const controlValue = c.value;
-    if (!controlValue) return false;
+    if (!controlValue) return { invalidUrl: true };
     const validUrlRegex = /^[A-Za-z][A-Za-z\d.+-]*:\/*(?:\w+(?::\w+)?@)?[^\s/]+(?::\d+)?(?:\/[\w#!:.?+=&%@\-/]*)?$/;
-    return validUrlRegex.test(controlValue);
+    return { invalidUrl: !validUrlRegex.test(controlValue) };
   }
 }
