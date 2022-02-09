@@ -71,9 +71,9 @@ export class SurveyorValidators {
     return validUrlRegex.test(controlValue);
   }
 
-  static isValidZip(c: AbstractControl) {
-    if (!c.value) return false;
+  static isValidZip(c: AbstractControl): { isInvalidZip: boolean } {
+    if (!c.value) return { isInvalidZip: true };
     var validZipRegex = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
-    return validZipRegex.test(c.value);
+    return { isInvalidZip: !validZipRegex.test(c.value) };
   }
 }

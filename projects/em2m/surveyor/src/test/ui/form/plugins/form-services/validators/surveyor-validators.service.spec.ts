@@ -30,26 +30,46 @@ describe('ZipCodeValidation', () => {
   const zipValidator = SurveyorValidators.isValidZip;
 
   it('should validate real zip codes', () => {
-    expect(zipValidator(new FormControl('90210'))).toBeTrue();
-    expect(zipValidator(new FormControl('22401-4703'))).toBeTrue();
+    expect(zipValidator(new FormControl('90210'))).toEqual({
+      isInvalidZip: false
+    });
+    expect(zipValidator(new FormControl('22401-4703'))).toEqual({
+      isInvalidZip: false
+    });
   });
 
   it('should reject non-numeric zip codes', () => {
-    expect(zipValidator(new FormControl('abcde'))).toBeFalse();
-    expect(zipValidator(new FormControl('123ab-1234'))).toBeFalse();
-    expect(zipValidator(new FormControl('-%$6a'))).toBeFalse();
+    expect(zipValidator(new FormControl('abcde'))).toEqual({
+      isInvalidZip: true
+    });
+    expect(zipValidator(new FormControl('123ab-1234'))).toEqual({
+      isInvalidZip: true
+    });
+    expect(zipValidator(new FormControl('-%$6a'))).toEqual({
+      isInvalidZip: true
+    });
   });
 
   it('should reject zip codes with wrong length', () => {
-    expect(zipValidator(new FormControl('9021'))).toBeFalse();
-    expect(zipValidator(new FormControl('902101'))).toBeFalse();
-    expect(zipValidator(new FormControl('90210-123'))).toBeFalse();
-    expect(zipValidator(new FormControl('90210-12345'))).toBeFalse();
+    expect(zipValidator(new FormControl('9021'))).toEqual({
+      isInvalidZip: true
+    });
+    expect(zipValidator(new FormControl('902101'))).toEqual({
+      isInvalidZip: true
+    });
+    expect(zipValidator(new FormControl('90210-123'))).toEqual({
+      isInvalidZip: true
+    });
+    expect(zipValidator(new FormControl('90210-12345'))).toEqual({
+      isInvalidZip: true
+    });
   });
 
   it('should reject falsey values', () => {
-    expect(zipValidator(new FormControl(null))).toBeFalse();
-    expect(zipValidator(new FormControl(undefined))).toBeFalse();
-    expect(zipValidator(new FormControl(''))).toBeFalse();
+    expect(zipValidator(new FormControl(null))).toEqual({ isInvalidZip: true });
+    expect(zipValidator(new FormControl(undefined))).toEqual({
+      isInvalidZip: true
+    });
+    expect(zipValidator(new FormControl(''))).toEqual({ isInvalidZip: true });
   });
 });
