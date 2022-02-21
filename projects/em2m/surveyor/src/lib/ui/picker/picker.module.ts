@@ -29,10 +29,6 @@ export * from './pickers/time-zone-picker/time-zone-picker.component';
   declarations: [
     TimeZonePicker,
     ColorPicker
-  ],
-  entryComponents: [
-    TimeZonePicker,
-    ColorPicker
   ]
 })
 export class SurveyorPickerModule {

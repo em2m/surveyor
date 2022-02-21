@@ -8,6 +8,7 @@ import {ConfirmationModal} from './modals/confirmation-modal/confirmation-modal.
 import {FixedModalContainer} from './containers/fixed/fixed-modal-container.component';
 import {StatusModal} from './modals/status-modal/status-modal.component';
 import {LoadingModal} from './modals/loading-modal/loading-modal.component';
+import {MatButtonModule} from "@angular/material/button";
 
 export * from './modal.component';
 export * from './modal.model';
@@ -23,7 +24,8 @@ export * from './modals/loading-modal/loading-modal.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    MatButtonModule
   ],
   exports: [
     CenterModalContainer,
@@ -35,15 +37,6 @@ export * from './modals/loading-modal/loading-modal.component';
     LoadingModal
   ],
   declarations: [
-    CenterModalContainer,
-    SideModalContainer,
-    InlineModalContainer,
-    FixedModalContainer,
-    ConfirmationModal,
-    StatusModal,
-    LoadingModal
-  ],
-  entryComponents: [
     CenterModalContainer,
     SideModalContainer,
     InlineModalContainer,

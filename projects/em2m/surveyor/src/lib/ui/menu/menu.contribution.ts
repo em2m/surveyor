@@ -1,5 +1,6 @@
-import {Input, Output, EventEmitter} from "@angular/core";
+import { Input, Output, EventEmitter, Directive } from "@angular/core";
 
+@Directive()
 export abstract class MenuContribution {
 
   @Input() config: any;

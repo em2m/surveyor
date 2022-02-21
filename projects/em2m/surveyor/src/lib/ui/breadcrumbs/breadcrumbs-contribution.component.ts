@@ -1,10 +1,12 @@
-import {Component, OnInit, OnDestroy, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {BreadcrumbItem} from './breadcrumbs.model';
 import {Subscription} from 'rxjs';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {ContextService} from '../../core/extension/context.service';
 import {MatMenuTrigger} from '@angular/material/menu';
+import {BreadcrumbService} from './breadcrumb.service';
+
 
 @Component({
   templateUrl: './breadcrumbs-contribution.component.html',
@@ -15,17 +17,22 @@ export class BreadcrumbsContribution implements OnInit, OnDestroy {
   items: Array<BreadcrumbItem> = [];
   tabletScreen: boolean;
   windowSizeTrackerSub: Subscription;
-  private routerSub: Subscription;
   @ViewChild(MatMenuTrigger, {static: true}) trigger: MatMenuTrigger;
+  private routerSub: Subscription;
+  private breadcrumbsSub: Subscription;
 
   constructor(private router: Router,
               private breakpoint: BreakpointObserver,
-              private ctx: ContextService) {
+              private ctx: ContextService,
+              private breadcrumbService: BreadcrumbService) {
   }
 
   ngOnInit() {
     // this.tabletScreen is checked to display the full or collapsed breadcrumbs.
     this.tabletScreen = this.breakpoint.isMatched('(max-width: 839px)');
+    this.breadcrumbsSub = this.breadcrumbService.onRefresh().subscribe(refresh => {
+      this.items = this.buildItems();
+    });
 
     this.routerSub = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -52,6 +59,9 @@ export class BreadcrumbsContribution implements OnInit, OnDestroy {
     if (this.routerSub) {
       this.routerSub.unsubscribe();
     }
+    if (this.breadcrumbsSub){
+      this.breadcrumbsSub.unsubscribe();
+    }
   }
 
   openMenu() {
@@ -74,21 +84,21 @@ export class BreadcrumbsContribution implements OnInit, OnDestroy {
     let stopIndex = 0;
     return Array.prototype.concat(
       ...routes.map((route: ActivatedRoute) => {
-        const title = route.routeConfig && route.routeConfig.data && route.routeConfig.data.title;
+        const title = route?.routeConfig?.data?.title;
         url = url + '/' + route.snapshot.url.map(segment => segment.path).join('/');
         stopIndex = stopIndex + 1;
 
         // There are two conditionals here because we don't want a child` breadcrumb to overwrite hideBreadcrumbsRecursive. This way, we only need to
         // set the hideBreadcrumb data to be true in the first breadcrumb we want to stop at. All of its children will also be hidden.
         if (title && !hideBreadcrumbsRecursive) {
-          hideBreadcrumbsRecursive = route.routeConfig && route.routeConfig.data && route.routeConfig.data.hideBreadcrumb;
+          hideBreadcrumbsRecursive = route?.routeConfig?.data?.hideBreadcrumb;
         }
         if (title && !hideBreadcrumbsRecursive && this.tabletScreen) {
-          if (typeof title === 'string') {
+          if (typeof title === 'string' || typeof title === 'number') {
             navigationArray.push({label: title, href: url});
           } else if (typeof title === 'function') {
             let evaluatedTitles = title(this.ctx.getContext());
-            if (typeof evaluatedTitles === 'string') {
+            if (typeof evaluatedTitles === 'string' || typeof evaluatedTitles === 'number') {
               // For single title breadcrumbs (i.e. devices or vehicles) we want to add them straight into the drop down nav.
               navigationArray.push({label: evaluatedTitles, href: url});
             } else {
@@ -103,7 +113,7 @@ export class BreadcrumbsContribution implements OnInit, OnDestroy {
           }
         } else if (title && !hideBreadcrumbsRecursive && !this.tabletScreen) {
           navigationArray = [];
-          if (typeof title === 'string') {
+          if (typeof title === 'string' || typeof title === 'number') {
             return [{label: title, href: url}];
           } else if (typeof title === 'function') {
             let evaluatedTitles = title(this.ctx.getContext());
@@ -111,7 +121,7 @@ export class BreadcrumbsContribution implements OnInit, OnDestroy {
               evaluatedTitles = [evaluatedTitles];
             }
             return evaluatedTitles.filter(evaluatedTitle => !!evaluatedTitle).map((evaluatedTitle) => {
-              if (typeof evaluatedTitle === 'string') {
+              if (typeof evaluatedTitle === 'string' || typeof evaluatedTitle === 'number') {
                 return {label: evaluatedTitle, href: url};
               } else {
                 if (!evaluatedTitle.href) {

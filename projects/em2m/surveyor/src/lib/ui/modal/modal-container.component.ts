@@ -1,7 +1,8 @@
-import {Input, Type, ComponentFactoryResolver, ViewChild, ViewContainerRef, Output, EventEmitter, OnInit, HostListener} from "@angular/core";
+import { Input, Type, ComponentFactoryResolver, ViewChild, ViewContainerRef, Output, EventEmitter, OnInit, HostListener, Directive } from "@angular/core";
 import {Modal} from "./modal.component";
 import {ModalOptions} from "./modal.model";
 
+@Directive()
 export abstract class ModalContainer implements OnInit {
 
   @Input() modal: Type<Modal>;

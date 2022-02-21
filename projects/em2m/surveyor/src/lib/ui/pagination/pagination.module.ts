@@ -13,9 +13,6 @@ export * from "./pagination.component";
   ],
   declarations: [
     PaginationComponent
-  ],
-  entryComponents: [
-    PaginationComponent
   ]
 })
 export class SurveyorPaginationModule {

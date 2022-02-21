@@ -1,6 +1,7 @@
-import {Input, EventEmitter, ComponentRef, ViewChild, ViewContainerRef} from '@angular/core';
+import { Input, EventEmitter, ComponentRef, ViewChild, ViewContainerRef, Directive } from '@angular/core';
 import {Card} from '../../card.model';
 
+@Directive()
 export abstract class BaseCardComponent {
 
   @Input() cardId: string;

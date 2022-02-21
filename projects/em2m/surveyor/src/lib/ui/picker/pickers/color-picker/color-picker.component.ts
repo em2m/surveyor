@@ -1,6 +1,7 @@
-import {Component, OnInit, ViewChild, ElementRef, ViewContainerRef} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {Picker} from '../../picker.component';
 import {FormControl} from '@angular/forms';
+
 
 @Component({
   selector: 'surveyor-color-picker',
@@ -60,7 +61,7 @@ export class ColorPicker extends Picker implements OnInit {
           weight: 900,
           hex: '#B71C1C'
         }
-        ]
+      ]
     },
     {
       color: 'Pink',
@@ -105,7 +106,7 @@ export class ColorPicker extends Picker implements OnInit {
           weight: 900,
           hex: '#880E4F'
         }
-        ]
+      ]
     },
     {
       color: 'Purple',
@@ -150,7 +151,7 @@ export class ColorPicker extends Picker implements OnInit {
           weight: 900,
           hex: '#4A148C'
         }
-        ]
+      ]
     },
     {
       color: 'Deep Purple',
@@ -195,7 +196,7 @@ export class ColorPicker extends Picker implements OnInit {
           weight: 900,
           hex: '#311B92'
         }
-        ]
+      ]
     },
     {
       color: 'Indigo',
@@ -240,7 +241,7 @@ export class ColorPicker extends Picker implements OnInit {
           weight: 900,
           hex: '#1A237E'
         }
-        ]
+      ]
     },
     {
       color: 'Blue',
@@ -285,7 +286,7 @@ export class ColorPicker extends Picker implements OnInit {
           weight: 900,
           hex: '#0D47A1'
         }
-        ]
+      ]
     },
     {
       color: 'Light Blue',
@@ -330,7 +331,7 @@ export class ColorPicker extends Picker implements OnInit {
           weight: 900,
           hex: '#01579B'
         }
-        ]
+      ]
     },
     {
       color: 'Cyan',
@@ -375,7 +376,7 @@ export class ColorPicker extends Picker implements OnInit {
           weight: 900,
           hex: '#006064'
         }
-        ]
+      ]
     },
     {
       color: 'Teal',
@@ -420,7 +421,7 @@ export class ColorPicker extends Picker implements OnInit {
           weight: 900,
           hex: '#004D40'
         }
-        ]
+      ]
     },
     {
       color: 'Green',
@@ -465,7 +466,7 @@ export class ColorPicker extends Picker implements OnInit {
           weight: 900,
           hex: '#1B5E20'
         }
-        ]
+      ]
     },
     {
       color: 'Light Green',
@@ -510,7 +511,7 @@ export class ColorPicker extends Picker implements OnInit {
           weight: 900,
           hex: '#33691E'
         }
-        ]
+      ]
     },
     {
       color: 'Lime',
@@ -555,7 +556,7 @@ export class ColorPicker extends Picker implements OnInit {
           weight: 900,
           hex: '#827717'
         }
-        ]
+      ]
     },
     {
       color: 'Yellow',
@@ -600,7 +601,7 @@ export class ColorPicker extends Picker implements OnInit {
           weight: 900,
           hex: '#F57F17'
         }
-        ]
+      ]
     },
     {
       color: 'Amber',
@@ -645,7 +646,7 @@ export class ColorPicker extends Picker implements OnInit {
           weight: 900,
           hex: '#FF6F00'
         }
-        ]
+      ]
     },
     {
       color: 'Orange',
@@ -690,7 +691,7 @@ export class ColorPicker extends Picker implements OnInit {
           weight: 900,
           hex: '#E65100'
         }
-        ]
+      ]
     },
     {
       color: 'Deep Orange',
@@ -735,7 +736,7 @@ export class ColorPicker extends Picker implements OnInit {
           weight: 900,
           hex: '#BF360C'
         }
-        ]
+      ]
     },
     {
       color: 'Brown',
@@ -780,7 +781,7 @@ export class ColorPicker extends Picker implements OnInit {
           weight: 900,
           hex: '#3E2723'
         }
-        ]
+      ]
     },
     {
       color: 'Blue Grey',
@@ -825,7 +826,7 @@ export class ColorPicker extends Picker implements OnInit {
           weight: 900,
           hex: '#263238'
         }
-        ]
+      ]
     },
     {
       color: 'Grey/Black',
@@ -879,7 +880,18 @@ export class ColorPicker extends Picker implements OnInit {
   }
 
   ngOnInit() {
-    this.selectedHexCode = this.params.value;
+    let isColorInArray = false;
+    this.selectedHexCode = this.params?.value;
+    this.materialColors.forEach(color => {
+      const variations = color.variations.map(variation => variation.hex);
+      if (variations.includes(this.selectedHexCode)){
+        this.selectColor(color);
+        isColorInArray = true;
+      }
+    });
+    if (!isColorInArray){
+      this.selectColor(this.materialColors[0]);
+    }
   }
 
   selectGradient(gradient): void {

@@ -1,12 +1,11 @@
-import {AbstractControl} from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 import has = Reflect.has;
 
 export class SurveyorValidators {
-
   static isValidEmailFormat(c: AbstractControl) {
     const EMAIL_REGEXP = /^((([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,})))$|^([^@]*<(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))>)$/;
     if (c.value && !EMAIL_REGEXP.test(c.value)) {
-      return {invalidEmail: true};
+      return { invalidEmail: true };
     } else {
       return null;
     }
@@ -21,10 +20,19 @@ export class SurveyorValidators {
     }
   }
 
+  static isValidCreditCard(c: AbstractControl) {
+    const temp = (c.value || '').replace(/\s/g, '');
+    if (temp.length >= 15 && temp.length <= 19 && Number(temp)) {
+      return null;
+    } else {
+      return { invalidCreditCard: true };
+    }
+  }
+
   static isValidToken(c: AbstractControl) {
     const tokenRegex = /[a-z0-9]{6}/gi;
     if (c.value && !tokenRegex.test(c.value)) {
-      return {invalidToken: true};
+      return { invalidToken: true };
     } else {
       return null;
     }
@@ -50,9 +58,16 @@ export class SurveyorValidators {
           inValidRole = false;
         }
       }
-      return inValidRole ? {inValidRole} : null;
+      return inValidRole ? { inValidRole } : null;
     } else {
-      return {inValidRole};
+      return { inValidRole };
     }
+  }
+
+  static isValidUrl(c: AbstractControl) {
+    const controlValue = c.value;
+    if (!controlValue) return false;
+    const validUrlRegex = /^[A-Za-z][A-Za-z\d.+-]*:\/*(?:\w+(?::\w+)?@)?[^\s/]+(?::\d+)?(?:\/[\w#!:.?+=&%@\-/]*)?$/;
+    return validUrlRegex.test(controlValue);
   }
 }

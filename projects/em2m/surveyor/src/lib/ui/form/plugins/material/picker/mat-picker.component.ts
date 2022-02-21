@@ -38,16 +38,18 @@ export class MaterialPickerInputComponent extends SurveyorFormInputComponent imp
   }
 
   loadPicker() {
-    let options = this.controlDefinition.options;
-    if (!options.pickerOptions.params) {
-      options.pickerOptions.params = {};
+    if (!this.controlDefinition.disabled) {
+      let options = this.controlDefinition.options;
+      if (!options.pickerOptions.params) {
+        options.pickerOptions.params = {};
+      }
+      options.pickerOptions.params['value'] = this.formControl.value;
+      this.pickerService.pick(options.picker, options.pickerOptions)
+        .subscribe((value: any) => {
+          this.setValue(value);
+          this.formControl.markAsDirty();
+        });
     }
-    options.pickerOptions.params['value'] = this.formControl.value;
-    this.pickerService.pick(options.picker, options.pickerOptions)
-      .subscribe((value: any) => {
-        this.setValue(value);
-        this.formControl.markAsDirty();
-      });
   }
 
 }

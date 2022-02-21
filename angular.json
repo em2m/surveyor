@@ -10,7 +10,7 @@
       "prefix": "surveyor",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/em2m/surveyor/tsconfig.lib.json",
             "project": "projects/em2m/surveyor/ng-package.json"

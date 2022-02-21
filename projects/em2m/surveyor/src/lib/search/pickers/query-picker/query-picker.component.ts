@@ -10,10 +10,8 @@ import {MatchQuery, OrQuery, TermQuery} from '../../shared/query.model';
 export class QueryPickerComponent extends Picker {
 
   queries: Array<string> = [];
-  _params;
-  successAudio: any;
-  errorAudio: any;
 
+  /*
   get params() {
     return this._params;
   }
@@ -22,11 +20,10 @@ export class QueryPickerComponent extends Picker {
     this._params = params;
     this.loadQuery(params);
   }
+   */
 
   constructor() {
     super();
-
-    this.loadAudio();
   }
 
   loadQuery(params: any) {
@@ -47,12 +44,6 @@ export class QueryPickerComponent extends Picker {
   }
 
   addQuery(queryText: string) {
-    if (queryText === 'error') {
-      this.errorAudio.play();
-    } else {
-      this.successAudio.play();
-    }
-
     if (!this.queries.some(query => query === queryText)) {
       this.queries.push(queryText);
     }
@@ -86,17 +77,5 @@ export class QueryPickerComponent extends Picker {
 
   getMatchField(): string {
     return this.params.field || '_all';
-  }
-
-  private loadAudio() {
-    const successAudio = new Audio();
-    successAudio.src = 'http://soundbible.com/grab.php?id=819&type=mp3';
-    successAudio.load();
-    this.successAudio = successAudio;
-
-    const errorAudio = new Audio();
-    errorAudio.src = 'http://soundbible.com/grab.php?id=1682&type=mp3';
-    errorAudio.load();
-    this.errorAudio = errorAudio;
   }
 }

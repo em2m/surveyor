@@ -2,9 +2,9 @@ import {ContextService} from '../../../core/extension/context.service';
 import {Router} from '@angular/router';
 import {AppConfig} from '../../../core/config/config.service';
 import {Injectable} from '@angular/core';
-import {Plugins} from '@capacitor/core';
 import {ContextOptions} from '../../../core/extension/extension.model';
-const Storage = Plugins.Storage;
+import {Plugins} from '@capacitor/core';
+const {Storage} = Plugins;
 
 @Injectable({ providedIn: 'root' })
 export class CapacitorContextService extends ContextService {

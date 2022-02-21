@@ -1,6 +1,7 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {ActivatedRoute, Routes} from '@angular/router';
 import {TabsService} from '../tabs.service';
+
 @Component({
   selector: 'surveyor-bottom-tabs',
   templateUrl: './bottom-tabs.component.html',
