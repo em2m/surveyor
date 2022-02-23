@@ -23,6 +23,14 @@ form {
   display: flex;
   flex-flow: row nowrap;
   margin: 1rem 0 1rem 0;
+  min-width: 0;
+}
+
+.facet-label {
+  max-width: 85%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .facet-buckets {
@@ -42,7 +50,7 @@ form {
 
 .bucket-label {
   padding-left: 1rem;
-  max-width: 70%;
+  max-width: 85%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

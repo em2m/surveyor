@@ -2,7 +2,7 @@
   <div *ngFor="let agg of searcher.aggs">
     <div *ngIf="hasBuckets(agg.key)" class="facet">
       <div class="facet-header">
-        <label class="facet-label">{{agg.label}}</label>
+        <label class="facet-label" matTooltip="{{agg.label}}" [matTooltipShowDelay]="1000">{{agg.label}}</label>
         <div class="spacer"></div>
         <span *ngIf="showMultiChoice(agg, bucketsForAgg(agg.key)) || isRangeAgg(agg)" class="hidden-menu">
           <button class="menu-button" [matMenuTriggerFor]="actionMenu">
