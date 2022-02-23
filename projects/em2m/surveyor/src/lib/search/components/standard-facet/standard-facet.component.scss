@@ -9,6 +9,9 @@ form {
 .facet{
   :hover .hidden-menu {
     display: inline-block;
+    * {
+      cursor: pointer;
+    }
   }
   display: flex;
   flex-flow: column nowrap;
@@ -29,6 +32,9 @@ form {
   display: flex;
   flex-flow: row nowrap;
   min-width: 0;
+  * {
+    cursor: pointer;
+  }
 }
 
 .bucket-label {
