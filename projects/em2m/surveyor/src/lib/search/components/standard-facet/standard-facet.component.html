@@ -3,6 +3,7 @@
     <div *ngIf="hasBuckets(agg.key)" class="facet">
       <div class="facet-header">
         <label class="facet-label">{{agg.label}}</label>
+        <div class="spacer"></div>
         <span *ngIf="showMultiChoice(agg, bucketsForAgg(agg.key)) || isRangeAgg(agg)" class="hidden-menu">
           <button class="menu-button" [matMenuTriggerFor]="actionMenu">
             <i style="transform: none" class="far fa-ellipsis-v"></i>
