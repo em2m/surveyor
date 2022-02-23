@@ -1,6 +1,50 @@
 
 form {
   width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  padding-top: 0.5rem;
+}
+
+.facet{
+  :hover .hidden-menu {
+    display: inline-block;
+  }
+  display: flex;
+  flex-flow: column nowrap;
+  font-size: 0.9rem;
+}
+
+.facet-header {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.facet-buckets {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.bucket {
+  display: flex;
+  flex-flow: row nowrap;
+  min-width: 0;
+}
+
+.bucket-label {
+  padding-left: 1rem;
+  max-width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spacer {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.bucket-count {
+  color: #777777;
 }
 
 .search-icon {
@@ -107,10 +151,6 @@ div.facet-nav span {
 
 .facet-header {
   font-weight: 900;
-}
-
-.parent-menu:hover .hidden-menu {
-  display: inline-block;
 }
 
 .hidden-menu {

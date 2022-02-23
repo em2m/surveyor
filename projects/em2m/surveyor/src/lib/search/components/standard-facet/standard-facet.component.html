@@ -1,34 +1,28 @@
-<form style="padding-top: 0.5rem;">
-  <div class="facet" *ngFor="let agg of searcher.aggs">
-    <div *ngIf="hasBuckets(agg.key)" class="parent-menu">
-      <div style="display:flex; align-items:flex-start;">
-
-        <span class="facet-nav facet-header">{{agg.label}}</span>
-        <span class="mdl-layout-spacer"></span>
+<form>
+  <div *ngFor="let agg of searcher.aggs">
+    <div *ngIf="hasBuckets(agg.key)" class="facet">
+      <div class="facet-header">
+        <label class="facet-label">{{agg.label}}</label>
         <span *ngIf="showMultiChoice(agg, bucketsForAgg(agg.key)) || isRangeAgg(agg)" class="hidden-menu">
-      <button class="menu-button" [matMenuTriggerFor]="actionMenu">
-        <i style="transform: none" class="far fa-ellipsis-v"></i>
-      </button>
-      <mat-menu #actionMenu="matMenu" yPosition="below" xPosition="before">
-        <button mat-menu-item *ngIf="showMultiChoice(agg, bucketsForAgg(agg.key))" (click)="showMoreAggs(agg)">
-          Select Multiple
-        </button>
-        <button mat-menu-item *ngIf="isRangeAgg(agg)" (click)="loadDatePicker(agg)">
-          Custom Date Range
-        </button>
-      </mat-menu>
-    </span>
+          <button class="menu-button" [matMenuTriggerFor]="actionMenu">
+            <i style="transform: none" class="far fa-ellipsis-v"></i>
+          </button>
+          <mat-menu #actionMenu="matMenu" yPosition="below" xPosition="before">
+            <button mat-menu-item *ngIf="showMultiChoice(agg, bucketsForAgg(agg.key))" (click)="showMoreAggs(agg)">
+              Select Multiple
+            </button>
+            <button mat-menu-item *ngIf="isRangeAgg(agg)" (click)="loadDatePicker(agg)">
+              Custom Date Range
+            </button>
+          </mat-menu>
+        </span>
       </div>
-      <div class="facet-nav checkboxes col-xs-12">
-        <ul class="facet-nav">
-          <li *ngFor="let bucket of bucketsForAgg(agg.key)">
-            <div (click)="addConstraint(agg, bucket)" style="cursor: pointer; display:flex; align-items:center;">
-              <span class="facet_label">{{bucket.label || bucket.key}}</span>
-              <span class="mdl-layout-spacer"></span>
-              <span class="facet_count"> {{bucket.count}} </span>
-            </div>
-          </li>
-        </ul>
+      <div class="facet-buckets">
+        <div class="bucket" *ngFor="let bucket of bucketsForAgg(agg.key)" (click)="addConstraint(agg, bucket)">
+          <label class="bucket-label">{{bucket.label || bucket.key}}</label>
+          <div class="spacer"></div>
+          <label class="bucket-count"> {{bucket.count}} </label>
+        </div>
       </div>
     </div>
   </div>
