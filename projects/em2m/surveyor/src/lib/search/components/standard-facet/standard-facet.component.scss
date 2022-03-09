@@ -1,116 +1,37 @@
 
 form {
   width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  padding-top: 0.5rem;
 }
 
-.search-icon {
-  padding-top: 0.2rem;
-  cursor: pointer;
-}
-
-.suborg-checkbox {
-  width: auto;
-}
-
-.search-constraints {
-  list-style-type: none;
-  padding-left: 0px;
-
-  li {
-    display: inline;
-
-    button {
-      margin-top: 0.1rem;
-    }
-  }
-}
-
-ul.facet-nav {
-  list-style-type: none;
-  padding-left: 15px;
-}
-
-.facet-nav {
+.facet{
+  display: flex;
+  flex-flow: column nowrap;
   font-size: 0.9rem;
 }
 
-.facet-nav {
-  li {
-    line-height: 2;
+.facet:hover .hidden-menu {
+  display: inline-block;
+  * {
+    cursor: pointer;
   }
 }
 
-ul.active-filters {
-  padding-left: 15px;
-  list-style: none;
-}
-
-ul.active-filters .filter {
-  padding-left: 3px;
-  color: #777777;
-  //font-size: 1em;
-}
-
-.facet-nav.results-count {
-  padding: 0;
-}
-
-.facet-nav .glyphicon {
-  //font-size: 10px;
-}
-
-.facet_checkbox {
-  margin-top: 0.1rem;
-  width: auto;
-}
-
-.facet_label {
-  padding-left: 0.25rem;
-  //font-size: 0.8em;
-  max-width: 180px;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.facet_count {
-  color: #777777;
-  //font-size: 0.8em;
-  margin-left: 0.5rem;
-}
-
-.facet-nav a:hover {
-  color: #000;
-}
-
-.result-line {
-  text-align: center;
-  color: #34495e;
-}
-
-div.facet-nav:hover span.show-on-hover {
-  display: inline;
-}
-
-.facet_action a {
-  color: #337bd1;
-  //font-size: small;
-  padding-left: 10px;
-}
-
-div.facet-nav span.show-on-hover {
-  display: none;
-}
-
-div.facet-nav span {
-  display: inline;
-}
-
 .facet-header {
+  display: flex;
+  flex-flow: row nowrap;
+  margin: .75rem 0 .75rem 0;
+  min-width: 0;
   font-weight: 900;
 }
 
-.parent-menu:hover .hidden-menu {
-  display: inline-block;
+.facet-label {
+  max-width: 85%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .hidden-menu {
@@ -127,4 +48,36 @@ div.facet-nav span {
 
 .menu-button:focus {
   outline: none;
+}
+
+.facet-buckets {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.bucket {
+  display: flex;
+  flex-flow: row nowrap;
+  min-width: 0;
+  * {
+    cursor: pointer;
+  }
+  margin: 0.2rem 0 0.2rem 0;
+}
+
+.bucket-label {
+  padding-left: 1rem;
+  max-width: 85%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bucket-count {
+  color: #777777;
+}
+
+.spacer {
+  flex-grow: 1;
+  flex-shrink: 1;
 }
