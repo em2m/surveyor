@@ -22,4 +22,14 @@ export class ActionService {
       });
     return results;
   }
+
+  findActionById(id: string): Action {
+    let result: Action = null;
+    let ext = this.extensionService.getExtensionById(this.ACTION_EXTENSION_TYPE, id)
+    if (ext) {
+      const type = ext.value as Type<Action>;
+      result = this.injector.get(type)
+    }
+    return result;
+  }
 }
