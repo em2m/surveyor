@@ -12,6 +12,7 @@ export class ExtensionService {
   private pluginRegistry: { [name: string]: Plugin } = {};
   private extensionsByType: { [type: string]: Array<Extension> } = {};
   private extensionsByTarget: { [type: string]: Array<Extension> } = {};
+  private extensionsById: { [type: string]: Extension } = {};
 
   constructor(@Inject('PLUGIN') plugins: Plugin[],
               private router: Router,
@@ -54,6 +55,10 @@ export class ExtensionService {
       this.extensionsByTarget[target] = extensionsForTarget;
     }
 
+    if (extension.config?.id) {
+      this.extensionsById[`${type}:${extension.config.id}`] = extension
+    }
+
     if (extension instanceof Type) {
       extension = { value: extension };
     }
@@ -66,13 +71,7 @@ export class ExtensionService {
   }
 
   getExtensionById(type: string, id: string): Extension {
-    for (const extension of this.extensionsByType[type] || []) {
-      const config = extension.config || {};
-      if (config.id === id) {
-        return extension;
-      }
-    }
-    return null;
+    return this.extensionsById[`${type}:${id}`];
   }
 
   getExtensionsForType(type: string): Array<Extension> {
