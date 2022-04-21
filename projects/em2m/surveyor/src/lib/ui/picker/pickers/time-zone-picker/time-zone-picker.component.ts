@@ -67,7 +67,7 @@ export class TimeZonePicker extends Picker implements OnInit, AfterViewInit {
   buildTimezoneList() {
     const validTimeZones = momentTz.tz.names()
       .filter((timeZone) => {
-        const allowedTimeZones = ['America/', 'US/', 'Australia/', 'NZ', 'Auckland', 'Chatham'];
+        const allowedTimeZones = ['America/', 'US/', 'Australia/', 'NZ', 'Auckland', 'Chatham', 'CET', 'Europe/'];
         let timeZoneAllowed = false;
         allowedTimeZones.forEach(filterVal => {
           if (timeZone.indexOf(filterVal) > -1) {
