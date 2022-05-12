@@ -1,5 +1,5 @@
 
-import {concat as observableConcat, from as observableFrom, of as observableOf, Observable} from 'rxjs';
+import {concat as observableConcat, from as observableFrom, of as observableOf, Observable, Subscription} from 'rxjs';
 import {map, concatMap, tap} from 'rxjs/operators';
 import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, NgZone, OnDestroy, Output, Renderer2} from '@angular/core';
 import * as L from 'leaflet';
@@ -7,6 +7,7 @@ import {Control, Map, MapOptions} from 'leaflet';
 import {ControlProvider, FeatureProvider, LayerDefinition, LayerProvider} from './leaflet.model';
 import {LeafletService} from './leaflet.service';
 import LayersObject = Control.LayersObject;
+import {NavigationEnd, Router} from "@angular/router";
 
 @Component({
   selector: 'surveyor-leaflet',
@@ -24,11 +25,14 @@ export class SurveyorLeafletComponent implements AfterViewInit, OnDestroy {
   private baseLayers = <LayersObject>{};
   private overlays = <LayersObject>{};
   private first = true;
+  private controls: Array<Control> = [];
+  private routerSub: Subscription;
 
   constructor(private leafletService: LeafletService,
               private elementRef: ElementRef,
               private renderer: Renderer2,
-              private ngZone: NgZone) {
+              private ngZone: NgZone,
+              private router: Router) {
   }
 
   ngOnDestroy() {
@@ -36,9 +40,32 @@ export class SurveyorLeafletComponent implements AfterViewInit, OnDestroy {
       this.map.remove();
     }
     this.leafletService.setMap(this.mapId, null);
+    this.routerSub?.unsubscribe();
+  }
+
+  onRouterUpdate() {
+    this.controls.forEach(control => control.remove());
+    this.controls = [];
+    this.leafletService.findControls(this.mapId).forEach(provider => {
+      const control = provider.provide(this.map);
+      if (control) {
+        try {
+          control.addTo(this.map);
+          this.controls.push(control);
+        } catch(error) {
+          //console.log(error)
+        }
+      }
+    })
   }
 
   ngAfterViewInit() {
+    this.routerSub = this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.onRouterUpdate();
+      }
+    })
+
     setTimeout(() => {
       // Initialize the primary map object
       if (!this.options) {
@@ -104,9 +131,12 @@ export class SurveyorLeafletComponent implements AfterViewInit, OnDestroy {
           return observableOf(null);
         }));
 
+      this.controls.forEach(control => control.remove());
+      this.controls = [];
       const controlsObs = observableFrom(this.leafletService.findControls(this.mapId)).pipe(
         concatMap((provider: ControlProvider) => {
           const control = provider.provide(this.map);
+          this.controls.push(control);
           if (control) {
             control.addTo(this.map);
           }
