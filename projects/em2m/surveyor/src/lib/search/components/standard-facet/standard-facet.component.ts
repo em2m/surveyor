@@ -112,19 +112,22 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
       });
       const aggLabel = values.length > 1 ? 'Multiple' : values[0];
       this.searcher.addConstraint({
+        key: `${agg.label || agg.key}`,
         label: `${agg.label || agg.key} : ${aggLabel}`,
         type: `multipleTermPicker:${agg.key}`,
         query: new OrQuery(queries),
-        key: `${agg.label || agg.key}`,
         values,
         buckets
       } as any);
     } else {
       const query = this.buildBucketQuery(agg, bucket);
       this.searcher.addConstraint({
+        key: `${agg.label || agg.key}`,
         label: `${agg.label || agg.key} : ${bucket.label || bucket.key}`,
+        type: `multipleTermPicker:${agg.key}`,
         query,
-        values: [bucket.key]
+        values: [bucket.key],
+        buckets: [bucket]
       });
     }
     this.searcher.broadcastRequest();
