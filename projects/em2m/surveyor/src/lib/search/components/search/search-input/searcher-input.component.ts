@@ -33,9 +33,9 @@ export class SearcherInputComponent implements OnInit {
       const constraint = {
         label: searchInput
       } as SearchConstraint;
-      // if (searchInput.indexOf(':') > -1 || searchInput.indexOf('(') > -1 || searchInput.indexOf('*') > -1 || (searchInput.indexOf('"') > -1)) {
-      //   constraint.query = new LuceneQuery(searchInput, '_all');
-      // } else {
+      if (searchInput.indexOf(':') > -1 || searchInput.indexOf('(') > -1 || searchInput.indexOf('*') > -1 || (searchInput.indexOf('"') > -1)) {
+        constraint.query = new LuceneQuery(searchInput, '_all');
+      } else {
       const outerQueries = [];
       const tokenizedSearchInput = searchInput.split(' ');
       this.searcher.fullTextFields.forEach(field => {
