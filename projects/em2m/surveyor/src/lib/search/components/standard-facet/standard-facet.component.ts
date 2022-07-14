@@ -113,6 +113,7 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
       const aggLabel = values.length > 1 ? 'Multiple' : values[0];
       this.searcher.addConstraint({
         label: `${agg.label || agg.key} : ${aggLabel}`,
+        type: `multipleTermPicker:${agg.key}`,
         query: new OrQuery(queries),
         key: `${agg.label || agg.key}`,
         values,
