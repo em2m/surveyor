@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Picker} from '../../../ui/picker/picker.component';
 import {FormControl} from '@angular/forms';
 
@@ -7,7 +7,7 @@ import {FormControl} from '@angular/forms';
   templateUrl: './date-range-picker.component.html',
   styleUrls: ['./date-range-picker.component.scss']
 })
-export class DateRangePickerComponent extends Picker {
+export class DateRangePickerComponent extends Picker implements OnInit{
   fromDate: Date;
   toDate: Date;
   dateToday: Date = new Date();
@@ -16,6 +16,13 @@ export class DateRangePickerComponent extends Picker {
 
   constructor() {
     super();
+  }
+
+  ngOnInit() {
+    this.fromDate = new Date(this.params?.fromDate);
+    this.formFromControl.setValue(this.fromDate);
+    this.toDate = new Date(this.params?.toDate);
+    this.formToControl.setValue(this.toDate);
   }
 
   fromDateChanged(event) {

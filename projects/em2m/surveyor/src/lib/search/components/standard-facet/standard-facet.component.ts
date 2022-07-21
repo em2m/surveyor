@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {SearchConstraint, Searcher} from '../../shared/searcher.model';
+import {Searcher} from '../../shared/searcher.model';
 import {Bucket, DateRangeQuery, ExistsQuery, OrQuery, Query, RangeQuery, TermQuery} from '../../shared/query.model';
 import {PickerService} from '../../../ui/picker/picker.service';
 import * as _moment from 'moment';
@@ -112,18 +112,22 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
       });
       const aggLabel = values.length > 1 ? 'Multiple' : values[0];
       this.searcher.addConstraint({
-        label: `${agg.label || agg.key} : ${aggLabel}`,
-        query: new OrQuery(queries),
         key: `${agg.label || agg.key}`,
+        label: `${agg.label || agg.key} : ${aggLabel}`,
+        type: `multipleTermPicker:${agg.key}`,
+        query: new OrQuery(queries),
         values,
         buckets
       } as any);
     } else {
       const query = this.buildBucketQuery(agg, bucket);
       this.searcher.addConstraint({
+        key: `${agg.label || agg.key}`,
         label: `${agg.label || agg.key} : ${bucket.label || bucket.key}`,
+        type: `multipleTermPicker:${agg.key}`,
         query,
-        values: [bucket.key]
+        values: [bucket.key],
+        buckets: [bucket]
       });
     }
     this.searcher.broadcastRequest();
@@ -171,8 +175,10 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
         const query = new RangeQuery(agg.field, to, null, null, from, null);
 
         this.searcher.addConstraint({
+          type: `dateRangePicker:${agg.key}`,
           label: `${agg.label || agg.key} : ${moment(from).format('LL')} to ${moment(to).format('LL')}`,
-          query
+          query,
+          values: [from, to]
         });
         this.searcher.broadcastRequest();
       }
