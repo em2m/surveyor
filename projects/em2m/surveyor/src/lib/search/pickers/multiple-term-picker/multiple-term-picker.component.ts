@@ -56,7 +56,7 @@ export class MultipleTermPickerComponent extends Picker implements OnInit {
 
 
     if (constraint.length > 0) {
-      (constraint[0] as SearchConstraint).buckets.forEach(bucket => {
+      (constraint[0] as SearchConstraint)?.buckets?.forEach(bucket => {
         let exists = false;
         this.bucketSearchResults.forEach(bucketItem => {
           if (bucket.key === bucketItem.key) {

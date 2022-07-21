@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {SearchConstraint, Searcher, SearchRequest} from '../../../shared/searcher.model';
 import {PickerService} from '../../../../ui/picker/picker.service';
 import {BoolQuery, LuceneQuery, OperationType, Query, WildcardQuery} from '../../../shared/query.model';
@@ -41,9 +41,13 @@ export class SearcherInputComponent implements OnInit {
         this.searcher.fullTextFields.forEach(field => {
           const innerQueries = [];
           tokenizedSearchInput.forEach(queryString => {
-              if (field === '_all') queryString = queryString.toLowerCase();
-              if (field === 'all') field = '_all';
-              innerQueries.push(new WildcardQuery(field, `*${queryString}*`));
+            if (field === '_all') {
+              queryString = queryString.toLowerCase();
+            }
+            if (field === 'all') {
+              field = '_all';
+            }
+            innerQueries.push(new WildcardQuery(field, `*${queryString}*`));
           });
           outerQueries.push(new BoolQuery(OperationType.AND, innerQueries));
         });
