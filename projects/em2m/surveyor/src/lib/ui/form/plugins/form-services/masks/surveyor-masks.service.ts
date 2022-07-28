@@ -23,8 +23,8 @@ export class SurveyorMasks {
         newModelVal = newModelVal.substring(0, newModelVal.length - 1);
       }
 
-      if (newModelVal.length > 10) {
-        newModelVal = newModelVal.substring(0, 10);
+      if (newModelVal.length > 15) {
+        newModelVal = newModelVal.substring(0, 15);
       }
 
       return newModelVal;
@@ -36,8 +36,13 @@ export class SurveyorMasks {
         newVal = value.replace(/^(\d{0,3})/, '($1)');
       } else if (value.length <= 6) {
         newVal = value.replace(/^(\d{0,3})(\d{0,3})/, '($1) $2');
-      } else {
+      } else if (value.length <= 10) {
         newVal = value.replace(/^(\d{0,3})(\d{0,3})(.*)/, '($1) $2-$3');
+      } else {
+        const countryCodeLength = value.length - 10;
+        const countryCode = value.substring(0, countryCodeLength);
+        const remaining = value.substring(countryCodeLength);
+        newVal = '+' + countryCode + ' ' + remaining.replace(/^(\d{0,3})(\d{0,3})(.*)/, '($1) $2-$3');
       }
       return newVal;
     }
