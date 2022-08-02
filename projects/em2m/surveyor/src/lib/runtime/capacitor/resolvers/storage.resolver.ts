@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Router, Resolve, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 import {ContextService} from '../../../core/extension/context.service';
-import {Plugins} from '@capacitor/core';
-const {Storage} = Plugins;
+import {Storage} from '@capacitor/storage';
 
 @Injectable({ providedIn: 'root' })
 export class StorageResolver implements Resolve<any> {
