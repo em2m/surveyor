@@ -20,6 +20,8 @@ export abstract class LayerProvider {
 
   protected resolveProvider(appConfig: AppConfig, ctx: ContextService) {
     const config = appConfig.get();
+    const isMobile = !!config.mobile;
+
 
     this.mapProvider = config.map.provider;
     if (this.mapProvider) {
@@ -29,7 +31,13 @@ export abstract class LayerProvider {
     const brand = ctx.getValue('brand:loaded');
     if (brand) {
       const brandMapSettings = brand.settings.maps;
-      if (brandMapSettings) {
+      if (isMobile && brandMapSettings?.mobileProvider) {
+        this.mapProvider = brandMapSettings.mobileProvider;
+        this.mapConfig = brandMapSettings;
+        if (brandMapSettings.mobileStyle) {
+          this.mapStyle = brandMapSettings.mobileStyle;
+        }
+      } else if (brandMapSettings) {
         if (brandMapSettings.provider) {
           this.mapProvider = brandMapSettings.provider;
           this.mapConfig = brandMapSettings;
@@ -41,7 +49,7 @@ export abstract class LayerProvider {
     }
 
     const orgMapSettings = ctx.getValue('organization:map:settings');
-    if (orgMapSettings) {
+    if (orgMapSettings && !isMobile) {
       if (orgMapSettings.provider) {
         this.mapProvider = orgMapSettings.provider;
         this.mapConfig = orgMapSettings;

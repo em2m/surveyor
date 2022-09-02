@@ -10,7 +10,7 @@ import {HttpClient} from '@angular/common/http';
 export class MapquestGeoProvider implements GeoProvider {
 
   private mapquestKey: string;
-  private baseUrl = 'https://www.mapquestapi.com/staticmap/v4/getmap';
+  private baseUrl = 'https://www.mapquestapi.com/staticmap/v5/map';
 
   constructor(private http: HttpClient) {}
 
