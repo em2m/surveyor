@@ -212,6 +212,10 @@ export class Searcher {
   }
 
   public addConstraint(constraint: SearchConstraint) {
+    if (!constraint.id) {
+      constraint.id = this.generateConstraintUID();
+    }
+
     let addConstraint = true;
     this.constraints.forEach(constraintItem => {
       let constraintItemString = Object.keys(constraintItem.query).map(key => constraintItem.query[key]).sort().toString().trim();
@@ -233,6 +237,12 @@ export class Searcher {
   }
 
   public setConstraints(constraints: Array<SearchConstraint>) {
+    constraints.forEach(constraint => {
+      if (!constraint.id) {
+        constraint.id = this.generateConstraintUID();
+      }
+    });
+
     this.constraints = constraints;
   }
 
@@ -250,6 +260,14 @@ export class Searcher {
 
   public broadcasetMoreRequest() {
     this.moreRequestSubject.next(this._moreRequest);
+  }
+
+  public generateConstraintUID(): string {
+    let firstPart = (Math.random() * 46656 || 0).toString(36);
+    let secondPart = (Math.random() * 46656 || 0).toString(36);
+    firstPart = ('000' + firstPart).slice(-3);
+    secondPart = ('000' + secondPart).slice(-3);
+    return firstPart + secondPart;
   }
 }
 
