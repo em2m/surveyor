@@ -112,7 +112,6 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
       });
       const aggLabel = values.length > 1 ? 'Multiple' : values[0];
       this.searcher.addConstraint({
-        id: this.generateUID(),
         key: `${agg.label || agg.key}`,
         label: `${agg.label || agg.key} : ${aggLabel}`,
         type: `multipleTermPicker:${agg.key}`,
@@ -123,7 +122,6 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
     } else {
       const query = this.buildBucketQuery(agg, bucket);
       this.searcher.addConstraint({
-        id: this.generateUID(),
         key: `${agg.label || agg.key}`,
         label: `${agg.label || agg.key} : ${bucket.label || bucket.key}`,
         type: `multipleTermPicker:${agg.key}`,
@@ -133,14 +131,6 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
       });
     }
     this.searcher.broadcastRequest();
-  }
-
-  private generateUID(): string {
-    let firstPart = (Math.random() * 46656 || 0).toString(36);
-    let secondPart = (Math.random() * 46656 || 0).toString(36);
-    firstPart = ('000' + firstPart).slice(-3);
-    secondPart = ('000' + secondPart).slice(-3);
-    return firstPart + secondPart;
   }
 
   private getAggOp(agg: any) {
