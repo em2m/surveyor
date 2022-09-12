@@ -43,6 +43,7 @@ export interface SearchSelection {
 }
 
 export interface SearchConstraint {
+  id?: string;
   label: string;
   query: Query;
   op?: string;
