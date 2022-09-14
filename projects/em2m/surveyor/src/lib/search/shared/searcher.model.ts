@@ -218,18 +218,11 @@ export class Searcher {
 
     let addConstraint = true;
     this.constraints.forEach(constraintItem => {
-      let constraintItemString = Object.keys(constraintItem.query).map(key => constraintItem.query[key]).sort().toString().trim();
-      if (constraintItem.not) {
-        constraintItemString += constraintItem.not.toString();
-      }
-      let constraintString = Object.keys(constraint.query).map(key => constraint.query[key]).sort().toString().trim();
-      if (constraint.not) {
-        constraintString += constraint.not.toString();
-      }
-      if (constraintItemString === constraintString && !(constraint.query instanceof BoolQuery)) {
+      if (constraintItem?.id === constraint.id) {
         addConstraint = false;
       }
     });
+
     if (addConstraint) {
       this.constraints.push(constraint);
       this.currentPage = 1;
