@@ -51,7 +51,7 @@ export class MultipleTermPickerComponent extends Picker implements OnInit {
     });
 
     const constraint = this.constraints.filter((con: SearchConstraint) => {
-      return con.key === `${this.agg.label || this.agg.key}`;
+      return con.key === `${this.agg.key || this.agg.label}`;
     });
 
 
