@@ -11,7 +11,7 @@ export class ConfigFilter implements Filter {
     let configTempValue = filterContext.config;
     let configSegments = this.configPath.split('.');
     for (let i = 0; i < configSegments.length; i++) {
-      configTempValue = configTempValue[configSegments[i]];
+      configTempValue = configTempValue?.[configSegments[i]];
     }
     if (configTempValue === undefined || configTempValue === null) {
       return false;

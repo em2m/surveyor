@@ -1,9 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Searcher} from '../../shared/searcher.model';
+import {SearchConstraint, Searcher} from '../../shared/searcher.model';
 import {Bucket, DateRangeQuery, ExistsQuery, OrQuery, Query, RangeQuery, TermQuery} from '../../shared/query.model';
 import {PickerService} from '../../../ui/picker/picker.service';
 import * as _moment from 'moment';
 import {Subscription} from 'rxjs';
+import {ContextService} from '../../../core/extension/context.service';
 
 const moment = _moment;
 
@@ -21,27 +22,40 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
   moreSubscription: Subscription;
 
   constructor(public searcher: Searcher,
-              private pickerService: PickerService) {
+              private pickerService: PickerService,
+              private ctx: ContextService) {
   }
 
   ngOnInit(): void {
     this.moreSubscription = this.searcher.whenMoreResultPublished.subscribe(item => {
-      // loop through constraint list
-      let constraintAlreadyExists = false;
-      this.searcher.constraints.forEach(constraint => {
-        if (item && item.agg && (constraint.key === item.agg.label || constraint.key === item.agg.key)) {
-          constraintAlreadyExists = true;
+      if (item) {
+        // If there is a specific constraint to edit, find it and edit only that constraint
+        const multiTermConstraint = this.ctx.getValue('multiTermConstraint') as SearchConstraint;
+        if (multiTermConstraint && multiTermConstraint.id) {
+          this.searcher.constraints = this.searcher.constraints.filter(constraint => {
+            return constraint.id !== multiTermConstraint.id;
+          });
+
+          this.ctx.setValue('multiTermConstraint', null);
+        } else {
+          // loop through constraint list
+          let constraintAlreadyExists = false;
+          this.searcher.constraints.forEach(constraint => {
+            if (item && item.agg && (constraint.key === item.agg.label || constraint.key === item.agg.key)) {
+              constraintAlreadyExists = true;
+            }
+          });
+
+          if (constraintAlreadyExists && item && item.agg) {
+            this.searcher.constraints = this.searcher.constraints.filter(constraint => {
+              return constraint.key !== `${item.agg.key || item.agg.label}`;
+            });
+          }
         }
-      });
 
-      if (constraintAlreadyExists && item && item.agg) {
-        this.searcher.constraints = this.searcher.constraints.filter(constraint => {
-          return constraint.key !== `${item.agg.label || item.agg.key}`;
-        });
-      }
-
-      if (item && item.agg) {
-        this.addConstraint(item.agg, item.bucket);
+        if (item && item.agg) {
+          this.addConstraint(item.agg, item.bucket);
+        }
       }
     });
   }
@@ -100,6 +114,7 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
   }
 
   addConstraint(agg: any, bucket: any) {
+    // console.log(this.searcher);
     if (Array.isArray(bucket)) {
       const queries = [];
       const values = [];
@@ -118,7 +133,7 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
         query: new OrQuery(queries),
         values,
         buckets
-      } as any);
+      } as SearchConstraint);
     } else {
       const query = this.buildBucketQuery(agg, bucket);
       this.searcher.addConstraint({
@@ -128,7 +143,7 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
         query,
         values: [bucket.key],
         buckets: [bucket]
-      });
+      } as SearchConstraint);
     }
     this.searcher.broadcastRequest();
   }
