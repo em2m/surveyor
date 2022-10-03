@@ -7,7 +7,7 @@
     <div class="tabs-bar">
       <a *ngFor="let tab of tabs" class="tabs-tab" [routerLink]="[tab.path]" [queryParams]="tab.queryParam"
          routerLinkActive="selected" [routerLinkActiveOptions]="{exact:tab.exact}">
-        <i [ngClass]="tab.icon"></i><br/> {{ tab.title }}
+        <i [ngClass]="tab.icon"></i><br/> <div [ngClass]="{'hide-title': suppressTitles}">{{ tab.title }}</div>
       </a>
     </div>
   </div>
