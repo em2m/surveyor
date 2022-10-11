@@ -6,38 +6,47 @@ export class SurveyorMasks {
     if (params && params.displayMaskedValue) {
       return ($event: any, value: string): string => {
         const model = updateModelValue($event, value);
-        return formatAsPhoneNumber(model);
+        return model.length > 0 ? formatAsPhoneNumber(model) : '';
       };
     } else {
       return ($event: any, value: string): MaskedValue => {
         const model = updateModelValue($event, value);
-        return {modelValue: model, viewValue: formatAsPhoneNumber(model)};
+        return {modelValue: model, viewValue: model.length > 0 ? formatAsPhoneNumber(model) : ''};
       };
     }
 
     function updateModelValue($event: any, value: string): string {
-      const eventVal = $event.key.replace(/\D/g, '');
-      let newModelVal = value ? value.replace(/\D/g, '') + eventVal : eventVal;
+      const eventVal = $event.key.replace( /[^0-9 +-]/g, '');
+      let newModelVal = value ? value + eventVal : eventVal;
 
       if ($event.key === 'Backspace') {
         newModelVal = newModelVal.substring(0, newModelVal.length - 1);
       }
-
-      if (newModelVal.length > 10) {
-        newModelVal = newModelVal.substring(0, 10);
-      }
-
       return newModelVal;
     }
 
     function formatAsPhoneNumber(value: string): string {
+      const rawPhoneNumber = value.replace(/\D/g, '');
+
       let newVal = '';
-      if (value.length === 0) {} else if (value.length <= 3) {
-        newVal = value.replace(/^(\d{0,3})/, '($1)');
-      } else if (value.length <= 6) {
-        newVal = value.replace(/^(\d{0,3})(\d{0,3})/, '($1) $2');
+      if (value.substring(0, 1) !== '+' && rawPhoneNumber.length > 0 && rawPhoneNumber.length <= 10) {
+        // domestic phone number
+        if (rawPhoneNumber.length <= 3) {
+          newVal = rawPhoneNumber.replace(/^(\d{0,3})/, '($1)');
+        } else if (rawPhoneNumber.length <= 6) {
+          newVal = rawPhoneNumber.replace(/^(\d{0,3})(\d{0,3})/, '($1) $2');
+        } else if (rawPhoneNumber.length <= 10) {
+          newVal = rawPhoneNumber.replace(/^(\d{0,3})(\d{0,3})(.*)/, '($1) $2-$3');
+        }
       } else {
-        newVal = value.replace(/^(\d{0,3})(\d{0,3})(.*)/, '($1) $2-$3');
+        // international phone number
+        if (/[()]/.test(value)) {
+          newVal = `+${value.replace(/\D/g, '')}`;
+        } else if (value.substring(0, 1) !== '+') {
+          newVal = `+${value}`;
+        } else {
+          newVal = value;
+        }
       }
       return newVal;
     }

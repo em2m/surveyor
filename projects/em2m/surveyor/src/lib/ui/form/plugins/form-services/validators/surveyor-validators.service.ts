@@ -12,8 +12,15 @@ export class SurveyorValidators {
   }
 
   static isValidPhoneFormat(c: AbstractControl) {
-    const temp = (c.value || '').replace(/\D/g, '');
-    if (temp.length === 10 || temp.length === 0) {
+
+    const validPhoneNumberPattern = '^[+1-9](?:[0-9][- ]?){5,17}[0-9]$';
+    const phoneValidRegex = new RegExp(validPhoneNumberPattern);
+
+    const domesticPhoneNumberPattern = '^(\\([0-9]{3}\\)) [0-9]{3}-[0-9]{4}$';
+    const domesticPhoneValidRegex = new RegExp(domesticPhoneNumberPattern);
+
+    const phoneNumber = c.value;
+    if (phoneNumber?.length === 0 || phoneValidRegex.test(phoneNumber) || domesticPhoneValidRegex.test(phoneNumber) ) {
       return null;
     } else {
       return { invalidPhoneNumber: true };
