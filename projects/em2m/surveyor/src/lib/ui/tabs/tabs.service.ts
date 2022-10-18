@@ -42,7 +42,8 @@ export class TabsService {
                 path: `./${route.path}`,
                 exact: route.path.trim().length === 0,
                 queryParam: queryParams,
-                icon: route.data.icon
+                icon: route.data.icon,
+                id: route.data.id || null
               });
             }
           }
