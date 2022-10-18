@@ -12,6 +12,8 @@ export class BottomTabsComponent implements OnInit, OnChanges {
   @Input() routes?: Routes;
   @Input() queryParams?: any = {};
   @Input() suppressTitles?: boolean;
+  @Input() badges?: any = {};
+
   tabs: any[] = [];
 
   constructor(private route: ActivatedRoute, private tabsService: TabsService) {

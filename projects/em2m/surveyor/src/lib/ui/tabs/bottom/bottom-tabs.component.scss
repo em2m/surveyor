@@ -36,3 +36,18 @@
 .hide-title {
   visibility: hidden;
 }
+
+.tab-badge {
+  position: absolute;
+  top: -5px;
+  right: 25%;
+  background-color: red;
+  border-radius: 50%;
+  font-size: 12px;
+  color: #fff;
+  height: 15px;
+  width: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
