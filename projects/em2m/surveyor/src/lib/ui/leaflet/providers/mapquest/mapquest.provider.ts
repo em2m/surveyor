@@ -3,58 +3,42 @@ import {LayerDefinition, LayerProvider} from '../../leaflet.model';
 import {Injectable} from '@angular/core';
 import {AppConfig} from '../../../../core/config/config.service';
 import {ContextService} from '../../../../core/extension/context.service';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {MapScriptLoaderService} from '../../map-script-loader.service';
+
+declare let MQ: any;
 
 @Injectable()
 export class MapquestProvider extends LayerProvider {
 
   config: any;
 
-  constructor(private appConfig: AppConfig, private ctx: ContextService) {
+  constructor(private appConfig: AppConfig, private ctx: ContextService, private scriptLoader: MapScriptLoaderService) {
     super();
   }
 
-  provide(): Array<LayerDefinition> {
+  provide(): Array<LayerDefinition> | Observable<Array<LayerDefinition>> {
     this.resolveProvider(this.appConfig, this.ctx);
+    const accessToken = this.mapConfig.accessToken || this.mapConfig.mapquestKey;
 
     if (this.mapProvider === 'mapquest') {
-      const accessToken = this.mapConfig.accessToken || this.mapConfig.mapquestKey;
-      const streetLayerId = this.mapConfig.mapquestStreetLayerId || 'mapquest/ck62awhdx0g1g1iqqv9u80q6i';
-      const satelliteLayerId = this.mapConfig.mapquestSatelliteLayerId || 'mapquest/ck62b7u670gx81irs634q9hzs';
-      //const hybridLayerId = this.mapConfig.mapquestHybridLayerId || 'mapquest/ck62b7u670gx81irs634q9hzs';
+      const scriptUrl = `https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=${accessToken}`;
+      return this.scriptLoader.loadApi(scriptUrl).pipe(
+        map(() => {
 
-      const streetsLayer = {
-        label: 'Streets',
-        layer: L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}@2x?access_token={accessToken}', {
-          maxZoom: 21,
-          id: streetLayerId,
-          accessToken: accessToken,
-          tileSize: 512,
-          zoomOffset: -1
-        })
-      };
+          const streetsLayer = {
+            label: 'Streets',
+            layer: MQ.mapLayer()
+          };
 
-      const satelliteLayer = {
-        label: 'Satellite',
-        layer: L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}@2x?access_token={accessToken}', {
-          maxZoom: 21,
-          maxNativeZoom: 19,
-          id: satelliteLayerId,
-          accessToken: accessToken,
-          tileSize: 512,
-          zoomOffset: -1
-        })
-      };
+          const satelliteLayer = {
+            label: 'Satellite',
+            layer: MQ.satelliteLayer()
+          };
 
-      // const hybridLayer = {
-      //   label: 'Hybrid',
-      //   layer: L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-      //     maxZoom: 21,
-      //     maxNativeZoom: 19,
-      //     id: hybridLayerId,
-      //     accessToken: accessToken
-      //   })
-      //};
-      return [streetsLayer, satelliteLayer]//, hybridLayer];
+          return [streetsLayer, satelliteLayer];
+        }));
     } else {
       return [];
     }
