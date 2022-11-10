@@ -10,8 +10,9 @@ import {ZoomControlProvider} from './providers/zoomcontrol/zoom-control.provider
 import {GoogleMapsProvider} from './providers/google-maps/google-maps.provider';
 import {GoogleMapsLoaderService} from './providers/google-maps/google-maps-loader.service';
 import {GoogleStreetViewControlProvider} from './providers/google-maps/google-street-view-control.provider';
-//import {AppleMapkitProvider} from './providers/apple-mapkit-js/apple-mapkit.provider';
-//import {AppleMapkitLoaderService} from './providers/apple-mapkit-js/apple-mapkit-loader.service';
+import {MapScriptLoaderService} from './map-script-loader.service';
+// import {AppleMapkitProvider} from './providers/apple-mapkit-js/apple-mapkit.provider';
+// import {AppleMapkitLoaderService} from './providers/apple-mapkit-js/apple-mapkit-loader.service';
 
 export * from './leaflet.component';
 export * from './leaflet.model';
@@ -19,6 +20,7 @@ export * from './leaflet.service';
 export * from './leaflet.plugin';
 export * from './providers/mapbox/mapbox.provider';
 export * from './providers/mapquest/mapquest.provider';
+export * from './map-script-loader.service';
 export * from './providers/google-maps/google-maps.provider';
 export * from './providers/google-maps/google-street-view-control.provider';
 export * from './providers/google-maps/google-maps-loader.service';
@@ -46,6 +48,7 @@ export class SurveyorLeafletModule {
         MapquestProvider,
         GoogleMapsProvider,
         GoogleMapsLoaderService,
+        MapScriptLoaderService,
 //        AppleMapkitProvider,
 //        AppleMapkitLoaderService,
         OpenStreetMapProvider,
