@@ -12,7 +12,6 @@ export class MapScriptLoaderService {
 
   loadApi(scriptAddress: string): Observable<boolean> {
     if (!this.isLoaded) {
-      this.isLoaded = true;
       return this.loadScript(scriptAddress);
     } else {
       return of(true);
@@ -27,12 +26,14 @@ export class MapScriptLoaderService {
         script.onreadystatechange = () => {
           if (script.readyState === 'loaded' || script.readyState === 'complete') {
             script.onreadystatechange = null;
+            this.isLoaded = true;
             observer.next(true);
             observer.complete();
           }
         };
       } else {  // Others
-        script.onload = function() {
+        script.onload = () => {
+            this.isLoaded = true;
             observer.next(true);
             observer.complete();
         };
