@@ -17,6 +17,7 @@
                (keyup.shift.enter)="onSubmit(searchInput)"
         />
       </li>
+      <i class="fa fa-barcode-read" *ngIf="barcode" (click)="clicked()"></i>
     </ul>
     <div>
       <surveyor-region type="horizontal" [regionId]="iconRegion"></surveyor-region>
