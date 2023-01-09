@@ -1,7 +1,8 @@
-import {Component, ElementRef, Input, OnInit, Output, ViewChild, EventEmitter} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {SearchConstraint, Searcher, SearchRequest} from '../../../shared/searcher.model';
 import {PickerService} from '../../../../ui/picker/picker.service';
 import {BoolQuery, LuceneQuery, OperationType, Query, WildcardQuery} from '../../../shared/query.model';
+
 @Component({
   selector: 'surveyor-searcher-input',
   templateUrl: './searcher-input.component.html',
@@ -13,16 +14,10 @@ export class SearcherInputComponent implements OnInit {
   @Input() iconRegion = 'icon-region';
   @Input() searcher: Searcher;
   @Input() placeholder = 'Search ...';
-  @Input() barcode = false;
-  @Output() scan = new EventEmitter();
   public searchInput = '';
   public constraints: Array<any> = [];
 
   constructor(private pickerService: PickerService) {
-  }
-
-  clicked(){
-    this.scan.emit('scan');
   }
 
   ngOnInit() {
@@ -33,7 +28,7 @@ export class SearcherInputComponent implements OnInit {
     }
   }
 
-  public onSubmit(searchInput: string) {
+  onSubmit(searchInput: string) {
     if (searchInput && searchInput.trim().length > 0) {
       const constraint = {
         label: searchInput
