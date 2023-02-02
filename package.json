@@ -24,6 +24,7 @@
     "@angular/platform-browser": "~12.2.13",
     "@angular/platform-browser-dynamic": "~12.2.13",
     "@angular/router": "~12.2.13",
+    "@capacitor/app": "^1.1.1",
     "@capacitor/cli": "^3.6.0",
     "@capacitor/core": "^3.6.0",
     "@capacitor/device": "^1.1.2",
