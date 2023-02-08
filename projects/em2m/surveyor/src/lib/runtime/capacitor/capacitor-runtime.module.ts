@@ -20,6 +20,7 @@ import { SurveyorFormModule } from '../../ui/form/form.module';
 import { CapacitorContextService } from './context/capacitor-context.service';
 import { StorageGuard } from './guards/storage.guard';
 import { DeviceInfoGuard } from './guards/device-info.guard';
+import {DeeplinksService} from "./deeplinks/DeeplinksService";
 
 export * from './capacitor-runtime.component';
 export * from './application/404/404.page';
@@ -120,7 +121,8 @@ export class SurveyorCapacitorRuntimeModule {
           deps: [LoaderService],
           multi: true
         },
-        { provide: ContextService, useExisting: CapacitorContextService }
+        { provide: ContextService, useExisting: CapacitorContextService },
+        DeeplinksService
         // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
       ]
     };
