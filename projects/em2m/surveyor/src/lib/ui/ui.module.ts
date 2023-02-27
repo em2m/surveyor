@@ -18,10 +18,12 @@ import {SurveyorRegionModule} from './region/region.module';
 import {SurveyorGeoModule} from './geo/geo.module';
 import {SurveyorWizardModule} from './wizard/wizard.module';
 import {SurveyorPopoverModule} from './popover/popover.module';
+import {SurveyorConverterModule} from './converter/converter.module';
 
 export * from './action/action.module';
 export * from './breadcrumbs/breadcrumbs.module';
 export * from './card/card.module';
+export * from './converter/converter.module';
 export * from './dropdown/dropdown.module';
 export * from './form/form.module';
 export * from './geo/geo.module';
@@ -44,6 +46,7 @@ export * from './wizard/wizard.module';
     SurveyorActionModule.forRoot(),
     SurveyorBreadcrumbsModule.forRoot(),
     SurveyorCardModule.forRoot(),
+    SurveyorConverterModule.forRoot(),
     SurveyorDropdownModule.forRoot(),
     SurveyorFormModule.forRoot(),
     SurveyorGeoModule.forRoot(),
@@ -65,6 +68,7 @@ export * from './wizard/wizard.module';
     SurveyorActionModule,
     SurveyorBreadcrumbsModule,
     SurveyorCardModule,
+    SurveyorConverterModule,
     SurveyorDropdownModule,
     SurveyorFormModule,
     SurveyorGeoModule,
@@ -83,4 +87,5 @@ export * from './wizard/wizard.module';
     SurveyorWizardModule
   ]
 })
-export class SurveyorUiModule {}
+export class SurveyorUiModule {
+}
