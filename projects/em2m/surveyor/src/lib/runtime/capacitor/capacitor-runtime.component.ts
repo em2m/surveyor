@@ -5,7 +5,7 @@ import {DeeplinksService} from "./deeplinks/DeeplinksService";
 
 @Component({
   selector: 'surveyor-runtime',
-  template: '<div mdl style="height: 100vh; display: flex; flex-direction: column;"><router-outlet></router-outlet></div>'
+  template: '<div mdl style="height: 100%; display: flex; flex-direction: column;"><router-outlet></router-outlet></div>'
 })
 export class SurveyorCapacitorRuntime {
 
