@@ -6,9 +6,9 @@
   <div style="width: 100%; z-index: 1000;">
     <div class="tabs-bar">
       <a *ngFor="let tab of tabs" class="tabs-tab" [routerLink]="[tab.path]" [queryParams]="tab.queryParam"
-         routerLinkActive="selected" [routerLinkActiveOptions]="{exact:tab.exact}">
+         routerLinkActive="selected" [routerLinkActiveOptions]="{exact:tab.exact}" #rla="routerLinkActive">
         <div class="tab-badge" *ngIf="badges[tab.id]">{{badges[tab.id]}}</div>
-        <i [ngClass]="tab.icon"></i><br/> <div [ngClass]="{'hide-title': suppressTitles}">{{ tab.title }}</div>
+        <i class="{{tab.icon}}" [ngClass]="{'custom-tab-color': rla.isActive}"></i><br/> <div [ngClass]="{'hide-title': suppressTitles}">{{ tab.title }}</div>
       </a>
     </div>
   </div>

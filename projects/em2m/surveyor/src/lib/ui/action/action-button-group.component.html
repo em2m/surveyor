@@ -69,7 +69,7 @@
   <span class="hidden-desktop-up center-content" *ngIf="iconOnly">
     <span class="center-content" *ngIf="primaryActions?.length || secondaryActions?.length">
       <button *ngIf="!miniFab" mat-icon-button color="primary" class="mat-icon-button center-content" matTooltip="{{toolTip}}" [matMenuTriggerFor]="actionMenu">
-        <i class="{{icon}}"></i>
+        <i class="{{icon}} custom-action-icon-color"></i>
       </button>
       <button *ngIf="miniFab" mat-mini-fab class="mini-fab-icon-size more-actions-mini-fab center-content" color="primary" matTooltip="{{toolTip}}" [matMenuTriggerFor]="actionMenu">
         <i class="{{icon}}"></i>
