@@ -38,5 +38,13 @@ button[mat-button] {
   color: #787878;
 }
 
-element.style {
+.mat-icon-button:hover {
+  background: #eee;
+  i {
+    color: #333;
+  }
+}
+
+.fa-ellipsis-v {
+  transform: rotate(0deg) !important;
 }
