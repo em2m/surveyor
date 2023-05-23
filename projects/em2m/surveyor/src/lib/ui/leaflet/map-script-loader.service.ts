@@ -44,7 +44,7 @@ export class MapScriptLoaderService {
       script.async = false;
       script.charset = 'utf-8';
 
-      console.log('head is' + document.getElementsByTagName('head')[0]);
+      // console.log('head is' + document.getElementsByTagName('head')[0]);
       document.getElementsByTagName('head')[0].appendChild(script);
     });
   }
