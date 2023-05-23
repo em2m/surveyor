@@ -3,7 +3,7 @@
     <router-outlet></router-outlet>
   </div>
 
-  <div style="width: 100%; z-index: 1000;">
+  <div style="width: 100%; z-index: 1000;" class="tabs-bar-container" >
     <div class="tabs-bar">
       <a *ngFor="let tab of tabs" class="tabs-tab" [routerLink]="[tab.path]" [queryParams]="tab.queryParam"
          routerLinkActive="selected" [routerLinkActiveOptions]="{exact:tab.exact}" #rla="routerLinkActive">
