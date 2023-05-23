@@ -86,6 +86,12 @@ export class LeafletService {
     return this.getMapSource(mapId).getValue();
   }
 
+  refreshMap(mapId: string, delay: number = 1000): void {
+    setTimeout(() => {
+      this.setMap(mapId, this.getMap(mapId));
+    } , delay);
+  }
+
   watchMap(mapId: string): Observable<Map> {
     return this.getMapSource(mapId).asObservable();
   }
