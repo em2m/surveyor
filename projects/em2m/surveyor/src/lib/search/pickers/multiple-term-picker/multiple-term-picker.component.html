@@ -14,8 +14,9 @@
     <span style="cursor: pointer; display:flex; align-items:center;">
       <span style="display:flex; align-items: center">
         <label class="mdl-checkbox__input ellipsis-over-flow">
-          <input type="checkbox" [(checked)]="bucketItem.checked" (change)="toggleBox(bucketItem)">
+          <mat-checkbox type="checkbox"   [value]="!!bucketItem.checked" (change)="toggleBox(bucketItem)">
           {{bucketItem.label || bucketItem.key}}
+          </mat-checkbox>
         </label>
       </span>
       <span class="mdl-layout-spacer"></span>
@@ -23,4 +24,3 @@
     </span>
   </div>
 </div>
-
