@@ -9,7 +9,7 @@ import {SplashScreen} from '@capacitor/splash-screen';
   selector: 'surveyor-runtime',
   template: '<div mdl style="height: 100%; display: flex; flex-direction: column;"><router-outlet></router-outlet></div>'
 })
-export class SurveyorCapacitorRuntime implements AfterViewInit{
+export class SurveyorCapacitorRuntime {
 
   constructor(private viewContainerRef: ViewContainerRef,
               private modalService: ModalService,
@@ -24,9 +24,4 @@ export class SurveyorCapacitorRuntime implements AfterViewInit{
 
   }
 
-  ngAfterViewInit(){
-    if (Capacitor.isPluginAvailable('SplashScreen')) {
-      SplashScreen.hide();
-    }
-  }
 }
