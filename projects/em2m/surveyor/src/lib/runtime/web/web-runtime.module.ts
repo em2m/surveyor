@@ -40,24 +40,36 @@ export * from './resolvers/storage.resolver';
 const routes: Routes = [
   {
     path: '',
-    data: { target: 'surveyor:root' },
-    resolve: {},
+    data: { target: 'surveyor:core' },
     children: [
       {
+        path: 'static',
+        data: { target: 'surveyor:static' },
+        children: [
+
+        ]
+      },
+      {
         path: '',
-        component: ApplicationWrapperComponent,
-        data: { target: 'surveyor:apps' },
+        data: { target: 'surveyor:root'},
         children: [
           {
-            path: '404',
-            component: ApplicationUnknownComponent
-          },
-          /*
-          {
-            path: "**",
-            component: ApplicationUnknownComponent
+            path: '',
+            component: ApplicationWrapperComponent,
+            data: { target: 'surveyor:apps' },
+            children: [
+              {
+                path: '404',
+                component: ApplicationUnknownComponent
+              },
+              /*
+              {
+                path: "**",
+                component: ApplicationUnknownComponent
+              }
+              */
+            ]
           }
-          */
         ]
       }
     ]
