@@ -1,7 +1,9 @@
-import {Component, ViewContainerRef} from '@angular/core';
+import {AfterViewInit, Component, ViewContainerRef} from '@angular/core';
 import {PopoverService} from '../../ui/popover/popover.service';
 import {ModalService} from '../../ui/modal/modal.service';
 import {DeeplinksService} from "./deeplinks/DeeplinksService";
+import {Capacitor} from '@capacitor/core';
+import {SplashScreen} from '@capacitor/splash-screen';
 
 @Component({
   selector: 'surveyor-runtime',
@@ -19,10 +21,7 @@ export class SurveyorCapacitorRuntime {
     this.modalService.setRootViewContainerRef(viewContainerRef);
     this.popoverService.setRootViewContainerRef(viewContainerRef);
 
-    /*
-    if (Capacitor.isPluginAvailable('SplashScreen')) {
-      SplashScreen.hide();
-    }
-     */
+
   }
+
 }

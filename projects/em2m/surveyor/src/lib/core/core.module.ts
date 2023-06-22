@@ -4,6 +4,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {ContextService} from './extension/context.service';
 import {ExtensionService} from './extension/extension.service';
 import {StateService} from './state/state.service';
+import {NetworkService} from './network/network.service';
 
 export * from './config/config.service';
 export * from './extension/extension.model';
@@ -20,6 +21,8 @@ export * from './extension/filters/or.filter';
 export * from './extension/filters/route.filter';
 export * from './extension/filters/visible.filter';
 export * from './state/state.service';
+export * from './network/network.service';
+
 
 @NgModule({
   imports: [
@@ -38,7 +41,8 @@ export class SurveyorCoreModule {
       providers: [
         ContextService,
         ExtensionService,
-        StateService
+        StateService,
+        NetworkService
       ]
     };
   }
