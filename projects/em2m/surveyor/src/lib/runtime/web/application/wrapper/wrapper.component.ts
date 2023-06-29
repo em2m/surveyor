@@ -3,9 +3,8 @@ import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Subscription} from 'rxjs';
 import {StateService} from '../../../../core/state/state.service';
 import {AppConfig} from '../../../../core/config/config.service';
-import {MatMenuTrigger} from "@angular/material/menu";
-import {MatSidenav} from "@angular/material/sidenav";
-import {ContextService} from "../../../../core/extension/context.service";
+import {MatSidenav} from '@angular/material/sidenav';
+import {ContextService} from '../../../../core/extension/context.service';
 
 @Component({
   selector: 'surveyor-application-wrapper',
@@ -20,6 +19,8 @@ export class ApplicationWrapperComponent implements OnInit, OnDestroy {
   brandColor: string;
   staticMenu = false;
   staticMenuOpened = false;
+  opened = false;
+  fixedMenu = false;
   private staticMenuSub: Subscription;
   private breakpointSub: Subscription;
   private brandSub: Subscription;
@@ -29,6 +30,10 @@ export class ApplicationWrapperComponent implements OnInit, OnDestroy {
               private ctx: ContextService,
               private breakpointObserver: BreakpointObserver) {
     this.staticMenu = !!config.get().staticMenu;
+    this.fixedMenu = !!config.get().fixedMenu;
+    if (this.fixedMenu) {
+      this.opened = true;
+    }
   }
 
   ngOnInit() {
@@ -37,6 +42,7 @@ export class ApplicationWrapperComponent implements OnInit, OnDestroy {
         this.staticMenu = value;
       }
     });
+
     this.breakpointSub = this.breakpointObserver.observe([Breakpoints.Handset, Breakpoints.Tablet]).subscribe(result => {
       // this.isMobile = result.matches;
     });
@@ -44,6 +50,13 @@ export class ApplicationWrapperComponent implements OnInit, OnDestroy {
     this.brandSub = this.stateService.watch('brand:loaded').subscribe(brand => {
       if (brand && brand.settings) {
         this.brandColor = brand.settings.navColor;
+        if (brand.settings.staticMenu !== undefined && brand.settings.staticMenu !== null) {
+          this.staticMenu = !!brand.settings.staticMenu;
+        }
+        if (brand.settings.fixedMenu !== undefined && brand.settings.fixedMenu !== null) {
+          this.fixedMenu = !!brand.settings.fixedMenu;
+          this.opened = this.fixedMenu;
+        }
       }
     });
   }
@@ -55,14 +68,16 @@ export class ApplicationWrapperComponent implements OnInit, OnDestroy {
 
   toggleMenu() {
     if (!this.staticMenu) {
-      this.matSidenav.toggle();
+      if (!this.fixedMenu) {
+        this.matSidenav.toggle();
+      }
     } else {
       this.staticMenuOpened = !this.staticMenuOpened;
     }
   }
 
   closeSidenav() {
-    if (!this.staticMenu) {
+    if (!this.staticMenu && !this.fixedMenu) {
       this.matSidenav.close();
     }
   }

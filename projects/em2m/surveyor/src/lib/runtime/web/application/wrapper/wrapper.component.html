@@ -2,8 +2,9 @@
 <div class="application-wrapper">
   <div class="application-content flex-vertical">
     <!-- Toolbar -->
-    <mat-toolbar color="primary" class="application-toolbar" id="org-theme-toolbar" [style.background-color]="brandColor">
-      <button mat-icon-button (click)="toggleMenu()">
+    <mat-toolbar color="primary" class="application-toolbar" id="org-theme-toolbar"
+                 [style.background-color]="brandColor" [class.fixed-menu-toolbar]="fixedMenu">
+      <button mat-icon-button (click)="toggleMenu()" *ngIf="!fixedMenu">
         <mat-icon>menu</mat-icon>
       </button>
       <surveyor-application-header (click)="closeSidenav()"></surveyor-application-header>
@@ -11,12 +12,13 @@
 
     <!-- Sidenav and Content -->
     <mat-sidenav-container class="sidenav-container flex-vertical">
-      <mat-sidenav mode="over" [fixedTopGap]="0" [fixedInViewport]="true" style="max-width: 250px" (click)="closeSidenav()">
+      <mat-sidenav [mode]="fixedMenu ? 'side' : 'over'" [opened]="opened" [fixedTopGap]="0" [fixedInViewport]="true"
+                   (click)="closeSidenav()" [class.fixed-menu]="fixedMenu">
         <surveyor-sidenav></surveyor-sidenav>
       </mat-sidenav>
       <mat-sidenav-content class="flex-horizontal">
-        <div class="static-menu flex-scroll" *ngIf="staticMenu" [class.static-menu-opened]="staticMenuOpened" [style.background-color]="brandColor">
-          <div style="width: 249px;">
+        <div class="static-menu flex-scroll" *ngIf="staticMenu && !fixedMenu" [class.static-menu-opened]="staticMenuOpened" [style.background-color]="brandColor">
+          <div style="width: 299px;">
             <surveyor-sidenav></surveyor-sidenav>
           </div>
         </div>
