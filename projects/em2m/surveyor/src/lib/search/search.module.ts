@@ -20,6 +20,7 @@ import {SurveyorModalModule} from '../ui/modal/modal.module';
 import {DateRangePickerComponent} from './pickers/date-range-picker/date-range-picker.component';
 import {MultipleTermPickerComponent} from './pickers/multiple-term-picker/multiple-term-picker.component';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 export * from './shared/query.model';
 export * from './shared/searcher.model';
@@ -51,18 +52,19 @@ const components: any[] = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    SurveyorRegionModule,
-    SurveyorModalModule,
-    MatTooltipModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatDatepickerModule,
-    MatMenuModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        SurveyorRegionModule,
+        SurveyorModalModule,
+        MatTooltipModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatDatepickerModule,
+        MatMenuModule,
+        MatCheckboxModule
+    ],
   exports: [
     ...components,
     ReactiveFormsModule

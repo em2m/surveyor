@@ -38,7 +38,10 @@
             *ngIf="activeIndex !== steps?.length - 1" (click)="selectStep(activeIndex + 1)">NEXT
     </button>
     <button mat-flat-button color="primary" style="flex: 1;" [disabled]="!isComplete(activeIndex)"
-            *ngIf="activeIndex === steps?.length - 1" (click)="onComplete()">COMPLETE
+            *ngIf="activeIndex === steps?.length - 1 && completeLabel" (click)="onComplete()">{{completeLabel}}
+    </button>
+    <button mat-flat-button color="primary" style="flex: 1;" [disabled]="!isComplete(activeIndex)"
+            *ngIf="activeIndex === steps?.length - 1 && !completeLabel" (click)="onComplete()">COMPLETE
     </button>
   </div>
 </div>

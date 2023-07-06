@@ -10,6 +10,7 @@ export class SurveyorWizardComponent implements AfterViewInit {
 
   @Input() skipInvalid: boolean;
   @Input() title: string;
+  @Input() completeLabel: string = null;
   @Output() complete: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() select: EventEmitter<SurveyorWizardStepComponent> = new EventEmitter<SurveyorWizardStepComponent>();
   @Output() cancel: EventEmitter<boolean> = new EventEmitter<boolean>();

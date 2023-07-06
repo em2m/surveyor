@@ -42,37 +42,51 @@ const components: any[] = [
 const routes: Routes = [
   {
     path: '',
-    component: CapacitorRootPage,
-    data: { target: 'surveyor:root' },
-    // resolve: { deviceInfo: DeviceInfoResolver, storage: StorageResolver },
-    canActivate: [StorageGuard, DeviceInfoGuard],
+    data: {target: 'surveyor:core'},
     children: [
       {
-        path: '',
-        component: CapacitorWrapperPage,
-        data: { target: 'surveyor:apps' },
+        path: 'static',
+        data: { target: 'surveyor:static' },
         children: [
+
+        ]
+      },
+      {
+        path: '',
+        component: CapacitorRootPage,
+        data: { target: 'surveyor:root' },
+        // resolve: { deviceInfo: DeviceInfoResolver, storage: StorageResolver },
+        canActivate: [StorageGuard, DeviceInfoGuard],
+        children: [
+          {
+            path: '',
+            component: CapacitorWrapperPage,
+            data: { target: 'surveyor:apps' },
+            children: [
+              {
+                path: '404',
+                component: Capacitor404Page
+              }
+            ]
+          }
+          /*
           {
             path: '404',
             component: Capacitor404Page
+          },
+           */
+          /*
+          {
+            path: "**",
+            component: Capacitor404Page,
+            data: { priority: 1000 }
           }
+          */
         ]
       }
-      /*
-      {
-        path: '404',
-        component: Capacitor404Page
-      },
-       */
-      /*
-      {
-        path: "**",
-        component: Capacitor404Page,
-        data: { priority: 1000 }
-      }
-      */
     ]
   }
+
 ];
 
 export function capacitorRouteLoader(loader: LoaderService) {
