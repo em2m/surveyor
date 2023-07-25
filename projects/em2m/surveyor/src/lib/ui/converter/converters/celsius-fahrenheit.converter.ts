@@ -9,10 +9,22 @@ export class CelsiusFahrenheitConverter extends Converter {
   }
 
   fromSavedUnits(value: number): number {
-    return (value - 32) * 5 / 9;
+    let celsius;
+    try {
+      celsius = (value - 32) * 5 / 9;
+    } catch (e) {
+      celsius = 0;
+    }
+    return celsius;
   }
 
   toSavedUnits(value: number): number {
-    return value * 9 / 5 + 32;
+    let fahrenheit;
+    try {
+      fahrenheit = value * 9 / 5 + 32;
+    } catch (e) {
+      fahrenheit = 0;
+    }
+    return fahrenheit;
   }
 }
