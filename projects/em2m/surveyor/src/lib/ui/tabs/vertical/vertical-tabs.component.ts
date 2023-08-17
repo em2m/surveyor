@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, NgZone, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router, Routes} from '@angular/router';
 import {TabsService} from '../tabs.service';
 import {ContextService} from '../../../core/extension/context.service';
@@ -23,6 +23,7 @@ export class VerticalTabsComponent implements OnInit, OnChanges, OnDestroy {
 
   constructor(private router: Router,
               private route: ActivatedRoute,
+              private ngZone: NgZone,
               private tabsService: TabsService,
               private ctx: ContextService) {
   }
@@ -39,6 +40,7 @@ export class VerticalTabsComponent implements OnInit, OnChanges, OnDestroy {
         this.navigateToTab();
       }
     });
+    this.ngZone.run(() => this.navigateToTab());
   }
 
   private navigateToTab() {
