@@ -1,17 +1,17 @@
 <div class="modal-overlay animated fadeIn" [class.fadeOut]="isDismissed" (click)="$event.stopPropagation()">
-  <div class="mdl-dialog show-modal animated zoomIn" [class.zoomOut]="isDismissed" [style.width]="width+'px'" (keyup.esc)="cancel()">
+  <div class="mdl-dialog show-modal animated zoomIn" [style.backgroundColor]="backgroundColor" [class.zoomOut]="isDismissed" [style.width]="width+'px'" (keyup.esc)="cancel()">
     <h4 class="mdl-dialog__title" *ngIf="!hideTitle">{{ title }}</h4>
     <div class="mdl-dialog__content" [ngClass]="{ 'no-padding': noPadding}">
       <div #modalTarget></div>
     </div>
-    <div class="mdl-dialog__actions" *ngIf="!(hideSubmit && hideCancel && hideDelete)">
-      <button *ngIf="!hideSubmit" mat-button color="primary" [disabled]="!canSubmit()" (click)="submit()">
+    <div class="mdl-dialog__actions" *ngIf="!(hideSubmit && hideCancel && hideDelete)" [ngClass]="{'centered-btn-actions' : centeredBtn}">
+      <button *ngIf="!hideSubmit" mat-button color="primary" [disabled]="!canSubmit()" (click)="submit()" [ngClass]="{'centered-btn' : centeredBtn}">
         {{ submitLabel }}
       </button>
       <button *ngIf="!hideCancel" mat-button (click)="cancel()">
         {{ cancelLabel }}
       </button>
-      <div class="mdl-layout-spacer"></div>
+      <div class="mdl-layout-spacer" [ngClass]="{'centered-btn-spacer' : centeredBtn}"></div>
       <button *ngIf="!hideDelete" mat-button color="warn" (click)="delete()">
         {{ deleteLabel }}
       </button>
