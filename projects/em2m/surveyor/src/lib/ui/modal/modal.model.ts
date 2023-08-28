@@ -16,6 +16,8 @@ export interface ModalOptions {
   width?: number;
   noPadding?: boolean;
   elementRef?: ViewContainerRef;
+  backgroundColor?: string;
+  centeredBtn?: boolean;
 }
 
 export interface ModalResult {

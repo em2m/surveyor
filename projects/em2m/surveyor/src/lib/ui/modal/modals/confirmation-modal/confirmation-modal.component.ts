@@ -9,6 +9,8 @@ import {Modal} from "../../modal.component";
 export class ConfirmationModal extends Modal implements OnInit {
 
   message: string;
+  padding: string;
+  color: string;
 
   constructor() {
     super();
@@ -17,6 +19,8 @@ export class ConfirmationModal extends Modal implements OnInit {
   ngOnInit() {
     if (this.params) {
       this.message = this.params.message;
+      this.color = this.params.color;
+      this.padding = this.params.padding;
     }
   }
 
