@@ -14,8 +14,8 @@
     <span style="cursor: pointer; display:flex; align-items:center;">
       <span style="display:flex; align-items: center">
         <label class="mdl-checkbox__input ellipsis-over-flow">
-          <mat-checkbox type="checkbox"   [value]="!!bucketItem.checked" (change)="toggleBox(bucketItem)">
-          {{bucketItem.label || bucketItem.key}}
+          <mat-checkbox type="checkbox" [(ngModel)]="bucketItem.checked" (ngModelChange)="toggleBox(bucketItem)">
+            {{bucketItem.label || bucketItem.key}}
           </mat-checkbox>
         </label>
       </span>
