@@ -39,7 +39,7 @@ export class MultipleTermPickerComponent extends Picker implements OnInit {
 
   ngOnInit() {
     this.buckets = this.params.buckets;
-    this.buckets =  this.buckets.filter(bucket => bucket.label || bucket.key);
+    this.buckets = this.buckets.filter(bucket => bucket.label || bucket.key);
     this.agg = this.params.agg;
     this.constraints = this.params.constraints;
     this.key = this.agg.key;
@@ -54,8 +54,7 @@ export class MultipleTermPickerComponent extends Picker implements OnInit {
       return con.key === `${this.agg.key}` || con.key === `${this.agg.label}`;
     });
 
-
-    if (constraint.length > 0) {
+    if (constraint.length) {
       (constraint[0] as SearchConstraint)?.buckets?.forEach(bucket => {
         let exists = false;
         this.bucketSearchResults.forEach(bucketItem => {
@@ -77,16 +76,16 @@ export class MultipleTermPickerComponent extends Picker implements OnInit {
     }
 
     // resort
-    if (this.agg.sort && this.agg.sort.type === 'Lexical' && this.agg.sort.direction === 'Descending') {
+    if (this.agg.sort?.type === 'Lexical' && this.agg.sort.direction === 'Descending') {
       this.buckets.sort(sortDescending);
       this.bucketSearchResults.sort(sortDescending);
-    } else if (this.agg.sort && this.agg.sort.type === 'Lexical' && this.agg.sort.direction === 'Ascending') {
+    } else if (this.agg.sort?.type === 'Lexical' && this.agg.sort.direction === 'Ascending') {
       this.buckets.sort(sortAscending);
       this.bucketSearchResults.sort(sortAscending);
-    } else if (this.agg.sort && this.agg.sort.direction === 'Descending') {
+    } else if (this.agg.sort?.direction === 'Descending') {
       this.buckets.sort(sortDescending);
       this.bucketSearchResults.sort(sortDescending);
-    } else if (this.agg.sort && this.agg.sort.direction === 'Ascending') {
+    } else if (this.agg.sort?.direction === 'Ascending') {
       this.buckets.sort(sortAscending);
       this.bucketSearchResults.sort(sortAscending);
     } else {
@@ -100,7 +99,6 @@ export class MultipleTermPickerComponent extends Picker implements OnInit {
   }
 
   toggleBox(item: any): void {
-    item.checked = !item.checked;
     this.selectedItems[item.key] = item.checked;
 
     const keys = Object.keys(this.selectedItems);
