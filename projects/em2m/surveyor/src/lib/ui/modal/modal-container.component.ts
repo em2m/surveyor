@@ -24,7 +24,8 @@ export abstract class ModalContainer implements OnInit {
   modalRef: any;
   isDismissed = false;
   noPadding = false;
-
+  backgroundColor: string;
+  centeredBtn = false;
   constructor(private resolver: ComponentFactoryResolver) {}
 
   ngOnInit() {
@@ -44,6 +45,8 @@ export abstract class ModalContainer implements OnInit {
     this.hideCancel = this.options.hideCancel;
     this.width = this.options.width || 350;
     this.noPadding = this.options.noPadding;
+    this.backgroundColor = this.options.backgroundColor || 'white';
+    this.centeredBtn = this.options.centeredBtn;
 
     let factory = this.resolver.resolveComponentFactory(this.modal);
     let modalRef = this.modalTarget.createComponent(factory);

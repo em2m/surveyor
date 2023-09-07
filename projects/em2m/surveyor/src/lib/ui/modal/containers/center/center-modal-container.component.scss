@@ -52,3 +52,20 @@
   overflow: auto;
   padding: 16px 24px;
 }
+
+.centered-btn-spacer {
+  flex: 0 !important;
+}
+
+.centered-btn-actions {
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.centered-btn {
+  background-color: white !important;
+  width: 30% !important;
+  color: black !important;
+  border-radius: 33px !important;
+  align-self: center !important;
+}

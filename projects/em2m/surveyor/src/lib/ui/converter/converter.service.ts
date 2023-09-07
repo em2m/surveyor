@@ -2,6 +2,7 @@ import {Injectable, Injector, Type} from '@angular/core';
 import {ExtensionService} from '../../core/extension/extension.service';
 import {Extension} from '../../core/extension/extension.model';
 import {Converter} from './converter.component';
+import {ContextService} from '../../core/extension/context.service';
 
 @Injectable()
 export class ConverterService {
@@ -9,7 +10,9 @@ export class ConverterService {
   private converters: { [type: string]: Converter } = {};
   private CONVERTER_EXTENSION_TYPE = 'surveyor:converter';
 
-  constructor(private extensionService: ExtensionService, private injector: Injector) {
+  constructor(private ctx: ContextService,
+              private extensionService: ExtensionService,
+              private injector: Injector) {
     this.registerConverters();
   }
 
@@ -28,7 +31,30 @@ export class ConverterService {
     this.converters[type] = converter;
   }
 
-  getConverter(type: string): Converter {
+  getConverter(type: string, condition: string = null): Converter {
+    if (condition) {
+      if (this.meetsCondition(condition)) {
+        return this.converters[type];
+      } else {
+        return null;
+      }
+    }
+
     return this.converters[type];
+  }
+
+  meetsCondition(condition: string): boolean {
+    const conditionArr = condition.includes('===') ? condition.split('===') : condition.split('==');
+    const conditionField = conditionArr[0]
+      .replace('ctx.', '')
+      .replace('context.', '')
+      .replace('return', '')
+      .trim();
+    const conditionVal = conditionArr[1]
+      .trim()
+      .replace(/\'/gm, '')
+      .replace(/\"/gm, '');
+
+    return this.ctx.getValue(conditionField) === conditionVal;
   }
 }
