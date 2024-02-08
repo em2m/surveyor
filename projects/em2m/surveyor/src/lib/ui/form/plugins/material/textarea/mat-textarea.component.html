@@ -5,6 +5,7 @@
             [required]="controlDefinition.required ? 'required' : null"
             [disabled]="controlDefinition.disabled"
             (keydown)="applyMask($event)"
+            (paste)="onPaste($event)"
             cdkTextareaAutosize
             #autosize="cdkTextareaAutosize"
             [cdkAutosizeMinRows]="controlDefinition.options['minRows'] || 3"

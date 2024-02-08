@@ -12,7 +12,12 @@ export class MaterialTextAreaInputComponent extends SurveyorFormInputComponent {
   controlKeys = ['Backspace', 'ArrowLeft', 'ArrowRight'];
 
   applyMask($event: any) {
-    if (this.controlDefinition.options.mask && this.controlKeys.indexOf($event.key) === -1) {
+    if(($event.ctrlKey || $event.metaKey) && $event.keyCode == 86) { // CTRL + V / command + V
+      $event.preventDefault();
+      navigator.clipboard.readText().then((copiedText) => {
+        this.onPasteValue(copiedText);
+      });
+    } else if (this.controlDefinition.options.mask && this.controlKeys.indexOf($event.key) === -1) {
       $event.preventDefault();
       let maskedVal = this.controlDefinition.options.mask.masker($event, this.formControl.value);
       if (typeof maskedVal === 'string') {
@@ -21,6 +26,33 @@ export class MaterialTextAreaInputComponent extends SurveyorFormInputComponent {
         let values: MaskedValue = maskedVal;
         this.formControl.setValue(values.modelValue, {});
       }
+    }
+  }
+
+  onPaste($event: any){
+    $event.preventDefault();
+    // @ts-ignore
+    let clipboardData = $event.clipboardData || window.clipboardData;
+    if (clipboardData) {
+      this.onPasteValue(clipboardData.getData("text"));
+    }
+  }
+
+  private onPasteValue(text) {
+    if (this.controlDefinition.options.mask) {
+      setTimeout(() => {
+        for (let i = 0; i < text.length; i++) {
+          let fakeEvent = {
+            key: text[i],
+            preventDefault: () => {
+            }
+          };
+          // Hacked in by Mike Resnik who hangs his head in shame
+          this.applyMask(fakeEvent);
+        }
+      })
+    } else {
+      this.formControl.setValue(text, {})
     }
   }
 
