@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, NgZone, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Subscription} from 'rxjs';
 import {StateService} from '../../../../core/state/state.service';
@@ -28,33 +28,47 @@ export class ApplicationWrapperComponent implements OnInit, OnDestroy {
   constructor(private config: AppConfig,
               private stateService: StateService,
               private ctx: ContextService,
-              private breakpointObserver: BreakpointObserver) {
-    this.staticMenu = !!config.get().staticMenu;
-    this.fixedMenu = !!config.get().fixedMenu;
-    if (this.fixedMenu) {
-      this.opened = true;
-    }
-  }
+              private breakpointObserver: BreakpointObserver,
+              private zone: NgZone) {}
 
   ngOnInit() {
-    this.staticMenuSub = this.ctx.onValueChange('staticMenu').subscribe(value => {
-      if (value !== undefined && value !== null) {
-        this.staticMenu = value;
+    this.zone.run(() => {
+      const isSmallScreen = this.breakpointObserver.isMatched([Breakpoints.Handset, Breakpoints.Tablet]);
+      this.staticMenu = (isSmallScreen) ? false : !!this.config.get().staticMenu;
+      this.fixedMenu = (isSmallScreen) ? false : !!this.config.get().fixedMenu;
+      this.opened = this.fixedMenu;
+      if (isSmallScreen) {
+        this.matSidenav.close();
       }
     });
-
+    this.staticMenuSub = this.ctx.onValueChange('staticMenu').subscribe(value => {
+      const isSmallScreen = this.breakpointObserver.isMatched([Breakpoints.Handset, Breakpoints.Tablet]);
+      if (value !== undefined && value !== null) {
+        this.staticMenu = (isSmallScreen) ? false : value;
+      }
+    });
     this.breakpointSub = this.breakpointObserver.observe([Breakpoints.Handset, Breakpoints.Tablet]).subscribe(result => {
-      // this.isMobile = result.matches;
+      this.zone.run(() => {
+        this.staticMenu = (result.matches) ? false : !!this.config.get().staticMenu;
+        this.fixedMenu = (result.matches) ? false : !!this.config.get().fixedMenu;
+        this.opened = this.fixedMenu;
+        if (result.matches) {
+          this.matSidenav.close();
+        } else if (this.fixedMenu) {
+          this.matSidenav.open();
+        }
+      });
     });
 
     this.brandSub = this.stateService.watch('brand:loaded').subscribe(brand => {
+      const isSmallScreen = this.breakpointObserver.isMatched([Breakpoints.Handset, Breakpoints.Tablet]);
       if (brand && brand.settings) {
         this.brandColor = brand.settings.navColor;
         if (brand.settings.staticMenu !== undefined && brand.settings.staticMenu !== null) {
-          this.staticMenu = !!brand.settings.staticMenu;
+          this.staticMenu = (isSmallScreen) ? false : !!brand.settings.staticMenu;
         }
         if (brand.settings.fixedMenu !== undefined && brand.settings.fixedMenu !== null) {
-          this.fixedMenu = !!brand.settings.fixedMenu;
+          this.fixedMenu = (isSmallScreen) ? false : !!brand.settings.fixedMenu;
           this.opened = this.fixedMenu;
         }
       }
