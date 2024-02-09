@@ -6,6 +6,7 @@
          [readonly]="controlDefinition?.options?.readonly"
          [required]="controlDefinition.required ? 'required' : null"
          [disabled]="controlDefinition.disabled"
+         (paste)="onPaste($event)"
          (keydown)="applyMask($event)"
   />
   <mat-error *ngFor="let errorKey of getErrors()">
