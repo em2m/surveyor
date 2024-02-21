@@ -4,6 +4,7 @@ import {ForwardGeocodeItem, ForwardGeocodeResult, GeoConfig, GeoProvider} from '
 import {map} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import {ContextService} from '../../../../core/extension/context.service';
 
 
 
@@ -12,11 +13,12 @@ export class MapboxGeoProvider implements GeoProvider {
 
   private mapboxAccessToken: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private ctx: ContextService) {
   }
 
   init(config: GeoConfig) {
-    this.mapboxAccessToken = config.properties && config.properties.mapbox && config.properties.mapbox.accessToken;
+    const brand = this.ctx.getValue('brand:loaded');
+    this.mapboxAccessToken = brand?.settings?.maps?.mapboxKey || config?.properties?.mapbox?.accessToken;
   }
 
   forwardGeocode(placeName: string): Observable<ForwardGeocodeResult> {
