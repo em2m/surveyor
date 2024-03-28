@@ -30,7 +30,7 @@ export class MatchAllQuery extends Query {
 }
 
 export class NamedQuery extends Query {
-  constructor(public name: string, public value: any = null) {
+  constructor(public name: string, public value: any = null, public label?: string) {
     super(OperationType.NAMED);
   }
 }
@@ -42,61 +42,61 @@ export class BboxQuery extends FieldedQuery {
 }
 
 export class TermQuery extends FieldedQuery {
-  constructor(field: string, public value: any) {
+  constructor(field: string, public value: any, public label?: string) {
     super(field, OperationType.TERM);
   }
 }
 
 export class TermsQuery extends FieldedQuery {
-  constructor(field: string, public value: Array<any>) {
+  constructor(field: string, public value: Array<any>, public label?: any) {
     super(field, OperationType.TERMS);
   }
 }
 
 export class MatchQuery extends FieldedQuery {
-  constructor(field: string, public value: any) {
+  constructor(field: string, public value: any, public label?: any) {
     super(field, OperationType.MATCH);
   }
 }
 
 export class PhraseQuery extends FieldedQuery {
-  constructor(field: string, public value: Array<string>) {
+  constructor(field: string, public value: Array<string>, public label?: any) {
     super(field, OperationType.PHRASE);
   }
 }
 
 export class PrefixQuery extends FieldedQuery {
-  constructor(field: string, public value: string) {
+  constructor(field: string, public value: string, public label?: string) {
     super(field, OperationType.PREFIX);
   }
 }
 
 export class WildcardQuery extends FieldedQuery {
-  constructor(field: string, public value: string) {
+  constructor(field: string, public value: string, public label?: string) {
     super(field, OperationType.WILDCARD);
   }
 }
 
 export class RangeQuery extends FieldedQuery {
-  constructor(field: string, public lt, public lte, public gt, public gte, public timeZone: string) {
+  constructor(field: string, public lt, public lte, public gt, public gte, public timeZone: string, public label?: string) {
     super(field, OperationType.RANGE);
   }
 }
 
 export class DateRangeQuery extends FieldedQuery {
-  constructor(field: string, public lt, public lte, public gt, public gte, public timeZone: string) {
+  constructor(field: string, public lt, public lte, public gt, public gte, public timeZone: string, public label?: string) {
     super(field, OperationType.DATE);
   }
 }
 
 export class RegexQuery extends FieldedQuery {
-  constructor(field: string, public value) {
+  constructor(field: string, public value, public label?: string) {
     super(field, OperationType.REGEX);
   }
 }
 
 export class ExistsQuery extends FieldedQuery {
-  constructor(field: string, public value: boolean) {
+  constructor(field: string, public value: boolean, public label?: string) {
     super(field, OperationType.EXISTS);
   }
 }
