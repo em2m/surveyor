@@ -6,6 +6,7 @@ import {SideModalContainer} from './containers/side/side-modal-container.compone
 import {InlineModalContainer} from './containers/inline/inline-modal-container.component';
 import {ConfirmationModal} from './modals/confirmation-modal/confirmation-modal.component';
 import {FixedModalContainer} from './containers/fixed/fixed-modal-container.component';
+import {AbsoluteModalContainer} from './containers/absolute/absolute-modal-container.component';
 import {StatusModal} from './modals/status-modal/status-modal.component';
 import {LoadingModal} from './modals/loading-modal/loading-modal.component';
 import {MatButtonModule} from "@angular/material/button";
@@ -32,6 +33,7 @@ export * from './modals/loading-modal/loading-modal.component';
     SideModalContainer,
     InlineModalContainer,
     FixedModalContainer,
+    AbsoluteModalContainer,
     ConfirmationModal,
     StatusModal,
     LoadingModal
@@ -41,6 +43,7 @@ export * from './modals/loading-modal/loading-modal.component';
     SideModalContainer,
     InlineModalContainer,
     FixedModalContainer,
+    AbsoluteModalContainer,
     ConfirmationModal,
     StatusModal,
     LoadingModal
