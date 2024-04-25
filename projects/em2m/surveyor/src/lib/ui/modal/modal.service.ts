@@ -10,6 +10,7 @@ import {ConfirmationModal} from './modals/confirmation-modal/confirmation-modal.
 import {StatusModal} from './modals/status-modal/status-modal.component';
 import {LoadingModal} from './modals/loading-modal/loading-modal.component';
 import {FixedModalContainer} from './containers/fixed/fixed-modal-container.component';
+import {AbsoluteModalContainer} from './containers/absolute/absolute-modal-container.component';
 
 @Injectable()
 export class ModalService {
@@ -39,6 +40,8 @@ export class ModalService {
       modalContainer = InlineModalContainer;
     } else if (options.type === 'fixed') {
       modalContainer = FixedModalContainer;
+    } else if (options.type === 'absolute') {
+      modalContainer = AbsoluteModalContainer;
     }
     let containerRef = options.elementRef;
     if (!containerRef) {

@@ -5,6 +5,7 @@ import {map} from 'rxjs/operators';
 import {ForwardGeocodeItem, ForwardGeocodeResult, GeoConfig, GeoProvider} from '../../geo.model';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {ContextService} from '../../../../core/extension/context.service';
 
 @Injectable()
 export class MapquestGeoProvider implements GeoProvider {
@@ -12,10 +13,11 @@ export class MapquestGeoProvider implements GeoProvider {
   private mapquestKey: string;
   private baseUrl = 'https://www.mapquestapi.com/staticmap/v5/map';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private ctx: ContextService) {}
 
   init(config: GeoConfig) {
-    this.mapquestKey = config.properties && config.properties.mapquest && config.properties.mapquest.consumerKey;
+    const brand = this.ctx.getValue('brand:loaded');
+    this.mapquestKey = brand?.settings?.maps?.mapquestKey || config?.properties?.mapquest?.consumerKey;
   }
 
   forwardGeocode(placeName: string): Observable<ForwardGeocodeResult> {
