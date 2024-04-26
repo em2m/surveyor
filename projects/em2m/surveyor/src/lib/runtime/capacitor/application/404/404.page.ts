@@ -15,7 +15,6 @@ export class Capacitor404Page implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.isMobile)
     this.links = this.extensionService.getExtensionsForTypeAndTarget('surveyor:link-contribution', '404')
       .map(extension => {
         if (extension) {

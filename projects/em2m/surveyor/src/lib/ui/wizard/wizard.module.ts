@@ -4,6 +4,7 @@ import {SurveyorWizardComponent} from './wizard.component';
 import {SurveyorWizardStepComponent} from './step.component';
 import {CommonModule} from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
+import {SurveyorPercentageWizardComponent} from './percentage.wizard.component';
 
 export * from './step.component';
 export * from './wizard.component';
@@ -11,7 +12,8 @@ export * from './wizard.model';
 
 const components = [
   SurveyorWizardComponent,
-  SurveyorWizardStepComponent
+  SurveyorWizardStepComponent,
+  SurveyorPercentageWizardComponent,
 ];
 
 @NgModule({

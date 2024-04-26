@@ -1,0 +1,47 @@
+:host {
+  display: flex;
+  flex: 1;
+}
+
+.page-header {
+  background-color: #F4F4F4;
+  z-index: 1;
+  position: relative;
+}
+
+.page-title {
+  font-size: 20px;
+  line-height: 28px;
+  text-align: center;
+  padding: 1rem 1rem 0rem 1rem;
+  font-weight: 300;
+  flex: 1;
+  align-items: center;
+  min-height: 2rem;
+}
+
+.progress-container {
+  border-top: 1px solid rgb(0,0,0,0.25);
+  border-bottom: 1px solid rgb(0,0,0,0.25);
+  box-shadow: inset 2px 5px 9px rgba(0,0,0,0.25);
+  box-sizing: border-box;
+}
+.progress-bar {
+  box-sizing: border-box;
+  height: 100%;
+  transition: width 1s ease-in-out;
+  box-shadow: inset 0 2px 1px rgba(255,255,255,0.5);
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.progress-bar-highlights {
+  box-sizing: border-box;
+  width: 99%;
+  height: 75%;
+  background-color: rgba(0,0,0,0);
+  border-top: 2px solid rgba(255,255,255,0.35);
+  transform: translateX(1px) translateY(1px);
+  border-top-right-radius: 2px;
+  border-top-left-radius: 2px;
+}
