@@ -59,7 +59,6 @@ export class MaterialTextInputComponent extends SurveyorFormInputComponent {
   }
 
   setValue(val: string) {
-
     if (this.controlDefinition.options.mask) {
       const lastKey = val.substring(val.length - 1);
       const priorVal = val.substring(0, val.length - 1);

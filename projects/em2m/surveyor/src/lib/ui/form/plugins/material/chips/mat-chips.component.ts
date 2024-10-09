@@ -31,7 +31,6 @@ export class MaterialChipsInputComponent extends SurveyorFormInputComponent impl
 
       // Reset the input value
       if (input) {
-        // input.value = '';
         input.value = '';
       }
       this.formControl.markAsDirty();
@@ -45,7 +44,7 @@ export class MaterialChipsInputComponent extends SurveyorFormInputComponent impl
         this.tags.splice(index, 1);
       }
 
-      this.formControl.markAsDirty(); // jj
+      this.formControl.markAsDirty();
       this.setValue(this.tags);
     }
 }
