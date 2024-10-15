@@ -160,4 +160,8 @@ export class SurveyorLeafletComponent implements AfterViewInit, OnDestroy {
       observableConcat(baseLayerObs, overlayObs, featuresObs, controlsObs, completeObs).subscribe();
     }, 0)
   }
+
+  hideLayer(layerLabel: string) {
+    this.overlays[layerLabel].removeFrom(this.map);
+  }
 }

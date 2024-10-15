@@ -38,12 +38,19 @@ export class LoaderService {
       if (routeTarget) {
         this.extensionService.getExtensionsForTypeAndTarget('surveyor:page', routeTarget).forEach((routeExt: Extension) => {
           const extRoute = routeExt.value as Route;
+          console.log(extRoute)
+          console.log(extRoute.path)
+          console.log(extRoute.canActivate)
 
           // Process all resolver extensions
           this.extensionService.getExtensionsForTypeAndTarget('surveyor:resolver', routeTarget).forEach((resolverExt: Extension) => {
+            console.log(route.path)
+            console.log(route.resolve)
             if (!route.resolve) {
               route.resolve = {};
             }
+            console.log(resolverExt.config.key)
+            console.log(resolverExt.value)
             route.resolve[resolverExt.config.key] = resolverExt.value;
           });
 
