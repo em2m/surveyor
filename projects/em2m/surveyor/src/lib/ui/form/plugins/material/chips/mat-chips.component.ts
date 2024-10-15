@@ -16,6 +16,7 @@ export class MaterialChipsInputComponent extends SurveyorFormInputComponent impl
         setTimeout(() => {
             this.tags = this.formControl.value || [];
         }, 100);
+
     }
 
     addTag(event: MatChipInputEvent): void {
@@ -32,7 +33,7 @@ export class MaterialChipsInputComponent extends SurveyorFormInputComponent impl
       if (input) {
         input.value = '';
       }
-
+      this.formControl.markAsDirty();
       this.setValue(this.tags);
     }
 
@@ -43,6 +44,7 @@ export class MaterialChipsInputComponent extends SurveyorFormInputComponent impl
         this.tags.splice(index, 1);
       }
 
+      this.formControl.markAsDirty();
       this.setValue(this.tags);
     }
 }
