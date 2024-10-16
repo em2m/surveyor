@@ -89,7 +89,6 @@ export class PopoverService {
     this.popoverContainerRef.instance.targetElement = targetElement;
 
     this.registerMouseLeave();
-    console.log(`popover ready: ${targetElement}`)
 
     return {
       submit: this.popoverContainerRef.instance.onSubmit,
@@ -104,7 +103,6 @@ export class PopoverService {
 
   private insideClick() {
     if (this.popoverOptions.pinOnClick) {
-      console.log('clicked');
       this.pinned = true;
     }
   }
@@ -112,7 +110,6 @@ export class PopoverService {
   private outsideClick() {
     if (this.popoverOptions.closeOnClickOff && !this.pinned) {
       this.destroy();
-      console.log('outside click');
     }
   }
 
