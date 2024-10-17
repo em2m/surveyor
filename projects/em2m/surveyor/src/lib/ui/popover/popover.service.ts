@@ -20,6 +20,7 @@ export class PopoverService {
     window.addEventListener('click', (event) => {
       if (this.targetElement) {
         if (event.target === this.targetElement ||
+          this.isDescendant(this.targetElement.parentNode, event.target) ||
           this.isDescendant(this.popoverContainerRef.instance.popoverTarget.element.nativeElement.parentElement, event.target)) {
           this.insideClick();
         } else {
