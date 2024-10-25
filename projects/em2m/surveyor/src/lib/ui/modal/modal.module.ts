@@ -19,6 +19,7 @@ export * from './containers/center/center-modal-container.component';
 export * from './containers/side/side-modal-container.component';
 export * from './containers/inline/inline-modal-container.component';
 export * from './containers/fixed/fixed-modal-container.component';
+export * from './containers/absolute/absolute-modal-container.component';
 export * from './modals/confirmation-modal/confirmation-modal.component';
 export * from './modals/status-modal/status-modal.component';
 export * from './modals/loading-modal/loading-modal.component';

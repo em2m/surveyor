@@ -1,13 +1,13 @@
 @import './variables.scss';
 @import './rotate.scss';
-@import '~material-design-lite/dist/material.css';
-@import '~material-design-icons/iconfont/material-icons.css';
-@import '~font-awesome/css/font-awesome.css';
-@import '~animate.css';
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
-@import '~leaflet/dist/leaflet.css';
-@import '~leaflet.markercluster/dist/MarkerCluster.css';
-@import '~leaflet.markercluster/dist/MarkerCluster.Default.css';
+@import 'material-design-lite/dist/material.css';
+@import 'material-design-icons/iconfont/material-icons.css';
+@import 'font-awesome/css/font-awesome.css';
+@import 'animate.css/animate.css';
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import 'leaflet/dist/leaflet.css';
+@import 'leaflet.markercluster/dist/MarkerCluster.css';
+@import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 
 body {
   margin: 0;
