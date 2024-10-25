@@ -2,7 +2,7 @@ import {Injectable, Injector, Type} from '@angular/core';
 import {ExtensionService} from '../../core/extension/extension.service';
 import {Extension} from '../../core/extension/extension.model';
 import {ControlOptions, ControlValidator, FormDefinition, AsyncControlValidator, Mask} from './form.model';
-import {AsyncValidatorFn, FormBuilder, ValidatorFn} from '@angular/forms';
+import {AsyncValidatorFn, UntypedFormBuilder, ValidatorFn} from '@angular/forms';
 import {SurveyorFormInputComponent} from './form-input-component';
 
 @Injectable()
@@ -21,7 +21,7 @@ export class FormService {
   };
 
   constructor(private extensionService: ExtensionService,
-              private formBuilder: FormBuilder,
+              private formBuilder: UntypedFormBuilder,
               private injector: Injector) {
     this.registerExtensions();
   }

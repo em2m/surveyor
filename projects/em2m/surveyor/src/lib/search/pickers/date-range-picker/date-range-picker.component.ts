@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Picker} from '../../../ui/picker/picker.component';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 
 @Component({
   selector: 'surveyor-searcher-date-range-picker',
@@ -11,8 +11,8 @@ export class DateRangePickerComponent extends Picker implements OnInit{
   fromDate: Date;
   toDate: Date;
   dateToday: Date = new Date();
-  formFromControl = new FormControl('');
-  formToControl = new FormControl('');
+  formFromControl = new UntypedFormControl('');
+  formToControl = new UntypedFormControl('');
 
   constructor() {
     super();
