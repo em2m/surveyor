@@ -9,7 +9,7 @@ import {FixedModalContainer} from './containers/fixed/fixed-modal-container.comp
 import {AbsoluteModalContainer} from './containers/absolute/absolute-modal-container.component';
 import {StatusModal} from './modals/status-modal/status-modal.component';
 import {LoadingModal} from './modals/loading-modal/loading-modal.component';
-import {MatButtonModule} from "@angular/material/button";
+import {MatButtonModule} from '@angular/material/button';
 
 export * from './modal.component';
 export * from './modal.model';

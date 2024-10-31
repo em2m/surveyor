@@ -9,6 +9,7 @@
 
 button[mat-button] {
   margin-bottom: 0.3rem;
+  text-transform: uppercase;
 }
 
 .button-wrapper {
@@ -26,19 +27,19 @@ button[mat-button] {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  ::ng-deep .mat-button-wrapper {
+  /* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version. */
+  ::ng-deep .mat-mdc-button-wrapper {
     padding: 0 !important;
     display: flex;
   }
 }
 
-.mat-icon-button {
+.mat-mdc-icon-button {
   font-size: 18px !important;
   color: #787878;
 }
 
-.mat-icon-button:hover {
+.mat-mdc-icon-button:hover {
   background: #eee;
   i {
     color: #333;

@@ -7,17 +7,18 @@ import {BehaviorSubject, Observable} from 'rxjs';
   templateUrl: './form.component.html',
   styles: [
       `
-      form :last-child {
-        margin-right: 8px;
-      }
-    `
+            form :last-child {
+              margin-right: 8px;
+            }
+          `
   ]
 })
 export class SurveyorFormComponent implements OnInit {
-  private _formDefinition: FormDefinition;
+
+  private formDefinitionVal: FormDefinition;
 
   @Input() set formDefinition(changes: any) {
-    this._formDefinition = changes;
+    this.formDefinitionVal = changes;
     if (this.formDefinition) {
       this.formDefinition.buildForm();
       this.onCreate.emit(true);
@@ -27,15 +28,15 @@ export class SurveyorFormComponent implements OnInit {
   }
 
   get formDefinition() {
-    return this._formDefinition;
+    return this.formDefinitionVal;
   }
 
-  private _asyncValues = new BehaviorSubject<any>({});
+  private asyncValuesVal = new BehaviorSubject<any>({});
   @Input() set asyncValues(obs: Observable<any>) {
-    obs.subscribe(this._asyncValues);
+    obs.subscribe(this.asyncValuesVal);
   }
   get asyncValues() {
-    return this._asyncValues;
+    return this.asyncValuesVal;
   }
 
   @Input() asyncOptions: any;
