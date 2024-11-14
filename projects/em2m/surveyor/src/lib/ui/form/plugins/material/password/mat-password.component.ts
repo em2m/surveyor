@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SurveyorFormInputComponent} from '../../../form-input-component';
-import {FormControl, ValidationErrors} from '@angular/forms';
+import {UntypedFormControl, ValidationErrors} from '@angular/forms';
 
 @Component({
   selector: 'surveyor-mat-password-input',
@@ -14,7 +14,7 @@ export class MaterialPasswordInputComponent extends SurveyorFormInputComponent {
   passwordMessage: string;
   passwordClass: string;
 
-  validatePasswordStrength(c: FormControl): any {
+  validatePasswordStrength(c: UntypedFormControl): any {
     if (!c) {
       return;
     }

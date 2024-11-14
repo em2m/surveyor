@@ -1,9 +1,9 @@
 <ol class="nav-container" *ngIf="items?.length > 0">
   <li *ngFor="let item of items; let $index = index;" class="nav-item">
     <a [routerLink]="[item.href]" name="{{item.label}}">{{item.label}}</a>
-    <button mat-icon-button [matMenuTriggerFor]="Menu" *ngIf="item.items?.length> 0" style="width: 20px;" (mouseenter)="openMenu()">
-      <mat-icon>more_vert</mat-icon>
-    </button>
+    <mat-icon [matMenuTriggerFor]="Menu" *ngIf="item.items?.length> 0" style="width: 20px; cursor: pointer;" (mouseenter)="openMenu()">
+      more_vert
+    </mat-icon>
     <mat-menu #Menu="matMenu" [overlapTrigger]="false" xPosition="before">
       <button *ngFor="let subItem of item.items;" [routerLink]="[subItem.href]" mat-menu-item>{{subItem.label}}</button>
     </mat-menu>

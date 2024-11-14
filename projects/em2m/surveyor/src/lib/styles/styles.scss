@@ -1,13 +1,13 @@
 @import './variables.scss';
 @import './rotate.scss';
-@import '~material-design-lite/dist/material.css';
-@import '~material-design-icons/iconfont/material-icons.css';
-@import '~font-awesome/css/font-awesome.css';
-@import '~animate.css';
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
-@import '~leaflet/dist/leaflet.css';
-@import '~leaflet.markercluster/dist/MarkerCluster.css';
-@import '~leaflet.markercluster/dist/MarkerCluster.Default.css';
+@import 'material-design-lite/dist/material.css';
+@import 'material-design-icons/iconfont/material-icons.css';
+@import 'font-awesome/css/font-awesome.css';
+@import 'animate.css/animate.css';
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import 'leaflet/dist/leaflet.css';
+@import 'leaflet.markercluster/dist/MarkerCluster.css';
+@import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 
 body {
   margin: 0;
@@ -52,6 +52,28 @@ body {
   overflow: auto;
 }
 
+.mat-mdc-icon-button {
+  background: transparent;
+}
+
+// Angular 15 MDC Changes
+.mat-mdc-card-content {
+  padding: 0 !important;
+}
+
+.mat-mdc-header-cell {
+  font-size: 12px;
+}
+
+.mat-mdc-menu-content, .mat-mdc-menu-content .mat-mdc-menu-item .mdc-list-item__primary-text {
+  font-size: 14px;
+}
+
+.mat-option-condensed {
+  font-size: 14px;
+  padding: 0.5rem 1rem !important;
+  min-height: 36px !important;
+}
 
 .mdl-button {
   color: #787878;
@@ -321,14 +343,17 @@ button::-moz-focus-inner {
 
 // Material Form Overrides
 
-.mat-form-field-appearance-outline .mat-form-field-wrapper {
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-wrapper {
   margin: 0 !important;
 }
 
-.mat-checkbox-label {
+/* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version. */
+.mat-mdc-checkbox-label {
   font-size: 16px;
 }
-surveyor-mat-checkbox-input > .mat-checkbox-layout {
+/* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version. */
+surveyor-mat-checkbox-input > .mat-mcd-checkbox-layout {
   padding-bottom: 1rem;
 }
 
@@ -336,7 +361,7 @@ surveyor-mat-checkbox-input > .mat-checkbox-layout {
   color: rgba(0, 0, 0, 0.87) !important;
 }
 
-.mat-input-element {
+.mat-mdc-input-element {
   color: rgba(0, 0, 0, 0.87) !important;
 }
 

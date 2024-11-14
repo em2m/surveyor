@@ -9,6 +9,7 @@ import {SurveyorPercentageWizardComponent} from './percentage.wizard.component';
 export * from './step.component';
 export * from './wizard.component';
 export * from './wizard.model';
+export * from './percentage.wizard.component';
 
 const components = [
   SurveyorWizardComponent,

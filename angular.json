@@ -28,23 +28,10 @@
             "tsConfig": "projects/em2m/surveyor/tsconfig.spec.json",
             "karmaConfig": "projects/em2m/surveyor/karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/em2m/surveyor/tsconfig.lib.json",
-              "projects/em2m/surveyor/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
         }
       }
     }
   },
-  "defaultProject": "@em2m/surveyor",
   "cli": {
     "analytics": "4d201df1-be42-4840-8a03-963062316ec3"
   }
