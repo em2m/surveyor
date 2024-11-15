@@ -15,7 +15,8 @@ export class MaterialChipsInputComponent extends SurveyorFormInputComponent impl
     ngOnInit() {
         setTimeout(() => {
             this.tags = this.formControl.value || [];
-        }, 100)
+        }, 100);
+
     }
 
     addTag(event: MatChipInputEvent): void {
@@ -23,7 +24,7 @@ export class MaterialChipsInputComponent extends SurveyorFormInputComponent impl
       const value = event.value;
 
       if ((value || '').trim()) {
-        if (this.tags.indexOf(value.trim()) == -1) {
+        if (this.tags.indexOf(value.trim()) === -1) {
           this.tags.push(value.trim());
         }
       }
@@ -32,8 +33,8 @@ export class MaterialChipsInputComponent extends SurveyorFormInputComponent impl
       if (input) {
         input.value = '';
       }
-
-      this.setValue(this.tags)
+      this.formControl.markAsDirty();
+      this.setValue(this.tags);
     }
 
     removeTag(tag: any) {
@@ -43,6 +44,7 @@ export class MaterialChipsInputComponent extends SurveyorFormInputComponent impl
         this.tags.splice(index, 1);
       }
 
+      this.formControl.markAsDirty();
       this.setValue(this.tags);
     }
 }

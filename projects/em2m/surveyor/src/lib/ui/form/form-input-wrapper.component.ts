@@ -1,6 +1,6 @@
 import {Component, ComponentFactoryResolver, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, ViewContainerRef} from '@angular/core';
 import {ControlDefinition} from './form.model';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 
 @Component({
   selector: 'surveyor-form-input',
@@ -10,7 +10,7 @@ export class SurveyorFormInputWrapperComponent implements OnInit, OnDestroy {
 
   @ViewChild('inputTarget', {read: ViewContainerRef, static: true}) inputTarget: any;
   @Input() controlDefinition: ControlDefinition;
-  @Input() controlInstance: FormControl;
+  @Input() controlInstance: UntypedFormControl;
   @Input() asyncValues: any;
   @Input() asyncOptions: any;
   @Input() value: any;
