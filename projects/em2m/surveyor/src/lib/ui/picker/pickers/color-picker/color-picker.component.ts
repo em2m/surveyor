@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {Picker} from '../../picker.component';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 
 
 @Component({
@@ -12,7 +12,7 @@ import {FormControl} from '@angular/forms';
 export class ColorPicker extends Picker implements OnInit {
 
   @ViewChild('navColorInput', {static: true}) navColorInput: ElementRef;
-  formControl: FormControl;
+  formControl: UntypedFormControl;
   selectedColor = null;
   gradients = null;
   selectedHexCode = null;

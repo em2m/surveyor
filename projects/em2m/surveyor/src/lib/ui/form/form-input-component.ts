@@ -1,10 +1,10 @@
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import {ControlDefinition} from './form.model';
 
 export class SurveyorFormInputComponent {
 
   controlDefinition: ControlDefinition;
-  formControl: FormControl;
+  formControl: UntypedFormControl;
   showErrors = false;
   readonly = false;
 

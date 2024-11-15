@@ -1,4 +1,4 @@
-import {AsyncValidatorFn, FormBuilder, FormGroup, ValidatorFn} from '@angular/forms';
+import {AsyncValidatorFn, UntypedFormBuilder, UntypedFormGroup, ValidatorFn} from '@angular/forms';
 
 export interface ControlValidator {
   key: string;
@@ -79,10 +79,10 @@ export class ControlDefinition {
 
 export class FormDefinition {
   controls: ControlDefinition[];
-  formBuilder: FormBuilder;
-  form: FormGroup;
+  formBuilder: UntypedFormBuilder;
+  form: UntypedFormGroup;
 
-  constructor(controls: ControlOptions[], formBuilder: FormBuilder) {
+  constructor(controls: ControlOptions[], formBuilder: UntypedFormBuilder) {
     this.controls = controls.map( ctrl => new ControlDefinition(ctrl));
     this.formBuilder = formBuilder;
   }

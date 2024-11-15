@@ -7,13 +7,11 @@ import {Control, Map, MapOptions} from 'leaflet';
 import {ControlProvider, FeatureProvider, LayerDefinition, LayerProvider} from './leaflet.model';
 import {LeafletService} from './leaflet.service';
 import LayersObject = Control.LayersObject;
-import {NavigationEnd, Router} from "@angular/router";
+import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
   selector: 'surveyor-leaflet',
-  template:
-      `<div [id]="mapId" style="height: 100%; width: 100%;">
-      </div>`,
+  template: `<div [id]="mapId" style="height: 100%; width: 100%;"></div>`,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SurveyorLeafletComponent implements AfterViewInit, OnDestroy {
@@ -22,8 +20,8 @@ export class SurveyorLeafletComponent implements AfterViewInit, OnDestroy {
   @Input() options?: MapOptions;
   @Output() mapReady = new EventEmitter();
   private map: Map;
-  private baseLayers = <LayersObject>{};
-  private overlays = <LayersObject>{};
+  private baseLayers: LayersObject = {};
+  private overlays: LayersObject = {};
   private first = true;
   private controls: Array<Control> = [];
   private routerSub: Subscription;
@@ -52,11 +50,11 @@ export class SurveyorLeafletComponent implements AfterViewInit, OnDestroy {
         try {
           control.addTo(this.map);
           this.controls.push(control);
-        } catch(error) {
-          //console.log(error)
+        } catch (error) {
+          // console.log(error)
         }
       }
-    })
+    });
   }
 
   ngAfterViewInit() {
@@ -64,17 +62,17 @@ export class SurveyorLeafletComponent implements AfterViewInit, OnDestroy {
       if (event instanceof NavigationEnd) {
         this.onRouterUpdate();
       }
-    })
+    });
 
     setTimeout(() => {
       // Initialize the primary map object
       if (!this.options) {
-        this.options = <MapOptions>{
+        this.options = {
           center: [37.8, -96],
           zoom: 4,
           maxZoom: 20,
-          //minZoom: 4
-        };
+          // minZoom: 4
+        } as MapOptions;
       }
       this.options.zoomControl = false;
 
@@ -83,7 +81,7 @@ export class SurveyorLeafletComponent implements AfterViewInit, OnDestroy {
       });
 
       // Hacks to remove the touch capabilities from leaflet which causes large buttons and boxes
-      (window['L'].Browser as any).touch = false;
+      (window.L.Browser as any).touch = false;
       const leafletContainerDiv = this.elementRef.nativeElement.querySelector('.leaflet-container');
       this.renderer.removeClass(leafletContainerDiv, 'leaflet-touch');
 
@@ -144,7 +142,7 @@ export class SurveyorLeafletComponent implements AfterViewInit, OnDestroy {
         }));
 
       const completeObs = observableOf(null).pipe(map(() => {
-        let leafletContainerDiv = this.elementRef.nativeElement.querySelector('.leaflet-container');
+        // const leafletContainerDiv = this.elementRef.nativeElement.querySelector('.leaflet-container');
         this.renderer.removeClass(leafletContainerDiv, 'leaflet-touch');
 
         // Persist the control layer in case controls need to be added manually
@@ -158,6 +156,10 @@ export class SurveyorLeafletComponent implements AfterViewInit, OnDestroy {
 
       // Chain up the observables to ensure layers are processed in order
       observableConcat(baseLayerObs, overlayObs, featuresObs, controlsObs, completeObs).subscribe();
-    }, 0)
+    }, 0);
+  }
+
+  hideLayer(layerLabel: string) {
+    this.overlays[layerLabel].removeFrom(this.map);
   }
 }
