@@ -14,9 +14,9 @@ export class GoogleMapsLoaderService {
     if (!this.isLoaded) {
       this.isLoaded = true;
 
-      return this.loadScript(`https://maps.googleapis.com/maps/api/js?v=3.47&key=${apiKey}`).pipe(
+      return this.loadScript(`https://maps.googleapis.com/maps/api/js?v=3.59.1&key=${apiKey}`).pipe(
         concatMap(() => {
-          return this.loadScript('https://unpkg.com/leaflet.gridlayer.googlemutant@0.10.0/Leaflet.GoogleMutant.js');
+          return this.loadScript('https://unpkg.com/leaflet.gridlayer.googlemutant@0.14.0/dist/Leaflet.GoogleMutant.js');
         }));
     } else {
       return of(true);
@@ -37,8 +37,8 @@ export class GoogleMapsLoaderService {
         };
       } else {  // Others
         script.onload = function() {
-            observer.next(true);
-            observer.complete();
+          observer.next(true);
+          observer.complete();
         };
       }
 
