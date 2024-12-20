@@ -19,6 +19,7 @@ import {SurveyorGeoModule} from './geo/geo.module';
 import {SurveyorWizardModule} from './wizard/wizard.module';
 import {SurveyorPopoverModule} from './popover/popover.module';
 import {SurveyorConverterModule} from './converter/converter.module';
+// import {Surveyori18nModule} from "./i18n/i18n.module";
 
 export * from './action/action.module';
 export * from './breadcrumbs/breadcrumbs.module';
@@ -40,6 +41,7 @@ export * from './table/table.module';
 export * from './tabs/tabs.module';
 export * from './toast/toast.module';
 export * from './wizard/wizard.module';
+// export * from './i18n/i18n.module';
 
 @NgModule({
   imports: [
@@ -84,7 +86,8 @@ export * from './wizard/wizard.module';
     SurveyorTableModule,
     SurveyorTabsModule,
     SurveyorToastModule,
-    SurveyorWizardModule
+    SurveyorWizardModule,
+    // Surveyori18nModule
   ]
 })
 export class SurveyorUiModule {
