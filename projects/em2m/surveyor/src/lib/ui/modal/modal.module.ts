@@ -10,6 +10,7 @@ import {AbsoluteModalContainer} from './containers/absolute/absolute-modal-conta
 import {StatusModal} from './modals/status-modal/status-modal.component';
 import {LoadingModal} from './modals/loading-modal/loading-modal.component';
 import {MatButtonModule} from '@angular/material/button';
+import {Surveyori18nModule, Surveyori18nService} from "../i18n/i18n.module";
 
 export * from './modal.component';
 export * from './modal.model';
@@ -27,7 +28,8 @@ export * from './modals/loading-modal/loading-modal.component';
 @NgModule({
   imports: [
     CommonModule,
-    MatButtonModule
+    MatButtonModule,
+    Surveyori18nModule
   ],
   exports: [
     CenterModalContainer,
@@ -55,6 +57,7 @@ export class SurveyorModalModule {
     return {
       ngModule: SurveyorModalModule,
       providers: [
+        Surveyori18nService,
         ModalService
       ]
     };

@@ -5,6 +5,7 @@ import {Surveyori18nService} from "./shared/i18n.service";
 
 export * from './i18n.module';
 export * from './shared/i18n.service';
+export * from './pipes/i18n-lang.pipe';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ export * from './shared/i18n.service';
     Surveyori18nLangPipe
   ],
   exports: [
+    Surveyori18nLangPipe
   ]
 })
 export class Surveyori18nModule {
