@@ -15,19 +15,28 @@ export class Surveyori18nService {
     this.langKeys = this.ctx.getValue("i18n");
   }
 
-  translate(message: string, variable?: string) {
-    //variable for strings with var passed in
+  translate(message: string) {
     if (!this.langKeys) {
       this.detectLang();
     }
 
-    const token = message.split(" ").join("").replace(/\./g, "");
-    const translation = this.langKeys[token]?.translation ? this.langKeys[token]?.translation : message;
+    let variable;
+    //no whitespace token
+    let token = message.split(" ").join("").replace(/\./g, "");
 
-    console.log(message, token, translation)
+    if (token.includes("%")) {
+      let splitToken = token.split("%");
+      token = splitToken[0];
+      variable = splitToken[1];
+    }
 
-    return variable ? translation + variable : translation;
+    let translation = this.langKeys[token]?.translation ? this.langKeys[token]?.translation : message;
 
+    if (translation != null && variable != null) {
+      translation = translation + variable;
+    }
+
+    return translation ? translation : message;
   }
 
 

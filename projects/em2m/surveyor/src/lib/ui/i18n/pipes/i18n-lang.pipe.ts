@@ -31,14 +31,23 @@ export class Surveyori18nLangPipe implements PipeTransform {
     const langKeys = this.ctx.getValue("i18n");
     if (!value) { return; }
     if (!langKeys) {return value}
+    let variable;
 
     if (token === value) {
       token = value.split(" ").join("").replace(/\./g, "");
     }
 
-    const translation = langKeys[token]?.translation;
+    if (token.includes("%")) {
+      let tokenSplit = token.split("%");
+      variable = tokenSplit [1]
+      token = tokenSplit [0]
+    }
 
-    console.log(value, token, translation)
+    let translation = langKeys[token]?.translation;
+
+    if (translation != null && variable != null) {
+      translation = translation + variable;
+    }
 
     return translation ? translation : value;
   }
