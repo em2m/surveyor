@@ -4,7 +4,7 @@
         <ul class="list-group">
           <li *ngFor="let tab of tabs" class="list-group-item" [routerLink]="[tab.path]"
               routerLinkActive="active active-nav" [routerLinkActiveOptions]="{exact:tab.exact}">
-            {{ tab.title }}
+            {{ tab.title | i18n:tab.title}}
           </li>
         </ul>
       </div>
@@ -12,7 +12,7 @@
         <ul class="list-group">
           <li *ngFor="let tab of tabs" class="list-group-item" [routerLink]="[tab.path]"
               routerLinkActive="active active-nav" [routerLinkActiveOptions]="{exact:tab.exact}">
-            {{ tab.title }}
+            {{ tab.title | i18n:tab.title}}
           </li>
         </ul>
       </div>

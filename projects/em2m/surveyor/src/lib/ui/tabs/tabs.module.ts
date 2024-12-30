@@ -8,6 +8,7 @@ import {VerticalTabsComponent} from './vertical/vertical-tabs.component';
 import {VerticalTabsPage} from './vertical/vertical-tabs.page';
 import {BottomTabsComponent} from './bottom/bottom-tabs.component';
 import {BottomTabsPage} from './bottom/bottom-tabs.page';
+import {Surveyori18nModule} from "../i18n/i18n.module";
 
 export * from './horizontal/horizontal-tabs.component';
 export * from './horizontal/horizontal-tabs.page';
@@ -29,7 +30,8 @@ const components = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    Surveyori18nModule
   ],
   exports: [
     ...components
