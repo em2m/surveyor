@@ -1,11 +1,11 @@
 <mat-form-field appearance="outline" floatLabel="always" (click)="loadPicker()">
-  <mat-label>{{ controlDefinition.label }}</mat-label>
+  <mat-label>{{ controlDefinition.label |i18n:controlDefinition.label}}</mat-label>
   <input matInput #picker [id]="controlDefinition.key" type="text" readonly
          [formControl]="formControl"
          [required]="controlDefinition.required ? 'required' : null"
          [disabled]="controlDefinition.disabled"
-         [placeholder]="label || controlDefinition.options.placeholder"/>
+         [placeholder]="label ? (label | i18n:label) : (controlDefinition.options.placeholder | i18n:controlDefinition.options.placeholder)"/>
   <mat-error *ngFor="let errorKey of getErrors()">
-    {{getErrorMessage(errorKey)}}
+    {{getErrorMessage(errorKey) | i18n:getErrorMessage(errorKey)}}
   </mat-error>
 </mat-form-field>
