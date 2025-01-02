@@ -30,13 +30,13 @@ export class Surveyori18nService {
       variable = splitToken[1];
     }
 
-    let translation = this.langKeys[token]?.translation ? this.langKeys[token]?.translation : message;
+    let translation = this.langKeys[token.toLowerCase()]?.translation || message;
 
     if (translation != null && variable != null) {
       translation = translation + variable;
     }
 
-    return translation ? translation : message;
+    return translation || message;
   }
 
 

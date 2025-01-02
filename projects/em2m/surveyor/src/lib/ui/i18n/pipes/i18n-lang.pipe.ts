@@ -43,7 +43,7 @@ export class Surveyori18nLangPipe implements PipeTransform {
       token = tokenSplit [0]
     }
 
-    let translation = langKeys[token]?.translation;
+    let translation = langKeys[token.toLowerCase()]?.translation;
 
     if (translation != null && variable != null) {
       translation = translation + variable;
