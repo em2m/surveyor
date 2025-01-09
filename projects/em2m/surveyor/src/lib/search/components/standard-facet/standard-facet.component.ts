@@ -188,7 +188,8 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
 
         this.searcher.addConstraint({
           type: `dateRangePicker:${agg.key}`,
-          label: `${agg.label || agg.key} : ${new Date(from).toLocaleDateString('en-US')} to ${new Date(to).toLocaleDateString('en-US')}`,          query,
+          label: `${agg.label || agg.key} : ${new Date(from).toLocaleDateString('en-US')} to ${new Date(to).toLocaleDateString('en-US')}`,
+          query,
           values: [from, to]
         });
         this.searcher.broadcastRequest();
