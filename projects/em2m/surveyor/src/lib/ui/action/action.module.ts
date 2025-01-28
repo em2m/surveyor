@@ -8,6 +8,7 @@ import {ActionService} from './action.service';
 import {ActionButtonGroupComponent} from './action-button-group.component';
 import {ActionButtonSelectionComponent} from './action-button-selection.component';
 import {NavigateBackAction} from './actions/back.action';
+import {Surveyori18nModule} from "../i18n/i18n.module";
 
 export * from './action.model';
 export * from './action.service';
@@ -26,7 +27,8 @@ const components = [
     MatButtonModule,
     MatMenuModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    Surveyori18nModule
   ],
   exports: [
     ...components
