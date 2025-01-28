@@ -5,6 +5,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {RouterModule} from '@angular/router';
 import {BreadcrumbsContribution} from './breadcrumbs-contribution.component';
+import {Surveyori18nModule} from "../i18n/i18n.module";
 
 export * from './breadcrumbs.model';
 export * from './breadcrumbs-contribution.component';
@@ -20,7 +21,8 @@ const components = [
     RouterModule,
     MatButtonModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    Surveyori18nModule
   ],
   exports: [
     CommonModule,
