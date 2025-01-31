@@ -51,7 +51,7 @@
       </span>
 
       <span class="center-content" *ngIf="secondaryActions && secondaryActions.length > 0">
-          <button *ngIf="!miniFab" mat-icon-button color="primary" matTooltip="{{toolTip}}" class="mat-icon-button center-content" [matMenuTriggerFor]="actionMenu">
+          <button *ngIf="!miniFab" mat-icon-button color="primary" matTooltip="{{toolTip | i18n:toolTip}}" class="mat-icon-button center-content" [matMenuTriggerFor]="actionMenu">
             <i class="{{icon}}"></i>
           </button>
           <button *ngIf="miniFab" mat-mini-fab class="mini-fab-icon-size more-actions-mini-fab center-content" color="primary" matTooltip="{{toolTip | i18n:toolTip}}" [matMenuTriggerFor]="actionMenu">
