@@ -23,7 +23,7 @@ export class Surveyori18nService {
 
     let translation;
 
-    if (!token) {
+    if (!token && message) {
       //Case 1 - only message sent in... > remove () & special chars, handle vars,
       if (message.includes("(")) {
         const startingIndex = message.indexOf("(");
@@ -61,7 +61,7 @@ export class Surveyori18nService {
 
         return translation;
       }
-    } else if (token) {
+    } else if (token && message) {
       //token should be passed without vars, chars, etc
       //symbols, (), etc added back in translation
       token = token.split(" ").join("").replace(/[\.\-\:\']/g, "");
