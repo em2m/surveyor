@@ -3,6 +3,6 @@
                 [formControl]="formControl"
                 [disabled]="controlDefinition.disabled"
                 [required]="controlDefinition.required ? 'required' : null">
-    {{ controlDefinition.label }}
+    {{ controlDefinition.label | i18n:controlDefinition.label}}
   </mat-checkbox>
 </div>
