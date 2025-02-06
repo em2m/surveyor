@@ -31,38 +31,58 @@ export class Surveyori18nLangPipe implements PipeTransform {
     const langKeys = this.ctx.getValue("i18n");
     if (!value) { return; }
     if (!langKeys) {return value}
-    let variable;
+    let translation;
 
-    //this is for validation messages etc passed from class file
-    if (token === value) {
-      //removes spaces to turn it into token
-      token = value.split(" ").join("").replace(/\./g, "");
+    //this is for validation messages etc passed from class file (error messages on form field etc)
+    if (token && token === value) {
+      //Case 1 - only value sent in... > remove () & special chars, handle vars,
+      if (value.includes("(")) {
+        const startingIndex = value.indexOf("(");
+        const endingIndex = value.indexOf(")");
+        token = value.slice(0, startingIndex) + value.slice(endingIndex + 1, value.length);
+      } else {
+        token = value;
+      }
+
+      //2 remove special chars
+      token = token.replace(/[\.\-\:\']/g, "");
+
+      if (token.includes("%")) {
+        let tokenSplit = token.split(" ");
+        let fullTranslation = [];
+
+        // find index of element with variable marker - %
+        tokenSplit.forEach((token, index) => {
+          if (token.includes("%")) {
+            //remove % then add to array
+            fullTranslation.push(token.replace(/%/g, ""));
+          } else if (token.trim() !== "") {
+            //translate each element and re-insert into array
+            let tokenTranslation = langKeys[token.toLowerCase()]?.translation || token;
+            fullTranslation.push(tokenTranslation);
+          }
+        })
+
+
+        return fullTranslation.join(" ");
+
+      } else {
+        //remove special chars && remove spaces
+        token = token.split(" ").join("");
+        translation = langKeys[token.toLowerCase()]?.translation || value;
+
+        return translation;
+      }
+
+    } else if (token) {
+      //token should be passed without vars, chars, etc
+      //symbols, (), etc added back in translation
+      token = token.split(" ").join("").replace(/[\.\-\:\']/g, "");
+      translation = langKeys[token.toLowerCase()]?.translation || value;
+
+      return translation;
+    } else {
+      return value;
     }
-
-    //for values such as "xt-4200..."
-    if (token.includes("-")) {
-      const index = token.indexOf("-");
-      token = token.slice(0, index) + token.slice(index + 1, token.length);
-      //for values such as "fuel level (%)" ...
-    } else if (token.includes("(")) {
-      const startingIndex = token.indexOf("(");
-      const endingIndex = token.indexOf(")");
-      token = token.slice(0, startingIndex) + token.slice(endingIndex, token.length - 1);
-      //variables passed in that would not be in main key list
-    } else if (token.includes("%")) {
-      let tokenSplit = token.split("%");
-      variable = tokenSplit[1]
-      token = tokenSplit[0]
-    }
-
-    let translation = langKeys[token.toLowerCase()]?.translation;
-    console.log(value, token, translation)
-
-    if (translation != null && variable != null) {
-      translation = `${translation} ${variable}`;
-    }
-
-    return translation || value;
   }
-
 }

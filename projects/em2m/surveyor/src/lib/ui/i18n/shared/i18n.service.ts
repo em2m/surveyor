@@ -15,38 +15,62 @@ export class Surveyori18nService {
     this.langKeys = this.ctx.getValue("i18n");
   }
 
-  translate(message: string) {
+  translate(message: string, token?: string) {
+
     if (!this.langKeys) {
       this.detectLang();
     }
 
-    let variable;
-    //no whitespace token
-    let token = message.split(" ").join("").replace(/\./g, "");
+    let translation;
 
-    //for values such as "xt-4200..."
-    if (token.includes("-")) {
-      const index = token.indexOf("-");
-      token = token.slice(0, index) + token.slice(index + 1, token.length);
-      //for values such as "fuel level (%)" ...
-    } else if (token.includes("(")) {
-      const startingIndex = token.indexOf("(");
-      const endingIndex = token.indexOf(")");
-      token = token.slice(0, startingIndex) + token.slice(endingIndex, token.length - 1);
-      //variables passed in that would not be in main key list
-    } else if (token.includes("%")) {
-      let tokenSplit = token.split("%");
-      variable = tokenSplit[1]
-      token = tokenSplit[0]
+    if (!token) {
+      //Case 1 - only message sent in... > remove () & special chars, handle vars,
+      if (message.includes("(")) {
+        const startingIndex = message.indexOf("(");
+        const endingIndex = message.indexOf(")");
+        token = message.slice(0, startingIndex) + message.slice(endingIndex + 1, message.length);
+      } else {
+        token = message;
+      }
+
+      //2 remove special chars
+      token = token.replace(/[\.\-\:\']/g, "");
+
+      if (token.includes("%")) {
+        let tokenSplit = token.split(" ");
+        let fullTranslation = [];
+
+        // find index of element with variable marker - %
+        tokenSplit.forEach((token, index) => {
+          if (token.includes("%")) {
+            //remove % then add to array
+            fullTranslation.push(token.replace(/%/g, ""));
+          } else if (token.trim() !== "") {
+            //translate each element and re-insert into array
+            let tokenTranslation = this.langKeys[token.toLowerCase()]?.translation || token;
+            fullTranslation.push(tokenTranslation);
+          }
+        })
+
+        return fullTranslation.join(" ");
+
+      } else {
+        //remove special chars && remove spaces
+        token = token.split(" ").join("");
+        translation = this.langKeys[token.toLowerCase()]?.translation || message;
+
+        return translation;
+      }
+    } else if (token) {
+      //token should be passed without vars, chars, etc
+      //symbols, (), etc added back in translation
+      token = token.split(" ").join("").replace(/[\.\-\:\']/g, "");
+      translation = this.langKeys[token.toLowerCase()]?.translation || message;
+
+      return translation || message;
+    } else {
+      return message;
     }
-
-    let translation = this.langKeys[token.toLowerCase()]?.translation || message;
-
-    if (translation != null && variable != null) {
-      translation = `${translation}  ${variable}`;
-    }
-
-    return translation || message;
   }
 
 
