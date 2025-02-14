@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Picker} from '../../../ui/picker/picker.component';
 import {SearchConstraint} from '../../shared/searcher.model';
+import {Surveyori18nService} from "../../../ui/i18n/shared/i18n.service";
 
 @Component({
   selector: 'surveyor-multiple-term-picker',
@@ -22,6 +23,11 @@ export class MultipleTermPickerComponent extends Picker implements OnInit {
   label = '';
   submitEnabled = false;
 
+  constructor(private i18nService: Surveyori18nService) {
+    super();
+  }
+
+
   submit() {
     this.buckets.forEach(bucket => {
       bucket.checked = this.selectedItems[bucket.key];
@@ -35,6 +41,10 @@ export class MultipleTermPickerComponent extends Picker implements OnInit {
 
   canSubmit(): boolean {
     return this.submitEnabled;
+  }
+
+  getLabel(label: string): string {
+    return this.i18nService.translate(label);
   }
 
   ngOnInit() {

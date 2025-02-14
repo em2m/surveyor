@@ -2,6 +2,7 @@ import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {SearchConstraint, Searcher, SearchRequest} from '../../../shared/searcher.model';
 import {PickerService} from '../../../../ui/picker/picker.service';
 import {BoolQuery, LuceneQuery, OperationType, Query, WildcardQuery} from '../../../shared/query.model';
+import {Surveyori18nService} from "../../../../ui/i18n/shared/i18n.service";
 
 @Component({
   selector: 'surveyor-searcher-input',
@@ -17,7 +18,8 @@ export class SearcherInputComponent implements OnInit {
   public searchInput = '';
   public constraints: Array<any> = [];
 
-  constructor(private pickerService: PickerService) {
+  constructor(private pickerService: PickerService,
+              private i18nService: Surveyori18nService) {
   }
 
   ngOnInit() {
@@ -26,6 +28,7 @@ export class SearcherInputComponent implements OnInit {
         this.onQuery(request.query);
       });
     }
+    this.placeholder = this.i18nService.translate(this.placeholder);
   }
 
   onSubmit(searchInput: string) {

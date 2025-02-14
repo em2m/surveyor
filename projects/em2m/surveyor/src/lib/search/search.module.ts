@@ -21,6 +21,8 @@ import {DateRangePickerComponent} from './pickers/date-range-picker/date-range-p
 import {MultipleTermPickerComponent} from './pickers/multiple-term-picker/multiple-term-picker.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {Surveyori18nService} from "../ui/i18n/shared/i18n.service";
+import {Surveyori18nModule} from "../ui/i18n/i18n.module";
 
 export * from './shared/query.model';
 export * from './shared/searcher.model';
@@ -63,7 +65,8 @@ const components: any[] = [
         MatFormFieldModule,
         MatDatepickerModule,
         MatMenuModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        Surveyori18nModule
     ],
   exports: [
     ...components,

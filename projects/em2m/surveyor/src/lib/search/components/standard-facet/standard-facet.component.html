@@ -2,7 +2,7 @@
   <div *ngFor="let agg of searcher.aggs">
     <div *ngIf="hasBuckets(agg.key)" class="facet">
       <div class="facet-header">
-        <label class="facet-label" matTooltip="{{agg.label}}" [matTooltipShowDelay]="1000">{{agg.label}}</label>
+        <label class="facet-label" matTooltip="{{agg.label | i18n:agg.label}}" [matTooltipShowDelay]="1000">{{agg.label | i18n:agg.label}}</label>
         <div class="spacer"></div>
         <span *ngIf="showMultiChoice(agg, bucketsForAgg(agg.key)) || isRangeAgg(agg)" class="hidden-menu">
           <button class="menu-button" [matMenuTriggerFor]="actionMenu">
@@ -10,17 +10,17 @@
           </button>
           <mat-menu #actionMenu="matMenu" yPosition="below" xPosition="before">
             <button mat-menu-item *ngIf="showMultiChoice(agg, bucketsForAgg(agg.key))" (click)="showMoreAggs(agg)">
-              Select Multiple
+              {{"Select Multiple" | i18n:"selectmultiple"}}
             </button>
             <button mat-menu-item *ngIf="isRangeAgg(agg)" (click)="loadDatePicker(agg)">
-              Custom Date Range
+              {{"Custom Date Range" | i18n:"customdaterange"}}
             </button>
           </mat-menu>
         </span>
       </div>
       <div class="facet-buckets">
         <div class="bucket" *ngFor="let bucket of bucketsForAgg(agg.key)" (click)="addConstraint(agg, bucket)">
-          <label class="bucket-label" matTooltip="{{bucket.label || bucket.key}}" [matTooltipShowDelay]="1000">{{bucket.label || bucket.key}}</label>
+          <label class="bucket-label" matTooltip="{{getLabel(bucket.label || bucket.key)}}" [matTooltipShowDelay]="1000">{{getLabel(bucket.label || bucket.key)}}</label>
           <div class="spacer"></div>
           <label class="bucket-count"> {{bucket.count}} </label>
         </div>

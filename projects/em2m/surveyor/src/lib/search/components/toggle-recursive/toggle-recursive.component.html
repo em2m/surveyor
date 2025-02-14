@@ -3,7 +3,7 @@
     <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect is-checked" for="rememberMe">
       <input type="checkbox" id="rememberMe" class="mdl-checkbox__input"
              (change)="toggleRecursive()" [checked]="searcher.recursive">
-      <span class="mdl-checkbox__label" style="font-size: 14px;">Include sub-organizations</span>
+      <span class="mdl-checkbox__label" style="font-size: 14px;">{{"Include sub-organizations" | i18n:"includesuborganizations"}}</span>
     </label>
   </div>
 </form>

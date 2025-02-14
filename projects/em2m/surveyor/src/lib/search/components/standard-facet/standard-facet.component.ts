@@ -5,6 +5,7 @@ import {PickerService} from '../../../ui/picker/picker.service';
 import * as _moment from 'moment';
 import {Subscription} from 'rxjs';
 import {ContextService} from '../../../core/extension/context.service';
+import {Surveyori18nService} from "../../../ui/i18n/shared/i18n.service";
 
 const moment = _moment;
 
@@ -23,7 +24,8 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
 
   constructor(public searcher: Searcher,
               private pickerService: PickerService,
-              private ctx: ContextService) {
+              private ctx: ContextService,
+              private i18nService: Surveyori18nService) {
   }
 
   ngOnInit(): void {
@@ -183,7 +185,7 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
   }
 
   loadDatePicker(agg: any) {
-    this.pickerService.pick('date-range', {title: 'Select Date Range'}).subscribe(range => {
+    this.pickerService.pick('date-range', {title: this.i18nService.translate('Select Date Range', 'selectdaterange')}).subscribe(range => {
       if (range) {
         const from = range.from.getTime();
         const to = range.to.getTime() + this.DAY_IN_MILLIS - 1;
@@ -198,5 +200,9 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
         this.searcher.broadcastRequest();
       }
     });
+  }
+
+  getLabel(label: string): string {
+    return this.i18nService.translate(label);
   }
 }

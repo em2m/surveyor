@@ -3,7 +3,7 @@
     <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect is-checked" for="toggle-closed-checkbox">
       <input type="checkbox" id="toggle-closed-checkbox" class="mdl-checkbox__input"
              (change)="toggleArchived()" [checked]="archived">
-      <span class="mdl-checkbox__label" style="font-size: 14px;">{{label}}</span>
+      <span class="mdl-checkbox__label" style="font-size: 14px;">{{label | i18n:label}}</span>
     </label>
   </div>
 </form>
