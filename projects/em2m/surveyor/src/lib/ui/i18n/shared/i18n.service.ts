@@ -11,7 +11,7 @@ export class Surveyori18nService {
   }
 
   detectLang() {
-    //TODO set up subscription
+    //TODO set up subscription for i18nLocale
     this.langKeys = this.ctx.getValue("i18n");
   }
 
@@ -34,10 +34,12 @@ export class Surveyori18nService {
       }
 
       //2 remove special chars
-      token = token.replace(/[\.\-\:\']/g, "");
+      token = token.replace(/[\.\-\:\'\?\,\&]/g, "");
 
+      //handle vars passed in
       if (token.includes("%")) {
-        let tokenSplit = token.split(" ");
+        //this preserves the separator
+        let tokenSplit = token.split(/(?=%)/);
         let fullTranslation = [];
 
         // find index of element with variable marker - %
@@ -46,8 +48,8 @@ export class Surveyori18nService {
             //remove % then add to array
             fullTranslation.push(token.replace(/%/g, ""));
           } else if (token.trim() !== "") {
-            //translate each element and re-insert into array
-            let tokenTranslation = this.langKeys[token.toLowerCase()]?.translation || token;
+            //remove spaces, translate each element and re-insert into array
+            let tokenTranslation = this.langKeys[token.replace(/\s/g, "").toLowerCase()]?.translation || token;
             fullTranslation.push(tokenTranslation);
           }
         })
@@ -64,7 +66,7 @@ export class Surveyori18nService {
     } else if (token && message) {
       //token should be passed without vars, chars, etc
       //symbols, (), etc added back in translation
-      token = token.split(" ").join("").replace(/[\.\-\:\']/g, "");
+      token = token.split(" ").join("").replace(/[\.\-\:\'\?\,\&]/g, "");
       translation = this.langKeys[token.toLowerCase()]?.translation || message;
 
       return translation || message;

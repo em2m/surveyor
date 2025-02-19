@@ -48,7 +48,7 @@ export class Surveyori18nLangPipe implements PipeTransform {
       token = token.replace(/[\.\-\:\']/g, "");
 
       if (token.includes("%")) {
-        let tokenSplit = token.split(" ");
+        let tokenSplit = token.split(/(?=%)/);
         let fullTranslation = [];
 
         // find index of element with variable marker - %
@@ -58,7 +58,7 @@ export class Surveyori18nLangPipe implements PipeTransform {
             fullTranslation.push(token.replace(/%/g, ""));
           } else if (token.trim() !== "") {
             //translate each element and re-insert into array
-            let tokenTranslation = langKeys[token.toLowerCase()]?.translation || token;
+            let tokenTranslation = langKeys[token.replace(/\s/g, "").toLowerCase()]?.translation || token;
             fullTranslation.push(tokenTranslation);
           }
         })
@@ -68,7 +68,7 @@ export class Surveyori18nLangPipe implements PipeTransform {
 
       } else {
         //remove special chars && remove spaces
-        token = token.split(" ").join("");
+        token = token.replace(/\s/g, "");
         translation = langKeys[token.toLowerCase()]?.translation || value;
 
         return translation;
