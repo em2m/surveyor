@@ -11,13 +11,14 @@ import {StatusModal} from './modals/status-modal/status-modal.component';
 import {LoadingModal} from './modals/loading-modal/loading-modal.component';
 import {FixedModalContainer} from './containers/fixed/fixed-modal-container.component';
 import {AbsoluteModalContainer} from './containers/absolute/absolute-modal-container.component';
+import {Surveyori18nService} from "../i18n/shared/i18n.service";
 
 @Injectable()
 export class ModalService {
 
   private rootViewContainerRef: ViewContainerRef = null;
 
-  constructor(private resolver: ComponentFactoryResolver, private injector: Injector) {
+  constructor(private resolver: ComponentFactoryResolver, private injector: Injector, private i18nService: Surveyori18nService) {
   }
 
   setRootViewContainerRef(rootViewContainerRef: ViewContainerRef) {
@@ -84,7 +85,7 @@ export class ModalService {
     let options = <ModalOptions> {
       submitLabel: 'Yes',
       cancelLabel: 'No',
-      params: { message: message },
+      params: { message: this.i18nService.translate(message) },
       type: 'center'
     };
 
@@ -103,7 +104,7 @@ export class ModalService {
     let options = <ModalOptions> {
       hideSubmit: true,
       hideCancel: true,
-      params: { message: message },
+      params: { message: this.i18nService.translate(message) },
       type: 'center',
       width: 400
     };
@@ -117,7 +118,7 @@ export class ModalService {
       hideCancel: true,
       hideDelete: true,
       params: {
-        message: message
+        message: this.i18nService.translate(message)
       },
       type: 'center',
       width: 450
@@ -131,7 +132,7 @@ export class ModalService {
       hideSubmit: true,
       hideCancel: false,
       cancelLabel: 'OK',
-      params: { message: message },
+      params: { message: this.i18nService.translate(message) },
       type: 'center'
     };
 
