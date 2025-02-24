@@ -44,6 +44,11 @@ export class ModalService {
     } else if (options.type === 'absolute') {
       modalContainer = AbsoluteModalContainer;
     }
+
+    if (options?.params?.messageToken) {
+      options.params.message = this.i18nService.translate(options.params.message, options?.params?.messageToken)
+    }
+
     let containerRef = options.elementRef;
     if (!containerRef) {
       containerRef = this.rootViewContainerRef;
@@ -81,11 +86,11 @@ export class ModalService {
     };
   }
 
-  confirm(message: string): Observable<boolean> {
+  confirm(message: string, messageToken?: string): Observable<boolean> {
     let options = <ModalOptions> {
       submitLabel: 'Yes',
       cancelLabel: 'No',
-      params: { message: this.i18nService.translate(message) },
+      params: { message: this.i18nService.translate(message, messageToken) },
       type: 'center'
     };
 
@@ -100,11 +105,11 @@ export class ModalService {
     return confirmResponse.asObservable();
   }
 
-  status(message: string): ModalResult {
+  status(message: string, messageToken?: string): ModalResult {
     let options = <ModalOptions> {
       hideSubmit: true,
       hideCancel: true,
-      params: { message: this.i18nService.translate(message) },
+      params: { message: this.i18nService.translate(message, messageToken) },
       type: 'center',
       width: 400
     };
@@ -112,13 +117,13 @@ export class ModalService {
     return this.open(StatusModal, options);
   }
 
-  loading(message: string): ModalResult {
+  loading(message: string, messageToken?: string): ModalResult {
     let options = <ModalOptions> {
       hideSubmit: true,
       hideCancel: true,
       hideDelete: true,
       params: {
-        message: this.i18nService.translate(message)
+        message: this.i18nService.translate(message, messageToken)
       },
       type: 'center',
       width: 450
@@ -127,12 +132,12 @@ export class ModalService {
     return this.open(LoadingModal, options);
   }
 
-  message(message: string) {
+  message(message: string, messageToken?: string) {
     let options = <ModalOptions> {
       hideSubmit: true,
       hideCancel: false,
       cancelLabel: 'OK',
-      params: { message: this.i18nService.translate(message) },
+      params: { message: this.i18nService.translate(message, messageToken) },
       type: 'center'
     };
 
