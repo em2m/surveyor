@@ -39,15 +39,16 @@ export class Surveyori18nLangPipe implements PipeTransform {
       if (value.includes("(")) {
         const startingIndex = value.indexOf("(");
         const endingIndex = value.indexOf(")");
-        token = value.slice(0, startingIndex) + value.slice(endingIndex + 1, value.length);
+        token = value.slice(0, startingIndex - 1) + value.slice(startingIndex + 1, endingIndex) + value.slice(endingIndex + 1, value.length);
       } else {
         token = value;
       }
 
       //2 remove special chars
-      token = token.replace(/[\.\-\:\']/g, "");
+      token = token.replace(/[\.\-\:\'\?\,\&\/]/g, "");
 
       if (token.includes("%")) {
+        //preserves separator
         let tokenSplit = token.split(/(?=%)/);
         let fullTranslation = [];
 
@@ -77,7 +78,7 @@ export class Surveyori18nLangPipe implements PipeTransform {
     } else if (token) {
       //token should be passed without vars, chars, etc
       //symbols, (), etc added back in translation
-      token = token.split(" ").join("").replace(/[\.\-\:\']/g, "");
+      token = token.split(" ").join("").replace(/[\.\-\:\'\?\,\&\/]/g, "");
       translation = langKeys[token.toLowerCase()]?.translation || value;
 
       return translation;

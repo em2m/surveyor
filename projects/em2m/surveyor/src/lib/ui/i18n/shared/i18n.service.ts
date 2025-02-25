@@ -28,13 +28,13 @@ export class Surveyori18nService {
       if (message.includes("(")) {
         const startingIndex = message.indexOf("(");
         const endingIndex = message.indexOf(")");
-        token = message.slice(0, startingIndex) + message.slice(endingIndex + 1, message.length);
+        token = message.slice(0, startingIndex - 1) + message.slice(startingIndex + 1, endingIndex) + message.slice(endingIndex + 1, message.length);
       } else {
         token = message;
       }
 
       //2 remove special chars
-      token = token.replace(/[\.\-\:\'\?\,\&]/g, "");
+      token = token.replace(/[\.\-\:\'\?\,\&\/]/g, "");
 
       //handle vars passed in
       if (token.includes("%")) {
@@ -66,7 +66,7 @@ export class Surveyori18nService {
     } else if (token && message) {
       //token should be passed without vars, chars, etc
       //symbols, (), etc added back in translation
-      token = token.split(" ").join("").replace(/[\.\-\:\'\?\,\&]/g, "");
+      token = token.split(" ").join("").replace(/[\.\-\:\'\?\,\&\/]/g, "");
       translation = this.langKeys[token.toLowerCase()]?.translation || message;
 
       return translation || message;
