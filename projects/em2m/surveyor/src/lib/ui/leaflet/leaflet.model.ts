@@ -6,6 +6,7 @@ import {AppConfig} from '../../core/config/config.service';
 export interface LayerDefinition {
   label: string;
   layer: Layer;
+  enLabel: string;
   type?: 'overlay' | 'baseLayer';
   enabled?: boolean;
 }
