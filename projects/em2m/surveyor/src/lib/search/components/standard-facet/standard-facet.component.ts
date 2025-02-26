@@ -2,12 +2,9 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SearchConstraint, Searcher} from '../../shared/searcher.model';
 import {Bucket, DateRangeQuery, ExistsQuery, OrQuery, Query, RangeQuery, TermQuery} from '../../shared/query.model';
 import {PickerService} from '../../../ui/picker/picker.service';
-import * as _moment from 'moment';
 import {Subscription} from 'rxjs';
 import {ContextService} from '../../../core/extension/context.service';
 import {Surveyori18nService} from "../../../ui/i18n/shared/i18n.service";
-
-const moment = _moment;
 
 @Component({
   selector: 'surveyor-standard-facet',
@@ -193,7 +190,7 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
 
         this.searcher.addConstraint({
           type: `dateRangePicker:${agg.key}`,
-          label: `${agg.label || agg.key} : ${moment(from).format('LL')} to ${moment(to).format('LL')}`,
+          label: `${agg.label || agg.key} : ${new Date(from).toLocaleDateString('en-US')} to ${new Date(to).toLocaleDateString('en-US')}`,
           query,
           values: [from, to]
         });
