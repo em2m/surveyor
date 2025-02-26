@@ -9,18 +9,19 @@ export class ToastService {
   constructor(private snackbar: MatSnackBar, private ctx: ContextService, private i18nService: Surveyori18nService) {}
 
   info(message: string, title?: string, duration?: number, token?: string) {
-    this.snackbar.open(message, null, { horizontalPosition: 'center', duration: 3000 });
+    const translatedMessage = this.i18nService.translate(message, token);
+    this.snackbar.open(translatedMessage, null, { horizontalPosition: 'center', duration: 3000 });
   }
 
   success(message: string, title?: string, duration?: number, token?: string) {
-    this.info(message, title);
+    this.info(message, title, duration, token);
   }
 
   error(message: string, title?: string, duration?: number, token?: string) {
-    this.info(message, title);
+    this.info(message, title, duration, token);
   }
 
   warning(message: string, title?: string, duration?: number, token?: string) {
-    this.info(message, title);
+    this.info(message, title, duration, token);
   }
 }
