@@ -56,14 +56,22 @@ export class Surveyori18nLangPipe implements PipeTransform {
         tokenSplit.forEach((token, index) => {
           if (token.includes("%")) {
             //remove % then add to array
-            fullTranslation.push(token.replace(/%/g, ""));
+            //to handle string var string...
+            token.split(" ").forEach((variableString, index) => {
+              if (index == 0) {
+                //pass var as is
+                fullTranslation.push(variableString.replace(/%/g, ""));
+              } else {
+                let tokenTranslation = langKeys[variableString.replace(/\s/g, "").toLowerCase()]?.translation || token;
+                fullTranslation.push(tokenTranslation);
+              }
+            })
           } else if (token.trim() !== "") {
-            //translate each element and re-insert into array
+            //remove spaces, translate each element and re-insert into array
             let tokenTranslation = langKeys[token.replace(/\s/g, "").toLowerCase()]?.translation || token;
             fullTranslation.push(tokenTranslation);
           }
         })
-
 
         return fullTranslation.join(" ");
 
