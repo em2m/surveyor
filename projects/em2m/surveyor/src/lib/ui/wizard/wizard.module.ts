@@ -5,6 +5,7 @@ import {SurveyorWizardStepComponent} from './step.component';
 import {CommonModule} from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import {SurveyorPercentageWizardComponent} from './percentage.wizard.component';
+import {Surveyori18nModule} from "../i18n/i18n.module";
 
 export * from './step.component';
 export * from './wizard.component';
@@ -22,7 +23,8 @@ const components = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatButtonModule
+    MatButtonModule,
+    Surveyori18nModule
   ],
   exports: [
     CommonModule,
