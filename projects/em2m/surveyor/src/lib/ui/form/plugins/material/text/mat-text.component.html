@@ -1,5 +1,5 @@
 <mat-form-field appearance="outline">
-  <mat-label>{{ controlDefinition.label | i18n:controlDefinition.label }}</mat-label>
+  <mat-label>{{ controlDefinition.label}}</mat-label>
   <input [autocomplete]="controlDefinition?.autoComplete || 'off' " matInput [id]="controlDefinition.key"
          [formControl]="formControl"
          [type]="controlDefinition?.options?.type || 'text'"
@@ -9,7 +9,9 @@
          (paste)="onPaste($event)"
          (keydown)="applyMask($event)"
   />
+<!--  HERE THEY ARE -->
+
   <mat-error *ngFor="let errorKey of getErrors()">
-    {{getErrorMessage(errorKey) | i18n:getErrorMessage(errorKey)}}
+    {{getErrorMessage(errorKey)}}
   </mat-error>
 </mat-form-field>
