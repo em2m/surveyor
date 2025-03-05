@@ -36,26 +36,27 @@ export class Surveyori18nService {
       //2 remove special chars
       token = token.replace(/[\.\-\:\'\?\,\&\/]/g, "");
 
-      //handle vars passed in
+      //handle vars passed in, separate var by enclosing it in % %. Split on %, translate first section, second section is var (add as is), last section translate
       if (token.includes("%")) {
         //this preserves the separator
         let tokenSplit = token.split(/(?=%)/);
         let fullTranslation = [];
+        let varStringRun = false;
 
         // find index of element with variable marker - %
-        tokenSplit.forEach((token, index) => {
+        tokenSplit.forEach((token) => {
+          //this includes 2 sections: first var and last section too (bc split on %)
           if (token.includes("%")) {
-            //remove % then add to array
-            //to handle string var string...
-            token.split(" ").forEach((variableString, index) => {
-              if (index == 0) {
-                //pass var as is
-                fullTranslation.push(variableString.replace(/%/g, ""));
-              } else {
-                let tokenTranslation = this.langKeys[variableString.replace(/\s/g, "").toLowerCase()]?.translation || token;
-                fullTranslation.push(tokenTranslation);
-              }
-            })
+            if (!varStringRun) {
+              //remove % then add to array as is (don't translate variable)
+              fullTranslation.push(token.replace(/%/g, ""));
+              varStringRun = true;
+            } else {
+              token = token.replace(/[\s\%]/g, "").toLowerCase();
+              //if variable already run, translate this section
+              let tokenTranslation = this.langKeys[token]?.translation || token;
+              fullTranslation.push(tokenTranslation);
+            }
           } else if (token.trim() !== "") {
             //remove spaces, translate each element and re-insert into array
             let tokenTranslation = this.langKeys[token.replace(/\s/g, "").toLowerCase()]?.translation || token;
@@ -78,7 +79,7 @@ export class Surveyori18nService {
       token = token.split(" ").join("").replace(/[\.\-\:\'\?\,\&\/]/g, "");
       translation = this.langKeys[token.toLowerCase()]?.translation || message;
 
-      return translation || message;
+      return translation;
     } else {
       return message;
     }
