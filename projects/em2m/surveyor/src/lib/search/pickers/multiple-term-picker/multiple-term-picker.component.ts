@@ -23,7 +23,7 @@ export class MultipleTermPickerComponent extends Picker implements OnInit {
   label = '';
   submitEnabled = false;
 
-  constructor(private i18nService: Surveyori18nService) {
+  constructor(public i18nService: Surveyori18nService) {
     super();
   }
 
@@ -42,11 +42,6 @@ export class MultipleTermPickerComponent extends Picker implements OnInit {
   canSubmit(): boolean {
     return this.submitEnabled;
   }
-
-  getLabel(label: string): string {
-    return this.i18nService.translate(label);
-  }
-
   ngOnInit() {
     this.buckets = this.params.buckets;
     this.buckets = this.buckets.filter(bucket => bucket.label || bucket.key);

@@ -35,7 +35,6 @@ export abstract class ModalContainer implements OnInit {
   }
 
   load() {
-    //todo can update here title, label - test
     this.title = this.i18nService.translate(this.options.title);
     this.submitLabel = this.i18nService.translate(this.options.submitLabel || "Ok");
     this.cancelLabel = this.i18nService.translate(this.options.cancelLabel || "Cancel");

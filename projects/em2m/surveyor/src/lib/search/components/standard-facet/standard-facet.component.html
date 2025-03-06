@@ -20,7 +20,7 @@
       </div>
       <div class="facet-buckets">
         <div class="bucket" *ngFor="let bucket of bucketsForAgg(agg.key)" (click)="addConstraint(agg, bucket)">
-          <label class="bucket-label" matTooltip="{{getLabel(bucket.label || bucket.key)}}" [matTooltipShowDelay]="1000">{{getLabel(bucket.label || bucket.key)}}</label>
+          <label class="bucket-label" matTooltip="{{i18nService.translate(bucket.label || bucket.key)}}" [matTooltipShowDelay]="1000">{{i18nService.translate(bucket.label || bucket.key)}}</label>
           <div class="spacer"></div>
           <label class="bucket-count"> {{bucket.count}} </label>
         </div>

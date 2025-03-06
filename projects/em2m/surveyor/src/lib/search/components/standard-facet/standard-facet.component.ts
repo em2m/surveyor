@@ -22,7 +22,7 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
   constructor(public searcher: Searcher,
               private pickerService: PickerService,
               private ctx: ContextService,
-              private i18nService: Surveyori18nService) {
+              public i18nService: Surveyori18nService) {
   }
 
   ngOnInit(): void {
@@ -197,9 +197,5 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
         this.searcher.broadcastRequest();
       }
     });
-  }
-
-  getLabel(label: string): string {
-    return this.i18nService.translate(label);
   }
 }

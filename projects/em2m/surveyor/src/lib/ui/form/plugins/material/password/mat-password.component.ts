@@ -66,7 +66,7 @@ export class MaterialPasswordInputComponent extends SurveyorFormInputComponent {
       this.passwordClass = 'label-danger';
       strength = 0;
     } else {
-      this.passwordMessage = `Password is ${message[index].val}`;
+      this.passwordMessage = `Password is %${message[index].val}%`;
       this.passwordClass = message[index].class;
     }
 
