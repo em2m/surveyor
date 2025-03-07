@@ -4,13 +4,15 @@ import {CardService} from '../card/card.service';
 import {FilterUtils} from '../../core/extension/filters/filter.util';
 import {Filter} from '../../core/extension/extension.model';
 import {ContextService} from '../../core/extension/context.service';
+import {Surveyori18nService} from "../i18n/shared/i18n.service";
 
 @Injectable({ providedIn: 'root' })
 export class TabsService {
 
   constructor(private router: Router,
               private contextService: ContextService,
-              private cardService: CardService) {
+              private cardService: CardService,
+              private i18nService: Surveyori18nService) {
   }
 
   findTabs(activatedRoute: ActivatedRoute, routes: Routes, queryParams: any): Array<any> {
@@ -38,7 +40,7 @@ export class TabsService {
             // Only add the tab if it passes all filter checks
             if (FilterUtils.isPermitted(this.contextService.getContext(), route.data.filters as Array<Filter>)) {
               tabs.push({
-                title: route.data.title || route.path,
+                title: this.i18nService.translate(route.data.title || route.path),
                 path: `./${route.path}`,
                 exact: route.path.trim().length === 0,
                 queryParam: queryParams,
