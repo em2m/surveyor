@@ -5,6 +5,7 @@ import {ContextService} from './extension/context.service';
 import {ExtensionService} from './extension/extension.service';
 import {StateService} from './state/state.service';
 import {NetworkService} from './network/network.service';
+import {ToolbarService} from "./toolbar/toolbar.service";
 
 export * from './config/config.service';
 export * from './extension/extension.model';
@@ -22,6 +23,7 @@ export * from './extension/filters/route.filter';
 export * from './extension/filters/visible.filter';
 export * from './state/state.service';
 export * from './network/network.service';
+export * from './toolbar/toolbar.service';
 
 
 @NgModule({
@@ -42,7 +44,8 @@ export class SurveyorCoreModule {
         ContextService,
         ExtensionService,
         StateService,
-        NetworkService
+        NetworkService,
+        ToolbarService
       ]
     };
   }
