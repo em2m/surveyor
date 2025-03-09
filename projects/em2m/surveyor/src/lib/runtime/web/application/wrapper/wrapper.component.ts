@@ -5,6 +5,7 @@ import {StateService} from '../../../../core/state/state.service';
 import {AppConfig} from '../../../../core/config/config.service';
 import {MatSidenav} from '@angular/material/sidenav';
 import {ContextService} from '../../../../core/extension/context.service';
+import {ToolbarService} from '../../../../core/toolbar/toolbar.service';
 
 @Component({
   selector: 'surveyor-application-wrapper',
@@ -21,21 +22,28 @@ export class ApplicationWrapperComponent implements OnInit, OnDestroy {
   staticMenuOpened = false;
   opened = false;
   fixedMenu = false;
+  hideToolbar = false;
+  hideSideNav = false;
   private staticMenuSub: Subscription;
   private breakpointSub: Subscription;
   private brandSub: Subscription;
+  private hideToolbarSub: Subscription;
+  private hideSideNavSub: Subscription;
 
   constructor(private config: AppConfig,
               private stateService: StateService,
               private ctx: ContextService,
               private breakpointObserver: BreakpointObserver,
-              private zone: NgZone) {}
+              private zone: NgZone,
+              private toolbarService: ToolbarService) {}
 
   ngOnInit() {
     this.zone.run(() => {
       const isSmallScreen = this.breakpointObserver.isMatched([Breakpoints.Handset, Breakpoints.Tablet]);
       this.staticMenu = (isSmallScreen) ? false : !!this.config.get().staticMenu;
       this.fixedMenu = (isSmallScreen) ? false : !!this.config.get().fixedMenu;
+      this.hideToolbar = !!this.config.get().hideToolbar || false;
+      this.hideSideNav = !!this.config.get().hideSideNav || false;
       this.opened = this.fixedMenu;
       if (isSmallScreen) {
         this.matSidenav.close();
@@ -73,11 +81,25 @@ export class ApplicationWrapperComponent implements OnInit, OnDestroy {
         }
       }
     });
+
+    this.hideSideNavSub = this.toolbarService.onSideNavChange.subscribe(hideSideNav => {
+      this.zone.run(() => {
+        this.hideSideNav = hideSideNav;
+      });
+    });
+
+    this.hideToolbarSub = this.toolbarService.onToolbarChange.subscribe(hideToolbar => {
+      this.zone.run(() => {
+        this.hideToolbar = hideToolbar;
+      });
+    });
   }
 
   ngOnDestroy() {
     this.breakpointSub?.unsubscribe();
     this.staticMenuSub?.unsubscribe();
+    this.hideToolbarSub?.unsubscribe();
+    this.hideSideNavSub?.unsubscribe();
   }
 
   toggleMenu() {
