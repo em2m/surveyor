@@ -52,3 +52,6 @@ mat-sidenav {
 .fixed-menu-toolbar {
   margin-left: 300px;
 }
+mat-sidenav-container > mat-sidenav-content.fight-me {
+  margin-left: 0 !important
+}
