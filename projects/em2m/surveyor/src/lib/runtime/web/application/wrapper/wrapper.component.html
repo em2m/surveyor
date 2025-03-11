@@ -13,7 +13,7 @@
     <!-- Sidenav and Content -->
     <mat-sidenav-container class="sidenav-container flex-vertical">
       <mat-sidenav [mode]="fixedMenu ? 'side' : 'over'" [opened]="opened" [fixedTopGap]="0" [fixedInViewport]="true"
-                   (click)="closeSidenav()" [class.fixed-menu]="fixedMenu">
+                   (click)="closeSidenav()" [class.fixed-menu]="fixedMenu"  [ngClass]="{'fight-me': hideSideNav}">
         <surveyor-sidenav *ngIf="!hideSideNav"></surveyor-sidenav>
       </mat-sidenav>
       <mat-sidenav-content class="flex-horizontal" [ngClass]="{'fight-me': hideSideNav}">
