@@ -55,3 +55,9 @@ mat-sidenav {
 mat-sidenav-container > mat-sidenav-content.fight-me {
   margin-left: 0 !important
 }
+.application-content > mat-sidenav-container.sidenav-container > mat-sidenav.fight-me {
+  width: 0 !important;
+  max-width: 0 !important;
+}
+
+
