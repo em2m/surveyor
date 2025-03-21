@@ -60,4 +60,24 @@ mat-sidenav-container > mat-sidenav-content.fight-me {
   max-width: 0 !important;
 }
 
+.application-banner {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+
+  .application-banner-icon {
+
+  }
+
+  .application-banner-title {
+    font-weight: bold;
+    font-size: 16px;
+    padding: 1rem;
+  }
+
+  .application-banner-message {
+
+  }
+}
+
 

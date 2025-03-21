@@ -24,11 +24,14 @@ export class ApplicationWrapperComponent implements OnInit, OnDestroy {
   fixedMenu = false;
   hideToolbar = false;
   hideSideNav = false;
+  banner: SurveyorBanner = null;
+  bannerDismissed = false;
   private staticMenuSub: Subscription;
   private breakpointSub: Subscription;
   private brandSub: Subscription;
   private hideToolbarSub: Subscription;
   private hideSideNavSub: Subscription;
+  private bannerSub: Subscription;
 
   constructor(private config: AppConfig,
               private stateService: StateService,
@@ -93,6 +96,11 @@ export class ApplicationWrapperComponent implements OnInit, OnDestroy {
         this.hideToolbar = hideToolbar;
       });
     });
+
+    this.banner = this.ctx.getValue('surveyorBanner');
+    this.bannerSub = this.ctx.onValueChange('surveyorBanner').subscribe(banner => {
+      this.banner = banner;
+    });
   }
 
   ngOnDestroy() {
@@ -100,6 +108,7 @@ export class ApplicationWrapperComponent implements OnInit, OnDestroy {
     this.staticMenuSub?.unsubscribe();
     this.hideToolbarSub?.unsubscribe();
     this.hideSideNavSub?.unsubscribe();
+    this.bannerSub.unsubscribe();
   }
 
   toggleMenu() {
@@ -117,4 +126,19 @@ export class ApplicationWrapperComponent implements OnInit, OnDestroy {
       this.matSidenav.close();
     }
   }
+
+  dismissBanner() {
+    this.bannerDismissed = true;
+    this.ctx.setValue('bannerDismissed', true);
+  }
+}
+
+export interface SurveyorBanner {
+  message: string;
+  title?: string;
+  iconClass?: string;
+  backgroundColor?: string;
+  color?: string;
+  enabled?: boolean;
+  dismissable?: boolean;
 }

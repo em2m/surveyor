@@ -1,6 +1,20 @@
 
 <div class="application-wrapper">
   <div class="application-content flex-vertical">
+    <!-- Application Banner -->
+    <div class="application-banner" *ngIf="banner?.enabled && !bannerDismissed"
+         [style.background-color]="banner?.backgroundColor || '#ffb300'"
+         [style.color]="banner?.color || '#495057'">
+      <i class="fal fa-3x application-banner-icon"
+         [ngClass]="banner?.iconClass || 'fa-exclamation-triangle'"></i>
+      <div class="application-banner-title">{{ banner?.title || 'IMPORTANT!'}}</div>
+      <div class="application-banner-message">{{ banner?.message }}</div>
+      <button class="application-banner-dismiss" mat-icon-button
+              *ngIf="banner?.dismissable !== false" (click)="dismissBanner()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
     <!-- Toolbar -->
     <mat-toolbar color="primary" class="application-toolbar" id="org-theme-toolbar"  *ngIf="!hideToolbar"
                  [style.background-color]="brandColor" [class.fixed-menu-toolbar]="fixedMenu">
