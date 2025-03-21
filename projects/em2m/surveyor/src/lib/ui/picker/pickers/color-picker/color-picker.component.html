@@ -1,6 +1,6 @@
 <div class="flex-container">
   <mat-form-field appearance="outline">
-    <mat-label>Hex Code</mat-label>
+    <mat-label>{{"Hex Code" | i18n:"hexcode"}}</mat-label>
     <input matInput type="text" [required]="true" [(ngModel)]="selectedHexCode"/>
     <!--
     <mat-error *ngFor="let errorKey of getErrors()">
@@ -22,7 +22,7 @@
   </div>
   <div class="color-gradient-container">
     <h3 *ngIf="!selectedColor"></h3>
-    <h3 *ngIf="selectedColor">{{selectedColor}}</h3>
+    <h3 *ngIf="selectedColor">{{selectedColor | i18n:selectedColor}}</h3>
     <div class="color-gradient" *ngFor="let gradient of gradients" (click)="selectGradient(gradient)"
          [style.background-color]="gradient.hex">
       <div *ngIf="selectedHexCode === gradient.hex; else unselectedGradient" class="color-gradients-selected"
