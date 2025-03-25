@@ -3,7 +3,7 @@
     <span *ngIf="primaryActions && primaryActions.length > 0">
       <span *ngFor="let action of primaryActions" class="button-wrapper">
         <button mat-raised-button color="primary" (click)="action.run()" [disabled]="!action.enabled">
-          {{action.text | i18n:action.text}}
+          {{action.text}}
         </button>
       </span>
     </span>
@@ -14,7 +14,7 @@
       </button>
       <mat-menu #actionMenu="matMenu" yPosition="below" xPosition="before" [overlapTrigger]="false">
         <button mat-menu-item *ngFor="let action of secondaryActions" [ngClass]="{disabled: !action.enabled}" (click)="action.enabled ? action.run() : ''">
-        {{action.text | i18n:action.text}}
+        {{action.text}}
         </button>
       </mat-menu>
     </span>
@@ -27,10 +27,10 @@
       </button>
       <mat-menu #actionMenu="matMenu" yPosition="below" xPosition="before" [overlapTrigger]="false">
         <button mat-menu-item *ngFor="let action of primaryActions" [ngClass]="{disabled: !action.enabled}" (click)="action.enabled ? action.run() : ''">
-        {{action.text | i18n:action.text}}
+        {{action.text}}
         </button>
         <button mat-menu-item *ngFor="let action of secondaryActions" [ngClass]="{disabled: !action.enabled}" (click)="action.enabled ? action.run() : ''">
-            {{action.text | i18n:action.text}}
+            {{action.text}}
         </button>
       </mat-menu>
     </span>
@@ -41,45 +41,45 @@
     <div class="center-content">
       <span class="center-content" *ngIf="primaryActions && primaryActions.length > 0">
         <span class="center-content" *ngFor="let action of primaryActions">
-          <button *ngIf="!miniFab" mat-icon-button class="mat-icon-button center-content" matTooltip='{{action.text | i18n:action.text}}' (click)="action.run()" [disabled]="!action.enabled">
+          <button *ngIf="!miniFab" mat-icon-button class="mat-icon-button center-content" matTooltip='{{action.text}}' (click)="action.run()" [disabled]="!action.enabled">
             <i class="{{action.iconClass}} center-content"></i>
           </button>
-          <button *ngIf="miniFab" mat-mini-fab class="mini-fab-icon-size center-content" color="primary" matTooltip='{{action.text | i18n:action.text}}'  (click)="action.run()" [disabled]="!action.enabled">
+          <button *ngIf="miniFab" mat-mini-fab class="mini-fab-icon-size center-content" color="primary" matTooltip='{{action.text}}'  (click)="action.run()" [disabled]="!action.enabled">
             <i class="{{action.iconClass}} center-content"></i>
           </button>
         </span>
       </span>
 
       <span class="center-content" *ngIf="secondaryActions && secondaryActions.length > 0">
-          <button *ngIf="!miniFab" mat-icon-button color="primary" matTooltip="{{toolTip | i18n:toolTip}}" class="mat-icon-button center-content" [matMenuTriggerFor]="actionMenu">
+          <button *ngIf="!miniFab" mat-icon-button color="primary" matTooltip="{{toolTip}}" class="mat-icon-button center-content" [matMenuTriggerFor]="actionMenu">
             <i class="{{icon}}"></i>
           </button>
-          <button *ngIf="miniFab" mat-mini-fab class="mini-fab-icon-size more-actions-mini-fab center-content" color="primary" matTooltip="{{toolTip | i18n:toolTip}}" [matMenuTriggerFor]="actionMenu">
+          <button *ngIf="miniFab" mat-mini-fab class="mini-fab-icon-size more-actions-mini-fab center-content" color="primary" matTooltip="{{toolTip}}" [matMenuTriggerFor]="actionMenu">
             <i class="{{icon}}"></i>
           </button>
       </span>
     </div>
     <mat-menu #actionMenu="matMenu" yPosition="below" xPosition="before" [overlapTrigger]="false">
       <button mat-menu-item *ngFor="let action of secondaryActions" [ngClass]="{disabled: !action.enabled}" (click)="action.enabled ? action.run() : ''">
-        {{action.text | i18n:action.text}}
+        {{action.text}}
       </button>
     </mat-menu>
   </span>
 
   <span class="hidden-desktop-up center-content" *ngIf="iconOnly && !showPrimary">
     <span class="center-content" *ngIf="primaryActions?.length || secondaryActions?.length">
-      <button *ngIf="!miniFab" mat-icon-button color="primary" class="mat-icon-button center-content" matTooltip="{{toolTip | i18n:toolTip}}" [matMenuTriggerFor]="actionMenu">
+      <button *ngIf="!miniFab" mat-icon-button color="primary" class="mat-icon-button center-content" matTooltip="{{toolTip}}" [matMenuTriggerFor]="actionMenu">
         <i class="{{icon}} custom-action-icon-color"></i>
       </button>
-      <button *ngIf="miniFab" mat-mini-fab class="mini-fab-icon-size more-actions-mini-fab center-content" color="primary" matTooltip="{{toolTip | i18n:toolTip}}" [matMenuTriggerFor]="actionMenu">
+      <button *ngIf="miniFab" mat-mini-fab class="mini-fab-icon-size more-actions-mini-fab center-content" color="primary" matTooltip="{{toolTip}}" [matMenuTriggerFor]="actionMenu">
         <i class="{{icon}}"></i>
       </button>
       <mat-menu #actionMenu="matMenu" yPosition="below" xPosition="before" [overlapTrigger]="false">
         <button mat-menu-item *ngFor="let action of primaryActions" [ngClass]="{disabled: !action.enabled}" (click)="action.enabled ? action.run() : ''">
-          {{action.text | i18n:action.text}}
+          {{action.text}}
         </button>
         <button mat-menu-item *ngFor="let action of secondaryActions" [ngClass]="{disabled: !action.enabled}" (click)="action.enabled ? action.run() : ''">
-          {{action.text | i18n:action.text}}
+          {{action.text}}
         </button>
       </mat-menu>
     </span>
@@ -89,27 +89,27 @@
     <div class="center-content">
       <span class="center-content" *ngIf="primaryActions && primaryActions.length > 0">
         <span class="center-content" *ngFor="let action of primaryActions">
-          <button *ngIf="!miniFab" mat-icon-button class="mat-icon-button center-content" matTooltip="{{action.text | i18n:action.text}}" (click)="action.run()" [disabled]="!action.enabled">
+          <button *ngIf="!miniFab" mat-icon-button class="mat-icon-button center-content" matTooltip="{{action.text}}" (click)="action.run()" [disabled]="!action.enabled">
             <i class="{{action.iconClass}} center-content"></i>
           </button>
-          <button *ngIf="miniFab" mat-mini-fab class="mini-fab-icon-size center-content" color="primary" matTooltip="{{action.text | i18n:action.text}}" (click)="action.run()" [disabled]="!action.enabled">
+          <button *ngIf="miniFab" mat-mini-fab class="mini-fab-icon-size center-content" color="primary" matTooltip="{{action.text}}" (click)="action.run()" [disabled]="!action.enabled">
             <i class="{{action.iconClass}} center-content"></i>
           </button>
         </span>
       </span>
 
       <span class="center-content" *ngIf="secondaryActions && secondaryActions.length > 0">
-          <button *ngIf="!miniFab" mat-icon-button color="primary" matTooltip="{{toolTip | i18n:toolTip}}" class="mat-icon-button center-content" [matMenuTriggerFor]="actionMenu">
+          <button *ngIf="!miniFab" mat-icon-button color="primary" matTooltip="{{toolTip}}" class="mat-icon-button center-content" [matMenuTriggerFor]="actionMenu">
             <i class="{{icon}}"></i>
           </button>
-          <button *ngIf="miniFab" mat-mini-fab class="mini-fab-icon-size more-actions-mini-fab center-content" color="primary" matTooltip="{{toolTip | i18n:toolTip}}" [matMenuTriggerFor]="actionMenu">
+          <button *ngIf="miniFab" mat-mini-fab class="mini-fab-icon-size more-actions-mini-fab center-content" color="primary" matTooltip="{{toolTip}}" [matMenuTriggerFor]="actionMenu">
             <i class="{{icon}}"></i>
           </button>
       </span>
     </div>
     <mat-menu #actionMenu="matMenu" yPosition="below" xPosition="before" [overlapTrigger]="false">
       <button mat-menu-item *ngFor="let action of secondaryActions" [ngClass]="{disabled: !action.enabled}" (click)="action.enabled ? action.run() : ''">
-        {{action.text | i18n:action.text}}
+        {{action.text}}
       </button>
     </mat-menu>
   </span>
