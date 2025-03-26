@@ -45,17 +45,19 @@ export class Surveyori18nLangPipe implements PipeTransform {
       }
 
       //2 remove special chars
-      token = token.replace(/[\.\-\:\'\?\,\&\/]/g, "");
+      token = token.replace(/[\.\*\<\!\_\-\:\'\?\,\&\/\|]/g, "");
 
       //handle vars passed in, separate var by enclosing it in % %. Split on %, translate first section, second section is var (add as is), last section translate
-      if (token.includes("%")) {
+      // this handles string that use % in phrase, not as symbol for a var
+      const variableSymbolsInString = (token.match(/%/g) || []).length;
+      if (variableSymbolsInString > 1) {
         //preserves separator
         let tokenSplit = token.split(/(?=%)/);
         let fullTranslation = [];
         let varStringRun = false;
 
         // find index of element with variable marker - %
-        tokenSplit.forEach((token, index) => {
+        tokenSplit.forEach((token) => {
           //this includes 2 sections: first var and last section too (bc split on %)
           if (token.includes("%")) {
             if (!varStringRun) {
@@ -88,7 +90,7 @@ export class Surveyori18nLangPipe implements PipeTransform {
     } else if (token) {
       //token should be passed without vars, chars, etc
       //symbols, (), etc added back in translation
-      token = token.split(" ").join("").replace(/[\.\-\:\'\?\,\&\/]/g, "");
+      token = token.split(" ").join("").replace(/[\.\*\!\<\_\-\:\'\?\,\&\/\|]/g, "");
       translation = langKeys[token.toLowerCase()]?.translation || value;
 
       return translation;
