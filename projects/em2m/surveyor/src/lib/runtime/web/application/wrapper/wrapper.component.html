@@ -1,8 +1,22 @@
 
 <div class="application-wrapper">
   <div class="application-content flex-vertical">
+    <!-- Application Banner -->
+    <div class="application-banner" *ngIf="banner?.enabled && !bannerDismissed"
+         [style.background-color]="banner?.backgroundColor || '#ffb300'"
+         [style.color]="banner?.color || '#495057'">
+      <i class="fal fa-3x application-banner-icon"
+         [ngClass]="banner?.iconClass || 'fa-exclamation-triangle'"></i>
+      <div class="application-banner-title">{{ banner?.title || 'IMPORTANT!'}}</div>
+      <div class="application-banner-message">{{ banner?.message }}</div>
+      <button class="application-banner-dismiss" mat-icon-button
+              *ngIf="banner?.dismissable !== false" (click)="dismissBanner()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
     <!-- Toolbar -->
-    <mat-toolbar color="primary" class="application-toolbar" id="org-theme-toolbar"
+    <mat-toolbar color="primary" class="application-toolbar" id="org-theme-toolbar"  *ngIf="!hideToolbar"
                  [style.background-color]="brandColor" [class.fixed-menu-toolbar]="fixedMenu">
       <button mat-icon-button (click)="toggleMenu()" *ngIf="!fixedMenu">
         <mat-icon>menu</mat-icon>
@@ -13,11 +27,11 @@
     <!-- Sidenav and Content -->
     <mat-sidenav-container class="sidenav-container flex-vertical">
       <mat-sidenav [mode]="fixedMenu ? 'side' : 'over'" [opened]="opened" [fixedTopGap]="0" [fixedInViewport]="true"
-                   (click)="closeSidenav()" [class.fixed-menu]="fixedMenu">
-        <surveyor-sidenav></surveyor-sidenav>
+                   (click)="closeSidenav()" [class.fixed-menu]="fixedMenu"  [ngClass]="{'fight-me': hideSideNav}">
+        <surveyor-sidenav *ngIf="!hideSideNav"></surveyor-sidenav>
       </mat-sidenav>
-      <mat-sidenav-content class="flex-horizontal">
-        <div class="static-menu flex-scroll" *ngIf="staticMenu && !fixedMenu" [class.static-menu-opened]="staticMenuOpened" [style.background-color]="brandColor">
+      <mat-sidenav-content class="flex-horizontal" [ngClass]="{'fight-me': hideSideNav}">
+        <div class="static-menu flex-scroll" *ngIf="staticMenu && !fixedMenu && !hideSideNav" [class.static-menu-opened]="staticMenuOpened" [style.background-color]="brandColor" >
           <div style="width: 299px;">
             <surveyor-sidenav></surveyor-sidenav>
           </div>

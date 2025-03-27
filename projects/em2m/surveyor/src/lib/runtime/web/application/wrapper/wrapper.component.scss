@@ -52,3 +52,32 @@ mat-sidenav {
 .fixed-menu-toolbar {
   margin-left: 300px;
 }
+mat-sidenav-container > mat-sidenav-content.fight-me {
+  margin-left: 0 !important
+}
+.application-content > mat-sidenav-container.sidenav-container > mat-sidenav.fight-me {
+  width: 0 !important;
+  max-width: 0 !important;
+}
+
+.application-banner {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+
+  .application-banner-icon {
+
+  }
+
+  .application-banner-title {
+    font-weight: bold;
+    font-size: 16px;
+    padding: 1rem;
+  }
+
+  .application-banner-message {
+
+  }
+}
+
+
