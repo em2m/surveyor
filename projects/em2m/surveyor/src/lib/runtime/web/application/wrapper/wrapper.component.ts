@@ -44,11 +44,14 @@ export class ApplicationWrapperComponent implements OnInit, OnDestroy {
     this.zone.run(() => {
       const isSmallScreen = this.breakpointObserver.isMatched([Breakpoints.Handset, Breakpoints.Tablet]);
       this.staticMenu = (isSmallScreen) ? false : !!this.config.get().staticMenu;
-      this.fixedMenu = (isSmallScreen) ? false : !!this.config.get().fixedMenu;
+      // this.fixedMenu = (isSmallScreen) ? false : !!this.config.get().fixedMenu;
+      this.fixedMenu = !!this.config.get().fixedMenu;
       this.hideToolbar = !!this.config.get().hideToolbar || false;
       this.hideSideNav = !!this.config.get().hideSideNav || false;
       this.opened = this.fixedMenu;
-      if (isSmallScreen) {
+      if (this.opened) {
+        this.matSidenav.open();
+      } else if (isSmallScreen) {
         this.matSidenav.close();
       }
     });
@@ -61,12 +64,12 @@ export class ApplicationWrapperComponent implements OnInit, OnDestroy {
     this.breakpointSub = this.breakpointObserver.observe([Breakpoints.Handset, Breakpoints.Tablet]).subscribe(result => {
       this.zone.run(() => {
         this.staticMenu = (result.matches) ? false : !!this.config.get().staticMenu;
-        this.fixedMenu = (result.matches) ? false : !!this.config.get().fixedMenu;
+        // this.fixedMenu = (result.matches) ? false : !!this.config.get().fixedMenu;
         this.opened = this.fixedMenu;
-        if (result.matches) {
-          this.matSidenav.close();
-        } else if (this.fixedMenu) {
+        if (this.opened) {
           this.matSidenav.open();
+        } else if (result.matches) {
+          this.matSidenav.close();
         }
       });
     });
@@ -79,8 +82,15 @@ export class ApplicationWrapperComponent implements OnInit, OnDestroy {
           this.staticMenu = (isSmallScreen) ? false : !!brand.settings.staticMenu;
         }
         if (brand.settings.fixedMenu !== undefined && brand.settings.fixedMenu !== null) {
-          this.fixedMenu = (isSmallScreen) ? false : !!brand.settings.fixedMenu;
+          // this.fixedMenu = (isSmallScreen) ? false : !!brand.settings.fixedMenu;
+          this.fixedMenu = !!brand.settings.fixedMenu;
           this.opened = this.fixedMenu;
+
+          if (this.opened) {
+            this.matSidenav.open();
+          } else if (isSmallScreen) {
+            this.matSidenav.close();
+          }
         }
       }
     });
