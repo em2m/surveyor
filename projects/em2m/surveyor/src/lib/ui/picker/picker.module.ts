@@ -7,6 +7,7 @@ import {ColorPicker} from './pickers/color-picker/color-picker.component';
 import {PickerPlugin} from './picker.plugin';
 import {SurveyorModalModule} from '../modal/modal.module';
 import {MatInputModule} from '@angular/material/input';
+import {Surveyori18nModule} from "../i18n/i18n.module";
 
 export * from './picker.component';
 export * from './picker.model';
@@ -21,6 +22,7 @@ export * from './pickers/time-zone-picker/time-zone-picker.component';
     FormsModule,
     SurveyorModalModule,
     MatInputModule,
+    Surveyori18nModule
   ],
   exports: [
     TimeZonePicker,

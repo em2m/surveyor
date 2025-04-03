@@ -98,7 +98,7 @@ export class LeafletService {
     return this.mapControlLayers[mapId];
   }
 
-  getMapBaseLayers(mapId): Array<{label: string, layer: Layer}> {
+  getMapBaseLayers(mapId): Array<{label: string, enLabel: string, layer: Layer}> {
     return this.mapBaseLayers[mapId];
   }
 

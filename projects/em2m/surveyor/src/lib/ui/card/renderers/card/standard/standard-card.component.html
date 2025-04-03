@@ -1,10 +1,10 @@
 
 <div [ngClass]="{'mdl-card mdl-shadow--2dp': card?.style != 'none'}">
   <div class="mdl-card__title" *ngIf="card?.title">
-    <span class="mdl-card__title-text">{{card?.title}}</span>
+    <span class="mdl-card__title-text">{{card?.title | i18n:card?.title}}</span>
   </div>
   <div [ngClass]="{'mdl-card__supporting-text': card?.style != 'none'}">
-    <h3 *ngIf="failed">Unable to load Widget</h3>
+    <h3 *ngIf="failed">{{"Unable to load Widget" | i18n:"UnableToLoadWidget"}}</h3>
     <div #cardTarget></div>
   </div>
 </div>

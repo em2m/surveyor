@@ -4,6 +4,7 @@ import {Bucket, DateRangeQuery, ExistsQuery, OrQuery, Query, RangeQuery, TermQue
 import {PickerService} from '../../../ui/picker/picker.service';
 import {Subscription} from 'rxjs';
 import {ContextService} from '../../../core/extension/context.service';
+import {Surveyori18nService} from "../../../ui/i18n/shared/i18n.service";
 
 @Component({
   selector: 'surveyor-standard-facet',
@@ -20,7 +21,8 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
 
   constructor(public searcher: Searcher,
               private pickerService: PickerService,
-              private ctx: ContextService) {
+              private ctx: ContextService,
+              public i18nService: Surveyori18nService) {
   }
 
   ngOnInit(): void {
@@ -180,7 +182,7 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
   }
 
   loadDatePicker(agg: any) {
-    this.pickerService.pick('date-range', {title: 'Select Date Range'}).subscribe(range => {
+    this.pickerService.pick('date-range', {title: this.i18nService.translate('Select Date Range', 'selectdaterange')}).subscribe(range => {
       if (range) {
         const from = range.from.getTime();
         const to = range.to.getTime() + this.DAY_IN_MILLIS - 1;

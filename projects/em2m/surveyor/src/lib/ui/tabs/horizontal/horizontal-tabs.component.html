@@ -4,7 +4,7 @@
       <span class="mdl-layout-spacer"></span>
       <a *ngFor="let tab of tabs" class="mdl-tabs__tab" [routerLink]="[tab.path]" [queryParams]="tab.queryParam"
          routerLinkActive="is-active" [routerLinkActiveOptions]="{exact:tab.exact}">
-        {{ tab.title }}
+        {{ tab.title}}
       </a>
       <span class="mdl-layout-spacer"></span>
     </div>

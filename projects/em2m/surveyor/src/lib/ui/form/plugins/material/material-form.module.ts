@@ -20,6 +20,7 @@ import {MaterialPasswordInputComponent} from './password/mat-password.component'
 import {MaterialDollarsComponent} from './dollars/mat-dollars.component';
 import {MaterialDateInputComponent} from './date/mat-date.component';
 import {MaterialChipsInputComponent} from './chips/mat-chips.component';
+import {Surveyori18nModule} from "../../../i18n/i18n.module";
 
 export * from './material-form-plugin';
 export * from './select/mat-select.component';
@@ -57,7 +58,8 @@ const components = [
     MatIconModule,
     MatDatepickerModule,
 //    MatNativeDateModule,
-    MatChipsModule
+    MatChipsModule,
+    Surveyori18nModule
   ],
   exports: [
     CommonModule,

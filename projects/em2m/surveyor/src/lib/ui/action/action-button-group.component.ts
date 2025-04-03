@@ -3,6 +3,7 @@ import {Selection, Action} from './action.model';
 import {ActionService} from './action.service';
 import {Observable, Subscription} from 'rxjs';
 import {ContextService} from '../../core/extension/context.service';
+import {Surveyori18nService} from "../i18n/shared/i18n.service";
 
 @Component({
   selector: 'surveyor-action-button-group',
@@ -26,10 +27,11 @@ export class ActionButtonGroupComponent implements OnInit, OnDestroy {
   private selectionSub: Subscription;
   private selectionValue: Selection;
 
-  constructor(private actionService: ActionService, private contextService: ContextService) {}
+  constructor(private actionService: ActionService, private contextService: ContextService, private i18nService: Surveyori18nService) {}
 
   ngOnInit() {
     this.contextSub = this.contextService.onContextChange().subscribe(() => this.findActions());
+    this.toolTip = this.i18nService.translate(this.toolTip);
 
     if (this.selection) {
       if (this.selection instanceof Selection) {

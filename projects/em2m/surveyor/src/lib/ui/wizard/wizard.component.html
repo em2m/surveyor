@@ -1,6 +1,6 @@
 <div class="wizard-wrapper flex-vertical" *ngIf="steps && steps?.length > 0">
   <div class="page-header">
-    <div class="page-title">{{title}}</div>
+    <div class="page-title">{{title | i18n:title}}</div>
     <a class="mdl-button mdl-js-button icon-button close-button" (click)="onCancel()"><i
       class="material-icons">close</i></a>
   </div>
@@ -21,7 +21,7 @@
           'fa-check-circle': isComplete($index) && !isSkipped($index) && activeIndex >= $index
         }"></i>
         </div>
-        <div class="step-item-title" [ngClass]="{'active-step': activeIndex === $index}">{{ step.title }}</div>
+        <div class="step-item-title" [ngClass]="{'active-step': activeIndex === $index}">{{ step.title | i18n:step.title }}</div>
       </div>
     </div>
   </div>
@@ -29,25 +29,25 @@
     <ng-content></ng-content>
   </div>
   <div class="step-controls">
-    <button mat-flat-button style="flex: 1;" *ngIf="activeIndex === 0" (click)="onCancel()">CANCEL</button>
+    <button mat-flat-button style="flex: 1;" *ngIf="activeIndex === 0" (click)="onCancel()">{{"CANCEL" | i18n:"cancel" | uppercase}}</button>
     <button mat-flat-button style="flex: 1;"
-            *ngIf="activeIndex > 0" (click)="selectStep(activeIndex - 1)" [disabled]="!hasActiveSteps(activeIndex)">BACK
+            *ngIf="activeIndex > 0" (click)="selectStep(activeIndex - 1)" [disabled]="!hasActiveSteps(activeIndex)">{{"BACK" | i18n:"back" | uppercase}}
     </button>
     <div style="flex: 0.5;"></div>
     <button mat-flat-button color="primary" style="flex: 1;" [disabled]="!isComplete(activeIndex, true)"
-            *ngIf="activeIndex !== steps?.length - 1" (click)="selectStep(activeIndex + 1)">NEXT
+            *ngIf="activeIndex !== steps?.length - 1" (click)="selectStep(activeIndex + 1)">{{"NEXT" | i18n:"next" | uppercase}}
     </button>
     <button mat-flat-button color="primary" style="flex: 1;" [disabled]="!isComplete(activeIndex)"
-            *ngIf="activeIndex === steps?.length - 1 && completeLabel" (click)="onComplete()">{{completeLabel}}
+            *ngIf="activeIndex === steps?.length - 1 && completeLabel" (click)="onComplete()">{{completeLabel | i18n:completeLabel}}
     </button>
     <button mat-flat-button color="primary" style="flex: 1;" [disabled]="!isComplete(activeIndex)"
-            *ngIf="activeIndex === steps?.length - 1 && !completeLabel" (click)="onComplete()">COMPLETE
+            *ngIf="activeIndex === steps?.length - 1 && !completeLabel" (click)="onComplete()">{{"COMPLETE" | i18n:"complete" | uppercase}}
     </button>
   </div>
 </div>
 
 <div *ngIf="!steps || steps?.length === 0">
   <p>
-    No available steps
+    {{"No available steps" | i18n:"noavailablesteps"}}
   </p>
 </div>

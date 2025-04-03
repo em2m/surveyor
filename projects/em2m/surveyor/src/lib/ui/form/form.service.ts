@@ -4,6 +4,7 @@ import {Extension} from '../../core/extension/extension.model';
 import {ControlOptions, ControlValidator, FormDefinition, AsyncControlValidator, Mask} from './form.model';
 import {AsyncValidatorFn, UntypedFormBuilder, ValidatorFn} from '@angular/forms';
 import {SurveyorFormInputComponent} from './form-input-component';
+import {Surveyori18nService} from "../i18n/shared/i18n.service";
 
 @Injectable()
 export class FormService {
@@ -22,7 +23,8 @@ export class FormService {
 
   constructor(private extensionService: ExtensionService,
               private formBuilder: UntypedFormBuilder,
-              private injector: Injector) {
+              private injector: Injector,
+              private i18nService: Surveyori18nService) {
     this.registerExtensions();
   }
 
@@ -103,6 +105,27 @@ export class FormService {
         }
         return controlValidator;
       });
+
+      opts.label = this.i18nService.translate(opts.label);
+
+      //select input options
+      if (opts.options && opts.options?.selections) {
+        opts.options?.selections.forEach((selection) => {
+          if (selection.label) {
+            selection.label = this.i18nService.translate(selection.label);
+          }
+        });
+      }
+
+      //select input options
+      if (opts.validators) {
+        opts.validators.forEach((validator) => {
+          if (validator.message) {
+            validator.message = this.i18nService.translate(validator.message);
+          }
+        });
+      }
+
       return opts;
     });
     return new FormDefinition(extendedControls, this.formBuilder);
