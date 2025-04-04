@@ -20,14 +20,21 @@
 
 import { Pipe, PipeTransform } from '@angular/core';
 import {ContextService} from '../../../core/extension/context.service';
+import {AppConfig} from "../../../core/config/config.service";
 
 @Pipe({
   name: 'i18n'
 })
 export class Surveyori18nLangPipe implements PipeTransform {
-  constructor(private ctx: ContextService) {}
+
+  private enabled: boolean = false;
+
+  constructor(private ctx: ContextService, config: AppConfig) {
+    this.enabled = config.get().i18n?.enabled || false;
+  }
 
   transform(value: string, token: string): any {
+    if (!this.enabled) return value;
     const langKeys = this.ctx.getValue("i18n");
     if (!value) { return; }
     if (!langKeys) {return value}
