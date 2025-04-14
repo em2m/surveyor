@@ -19,6 +19,7 @@ import {SurveyorGeoModule} from './geo/geo.module';
 import {SurveyorWizardModule} from './wizard/wizard.module';
 import {SurveyorPopoverModule} from './popover/popover.module';
 import {SurveyorConverterModule} from './converter/converter.module';
+import {Surveyori18nModule} from "./i18n/i18n.module";
 
 export * from './action/action.module';
 export * from './breadcrumbs/breadcrumbs.module';
@@ -27,6 +28,7 @@ export * from './converter/converter.module';
 export * from './dropdown/dropdown.module';
 export * from './form/form.module';
 export * from './geo/geo.module';
+export * from './i18n/i18n.module';
 export * from './intent/intent.module';
 export * from './leaflet/leaflet.module';
 export * from './mask/mask.module';
@@ -50,6 +52,7 @@ export * from './wizard/wizard.module';
     SurveyorDropdownModule.forRoot(),
     SurveyorFormModule.forRoot(),
     SurveyorGeoModule.forRoot(),
+    Surveyori18nModule.forRoot(),
     SurveyorIntentModule.forRoot(),
     SurveyorLeafletModule.forRoot(),
     SurveyorMaskModule.forRoot(),
