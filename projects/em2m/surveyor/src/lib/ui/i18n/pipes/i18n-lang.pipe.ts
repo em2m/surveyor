@@ -27,14 +27,11 @@ import {AppConfig} from "../../../core/config/config.service";
 })
 export class Surveyori18nLangPipe implements PipeTransform {
 
-  private enabled: boolean = false;
-
   constructor(private ctx: ContextService, config: AppConfig) {
-    this.enabled = config.get().i18n?.enabled || false;
+
   }
 
   transform(value: string, token: string): any {
-    if (!this.enabled) return value;
     const langKeys = this.ctx.getValue("i18n");
     if (!value) { return; }
     if (!langKeys) {return value}
