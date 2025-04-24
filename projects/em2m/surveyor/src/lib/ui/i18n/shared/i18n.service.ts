@@ -5,13 +5,10 @@ import {AppConfig} from "../../../core/config/config.service";
 
 @Injectable()
 export class Surveyori18nService {
-
-  private enabled: boolean = false;
   private langKeys: any;
   private localeSub: Subscription;
 
   constructor(private ctx: ContextService, config: AppConfig) {
-    this.enabled = config.get().i18n?.enabled || false;
     this.langKeys = ctx.getValue("i18n");
     this.localeSub = this.ctx.onValueChange("i18n").subscribe(res => {
       this.detectLang();
@@ -26,7 +23,6 @@ export class Surveyori18nService {
   }
 
   translate(message: string, token?: string) {
-    if (!this.enabled) return message;
     let translation;
 
     if (!this.langKeys) {
