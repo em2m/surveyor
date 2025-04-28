@@ -24,9 +24,8 @@ export class Surveyori18nService {
 
   translate(message: string, token?: string) {
     let translation;
-
     if (!this.langKeys) {
-      this.detectLang();
+      return message
     } else {
       if (!token && message) {
         //Case 1 - only message sent in... > remove () & special chars, handle vars,
