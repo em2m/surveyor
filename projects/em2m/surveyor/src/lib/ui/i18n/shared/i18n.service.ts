@@ -26,6 +26,9 @@ export class Surveyori18nService {
 
   translate(message: string, token?: string) {
     let translation;
+    if (!message) {
+      return message;
+    }
     const variableMarkersInMessage = (message.match(/%/g) || []).length;
 
     if (!this.langKeys || !this.enabled) {
