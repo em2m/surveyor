@@ -26,15 +26,25 @@ import {AppConfig} from "../../../core/config/config.service";
   name: 'i18n'
 })
 export class Surveyori18nLangPipe implements PipeTransform {
+  private enabled: boolean = false;
 
   constructor(private ctx: ContextService, config: AppConfig) {
-
+    this.enabled = config.get().i18n?.enabled || false;
   }
 
   transform(value: string, token: string): any {
     const langKeys = this.ctx.getValue("i18n");
+
+    const variableMarkersInMessage = (value.match(/%/g) || []).length;
+
     if (!value) { return; }
-    if (!langKeys) {return value}
+    if (!langKeys || !this.enabled) {
+      //remove variable markers
+      if (variableMarkersInMessage > 1) {
+        value = value.replace(/[\s\%]/g, " ")
+      }
+      return value
+    }
     let translation;
 
     //this is for validation messages etc passed from class file (error messages on form field etc)
