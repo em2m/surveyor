@@ -32,20 +32,19 @@ export class Surveyori18nLangPipe implements PipeTransform {
     this.enabled = config.get().i18n?.enabled || false;
   }
 
-  transform(value: string, token: string): any {
+  transform(value: string, token: string, uppercaseCheck?: boolean): any {
     const langKeys = this.ctx.getValue("i18n");
-
-    const variableMarkersInMessage = (value.match(/%/g) || []).length;
-
     if (!value) { return; }
+    let uppercaseString = false;
+    let translation;
+
+    if (uppercaseCheck && (value.toUpperCase() === value)) {
+      uppercaseString = true;
+    }
+
     if (!langKeys || !this.enabled) {
-      //remove variable markers
-      if (variableMarkersInMessage > 1) {
-        value = value.replace(/[\s\%]/g, " ")
-      }
       return value
     }
-    let translation;
 
     //this is for validation messages etc passed from class file (error messages on form field etc)
     if (token && token === value) {
@@ -91,14 +90,14 @@ export class Surveyori18nLangPipe implements PipeTransform {
           }
         })
 
-        return fullTranslation.join(" ");
+        return uppercaseString ? fullTranslation.join(" ").toUpperCase() : fullTranslation.join(" ");
 
       } else {
         //remove special chars && remove spaces
         token = token.replace(/\s/g, "");
         translation = langKeys[token.toLowerCase()]?.translation || value;
 
-        return translation;
+        return uppercaseString ? translation.toUpperCase() : translation;
       }
 
     } else if (token) {
@@ -107,7 +106,7 @@ export class Surveyori18nLangPipe implements PipeTransform {
       token = token.split(" ").join("").replace(/[\.\*\!\<\_\-\:\'\?\,\&\/\|]/g, "");
       translation = langKeys[token.toLowerCase()]?.translation || value;
 
-      return translation;
+      return uppercaseString ? translation.toUpperCase() : translation;
     } else {
       return value;
     }
