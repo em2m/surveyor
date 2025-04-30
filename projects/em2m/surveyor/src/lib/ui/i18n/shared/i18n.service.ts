@@ -26,10 +26,14 @@ export class Surveyori18nService {
 
   translate(message: string, token?: string) {
     let translation;
+    let uppercaseString = false;
     if (!message) {
       return message;
     }
     const variableMarkersInMessage = (message.match(/%/g) || []).length;
+    if (message.toUpperCase() === message) {
+      uppercaseString = true;
+    }
 
     if (!this.langKeys || !this.enabled) {
       //remove variable markers
@@ -81,14 +85,14 @@ export class Surveyori18nService {
             }
           })
 
-          return fullTranslation.join(" ");
+          return uppercaseString ? fullTranslation.join(" ").toUpperCase() : fullTranslation.join(" ");
 
         } else {
           //remove special chars && remove spaces
           token = token.split(" ").join("");
-          translation = this.langKeys[token.toLowerCase()]?.translation;
+          translation = this.langKeys[token.toLowerCase()]?.translation || message;
 
-          return translation || message;
+          return uppercaseString ? translation.toUpperCase() : translation;
         }
 
       } else if (token && message) {
@@ -97,7 +101,7 @@ export class Surveyori18nService {
         token = token.split(" ").join("").replace(/[\.\-\:\'\?\,\&\/]/g, "");
         translation = this.langKeys[token.toLowerCase()]?.translation || message;
 
-        return translation;
+        return uppercaseString ? translation.toUpperCase() : translation;
       } else {
         return message;
       }
