@@ -32,13 +32,13 @@ export class Surveyori18nLangPipe implements PipeTransform {
     this.enabled = config.get().i18n?.enabled || false;
   }
 
-  transform(value: string, token: string, uppercaseCheck?: boolean): any {
+  transform(value: string, token: string): any {
     const langKeys = this.ctx.getValue("i18n");
     if (!value) { return; }
     let uppercaseString = false;
     let translation;
 
-    if (uppercaseCheck && (value.toUpperCase() === value)) {
+    if (value.toUpperCase() === value) {
       uppercaseString = true;
     }
 

@@ -24,14 +24,14 @@ export class Surveyori18nService {
     }
   }
 
-  translate(message: string, token?: string, uppercaseCheck?: boolean) {
+  translate(message: string, token?: string) {
     let translation;
     let uppercaseString = false;
     if (!message) {
       return message;
     }
     const variableMarkersInMessage = (message.match(/%/g) || []).length;
-    if (uppercaseCheck && (message.toUpperCase() === message)) {
+    if (message.toUpperCase() === message) {
       uppercaseString = true;
     }
 
