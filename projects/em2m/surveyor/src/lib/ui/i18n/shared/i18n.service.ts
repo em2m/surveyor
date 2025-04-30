@@ -7,8 +7,10 @@ import {AppConfig} from "../../../core/config/config.service";
 export class Surveyori18nService {
   private langKeys: any;
   private localeSub: Subscription;
+  private enabled: boolean = false;
 
   constructor(private ctx: ContextService, config: AppConfig) {
+    this.enabled = config.get().i18n?.enabled || false;
     this.langKeys = ctx.getValue("i18n");
     this.localeSub = this.ctx.onValueChange("i18n").subscribe(res => {
       this.detectLang();
@@ -24,7 +26,13 @@ export class Surveyori18nService {
 
   translate(message: string, token?: string) {
     let translation;
-    if (!this.langKeys) {
+    const variableMarkersInMessage = (message.match(/%/g) || []).length;
+
+    if (!this.langKeys || !this.enabled) {
+      //remove variable markers
+      if (variableMarkersInMessage > 1) {
+        message = message.replace(/[\s\%]/g, " ")
+      }
       return message
     } else {
       if (!token && message) {
