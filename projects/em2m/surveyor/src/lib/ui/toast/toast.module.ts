@@ -2,13 +2,15 @@ import {ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ToastService} from './toast.service';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {Surveyori18nModule, Surveyori18nService} from "../i18n/i18n.module";
 
 export * from './toast.service';
 
 @NgModule({
   imports: [
     CommonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    Surveyori18nModule
   ],
   exports: [
     CommonModule,
@@ -20,6 +22,7 @@ export class SurveyorToastModule {
     return {
       ngModule: SurveyorToastModule,
       providers: [
+        Surveyori18nService,
         ToastService
       ]
     };

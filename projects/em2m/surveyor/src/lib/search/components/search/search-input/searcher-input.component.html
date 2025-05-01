@@ -4,15 +4,15 @@
       <li class="search-icon" (click)="stopEventPropagation($event); onSubmit(searchInput)"><i class="material-icons">search</i></li>
       <li *ngFor="let constraint of constraints" class="search-constraint">
         <span class="mdl-chip mdl-chip--deletable" (click)="stopEventPropagation($event); clickConstraint(constraint)">
-          <span *ngIf="!constraint.not" class="mdl-chip__text">{{ constraint.text }}</span>
-          <span *ngIf="constraint.not" class="mdl-chip__text mdl-color-text--red">NOT {{ constraint.text }}</span>
+          <span *ngIf="!constraint.not" class="mdl-chip__text">{{ constraint.text | i18n:constraint.text}}</span>
+          <span *ngIf="constraint.not" class="mdl-chip__text mdl-color-text--red">{{"NOT" | i18n:"not" | lowercase}} {{ constraint.text | i18n:constraint.text }}</span>
           <button type="button" class="mdl-chip__action" (click)="stopEventPropagation($event); removeConstraint(constraint)" >
             <i class="material-icons">cancel</i>
           </button>
         </span>
       </li>
       <li class="search-input-wrapper">
-        <input #searchInputFocus class="search-input" [(ngModel)]="searchInput" [placeholder]="placeholder"
+        <input #searchInputFocus class="search-input" [(ngModel)]="searchInput" [placeholder]="placeholder | i18n:placeholder"
                (keyup.enter)="onSubmit(searchInput)"
                (keyup.shift.enter)="onSubmit(searchInput)"
         />

@@ -11,6 +11,7 @@ import {GoogleMapsProvider} from './providers/google-maps/google-maps.provider';
 import {GoogleMapsLoaderService} from './providers/google-maps/google-maps-loader.service';
 import {GoogleStreetViewControlProvider} from './providers/google-maps/google-street-view-control.provider';
 import {MapScriptLoaderService} from './map-script-loader.service';
+import {Surveyori18nModule} from "../i18n/i18n.module";
 // import {AppleMapkitProvider} from './providers/apple-mapkit-js/apple-mapkit.provider';
 // import {AppleMapkitLoaderService} from './providers/apple-mapkit-js/apple-mapkit-loader.service';
 
@@ -29,7 +30,8 @@ export * from './providers/zoomcontrol/zoom-control.provider';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    Surveyori18nModule
   ],
   exports: [
     SurveyorLeafletComponent

@@ -15,6 +15,7 @@ import {CollapsibleCardComponent} from './renderers/card/collapsible/collapsible
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {GridCardBoardRenderer} from './renderers/cardboard/grid/grid-card-board.component';
 import {PlainCardComponent} from './renderers/card/plain/plain-card.component';
+import {Surveyori18nModule, Surveyori18nService} from "../i18n/i18n.module";
 
 export * from './card-plugin';
 export * from './card.component';
@@ -53,7 +54,8 @@ const components = [
 @NgModule({
   imports: [
     CommonModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    Surveyori18nModule
   ],
   declarations: [
     ...components
@@ -68,6 +70,7 @@ export class SurveyorCardModule {
       ngModule: SurveyorCardModule,
       providers: [
         CardService,
+        Surveyori18nService,
         {provide: 'PLUGIN', useValue: CardPlugin, multi: true}
       ]
     };

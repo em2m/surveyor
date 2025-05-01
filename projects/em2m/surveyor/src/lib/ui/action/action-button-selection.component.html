@@ -1,9 +1,9 @@
 <span style="display: flex; align-items: center;">
   <span style="flex: 1; text-transform: uppercase;">
     <i class="fa fa-close fa-lg" style="padding: 0 1rem; cursor: pointer;" (click)="clearSelection.next()"></i>
-    <span><ng-container *ngIf="itemSelection.all">All</ng-container> {{ itemSelection.count() | number }} items selected</span>
+    <span><ng-container *ngIf="itemSelection.all">{{"All" | i18n:"all"}}</ng-container> {{ itemSelection.count() | number }} {{"items selected" | i18n:"itemsselected"}}</span>
     <button mat-button class="custom-color" *ngIf="itemSelection.allOnPage && !itemSelection.all" (click)="handleSelectAll()" style="margin-left: 2rem;">
-      Select all {{ itemSelection.totalItems | number }} items
+      {{"Select all" | i18n:"select all"}} {{ itemSelection.totalItems | number }} {{"items" | i18n:"items"}}
     </button>
   </span>
   <surveyor-action-button-group [actionTarget]="actionTarget" [selection]="whenSelection"

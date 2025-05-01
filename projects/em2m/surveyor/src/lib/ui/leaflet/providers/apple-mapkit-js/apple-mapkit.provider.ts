@@ -8,13 +8,16 @@ import {ContextService} from '../../../../core/extension/context.service';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {AppleMapkitLoaderService} from './apple-mapkit-loader.service';
+import {Surveyori18nService} from "../../../i18n/shared/i18n.service";
 
 @Injectable()
 export class AppleMapkitProvider extends LayerProvider {
 
   config: any;
 
-  constructor(private appConfig: AppConfig, private ctx: ContextService/*, private appleMaps: AppleMapkitLoaderService*/) {
+  constructor(private appConfig: AppConfig,
+              private ctx: ContextService,
+              private i18nService: Surveyori18nService/*, private appleMaps: AppleMapkitLoaderService*/) {
     super();
   }
 
@@ -27,7 +30,8 @@ export class AppleMapkitProvider extends LayerProvider {
       //return this.appleMaps.loadApi().pipe(
       //  map(() => {
           const streetsLayer = {
-            label: 'Streets',
+            label: this.i18nService.translate('Streets'),
+            enLabel: 'Streets',
             layer: (L as any).mapkitMutant({
               type: 'standard',
               minZoom: 3,
@@ -45,7 +49,8 @@ export class AppleMapkitProvider extends LayerProvider {
           } as LayerDefinition;
           */
           const satelliteLayer = {
-            label: 'Satellite',
+            label: this.i18nService.translate('Satellite'),
+            enLabel: 'Satellite',
             layer: (L as any).mapkitMutant({
               type: 'hybrid',
               minZoom: 3,

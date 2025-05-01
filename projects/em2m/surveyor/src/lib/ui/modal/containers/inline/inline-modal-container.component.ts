@@ -1,5 +1,6 @@
 import {Component, ComponentFactoryResolver} from "@angular/core";
 import {ModalContainer} from "../../modal-container.component";
+import {Surveyori18nService} from "../../../i18n/shared/i18n.service";
 
 @Component({
   selector: 'surveyor-inline-modal-container',
@@ -8,8 +9,8 @@ import {ModalContainer} from "../../modal-container.component";
 })
 export class InlineModalContainer extends ModalContainer {
 
-  constructor(resolver: ComponentFactoryResolver) {
-    super(resolver);
+  constructor(resolver: ComponentFactoryResolver, i18nService: Surveyori18nService) {
+    super(resolver, i18nService);
   }
 }
 

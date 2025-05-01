@@ -10,6 +10,7 @@ import {MobileNumberInputComponent} from './plugins/mobile/number-input/number-i
 import {MaterialFormModule} from './plugins/material/material-form.module';
 import {FormServicesPlugin} from './plugins/form-services/form-services-plugin';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {Surveyori18nModule} from "../i18n/i18n.module";
 
 export * from './form.component';
 export * from './form.model';
@@ -35,7 +36,8 @@ const components = [
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    MaterialFormModule.forRoot()
+    MaterialFormModule.forRoot(),
+    Surveyori18nModule
   ],
   exports: [
     CommonModule,
