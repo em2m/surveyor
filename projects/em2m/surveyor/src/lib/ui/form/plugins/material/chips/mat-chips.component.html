@@ -1,5 +1,5 @@
 <mat-form-field appearance="outline" style="width: 100%">
-  <mat-label>Tags</mat-label>
+  <mat-label>{{"Tags" | i18n:"tags"}}</mat-label>
   <mat-chip-grid #chiplist aria-label="Tags">
     <mat-chip-row *ngFor="let tag of tags" [removable]="true" (removed)="removeTag(tag)">
       {{tag}}

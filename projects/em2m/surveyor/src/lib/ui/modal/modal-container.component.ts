@@ -1,6 +1,7 @@
 import { Input, Type, ComponentFactoryResolver, ViewChild, ViewContainerRef, Output, EventEmitter, OnInit, HostListener, Directive } from "@angular/core";
 import {Modal} from "./modal.component";
 import {ModalOptions} from "./modal.model";
+import {Surveyori18nService} from "../i18n/shared/i18n.service";
 
 @Directive()
 export abstract class ModalContainer implements OnInit {
@@ -26,17 +27,18 @@ export abstract class ModalContainer implements OnInit {
   noPadding = false;
   backgroundColor: string;
   centeredBtn = false;
-  constructor(private resolver: ComponentFactoryResolver) {}
+  constructor(private resolver: ComponentFactoryResolver,
+              private i18nService: Surveyori18nService) {}
 
   ngOnInit() {
     this.load();
   }
 
   load() {
-    this.title = this.options.title;
-    this.submitLabel = this.options.submitLabel || "Ok";
-    this.cancelLabel = this.options.cancelLabel || "Cancel";
-    this.deleteLabel = this.options.deleteLabel || "Delete";
+    this.title = this.i18nService.translate(this.options.title);
+    this.submitLabel = this.i18nService.translate(this.options.submitLabel || "Ok");
+    this.cancelLabel = this.i18nService.translate(this.options.cancelLabel || "Cancel");
+    this.deleteLabel = this.i18nService.translate(this.options.deleteLabel || "Delete");
     this.hideActions = this.options.hideActions;
     this.hideTitle = this.options.hideTitle;
     this.hideSubmit = this.options.hideSubmit;
