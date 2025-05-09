@@ -6,25 +6,15 @@ import {AppConfig} from "../../../core/config/config.service";
 @Injectable()
 export class Surveyori18nService {
   private langKeys: any;
-  private localeSub: Subscription;
   private enabled: boolean = false;
 
   constructor(private ctx: ContextService, config: AppConfig) {
     this.enabled = config.get().i18n?.enabled || false;
-    this.langKeys = ctx.getValue("i18n");
-    this.localeSub = this.ctx.onValueChange("i18n").subscribe(res => {
-      this.detectLang();
-    });
-  }
-
-  detectLang(message?: string, token?: string) {
-    this.langKeys = this.ctx.getValue("i18n");
-    if (message) {
-      this.translate(message, token);
-    }
+    this.langKeys = ctx.getValue("i18nTokens");
   }
 
   translate(message: string, token?: string) {
+    this.langKeys = this.ctx.getValue("i18nTokens");
     let translation;
     let uppercaseString = false;
     if (!message) {
