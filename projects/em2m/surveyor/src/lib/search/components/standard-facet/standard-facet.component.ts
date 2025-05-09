@@ -18,6 +18,7 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
   resultTypeAggs: { [key: string]: string } = {};
   DAY_IN_MILLIS = 1000 * 60 * 60 * 24;
   moreSubscription: Subscription;
+  reqSub: Subscription;
   aggSettings;
 
   constructor(public searcher: Searcher,
@@ -27,8 +28,10 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.moreSubscription = this.searcher.whenMoreResultPublished.subscribe(item => {
+    this.reqSub = this.searcher.whenRequestPublished.subscribe(req => {
       this.aggSettings = this.ctx.getValue('aggSettings');
+    });
+    this.moreSubscription = this.searcher.whenMoreResultPublished.subscribe(item => {
       if (item) {
         // If there is a specific constraint to edit, find it and edit only that constraint
         const multiTermConstraint = this.ctx.getValue('multiTermConstraint') as SearchConstraint;
@@ -66,6 +69,7 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
       this.searcher.moreResult = null;
       this.searcher.moreRequest = null;
       this.moreSubscription.unsubscribe();
+      this.reqSub?.unsubscribe();
     }
   }
 
