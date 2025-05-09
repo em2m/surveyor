@@ -28,10 +28,10 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.moreSubscription = this.searcher.whenMoreResultPublished.subscribe(item => {
+      this.aggSettings = this.ctx.getValue('aggSettings');
       if (item) {
         // If there is a specific constraint to edit, find it and edit only that constraint
         const multiTermConstraint = this.ctx.getValue('multiTermConstraint') as SearchConstraint;
-        this.aggSettings = this.ctx.getValue('aggSettings');
         if (multiTermConstraint && multiTermConstraint.id) {
           this.searcher.constraints = this.searcher.constraints.filter(constraint => {
             return constraint.id !== multiTermConstraint.id;
