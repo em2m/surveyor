@@ -65,13 +65,13 @@ export class Surveyori18nService {
               } else {
                 token = token.replace(/[\s\%]/g, "").toLowerCase();
                 //if variable already run, translate this section
-                let tokenTranslation = this.langKeys[token]?.translation || token;
-                fullTranslation.push(tokenTranslation);
+                let tokenTranslation = this.langKeys[token]?.translation;
+                tokenTranslation ? fullTranslation.push(tokenTranslation) : fullTranslation.push(token + "**");
               }
             } else if (token.trim() !== "") {
               //remove spaces, translate each element and re-insert into array
-              let tokenTranslation = this.langKeys[token.replace(/\s/g, "").toLowerCase()]?.translation || token;
-              fullTranslation.push(tokenTranslation);
+              let tokenTranslation = this.langKeys[token.replace(/\s/g, "").toLowerCase()]?.translation;
+              tokenTranslation ? fullTranslation.push(tokenTranslation) : fullTranslation.push(token + "**");
             }
           })
 
@@ -80,8 +80,7 @@ export class Surveyori18nService {
         } else {
           //remove special chars && remove spaces
           token = token.split(" ").join("");
-          translation = this.langKeys[token.toLowerCase()]?.translation || message;
-
+          translation = this.langKeys[token.toLowerCase()]?.translation ? this.langKeys[token.toLowerCase()]?.translation : message + "**";
           return uppercaseString ? translation.toUpperCase() : translation;
         }
 
@@ -89,11 +88,11 @@ export class Surveyori18nService {
         //token should be passed without vars, chars, etc
         //symbols, (), etc added back in translation
         token = token.split(" ").join("").replace(/[\.\-\:\'\?\,\&\/]/g, "");
-        translation = this.langKeys[token.toLowerCase()]?.translation || message;
+        translation = this.langKeys[token.toLowerCase()]?.translation ? this.langKeys[token.toLowerCase()]?.translation : message + "**";
 
         return uppercaseString ? translation.toUpperCase() : translation;
       } else {
-        return message;
+        return message + "**";
       }
     }
   }
