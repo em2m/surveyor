@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatSnackBar, MatSnackBarConfig} from '@angular/material/snack-bar';
 import {ContextService} from '../../core/extension/context.service';
-import {Surveyori18nService} from "../i18n/shared/i18n.service";
+import {Surveyori18nService} from '../i18n/shared/i18n.service';
+import {ToastDuration} from './toast-duration.enum';
+import {ToastComponent} from './toast.component';
 
 @Injectable()
 export class ToastService {
@@ -10,7 +12,7 @@ export class ToastService {
 
   info(message: string, title?: string, duration?: number, token?: string) {
     const translatedMessage = this.i18nService.translate(message, token);
-    this.snackbar.open(translatedMessage, null, { horizontalPosition: 'center', duration: 3000 });
+    this.snackbar.open(translatedMessage, null, { horizontalPosition: 'center', duration: ToastDuration.SHORT });
   }
 
   success(message: string, title?: string, duration?: number, token?: string) {
@@ -18,7 +20,14 @@ export class ToastService {
   }
 
   error(message: string, title?: string, duration?: number, token?: string) {
-    this.info(message, title, duration, token);
+    const translatedMessage = this.i18nService.translate(message, token);
+    const isLongMessage = translatedMessage?.length > 40;
+
+    this.snackbar.openFromComponent(ToastComponent, {
+      data: { message: translatedMessage, showClose: isLongMessage },
+      horizontalPosition: 'center',
+      duration: isLongMessage ? undefined : ToastDuration.MEDIUM,
+    });
   }
 
   warning(message: string, title?: string, duration?: number, token?: string) {
