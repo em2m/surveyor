@@ -12,7 +12,7 @@ export class ToastService {
 
   info(message: string, title?: string, duration?: number, token?: string) {
     const translatedMessage = this.i18nService.translate(message, token);
-    this.snackbar.open(translatedMessage, null, { horizontalPosition: 'center', duration: ToastDuration.SHORT });
+    this.snackbar.open(translatedMessage, null, { horizontalPosition: 'center', duration: duration || ToastDuration.SHORT });
   }
 
   success(message: string, title?: string, duration?: number, token?: string) {
@@ -26,7 +26,7 @@ export class ToastService {
     this.snackbar.openFromComponent(ToastComponent, {
       data: { message: translatedMessage, showClose: isLongMessage },
       horizontalPosition: 'center',
-      duration: isLongMessage ? undefined : ToastDuration.MEDIUM,
+      duration: isLongMessage ? undefined : (duration || ToastDuration.MEDIUM),
     });
   }
 
