@@ -16,10 +16,8 @@ export class Surveyori18nService {
 
   translate(message: string, token?: string) {
     this.langKeys = this.ctx.getValue("i18nTokens");
-    //todo for ** testing
     const locale = this.ctx.getValue("i18nLocale");
     this.isDevLocale = locale === "dev";
-    //
     let translation;
     let uppercaseString = false;
     if (!message) {
@@ -71,29 +69,23 @@ export class Surveyori18nService {
                 token = token.replace(/[\s\%]/g, "").toLowerCase();
                 //if variable already run, translate this section
                 let tokenTranslation = this.langKeys[token]?.translation;
-                //todo add back after testing
-                // tokenTranslation ? fullTranslation.push(tokenTranslation) : fullTranslation.push(token);
 
-                //remove after testing
                 if (tokenTranslation) {
                   fullTranslation.push(tokenTranslation);
                 } else if (token != "") {
                   let hasAsterisk = token.includes("**");
-                  fullTranslation.push(this.isDevLocale ? token : !hasAsterisk ? token + "**": token);
+                  fullTranslation.push(!this.isDevLocale ? token : !hasAsterisk ? token + "**": token);
                 }
               }
             } else if (token.trim() !== "") {
               //remove spaces, translate each element and re-insert into array
               let tokenTranslation = this.langKeys[token.replace(/\s/g, "").toLowerCase()]?.translation;
-              //todo add back after testing
-              // tokenTranslation ? fullTranslation.push(tokenTranslation) : fullTranslation.push(token);
 
-              //remove after testing
               if (tokenTranslation) {
                 fullTranslation.push(tokenTranslation);
               } else {
                 let hasAsterisk = token.includes("**");
-                fullTranslation.push(this.isDevLocale ? token : !hasAsterisk ? token + "**": token);
+                fullTranslation.push(!this.isDevLocale ? token : !hasAsterisk ? token + "**": token);
               }
             }
           })
@@ -103,14 +95,11 @@ export class Surveyori18nService {
         } else {
           //remove special chars && remove spaces
           token = token.split(" ").join("");
-          //todo commented out - code before adding ** for testing
-          // translation = this.langKeys[token.toLowerCase()]?.translation ? this.langKeys[token.toLowerCase()]?.translation : message;
-
-          //remove after testing
           translation = this.langKeys[token.toLowerCase()]?.translation;
+
           if (!translation) {
             let hasAsterisk = message.includes("**");
-            translation = this.isDevLocale ? message : !hasAsterisk ? message + "**" : message;
+            translation = !this.isDevLocale ? message : !hasAsterisk ? message + "**" : message;
           }
 
           return uppercaseString ? translation.toUpperCase() : translation;
@@ -120,24 +109,17 @@ export class Surveyori18nService {
         //token should be passed without vars, chars, etc
         //symbols, (), etc added back in translation
         token = token.split(" ").join("").replace(/[\.\-\:\'\?\,\&\/]/g, "");
-        //todo add back after testing
-        // translation = this.langKeys[token.toLowerCase()]?.translation ? this.langKeys[token.toLowerCase()]?.translation : message;
-
-        //todo remove after tests
         translation = this.langKeys[token.toLowerCase()]?.translation;
+
         if (!translation) {
           let hasAsterisk = message.includes("**");
-          translation = this.isDevLocale ? message : !hasAsterisk ? message + "**" : message;
+          translation = !this.isDevLocale ? message : !hasAsterisk ? message + "**" : message;
         }
 
         return uppercaseString ? translation.toUpperCase() : translation;
       } else {
-        //todo add back after test
-        // return message
-
-        //todo remove after test
         let hasAsterisk = message.includes("**");
-        return !hasAsterisk ? message + "**" : message;
+        return !this.isDevLocale ? message : !hasAsterisk ? message + "**" : message;
       }
     }
   }
