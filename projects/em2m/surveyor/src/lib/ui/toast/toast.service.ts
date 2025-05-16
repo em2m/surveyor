@@ -19,14 +19,13 @@ export class ToastService {
     this.info(message, title, duration, token);
   }
 
-  error(message: string, title?: string, duration?: number, token?: string) {
+  error(message: string, title?: string, duration?: number, token?: string, showCloseOption?: boolean) {
     const translatedMessage = this.i18nService.translate(message, token);
-    const isLongMessage = translatedMessage?.length > 40;
 
     this.snackbar.openFromComponent(ToastComponent, {
-      data: { message: translatedMessage, showClose: isLongMessage },
+      data: { message: translatedMessage, showClose: showCloseOption || false },
       horizontalPosition: 'center',
-      duration: isLongMessage ? undefined : (duration || ToastDuration.MEDIUM),
+      duration: duration || ToastDuration.MEDIUM
     });
   }
 
