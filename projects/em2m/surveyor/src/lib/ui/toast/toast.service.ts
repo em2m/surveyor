@@ -25,7 +25,7 @@ export class ToastService {
     this.snackbar.openFromComponent(ToastComponent, {
       data: { message: translatedMessage, showClose: showCloseOption || false },
       horizontalPosition: 'center',
-      duration: duration || ToastDuration.MEDIUM
+      duration: showCloseOption ? duration : ToastDuration.MEDIUM
     });
   }
 
