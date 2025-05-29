@@ -26,14 +26,18 @@ import {AppConfig} from "../../../core/config/config.service";
   name: 'i18n'
 })
 export class Surveyori18nLangPipe implements PipeTransform {
-  private enabled: boolean = false;
+  enabled: boolean = false;
+  isDevLocale = false;
 
   constructor(private ctx: ContextService, config: AppConfig) {
     this.enabled = config.get().i18n?.enabled || false;
   }
 
   transform(value: string, token: string): any {
-    const langKeys = this.ctx.getValue("i18n");
+    const langKeys = this.ctx.getValue("i18nTokens");
+    const locale = this.ctx.getValue("i18nLocale");
+    this.isDevLocale = locale === "dev";
+
     if (!value) { return; }
     let uppercaseString = false;
     let translation;
@@ -80,13 +84,25 @@ export class Surveyori18nLangPipe implements PipeTransform {
             } else {
               token = token.replace(/[\s\%]/g, "").toLowerCase();
               //if variable already run, translate this section
-              let tokenTranslation = langKeys[token]?.translation || token;
-              fullTranslation.push(tokenTranslation);
+              let tokenTranslation = langKeys[token]?.translation;
+
+              if (tokenTranslation) {
+                fullTranslation.push(tokenTranslation);
+              } else if (token != "") {
+                let hasAsterisk = token.includes("**");
+                fullTranslation.push(!this.isDevLocale ? token : !hasAsterisk ? token + "**": token);
+              }
             }
           } else if (token.trim() !== "") {
             //remove spaces, translate each element and re-insert into array
-            let tokenTranslation = langKeys[token.replace(/\s/g, "").toLowerCase()]?.translation || token;
-            fullTranslation.push(tokenTranslation);
+            let tokenTranslation = langKeys[token.replace(/\s/g, "").toLowerCase()]?.translation;
+
+            if (tokenTranslation) {
+              fullTranslation.push(tokenTranslation);
+            } else {
+              let hasAsterisk = token.includes("**");
+              fullTranslation.push(!this.isDevLocale ? token : !hasAsterisk ? token + "**": token);
+            }
           }
         })
 
@@ -95,7 +111,12 @@ export class Surveyori18nLangPipe implements PipeTransform {
       } else {
         //remove special chars && remove spaces
         token = token.replace(/\s/g, "");
-        translation = langKeys[token.toLowerCase()]?.translation || value;
+        translation = langKeys[token.toLowerCase()]?.translation;
+
+        if (!translation) {
+          let hasAsterisk = value.includes("**");
+          translation = !this.isDevLocale ? value : !hasAsterisk ? value + "**" : value;
+        }
 
         return uppercaseString ? translation.toUpperCase() : translation;
       }
@@ -104,11 +125,17 @@ export class Surveyori18nLangPipe implements PipeTransform {
       //token should be passed without vars, chars, etc
       //symbols, (), etc added back in translation
       token = token.split(" ").join("").replace(/[\.\*\!\<\_\-\:\'\?\,\&\/\|]/g, "");
-      translation = langKeys[token.toLowerCase()]?.translation || value;
+      translation = langKeys[token.toLowerCase()]?.translation;
+
+      if (!translation) {
+        let hasAsterisk = value.includes("**");
+        translation = !this.isDevLocale ? value : !hasAsterisk ? value + "**" : value;
+      }
 
       return uppercaseString ? translation.toUpperCase() : translation;
     } else {
-      return value;
+      let hasAsterisk = value.includes("**");
+      return !this.isDevLocale ? value : !hasAsterisk ? value + "**" : value;
     }
   }
 }
