@@ -42,11 +42,17 @@ export class Surveyori18nLangPipe implements PipeTransform {
     let uppercaseString = false;
     let translation;
 
+    const variableMarkersInMessage = (value.match(/%/g) || []).length;
+
     if (value.toUpperCase() === value) {
       uppercaseString = true;
     }
 
     if (!langKeys || !this.enabled) {
+      //remove variable markers
+      if (variableMarkersInMessage > 1) {
+        value = value.replace(/[\s\%]/g, " ")
+      }
       return value
     }
 
