@@ -18,6 +18,8 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
   resultTypeAggs: { [key: string]: string } = {};
   DAY_IN_MILLIS = 1000 * 60 * 60 * 24;
   moreSubscription: Subscription;
+  reqSub: Subscription;
+  aggSettings;
 
   constructor(public searcher: Searcher,
               private pickerService: PickerService,
@@ -26,6 +28,9 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.reqSub = this.searcher.whenRequestPublished.subscribe(req => {
+      this.aggSettings = this.ctx.getValue('aggSettings');
+    });
     this.moreSubscription = this.searcher.whenMoreResultPublished.subscribe(item => {
       if (item) {
         // If there is a specific constraint to edit, find it and edit only that constraint
@@ -64,6 +69,7 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
       this.searcher.moreResult = null;
       this.searcher.moreRequest = null;
       this.moreSubscription.unsubscribe();
+      this.reqSub?.unsubscribe();
     }
   }
 
@@ -95,7 +101,9 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
       this.requestAggs[key] = aggs;
       this.resultOpAggs[key] = this.searcher.searchResult.aggs[key].op;
       this.resultTypeAggs[key] = this.searcher.searchResult.aggs[key].type;
-      let buckets = aggs.size ? this.searcher.searchResult.aggs[key].buckets.slice(0, aggs.size) :
+      const aggSetting = this.aggSettings?.filter(agg => agg.name === key).length > 0 ? this.aggSettings?.filter(agg => agg.name === key)[0] : null;
+      const size = aggSetting?.displaySize || aggs.size;
+      let buckets = size ? this.searcher.searchResult.aggs[key].buckets.slice(0, size) :
         this.searcher.searchResult.aggs[key].buckets;
       buckets = buckets.filter(bucket => bucket.key || bucket.label);
       if (this.searcher.aggsMapper && this.searcher.aggsMapper[key]) {
