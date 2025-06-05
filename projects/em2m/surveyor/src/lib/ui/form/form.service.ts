@@ -114,6 +114,9 @@ export class FormService {
           if (selection.label) {
             selection.label = this.i18nService.translate(selection.label);
           }
+          if (selection.placeholder) {
+            selection.label = this.i18nService.translate(selection.placeholder);
+          }
         });
       }
 
