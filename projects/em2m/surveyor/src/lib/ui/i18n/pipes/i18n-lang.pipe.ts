@@ -20,7 +20,7 @@
 
 import { Pipe, PipeTransform } from '@angular/core';
 import {ContextService} from '../../../core/extension/context.service';
-import {AppConfig} from "../../../core/config/config.service";
+import {Surveyori18nService} from "../shared/i18n.service";
 
 @Pipe({
   name: 'i18n'
@@ -29,8 +29,8 @@ export class Surveyori18nLangPipe implements PipeTransform {
   enabled: boolean = false;
   isDevLocale = false;
 
-  constructor(private ctx: ContextService, config: AppConfig) {
-    this.enabled = config.get().i18n?.enabled || false;
+  constructor(private ctx: ContextService, private i18nService: Surveyori18nService) {
+    this.enabled = this.i18nService.checki18nEnabled();
   }
 
   transform(value: string, token: string): any {
