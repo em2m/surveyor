@@ -8,24 +8,21 @@ export class Surveyori18nService {
   private langKeys: any;
   private enabled: boolean = false;
   isDevLocale = false;
-  i18nEnabledApps = ["sensata"];
+
+  app: string;
 
   constructor(private ctx: ContextService, private config: AppConfig) {
-    this.enabled = this.checki18nEnabled();
     this.langKeys = ctx.getValue("i18nTokens");
+    this.enabled = this.ctx.getValue("i18nEnabled");
+
   }
 
-  //todo temp fix to only show root users for certain apps
-  checki18nEnabled(): boolean {
-    const account = this.ctx.getValue("profile");
-    const app = this.ctx.getContext().config?.app;
-    const isEnabledApp = this.i18nEnabledApps.includes(app);
-    const isRootUser = account?.roles?.includes("root");
-    //show for all roles in dev. Prod only show for root user
-    return isEnabledApp && isRootUser;
-  }
 
   translate(message: string, token?: string) {
+    if (this.enabled == null) {
+      this.enabled = this.ctx.getValue("i18nEnabled");
+    }
+
     this.langKeys = this.ctx.getValue("i18nTokens");
     const locale = this.ctx.getValue("i18nLocale");
     this.isDevLocale = locale === "dev";

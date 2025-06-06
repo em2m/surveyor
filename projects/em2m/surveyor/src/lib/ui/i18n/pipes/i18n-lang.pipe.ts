@@ -30,10 +30,13 @@ export class Surveyori18nLangPipe implements PipeTransform {
   isDevLocale = false;
 
   constructor(private ctx: ContextService, private i18nService: Surveyori18nService) {
-    this.enabled = this.i18nService.checki18nEnabled();
+    this.enabled = this.ctx.getValue("i18nEnabled");
   }
 
   transform(value: string, token: string): any {
+    if (this.enabled == null) {
+      this.enabled = this.ctx.getValue("i18nEnabled");
+    }
     const langKeys = this.ctx.getValue("i18nTokens");
     const locale = this.ctx.getValue("i18nLocale");
     this.isDevLocale = locale === "dev";
