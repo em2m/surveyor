@@ -9,12 +9,20 @@ export class Surveyori18nService {
   private enabled: boolean = false;
   isDevLocale = false;
 
-  constructor(private ctx: ContextService, config: AppConfig) {
-    this.enabled = config.get().i18n?.enabled || false;
+  app: string;
+
+  constructor(private ctx: ContextService, private config: AppConfig) {
     this.langKeys = ctx.getValue("i18nTokens");
+    this.enabled = this.ctx.getValue("i18nEnabled");
+
   }
 
+
   translate(message: string, token?: string) {
+    if (this.enabled == null) {
+      this.enabled = this.ctx.getValue("i18nEnabled");
+    }
+
     this.langKeys = this.ctx.getValue("i18nTokens");
     const locale = this.ctx.getValue("i18nLocale");
     this.isDevLocale = locale === "dev";
@@ -123,4 +131,5 @@ export class Surveyori18nService {
       }
     }
   }
+
 }
