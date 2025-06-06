@@ -20,7 +20,7 @@ export class Surveyori18nService {
     this.isDevLocale = locale === "dev";
     let translation;
     let uppercaseString = false;
-    if (!message) {
+    if (!message || typeof message === 'number') {
       return message;
     }
     const variableMarkersInMessage = (message.match(/%/g) || []).length;
