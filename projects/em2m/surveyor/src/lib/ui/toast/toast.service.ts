@@ -10,26 +10,28 @@ export class ToastService {
 
   constructor(private snackbar: MatSnackBar, private ctx: ContextService, private i18nService: Surveyori18nService) {}
 
-  info(message: string, title?: string, duration?: number, token?: string) {
+  info(message: string, title?: string, duration?: number, token?: string, showClose?: boolean) {
     const translatedMessage = this.i18nService.translate(message, token);
-    this.snackbar.open(translatedMessage, null, { horizontalPosition: 'center', duration: duration || ToastDuration.SHORT });
+    if (showClose) {
+      this.snackbar.openFromComponent(ToastComponent, {
+        data: { message: translatedMessage, showClose: true },
+        horizontalPosition: 'center',
+        duration: duration
+      });
+    } else {
+      this.snackbar.open(translatedMessage, null, { horizontalPosition: 'center', duration: duration || ToastDuration.SHORT });
+    }
   }
 
-  success(message: string, title?: string, duration?: number, token?: string) {
-    this.info(message, title, duration, token);
+  success(message: string, title?: string, duration?: number, token?: string, showClose?: boolean) {
+    this.info(message, title, duration, token, showClose);
   }
 
-  error(message: string, title?: string, duration?: number, token?: string, showCloseOption?: boolean) {
-    const translatedMessage = this.i18nService.translate(message, token);
-
-    this.snackbar.openFromComponent(ToastComponent, {
-      data: { message: translatedMessage, showClose: showCloseOption || false },
-      horizontalPosition: 'center',
-      duration: showCloseOption ? duration : ToastDuration.MEDIUM
-    });
+  error(message: string, title?: string, duration?: number, token?: string, showClose?: boolean) {
+    this.info(message, title, duration, token, showClose);
   }
 
-  warning(message: string, title?: string, duration?: number, token?: string) {
-    this.info(message, title, duration, token);
+  warning(message: string, title?: string, duration?: number, token?: string, showClose?: boolean) {
+    this.info(message, title, duration, token, showClose);
   }
 }
