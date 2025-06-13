@@ -22,6 +22,9 @@ export class Surveyori18nService {
     if (this.enabled == null) {
       this.enabled = this.ctx.getValue("i18nEnabled");
     }
+    if (!this.enabled) {
+      return;
+    }
 
     this.langKeys = this.ctx.getValue("i18nTokens");
     const locale = this.ctx.getValue("i18nLocale");
