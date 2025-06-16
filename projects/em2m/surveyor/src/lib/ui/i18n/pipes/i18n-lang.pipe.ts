@@ -34,9 +34,7 @@ export class Surveyori18nLangPipe implements PipeTransform {
   }
 
   transform(value: string, token: string): any {
-    if (this.enabled == null) {
-      this.enabled = this.ctx.getValue("i18nEnabled");
-    }
+    this.enabled = this.ctx.getValue("i18nEnabled");
     const langKeys = this.ctx.getValue("i18nTokens");
     const locale = this.ctx.getValue("i18nLocale");
     this.isDevLocale = locale === "dev";
