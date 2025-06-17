@@ -2,11 +2,11 @@
   <button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="sortMenu">
     <i class="fa"
        [ngClass]="{'fa-sort-amount-desc': selectedItem.sorts[0].direction == 'Descending', 'fa-sort-amount-asc': selectedItem.sorts[0].direction == 'Ascending'}">
-    </i> {{ selectedItem.label}}
+    </i> {{ selectedItem.label | i18n:selectedItem.label}}
   </button>
   <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" data-mdl-for="sortMenu">
     <li *ngFor="let item of items; let i = index" class="mdl-menu__item" (click)="handleClick(i)"
-        [class.selected]="i == selectedIndex">{{item.label}}
+        [class.selected]="i == selectedIndex">{{item.label | i18n:item.label}}
     </li>
   </ul>
 </span>
