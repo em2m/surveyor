@@ -38,7 +38,19 @@ export class GoogleMapsProvider extends LayerProvider {
               enLabel: 'Satellite',
               layer: gridLayer.googleMutant({type: 'hybrid'})
             };
-            return [streetsLayer, satelliteLayer];
+
+            const traffic = gridLayer.googleMutant({
+                  type: 'roadmap'
+                });
+            traffic.addGoogleLayer('TrafficLayer');
+
+            const trafficLayer = <LayerDefinition>{
+                label: this.i18nService.translate('Traffic'),
+                enLabel: 'Traffic',
+                layer: traffic
+              };
+
+            return [streetsLayer, satelliteLayer, trafficLayer];
           } else {
             return [];
           }
