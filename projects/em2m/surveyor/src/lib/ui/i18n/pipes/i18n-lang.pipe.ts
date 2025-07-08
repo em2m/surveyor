@@ -44,6 +44,7 @@ export class Surveyori18nLangPipe implements PipeTransform {
     let translation;
 
     const variableMarkersInMessage = (value.match(/%/g) || []).length;
+
     if (value.toUpperCase() === value) {
       uppercaseString = true;
     }
@@ -68,12 +69,13 @@ export class Surveyori18nLangPipe implements PipeTransform {
       }
 
       //2 remove special chars
-      token = token.replace(/[\.\*\<\!\_\-\:\'\?\,\&\/\|]/g, "");
+      let isRange = (variableMarkersInMessage > 1) && (token.includes("% -"))
+      token = token.replace(/[\.\*\+\<\!\_\-\:\'\?\,\&\/\|]/g, "");
 
       //handle vars passed in, separate var by enclosing it in % %. Split on %, translate first section, second section is var (add as is), last section translate
       // this handles string that use % in phrase, not as symbol for a var
       const variableSymbolsInString = (token.match(/%/g) || []).length;
-      if (variableSymbolsInString > 1) {
+      if (variableSymbolsInString > 1 && !isRange) {
         //preserves separator
         let tokenSplit = token.split(/(?=%)/);
         let fullTranslation = [];
