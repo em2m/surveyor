@@ -9,18 +9,22 @@ export class Surveyori18nService {
   private enabled: boolean = false;
   isDevLocale = false;
 
-  constructor(private ctx: ContextService, config: AppConfig) {
-    this.enabled = config.get().i18n?.enabled || false;
+  app: string;
+
+  constructor(private ctx: ContextService, private config: AppConfig) {
     this.langKeys = ctx.getValue("i18nTokens");
+    this.enabled = this.ctx.getValue("i18nEnabled");
   }
 
   translate(message: string, token?: string) {
+    this.enabled = this.ctx.getValue("i18nEnabled");
     this.langKeys = this.ctx.getValue("i18nTokens");
     const locale = this.ctx.getValue("i18nLocale");
     this.isDevLocale = locale === "dev";
     let translation;
     let uppercaseString = false;
-    if (!message) {
+
+    if (!message || typeof message === 'number') {
       return message;
     }
     const variableMarkersInMessage = (message.match(/%/g) || []).length;
@@ -46,12 +50,13 @@ export class Surveyori18nService {
         }
 
         //2 remove special chars
-        token = token.replace(/[\.\*\!\<\_\-\:\'\?\,\&\/\|]/g, "");
+        let isRange = (variableMarkersInMessage > 1) && (token.includes("% -"));
+        token = token.replace(/[\.\*\+\!\<\_\-\:\'\?\,\&\/\|]/g, "");
 
         //handle vars passed in, separate var by enclosing it in % %. Split on %, translate first section, second section is var (add as is), last section translate
         // this handles string that use % in phrase, not as symbol for a var
         const variableSymbolsInString = (token.match(/%/g) || []).length;
-        if (variableSymbolsInString > 1) {
+        if (variableSymbolsInString > 1 && !isRange) {
           //this preserves the separator
           let tokenSplit = token.split(/(?=%)/);
           let fullTranslation = [];
@@ -123,4 +128,5 @@ export class Surveyori18nService {
       }
     }
   }
+
 }

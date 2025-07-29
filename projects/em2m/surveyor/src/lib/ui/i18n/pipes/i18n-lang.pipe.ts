@@ -20,7 +20,7 @@
 
 import { Pipe, PipeTransform } from '@angular/core';
 import {ContextService} from '../../../core/extension/context.service';
-import {AppConfig} from "../../../core/config/config.service";
+import {Surveyori18nService} from "../shared/i18n.service";
 
 @Pipe({
   name: 'i18n'
@@ -29,11 +29,12 @@ export class Surveyori18nLangPipe implements PipeTransform {
   enabled: boolean = false;
   isDevLocale = false;
 
-  constructor(private ctx: ContextService, config: AppConfig) {
-    this.enabled = config.get().i18n?.enabled || false;
+  constructor(private ctx: ContextService, private i18nService: Surveyori18nService) {
+    this.enabled = this.ctx.getValue("i18nEnabled");
   }
 
   transform(value: string, token: string): any {
+    this.enabled = this.ctx.getValue("i18nEnabled");
     const langKeys = this.ctx.getValue("i18nTokens");
     const locale = this.ctx.getValue("i18nLocale");
     this.isDevLocale = locale === "dev";
@@ -42,11 +43,17 @@ export class Surveyori18nLangPipe implements PipeTransform {
     let uppercaseString = false;
     let translation;
 
+    const variableMarkersInMessage = (value.match(/%/g) || []).length;
+
     if (value.toUpperCase() === value) {
       uppercaseString = true;
     }
 
     if (!langKeys || !this.enabled) {
+      //remove variable markers
+      if (variableMarkersInMessage > 1) {
+        value = value.replace(/[\s\%]/g, " ")
+      }
       return value
     }
 
@@ -62,12 +69,13 @@ export class Surveyori18nLangPipe implements PipeTransform {
       }
 
       //2 remove special chars
-      token = token.replace(/[\.\*\<\!\_\-\:\'\?\,\&\/\|]/g, "");
+      let isRange = (variableMarkersInMessage > 1) && (token.includes("% -"))
+      token = token.replace(/[\.\*\+\<\!\_\-\:\'\?\,\&\/\|]/g, "");
 
       //handle vars passed in, separate var by enclosing it in % %. Split on %, translate first section, second section is var (add as is), last section translate
       // this handles string that use % in phrase, not as symbol for a var
       const variableSymbolsInString = (token.match(/%/g) || []).length;
-      if (variableSymbolsInString > 1) {
+      if (variableSymbolsInString > 1 && !isRange) {
         //preserves separator
         let tokenSplit = token.split(/(?=%)/);
         let fullTranslation = [];

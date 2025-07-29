@@ -6,11 +6,8 @@ import {BehaviorSubject, Observable} from 'rxjs';
   selector: 'surveyor-form',
   templateUrl: './form.component.html',
   styles: [
-      `
-            form :last-child {
-              margin-right: 8px;
-            }
-          `
+      `form :last-child {margin-right: 8px;}`,
+      `form div {margin-bottom: 8px;}`
   ]
 })
 export class SurveyorFormComponent implements OnInit {

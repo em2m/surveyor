@@ -73,6 +73,11 @@ export class StandardFacetComponent implements OnInit, OnDestroy {
     }
   }
 
+  getBucketLabel(bucket: any): string {
+    const label = bucket.label ? bucket.label : bucket.key
+    return this.i18nService.translate(label);
+  }
+
   showMoreAggs(agg) {
     const constraintRemovedAgg = JSON.parse(JSON.stringify(agg));
     constraintRemovedAgg.query = {op: 'all'};
