@@ -1,18 +1,18 @@
 
 <form>
   <mat-form-field appearance="outline" floatLabel="always">
-    <mat-label>Start</mat-label>
+    <mat-label>{{"Start" | i18n:"start"}}</mat-label>
     <input matInput  [formControl]="formFromControl" required [max]="toDate" [matDatepicker]="fromDatePicker" [value]="fromDate" (dateChange)="fromDateChanged($event)">
     <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
     <mat-datepicker #fromDatePicker disabled="false"></mat-datepicker>
-    <mat-error *ngIf="formFromControl.invalid">Invalid start date</mat-error>
+    <mat-error *ngIf="formFromControl.invalid">{{"Invalid start date" | i18n:"invalidStartDate"}}</mat-error>
 
   </mat-form-field>
   <mat-form-field appearance="outline" floatLabel="always">
-    <mat-label>End</mat-label>
+    <mat-label>{{"End" | i18n:"end"}}</mat-label>
     <input matInput required   [formControl]="formToControl" [min]="fromDate" [max]="dateToday" [matDatepicker]="toDatePicker" [value]="toDate" (dateChange)="toDateChanged($event)">
     <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
     <mat-datepicker #toDatePicker disabled="false"></mat-datepicker>
-    <mat-error *ngIf="formToControl.invalid">Invalid end date</mat-error>
+    <mat-error *ngIf="formToControl.invalid">{{"Invalid end date" | i18n:"invalidEndDate"}}</mat-error>
   </mat-form-field>
 </form>
