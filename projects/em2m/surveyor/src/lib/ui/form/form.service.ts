@@ -109,15 +109,21 @@ export class FormService {
       opts.label = this.i18nService.translate(opts.label);
 
       //select input options
-      if (opts.options && opts.options?.selections) {
+      if (opts.options && opts.options?.selections ) {
+
         opts.options?.selections.forEach((selection) => {
           if (selection.label) {
             selection.label = this.i18nService.translate(selection.label);
           }
-          if (selection.placeholder) {
-            selection.label = this.i18nService.translate(selection.placeholder);
-          }
         });
+      }
+
+      if (opts.options && opts.options?.placeholder) {
+        opts.options.placeholder = this.i18nService.translate(opts.options?.placeholder)
+      }
+
+      if (opts.options && opts.options?.pickerOptions && opts.options?.pickerOptions?.title) {
+        opts.options.pickerOptions.title = this.i18nService.translate(opts.options?.pickerOptions?.title)
       }
 
       //select input options
