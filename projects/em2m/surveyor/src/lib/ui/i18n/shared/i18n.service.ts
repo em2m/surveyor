@@ -37,6 +37,12 @@ export class Surveyori18nService {
       if (variableMarkersInMessage > 1) {
         message = message.replace(/[\s\%]/g, " ")
       }
+
+       //TODO temp fix for non-i18n enabled apps
+      if (message.includes("eventLabel")) {
+        message = message.replace("eventLabel", "");
+      }
+
       return message
     } else {
       if (!token && message) {

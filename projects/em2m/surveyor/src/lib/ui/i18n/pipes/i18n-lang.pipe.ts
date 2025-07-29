@@ -54,6 +54,10 @@ export class Surveyori18nLangPipe implements PipeTransform {
       if (variableMarkersInMessage > 1) {
         value = value.replace(/[\s\%]/g, " ")
       }
+      //TODO temp fix for non-i18n enabled apps
+      if (value.includes("eventLabel")) {
+        value = value.replace("eventLabel", "");
+      }
       return value
     }
 
