@@ -24,7 +24,7 @@ export class Surveyori18nService {
     let translation;
     let uppercaseString = false;
 
-    if (!message || typeof message === 'number') {
+    if (!message || typeof message !== 'string') {
       return message;
     }
     const variableMarkersInMessage = (message.match(/%/g) || []).length;
