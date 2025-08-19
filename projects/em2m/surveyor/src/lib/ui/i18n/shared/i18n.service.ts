@@ -7,8 +7,6 @@ import {AppConfig} from "../../../core/config/config.service";
 export class Surveyori18nService {
   private langKeys: any;
   private enabled: boolean = false;
-  isDevLocale = false;
-
   app: string;
 
   constructor(private ctx: ContextService, private config: AppConfig) {
@@ -20,7 +18,6 @@ export class Surveyori18nService {
     this.enabled = this.ctx.getValue("i18nEnabled");
     this.langKeys = this.ctx.getValue("i18nTokens");
     const locale = this.ctx.getValue("i18nLocale");
-    this.isDevLocale = locale === "dev";
     let translation;
     let uppercaseString = false;
 
@@ -84,8 +81,7 @@ export class Surveyori18nService {
                 if (tokenTranslation) {
                   fullTranslation.push(tokenTranslation);
                 } else if (token != "") {
-                  let hasAsterisk = token.includes("**");
-                  fullTranslation.push(!this.isDevLocale ? token : !hasAsterisk ? token + "**": token);
+                  fullTranslation.push(token);
                 }
               }
             } else if (token.trim() !== "") {
@@ -95,8 +91,7 @@ export class Surveyori18nService {
               if (tokenTranslation) {
                 fullTranslation.push(tokenTranslation);
               } else {
-                let hasAsterisk = token.includes("**");
-                fullTranslation.push(!this.isDevLocale ? token : !hasAsterisk ? token + "**": token);
+                fullTranslation.push(token);
               }
             }
           })
@@ -109,8 +104,7 @@ export class Surveyori18nService {
           translation = this.langKeys[token.toLowerCase()]?.translation;
 
           if (!translation) {
-            let hasAsterisk = message.includes("**");
-            translation = !this.isDevLocale ? message : !hasAsterisk ? message + "**" : message;
+            translation = message;
           }
 
           return uppercaseString ? translation.toUpperCase() : translation;
@@ -123,14 +117,12 @@ export class Surveyori18nService {
         translation = this.langKeys[token.toLowerCase()]?.translation;
 
         if (!translation) {
-          let hasAsterisk = message.includes("**");
-          translation = !this.isDevLocale ? message : !hasAsterisk ? message + "**" : message;
+          translation = message;
         }
 
         return uppercaseString ? translation.toUpperCase() : translation;
       } else {
-        let hasAsterisk = message.includes("**");
-        return !this.isDevLocale ? message : !hasAsterisk ? message + "**" : message;
+        return message;
       }
     }
   }
