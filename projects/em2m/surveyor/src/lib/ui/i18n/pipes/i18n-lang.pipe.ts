@@ -27,7 +27,6 @@ import {Surveyori18nService} from "../shared/i18n.service";
 })
 export class Surveyori18nLangPipe implements PipeTransform {
   enabled: boolean = false;
-  isDevLocale = false;
 
   constructor(private ctx: ContextService, private i18nService: Surveyori18nService) {
     this.enabled = this.ctx.getValue("i18nEnabled");
@@ -36,8 +35,6 @@ export class Surveyori18nLangPipe implements PipeTransform {
   transform(value: string, token: string): any {
     this.enabled = this.ctx.getValue("i18nEnabled");
     const langKeys = this.ctx.getValue("i18nTokens");
-    const locale = this.ctx.getValue("i18nLocale");
-    this.isDevLocale = locale === "dev";
 
     if (!value) { return; }
     let uppercaseString = false;
@@ -102,7 +99,7 @@ export class Surveyori18nLangPipe implements PipeTransform {
                 fullTranslation.push(tokenTranslation);
               } else if (token != "") {
                 let hasAsterisk = token.includes("**");
-                fullTranslation.push(!this.isDevLocale ? token : !hasAsterisk ? token + "**": token);
+                fullTranslation.push(token);
               }
             }
           } else if (token.trim() !== "") {
@@ -112,8 +109,7 @@ export class Surveyori18nLangPipe implements PipeTransform {
             if (tokenTranslation) {
               fullTranslation.push(tokenTranslation);
             } else {
-              let hasAsterisk = token.includes("**");
-              fullTranslation.push(!this.isDevLocale ? token : !hasAsterisk ? token + "**": token);
+              fullTranslation.push(token);
             }
           }
         })
@@ -126,8 +122,7 @@ export class Surveyori18nLangPipe implements PipeTransform {
         translation = langKeys[token.toLowerCase()]?.translation;
 
         if (!translation) {
-          let hasAsterisk = value.includes("**");
-          translation = !this.isDevLocale ? value : !hasAsterisk ? value + "**" : value;
+          translation = value;
         }
 
         return uppercaseString ? translation.toUpperCase() : translation;
@@ -140,14 +135,12 @@ export class Surveyori18nLangPipe implements PipeTransform {
       translation = langKeys[token.toLowerCase()]?.translation;
 
       if (!translation) {
-        let hasAsterisk = value.includes("**");
-        translation = !this.isDevLocale ? value : !hasAsterisk ? value + "**" : value;
+        translation = value;
       }
 
       return uppercaseString ? translation.toUpperCase() : translation;
     } else {
-      let hasAsterisk = value.includes("**");
-      return !this.isDevLocale ? value : !hasAsterisk ? value + "**" : value;
+      return value;
     }
   }
 }
