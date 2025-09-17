@@ -37,6 +37,9 @@ export class Surveyori18nLangPipe implements PipeTransform {
     const langKeys = this.ctx.getValue("i18nTokens");
 
     if (!value) { return; }
+    if (typeof token !== "string") {
+      return value;
+    }
     let uppercaseString = false;
     let translation;
 
